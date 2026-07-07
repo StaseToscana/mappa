@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mappa Eventi – Stase Toscana</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'League Spartan', sans-serif; }
+
+    #top-bar {
+      background-image: url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-header.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    header {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    header img { height: 40px; width: auto; }
+
+    #btn-geolocate {
+      background: white;
+      color: #CC0000;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    #btn-geolocate:hover { background: #fff3f3; }
+
+    #filtri {
+      padding: 0 20px 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-filtro {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-filtro:hover, .btn-filtro.attivo {
+      background: white;
+      color: #CC0000;
+      border-color: white;
+    }
+
+    #map { width: 100%; height: calc(100vh - 110px); }
+
+    /* Cluster personalizzato */
+    .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+      background-color: rgba(204, 0, 0, 0.2) !important;
+    }
+    .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+      background-color: rgba(204, 0, 0, 0.8) !important;
+      color: white !important;
+      font-family: 'League Spartan', sans-serif !important;
+      font-weight: 700 !important;
+    }
+
+    /* Popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      min-width: 240px;
+      max-width: 280px;
+      font-family: 'League Spartan', sans-serif;
+    }
+    .leaflet-popup-content { margin: 0; width: 100% !important; }
+
+    .popup-img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+    .popup-header {
+      padding: 10px 14px 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: white;
+      line-height: 1.3;
+    }
+    .popup-body {
+      padding: 10px 14px 12px;
+      font-size: 0.83rem;
+      color: #333;
+      line-height: 1.6;
+      background: white;
+    }
+    .popup-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .popup-quando { font-weight: 600; margin-bottom: 3px; color: #444; }
+    .popup-luogo { color: #777; font-size: 0.78rem; margin-bottom: 10px; }
+    .popup-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: white !important;
+      text-decoration: none !important;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    /* Legenda */
+    #legenda {
+      position: absolute;
+      bottom: 40px;
+      right: 10px;
+      z-index: 1000;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+      overflow: hidden;
+      max-width: 200px;
+    }
+    #legenda-header {
+      background: #CC0000;
+      color: white;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.3px;
+    }
+    #legenda-body {
+      padding: 8px 12px;
+      display: none;
+    }
+    #legenda-body.aperta { display: block; }
+    .legenda-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 0;
+      font-size: 0.78rem;
+      color: #333;
+    }
+    .legenda-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Loading */
+    #loading {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-loading.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      gap: 24px;
+      font-family: 'League Spartan', sans-serif;
+    }
+    #loading p {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #contatore {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #CC0000;
+      color: white;
+      padding: 7px 20px;
+      border-radius: 20px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      z-index: 1000;
+      pointer-events: none;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 12px rgba(204,0,0,0.3);
+      white-space: nowrap;
+    }
+
+    /* Cerchio raggio geolocalizzazione */
+    .raggio-label {
+      background: transparent;
+      border: none;
+      color: #CC0000;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">
+  <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" style="height:120px;width:auto;" alt="Stase Toscana" />
+  <div class="spinner"></div>
+  <p id="loading-msg">Carico gli eventi in Toscana...</p>
+</div>
+
+<div id="top-bar">
+  <header>
+    <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" alt="Stase Toscana" />
+    <button id="btn-geolocate" onclick="geolocate()">📍 Vicino a me</button>
+  </header>
+  <div id="filtri">
+    <button class="btn-filtro attivo" onclick="filtra('tutti', this)">Tutti</button>
+    <button class="btn-filtro" onclick="filtra('oggi', this)">Oggi</button>
+    <button class="btn-filtro" onclick="filtra('weekend', this)">Questo weekend</button>
+    <button class="btn-filtro" onclick="filtra('settimana', this)">Questa settimana</button>
+    <button class="btn-filtro" onclick="filtra('mese', this)">Prossimi 30 giorni</button>
+  </div>
+</div>
+
+<div id="map"></div>
+<div id="contatore"></div>
+
+<div id="legenda">
+  <div id="legenda-header" onclick="toggleLegenda()">
+    <span>Legenda</span>
+    <span id="legenda-arrow">▼</span>
+  </div>
+  <div id="legenda-body"></div>
+</div>
+
+<script>
+  // URL del Web App Apps Script (sostituisce il vecchio eventi.json statico)
+  const JSON_URL = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
+
+  const CATEGORIE = {
+    'Concerto':                   { bg: '#6366f1', emoji: '🎤' },
+    'Evento gastronomico':        { bg: '#f59e0b', emoji: '🍷' },
+    'Evento sportivo':            { bg: '#10b981', emoji: '⚽' },
+    'Festa paesana':              { bg: '#ec4899', emoji: '🎪' },
+    'Festival':                   { bg: '#f97316', emoji: '🎵' },
+    'Fiera':                      { bg: '#14b8a6', emoji: '🏪' },
+    'Mercato':                    { bg: '#84cc16', emoji: '🛍️' },
+    'Mostra/Esposizione':         { bg: '#a855f7', emoji: '🎨' },
+    'Rievocazione storica/Palio': { bg: '#92400e', emoji: '⚔️' },
+    'Sagra':                      { bg: '#CC0000', emoji: '🍽️' },
+    'Spettacolo teatrale':        { bg: '#7c3aed', emoji: '🎭' },
+    'Serata/Discoteca':           { bg: '#4c1d95', emoji: '🪩' },
+    'Altro':                      { bg: '#6b7280', emoji: '📌' },
+  };
+
+  function getCat(nome) {
+    return CATEGORIE[nome] || { bg: '#6b7280', emoji: '📌' };
+  }
+
+  // Popola legenda
+  const legendaBody = document.getElementById('legenda-body');
+  Object.entries(CATEGORIE).forEach(([nome, cat]) => {
+    const item = document.createElement('div');
+    item.className = 'legenda-item';
+    item.innerHTML = `<div class="legenda-dot" style="background:${cat.bg}"></div><span>${cat.emoji} ${nome}</span>`;
+    legendaBody.appendChild(item);
+  });
+
+  function toggleLegenda() {
+    const body = document.getElementById('legenda-body');
+    const arrow = document.getElementById('legenda-arrow');
+    body.classList.toggle('aperta');
+    arrow.textContent = body.classList.contains('aperta') ? '▲' : '▼';
+  }
+
+  // Mappa minimal
+  const map = L.map('map').setView([43.5, 11.0], 8);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+
+  // Cluster group
+  const clusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 50,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+  });
+  map.addLayer(clusterGroup);
+
+  function creaIcona(cat) {
+    const c = getCat(cat);
+    return L.divIcon({
+      className: '',
+      html: `<div style="background:${c.bg};width:36px;height:36px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:16px;display:block;line-height:1">${c.emoji}</span></div>`,
+      iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -38]
+    });
+  }
+
+  const geocodeCache = {};
+  async function geocodifica(indirizzo) {
+    if (geocodeCache[indirizzo]) return geocodeCache[indirizzo];
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(indirizzo)}&limit=1`, { headers: { 'Accept-Language': 'it' } });
+      const data = await res.json();
+      if (data && data.length > 0) {
+        const coords = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+        geocodeCache[indirizzo] = coords;
+        return coords;
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  async function leggiEventi() {
+    const res = await fetch(JSON_URL + '?t=' + Date.now());
+    const data = await res.json();
+    // Converti formato JSON nel formato che si aspetta il codice
+    return data.map((e, i) => ({
+      id: e.id || ('json_' + i),
+      fields: {
+        'Nome evento': e.nome,
+        'Locandina': e.locandina ? [{ url: e.locandina }] : null,
+        'Categoria': e.categoria,
+        'Provincia': e.provincia,
+        'Comune': e.comune,
+        'Indirizzo completo': e.indirizzo,
+        'Riepilogo date': e.riepilogo_date,
+        'Data sort': e.data_sort,
+        'data_fine': e.data_fine,
+        'Apri su Google Maps': e.maps_url,
+        'Lat': e.lat,
+        'Lon': e.lon,
+        'Softr Record ID': e.softr_record_id,
+      }
+    }));
+  }
+
+  function parseData(d) {
+    if (!d) return null;
+    try {
+      const parts = d.split('-');
+      return new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+    } catch(e) { return null; }
+  }
+
+  function isFuturo(r) {
+    const d = r.fields['Data sort'];
+    if (!d) return true;
+    const dataEvento = parseData(d);
+    if (!dataEvento) return true;
+    const oggi = new Date(); oggi.setHours(0,0,0,0);
+    return dataEvento >= oggi;
+  }
+
+  function inPeriodo(fields, filtro) {
+    if (filtro === 'tutti') return true;
+    const d = fields['Data sort'];
+    if (!d) return false;
+    const dataInizio = parseData(d);
+    if (!dataInizio) return false;
+    const dataFine = fields['data_fine'] ? parseData(fields['data_fine']) : dataInizio;
+    const oggi = new Date(); oggi.setHours(0,0,0,0);
+    const day = oggi.getDay(); // 0=domenica, 1=lunedì, ..., 6=sabato
+
+    // Questo weekend: il sabato più vicino da oggi (incluso oggi se è sabato)
+    // Se oggi è domenica (0), sabato era ieri — prendiamo il prossimo sabato
+    let giorniASabato;
+    if (day === 0) giorniASabato = 6;       // domenica → sabato prossimo
+    else if (day === 6) giorniASabato = 0;  // sabato → oggi
+    else giorniASabato = 6 - day;           // altri giorni → giorni mancanti a sabato
+
+    const sabato = new Date(oggi); sabato.setDate(oggi.getDate() + giorniASabato);
+    const domenica = new Date(sabato); domenica.setDate(sabato.getDate() + 1);
+    const lunediDopoWeekend = new Date(domenica); lunediDopoWeekend.setDate(domenica.getDate() + 1);
+
+    const tra30 = new Date(oggi); tra30.setDate(oggi.getDate() + 30);
+
+    if (filtro === 'oggi') return dataInizio <= oggi && dataFine >= oggi;
+    if (filtro === 'weekend') return dataInizio <= domenica && dataFine >= sabato;
+    // "Questa settimana" ora copre da oggi fino alla domenica corrente inclusa
+    // (prima si fermava al venerdì, facendo sparire gli eventi del weekend
+    // che invece comparivano nel filtro "Weekend" — corretto qui)
+    if (filtro === 'settimana') return dataInizio <= domenica && dataFine >= oggi;
+    if (filtro === 'mese') return dataInizio <= tra30 && dataFine >= oggi;
+    return true;
+  }
+
+  let tuttiMarker = [];
+  let filtroCorrente = 'tutti';
+
+  function filtra(periodo, btn) {
+    filtroCorrente = periodo;
+    document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('attivo'));
+    btn.classList.add('attivo');
+    clusterGroup.clearLayers();
+    let visibili = 0;
+    tuttiMarker.forEach(item => {
+      if (inPeriodo(item.fields, periodo)) {
+        clusterGroup.addLayer(item.marker);
+        visibili++;
+      }
+    });
+    document.getElementById('contatore').textContent = `${visibili} eventi in Toscana`;
+  }
+
+  // Geolocalizzazione
+  let raggioLayer = null;
+  let markerUtente = null;
+
+  function geolocate() {
+    if (!navigator.geolocation) { alert('Geolocalizzazione non supportata dal browser.'); return; }
+    const btn = document.getElementById('btn-geolocate');
+    btn.textContent = '⏳ Ricerco...';
+    navigator.geolocation.getCurrentPosition(pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      map.setView([lat, lon], 11);
+
+      if (markerUtente) map.removeLayer(markerUtente);
+      if (raggioLayer) map.removeLayer(raggioLayer);
+
+      markerUtente = L.marker([lat, lon], {
+        icon: L.divIcon({
+          className: '',
+          html: '<div style="width:16px;height:16px;background:#CC0000;border:3px solid white;border-radius:50%;box-shadow:0 0 0 4px rgba(204,0,0,0.3);"></div>',
+          iconSize: [16,16], iconAnchor: [8,8]
+        })
+      }).addTo(map).bindPopup('<b>Sei qui</b>');
+
+      raggioLayer = L.circle([lat, lon], {
+        radius: 15000,
+        color: '#CC0000', fillColor: '#CC0000',
+        fillOpacity: 0.05, weight: 1.5, dashArray: '5,5'
+      }).addTo(map);
+
+      btn.textContent = '📍 Vicino a me';
+    }, () => {
+      btn.textContent = '📍 Vicino a me';
+      alert('Non riesco a trovare la tua posizione.');
+    });
+  }
+
+  async function init() {
+    try {
+      const records = await leggiEventi();
+      const eventiFuturi = records.filter(isFuturo);
+      let piazzati = 0;
+
+      for (const record of eventiFuturi) {
+        const f = record.fields;
+        let coords = null;
+
+        if (f['Lat'] && f['Lon']) {
+          coords = { lat: parseFloat(f['Lat']), lon: parseFloat(f['Lon']) };
+        } else {
+          const indirizzo = f['Indirizzo completo'] || f['Comune'] || f['Indirizzo'];
+          if (!indirizzo) continue;
+          await new Promise(r => setTimeout(r, 1100));
+          coords = await geocodifica(indirizzo);
+        }
+
+        if (!coords) continue;
+
+        const nome      = f['Nome evento'] || 'Evento senza nome';
+        const quando    = f['Riepilogo date'] || f['Data principale'] || '';
+        const categoria = f['Categoria'] || 'Altro';
+        const luogo     = [f['Comune'], f['Provincia'] ? `(${f['Provincia']})` : ''].filter(Boolean).join(' ');
+        const mapsUrl   = f['Apri su Google Maps'] || `https://maps.google.com/?q=${encodeURIComponent(f['Indirizzo completo'] || '')}`;
+        const locandina = f['Locandina'] && f['Locandina'][0] ? f['Locandina'][0].url : null;
+        const cat       = getCat(categoria);
+
+        document.getElementById('loading-msg').textContent = `Carico... ${piazzati + 1}/${eventiFuturi.length} eventi`;
+
+        const imgHtml = locandina ? `<img src="${locandina}" class="popup-img" alt="${nome}" onerror="this.style.display='none'" />` : '';
+
+        const popupHtml = `
+          ${imgHtml}
+          <div class="popup-header" style="background:${cat.bg}">${nome}</div>
+          <div class="popup-body">
+            <span class="popup-cat" style="background:${cat.bg}20;color:${cat.bg}">${cat.emoji} ${categoria}</span><br>
+            ${quando ? `<div class="popup-quando">📅 ${quando}</div>` : ''}
+            ${luogo ? `<div class="popup-luogo">📍 ${luogo}</div>` : ''}
+            <a href="${mapsUrl}" target="_blank" class="popup-btn" style="background:${cat.bg}">🗺️ Google Maps</a>
+            ${f['Softr Record ID'] ? `<a href="https://luis70695.softr.app/eventi-details?recordId=${f['Softr Record ID']}" target="_blank" class="popup-btn" style="background:#333;margin-top:6px;display:inline-block;">📋 Vedi dettagli</a>` : ''}
+          </div>
+        `;
+
+        const marker = L.marker([coords.lat, coords.lon], { icon: creaIcona(categoria) })
+          .bindPopup(popupHtml, { maxWidth: 280 });
+
+        tuttiMarker.push({ fields: f, marker });
+
+        if (inPeriodo(f, filtroCorrente)) {
+          clusterGroup.addLayer(marker);
+          piazzati++;
+        }
+
+        // Aggiorna contatore in tempo reale
+        document.getElementById('contatore').textContent = `${piazzati} eventi caricati...`;
+      }
+
+      document.getElementById('loading').style.display = 'none';
+      const visibili = tuttiMarker.filter(i => inPeriodo(i.fields, filtroCorrente)).length;
+      document.getElementById('contatore').textContent = `${visibili} eventi in Toscana`;
+
+    } catch(err) {
+      console.error(err);
+      document.getElementById('loading').innerHTML = `
+        <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" style="height:100px;" alt="Stase" />
+        <p style="color:white;text-align:center;padding:0 20px;">Errore nel caricamento.<br>Riprova più tardi.</p>
+      `;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
