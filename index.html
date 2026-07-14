@@ -3,558 +3,1221 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mappa Eventi – Stase Toscana</title>
+  <title>Eventi in Toscana – Stase Toscana</title>
+  <meta name="description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
+
+  <!-- Open Graph (anteprime su WhatsApp, Facebook, Instagram, ecc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Stase - Eventi in Toscana" />
+  <meta property="og:title" content="Stase - Eventi in Toscana" />
+  <meta property="og:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
+  <meta property="og:image" content="logo-stase.png" />
+  <!-- TODO: sostituisci con l'URL definitivo del sito pubblicato -->
+  <meta property="og:url" content="https://staseoscana.github.io/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stase - Eventi in Toscana" />
+  <meta name="twitter:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana." />
+  <meta name="twitter:image" content="logo-stase.png" />
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --rosso: #FF3131;
+      --rosso-scuro: #CC0000;
+      --rosso-tenue: #FFF1EE;
+      --inchiostro: #1B1B1B;
+      --crema: #FFF8EE;
+      --crema-card: #FFFFFF;
+      --bordo: #F0E6DC;
+      --grigio-testo: #6B6258;
+      --banner-h: 68px;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'League Spartan', sans-serif; }
+    html, body { height: 100vh; height: 100dvh; margin: 0; overflow: hidden; }
+    body { font-family: 'League Spartan', sans-serif; color: var(--inchiostro); background: var(--crema); display: flex; flex-direction: column; }
+    a { color: inherit; }
+    button { font-family: inherit; }
 
     #top-bar {
-      background-image: url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-header.jpg');
+      background-image: linear-gradient(rgba(20,10,8,0.55), rgba(20,10,8,0.55)), url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-header.jpg');
       background-size: cover;
       background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      flex-shrink: 0;
     }
 
     header {
-      padding: 10px 20px;
+      padding: 16px 24px 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 60px;
+      min-height: 100px;
+      transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    header img.logo { height: 80px; width: auto; display: block; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+
+
+    #tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 20px 16px;
+      transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tab-btn {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover { background: rgba(255,255,255,0.15); }
+    .tab-btn.attivo { background: var(--crema-card); color: var(--rosso); border-color: var(--crema-card); }
+    .tab-btn:active { transform: scale(0.95); }
+    .tab-btn .testo-corta { display: none; }
+    .tab-btn.tab-cta {
+      background: #FF3131;
+      color: white;
+      border-color: #FF3131;
+      box-shadow: 0 4px 16px rgba(255,49,49,0.4);
+      animation: pulse-cta 2s ease infinite;
+    }
+    .tab-btn.tab-cta:hover {
+      background: #ff5252;
+      border-color: #ff5252;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255,49,49,0.5);
+    }
+    @keyframes pulse-cta {
+      0%, 100% { box-shadow: 0 4px 16px rgba(255,49,49,0.4); }
+      50% { box-shadow: 0 4px 24px rgba(255,49,49,0.6); }
     }
 
-    header img { height: 40px; width: auto; }
+    #controlli {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid var(--bordo);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 20;
+    }
+    #barra-ricerca { display: flex; gap: 8px; }
+    #input-ricerca {
+      flex: 1;
+      border: 1.5px solid var(--bordo);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-size: 0.85rem;
+      outline: none;
+      background: var(--crema);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    #input-ricerca:focus { border-color: var(--rosso); box-shadow: 0 0 0 3px rgba(255,68,56,0.1); }
 
-    #btn-geolocate {
-      background: white;
-      color: #CC0000;
-      border: none;
+    #btn-filtri-toggle {
+      display: flex; align-items: center; gap: 6px; white-space: nowrap;
+      background: var(--crema); color: var(--inchiostro); border: 1.5px solid var(--bordo);
+      border-radius: 20px; padding: 9px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    }
+    #btn-filtri-toggle:hover { border-color: var(--rosso); color: var(--rosso); }
+    #btn-filtri-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso); }
+
+    #filtri-riga { display: none; gap: 8px; flex-wrap: wrap; align-items: center; }
+    #filtri-riga.aperto { display: flex; }
+
+    .btn-filtro {
+      background: var(--crema);
+      color: var(--inchiostro);
+      border: 1.5px solid var(--bordo);
       border-radius: 20px;
       padding: 6px 14px;
-      font-family: 'League Spartan', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-filtro:hover { border-color: var(--rosso); color: var(--rosso); }
+    .btn-filtro.attivo { background: var(--rosso); color: white; border-color: var(--rosso); }
+    .btn-filtro:active { transform: scale(0.95); }
+
+    .multiselect { position: relative; }
+    .ms-toggle {
+      background: var(--crema);
+      color: var(--inchiostro);
+      border: 1.5px solid var(--bordo);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.15s ease;
     }
-    #btn-geolocate:hover { background: #fff3f3; }
-
-    #filtri {
-      padding: 0 20px 10px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .btn-filtro {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: 2px solid rgba(255,255,255,0.6);
-      border-radius: 20px;
-      padding: 5px 16px;
-      font-family: 'League Spartan', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-filtro:hover, .btn-filtro.attivo {
-      background: white;
-      color: #CC0000;
-      border-color: white;
-    }
-
-    #map { width: 100%; height: calc(100vh - 110px); }
-
-    /* Cluster personalizzato */
-    .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
-      background-color: rgba(204, 0, 0, 0.2) !important;
-    }
-    .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
-      background-color: rgba(204, 0, 0, 0.8) !important;
-      color: white !important;
-      font-family: 'League Spartan', sans-serif !important;
-      font-weight: 700 !important;
-    }
-
-    /* Popup */
-    .leaflet-popup-content-wrapper {
-      border-radius: 12px;
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-      min-width: 240px;
-      max-width: 280px;
-      font-family: 'League Spartan', sans-serif;
-    }
-    .leaflet-popup-content { margin: 0; width: 100% !important; }
-
-    .popup-img {
-      width: 100%;
-      height: 130px;
-      object-fit: cover;
-      display: block;
-    }
-    .popup-header {
-      padding: 10px 14px 8px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: white;
-      line-height: 1.3;
-    }
-    .popup-body {
-      padding: 10px 14px 12px;
-      font-size: 0.83rem;
-      color: #333;
-      line-height: 1.6;
-      background: white;
-    }
-    .popup-cat {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      border-radius: 20px;
-      padding: 3px 10px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .popup-quando { font-weight: 600; margin-bottom: 3px; color: #444; }
-    .popup-luogo { color: #777; font-size: 0.78rem; margin-bottom: 10px; }
-    .popup-btn {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 20px;
-      color: white !important;
-      text-decoration: none !important;
-      font-weight: 700;
-      font-size: 0.78rem;
-    }
-
-    /* Legenda */
-    #legenda {
-      position: absolute;
-      bottom: 40px;
-      right: 10px;
-      z-index: 1000;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.15);
-      overflow: hidden;
-      max-width: 200px;
-    }
-    #legenda-header {
-      background: #CC0000;
-      color: white;
-      padding: 8px 12px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      letter-spacing: 0.3px;
-    }
-    #legenda-body {
-      padding: 8px 12px;
+    .ms-toggle:hover { border-color: var(--rosso); color: var(--rosso); }
+    .ms-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso); }
+    .ms-toggle:active { transform: scale(0.95); }
+    .ms-badge { background: var(--rosso); color: white; border-radius: 10px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; }
+    .ms-panel {
       display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: var(--crema-card);
+      border: 1px solid var(--bordo);
+      border-radius: 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+      min-width: 220px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 8px;
+      z-index: 100;
     }
-    #legenda-body.aperta { display: block; }
-    .legenda-item {
+    .ms-panel.aperto { display: block; }
+    .ms-opzione { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; }
+    .ms-opzione:hover { background: var(--crema); }
+    .ms-opzione input { accent-color: var(--rosso); width: 15px; height: 15px; cursor: pointer; }
+    .ms-clear {
+      display: block; width: 100%; text-align: center; background: none; border: none;
+      color: var(--rosso); font-size: 0.76rem; font-weight: 700; padding: 8px 4px 2px;
+      cursor: pointer; border-top: 1px solid var(--bordo); margin-top: 4px;
+    }
+
+    #toggle-vista { display: none; gap: 8px; }
+    #toggle-vista button {
+      flex: 1; background: var(--crema); color: var(--inchiostro); border: 1.5px solid var(--bordo);
+      border-radius: 20px; padding: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    #toggle-vista button.attivo { background: var(--rosso); color: white; border-color: var(--rosso); }
+    #toggle-vista button:active { transform: scale(0.95); }
+
+    #view-esplora { display: flex; flex: 1; min-height: 0; }
+    #pannello-lista { width: 480px; min-width: 480px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--crema); border-right: 1px solid var(--bordo); }
+    #map-wrap { flex: 1; position: relative; z-index: 0; }
+    #map { width: 100%; height: 100%; }
+
+    #contatore-lista { padding: 12px 16px 4px; font-size: 0.8rem; font-weight: 700; color: var(--grigio-testo); letter-spacing: 0.3px; text-transform: uppercase; }
+
+    .gruppo-data {
+      padding: 0 8px;
+      margin-top: 8px;
+    }
+    .gruppo-data-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 3px 0;
+      padding: 8px 4px 4px;
       font-size: 0.78rem;
-      color: #333;
+      font-weight: 700;
+      color: var(--grigio-testo);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      background: var(--crema);
+      z-index: 2;
     }
-    .legenda-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .gruppo-data-header .giorno-nome { color: var(--rosso); }
 
-    /* Loading */
-    #loading {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-loading.jpg');
-      background-size: cover;
-      background-position: center;
+    #lista-eventi {
       display: flex;
       flex-direction: column;
+      gap: 0;
+      padding: 8px;
+    }
+    .eventi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .card-evento {
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 12px; cursor: pointer; border: 2px solid transparent; background: var(--crema-card);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-evento:hover, .card-evento.hover-marker { border-color: var(--rosso); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,68,56,0.12); }
+    .card-evento:active { transform: scale(0.98); }
+    .card-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+    .card-img[src=""], .card-img:not([src]) {
+      background: linear-gradient(90deg, #f0e6dc 25%, #e8ddd0 50%, #f0e6dc 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .card-body { flex: 1; min-width: 0; padding: 10px; }
+    .card-nome {
+      font-weight: 700; font-size: 0.86rem; line-height: 1.25; margin-bottom: 4px;
+      overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+    .card-cat { display: inline-block; font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 5px; }
+    .card-data { font-size: 0.72rem; color: #555; font-weight: 600; display: block; margin-bottom: 2px; }
+    .card-luogo { font-size: 0.7rem; color: var(--grigio-testo); display: block; }
+
+    #stato-vuoto { grid-column: 1 / -1; padding: 40px 24px; text-align: center; color: var(--grigio-testo); font-size: 0.9rem; display: none; }
+
+    .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 220px; max-width: 260px; font-family: 'League Spartan', sans-serif; }
+    .leaflet-popup-content { margin: 0; width: 100% !important; }
+    .popup-img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .popup-header { padding: 8px 12px 6px; font-weight: 700; font-size: 0.88rem; color: white; line-height: 1.25; }
+    .popup-body { padding: 8px 12px 10px; font-size: 0.78rem; color: #333; line-height: 1.5; background: white; }
+    .popup-quando { font-weight: 600; margin-bottom: 2px; color: #444; }
+    .popup-btn { display: inline-block; padding: 5px 12px; border-radius: 20px; color: white !important; text-decoration: none !important; font-weight: 700; font-size: 0.74rem; margin-top: 6px; margin-right: 6px; cursor: pointer; border: none; transition: transform 0.1s; }
+    .popup-btn:active { transform: scale(0.95); }
+
+    #view-aggiungi { display: none; flex: 1; min-height: 0; overflow-y: auto; max-width: 640px; margin: 0 auto; padding: 28px 20px 60px; width: 100%; }
+    .aggiungi-hero {
+      background: linear-gradient(135deg, #FF3131, #CC0000);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .aggiungi-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .aggiungi-hero h1 { font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 8px; position: relative; z-index: 1; }
+    .aggiungi-hero p.sub { font-size: 0.95rem; color: rgba(255,255,255,0.9); margin-bottom: 0; line-height: 1.5; position: relative; z-index: 1; }
+    .aggiungi-badge {
+      display: inline-block;
+      background: white;
+      color: #FF3131;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #form-card { background: var(--crema-card); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); overflow: hidden; padding: 8px; }
+    iframe#tally-form { width: 100%; border: none; }
+
+    #dettaglio-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
+    }
+    #dettaglio-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
+      background: var(--crema-card); z-index: 1001; overflow-y: auto;
+      box-shadow: -8px 0 32px rgba(0,0,0,0.2);
+      transform: translateX(100%); transition: transform 0.25s ease;
+    }
+    #dettaglio-backdrop.aperto { display: block; }
+    #dettaglio-backdrop.aperto #dettaglio-panel { transform: translateX(0); }
+    #btn-chiudi-dettaglio {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%;
+      width: 34px; height: 34px; font-size: 1.1rem; cursor: pointer; line-height: 1;
+      transition: background 0.15s;
+    }
+    #btn-chiudi-dettaglio:hover { background: rgba(0,0,0,0.7); }
+    #dettaglio-img-wrap { position: relative; cursor: zoom-in; }
+    #dettaglio-img { width: 100%; max-height: 380px; object-fit: contain; background: var(--inchiostro); display: block; }
+    #dettaglio-zoom-hint {
+      position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.55); color: white;
+      border-radius: 20px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; pointer-events: none;
+    }
+
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(10,6,5,0.92);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    #lightbox.aperto { display: flex; }
+    #lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 6px; }
+    #lightbox-chiudi {
+      position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.15); color: white;
+      border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.2rem; cursor: pointer;
+    }
+    #dettaglio-body { padding: 22px; }
+    #dettaglio-nome { font-size: 1.3rem; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+    #dettaglio-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
+    .dett-riga { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-top: 1px solid var(--bordo); font-size: 0.88rem; }
+    .dett-riga .icona { font-size: 1.05rem; flex-shrink: 0; }
+    #dettaglio-descrizione { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--bordo); font-size: 0.88rem; line-height: 1.6; white-space: pre-line; }
+    #dettaglio-azioni { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .btn-azione { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 20px; font-weight: 700; font-size: 0.82rem; text-decoration: none !important; color: white !important; border: none; cursor: pointer; transition: transform 0.1s; }
+    .btn-azione:active { transform: scale(0.95); }
+
+    #banner-cta-content {
+      display: none;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      gap: 24px;
-      font-family: 'League Spartan', sans-serif;
-    }
-    #loading p {
-      color: white;
-      font-size: 1.1rem;
+      text-align: center;
+      font-size: 0.76rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      color: var(--inchiostro);
+      max-width: 640px;
+      width: 100%;
+      line-height: 1.35;
     }
-    .spinner {
-      width: 44px; height: 44px;
-      border: 4px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+    #banner-cta-content a { color: var(--rosso); text-decoration: underline; font-weight: 700; }
+    #banner-cta-content a:hover { text-decoration: none; }
+    #banner-pubblicitario {
+      position: relative; flex-shrink: 0;
+      height: var(--banner-h, 68px);
+      background: var(--crema-card); border-top: 1px solid var(--bordo);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 0 14px; box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
     }
+    #banner-pubblicitario a.banner-link { display: flex; align-items: center; height: 100%; max-width: 640px; width: 100%; justify-content: center; }
+    #banner-pubblicitario img { max-height: calc(var(--banner-h, 68px) - 16px); max-width: 100%; object-fit: contain; border-radius: 6px; }
+    #banner-label { position: absolute; left: 8px; top: 3px; font-size: 0.6rem; color: var(--grigio-testo); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    #loading {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(rgba(20,10,8,0.5), rgba(20,10,8,0.5)), url('https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/sfondo-header.jpg');
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; gap: 20px;
+    }
+    #loading p { color: white; font-size: 1rem; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    #contatore {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #CC0000;
-      color: white;
-      padding: 7px 20px;
-      border-radius: 20px;
-      font-family: 'League Spartan', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      z-index: 1000;
-      pointer-events: none;
-      letter-spacing: 0.3px;
-      box-shadow: 0 2px 12px rgba(204,0,0,0.3);
-      white-space: nowrap;
+    #toast-container {
+      position: fixed; bottom: calc(var(--banner-h, 68px) + 28px + 16px); left: 50%; transform: translateX(-50%);
+      z-index: 3000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+    }
+    .toast {
+      background: var(--inchiostro); color: white; padding: 10px 20px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
+      pointer-events: auto;
+    }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(10px); } }
+
+        #top-bar.compact header img.logo { height: 40px; }
+    #top-bar.compact header { padding: 8px 24px 4px; min-height: auto; }
+    #top-bar.compact { padding-bottom: 0; }
+
+    @media (max-width: 760px) {
+      :root { --banner-h: 60px; }
+      #toggle-vista { display: flex; }
+      #pannello-lista { width: 100%; min-width: 0; }
+      #pannello-lista.nascosto, #map-wrap.nascosto { display: none; }
+      header { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; padding: 10px 12px 6px; transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+      header img.logo { height: 48px; width: auto; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
+      #tab-nav { display: flex; gap: 4px; padding: 0; flex-shrink: 1; min-width: 0; }
+      .tab-btn { padding: 9px 16px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; }
+      #tab-esplora .testo-lunga, #tab-aggiungi .testo-lunga { display: none; }
+      .tab-btn .testo-corta { display: inline; }
+      #dettaglio-panel { width: 100%; }
+      #input-ricerca { padding: 11px 18px; font-size: 0.9rem; }
+      #btn-filtri-toggle { padding: 11px 18px; font-size: 0.9rem; }
+      #top-bar { transition: all 0.3s ease; }
+      #top-bar.compact header img.logo { height: 32px; }
+      #top-bar.compact header { padding: 6px 12px 2px; }
+      #top-bar.compact .tab-btn { padding: 5px 10px; font-size: 0.7rem; }
+      #top-bar.compact { padding-bottom: 0; }
     }
 
-    /* Cerchio raggio geolocalizzazione */
-    .raggio-label {
-      background: transparent;
-      border: none;
-      color: #CC0000;
-      font-family: 'League Spartan', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
+    @media (max-width: 640px) {
+      #lista-eventi { padding: 12px; }
+      .eventi-grid { grid-template-columns: 1fr; gap: 10px; }
+      .card-evento { flex-direction: row; border-radius: 12px; }
+      .card-img { width: 92px; height: 92px; aspect-ratio: unset; flex-shrink: 0; border-radius: 12px 0 0 12px; }
+      .card-body { padding: 10px 12px; display: flex; flex-direction: column; justify-content: center; }
+      .card-nome { font-size: 0.9rem; -webkit-line-clamp: 2; }
+      .card-cat { font-size: 0.68rem; padding: 3px 9px; }
+      .card-data { font-size: 0.76rem; }
+      .card-luogo { font-size: 0.72rem; }
+      .gruppo-data-header { font-size: 0.82rem; padding: 10px 4px 6px; }
+      #contatore-lista { padding: 14px 16px 6px; font-size: 0.85rem; }
     }
   </style>
 </head>
 <body>
 
 <div id="loading">
-  <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" style="height:120px;width:auto;" alt="Stase Toscana" />
+  <img src="logo-stase.png" style="height:100px;width:auto;" alt="Stase Toscana" />
   <div class="spinner"></div>
   <p id="loading-msg">Carico gli eventi in Toscana...</p>
 </div>
 
 <div id="top-bar">
   <header>
-    <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" alt="Stase Toscana" />
-    <button id="btn-geolocate" onclick="geolocate()">📍 Vicino a me</button>
+    <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
+    <div id="tab-nav">
+      <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
+      <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
+    </div>
   </header>
-  <div id="filtri">
-    <button class="btn-filtro attivo" onclick="filtra('tutti', this)">Tutti</button>
-    <button class="btn-filtro" onclick="filtra('oggi', this)">Oggi</button>
-    <button class="btn-filtro" onclick="filtra('weekend', this)">Questo weekend</button>
-    <button class="btn-filtro" onclick="filtra('settimana', this)">Questa settimana</button>
-    <button class="btn-filtro" onclick="filtra('mese', this)">Prossimi 30 giorni</button>
+</div>
+
+<div id="controlli">
+  <div id="barra-ricerca">
+    <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
+    <button id="btn-filtri-toggle" onclick="toggleFiltriPanel()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
+  </div>
+  <div id="filtri-riga">
+    <button class="btn-filtro" id="btn-geolocate" onclick="geolocate()">Vicino a me</button>
+    <button class="btn-filtro attivo" data-periodo="tutti" onclick="setPeriodo('tutti', this)">Tutti</button>
+    <button class="btn-filtro" data-periodo="oggi" onclick="setPeriodo('oggi', this)">Oggi</button>
+    <button class="btn-filtro" data-periodo="weekend" onclick="setPeriodo('weekend', this)">Weekend</button>
+    <button class="btn-filtro" data-periodo="settimana" onclick="setPeriodo('settimana', this)">Settimana</button>
+    <button class="btn-filtro" data-periodo="mese" onclick="setPeriodo('mese', this)">Prossimi 30gg</button>
+    <div class="multiselect" id="ms-categoria">
+      <button class="ms-toggle" onclick="toggleMultiselect('categoria')">Categoria <span class="ms-badge" id="ms-badge-categoria" style="display:none;"></span> &#9662;</button>
+      <div class="ms-panel" id="ms-panel-categoria"></div>
+    </div>
+    <div class="multiselect" id="ms-provincia">
+      <button class="ms-toggle" onclick="toggleMultiselect('provincia')">Provincia <span class="ms-badge" id="ms-badge-provincia" style="display:none;"></span> &#9662;</button>
+      <div class="ms-panel" id="ms-panel-provincia"></div>
+    </div>
+    <button class="btn-filtro" id="btn-azzera-filtri" onclick="azzeraFiltri()" style="display:none;">&#10005; Azzera filtri</button>
+  </div>
+  <div id="toggle-vista">
+    <button class="attivo" id="btn-vista-lista" onclick="mostraVista('lista')">Lista</button>
+    <button id="btn-vista-mappa" onclick="mostraVista('mappa')">Mappa</button>
   </div>
 </div>
 
-<div id="map"></div>
-<div id="contatore"></div>
-
-<div id="legenda">
-  <div id="legenda-header" onclick="toggleLegenda()">
-    <span>Legenda</span>
-    <span id="legenda-arrow">▼</span>
+<div id="view-esplora">
+  <div id="pannello-lista">
+    <div id="contatore-lista"></div>
+    <div id="lista-eventi"></div>
+    <div id="stato-vuoto">Nessun evento trovato con questi filtri.<br>Prova ad allargare la ricerca.</div>
   </div>
-  <div id="legenda-body"></div>
+  <div id="map-wrap" class="nascosto">
+    <div id="map"></div>
+  </div>
 </div>
+
+<div id="view-aggiungi">
+  <div class="aggiungi-hero">
+    <h1>Invia il tuo evento</h1>
+    <p class="sub">Compila il modulo qui sotto: il tuo evento comparirà sulla mappa e nella lista entro pochi minuti dall'invio.</p>
+    <div class="aggiungi-badge">GRATIS</div>
+  </div>
+  <div id="form-card">
+    <iframe id="tally-form" data-tally-src="https://tally.so/embed/pb5GDE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" height="700" title="Invia il tuo evento"></iframe>
+  </div>
+</div>
+
+<div id="dettaglio-backdrop" onclick="if(event.target===this) chiudiDettaglio()">
+  <div id="dettaglio-panel">
+    <button id="btn-chiudi-dettaglio" onclick="chiudiDettaglio()">&#10005;</button>
+    <div id="dettaglio-img-wrap" onclick="apriLightbox()">
+      <img id="dettaglio-img" src="" alt="" onerror="this.parentElement.style.display='none'" />
+      <span id="dettaglio-zoom-hint">Zoom</span>
+    </div>
+    <div id="dettaglio-body">
+      <div id="dettaglio-nome"></div>
+      <span id="dettaglio-badge"></span>
+      <div class="dett-riga"><span class="icona">&#128197;</span><span id="dett-data"></span></div>
+      <div class="dett-riga"><span class="icona">&#128205;</span><span id="dett-luogo"></span></div>
+      <div id="dettaglio-descrizione"></div>
+      <div id="dettaglio-azioni"></div>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="chiudiLightbox()">
+  <button id="lightbox-chiudi" onclick="chiudiLightbox()">&#10005;</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<div id="banner-pubblicitario">
+  <span id="banner-label">Sponsorizzato</span>
+  <a class="banner-link" id="banner-link" href="#" target="_blank">
+    <img id="banner-img" src="" alt="Banner sponsor" />
+  </a>
+  <div id="banner-cta-content">
+    <span>Vuoi comparire qui? Contattaci su <a href="https://instagram.com/stasetoscana" target="_blank">Instagram</a> o scrivi a <a href="mailto:info@stasetoscana.it">info@stasetoscana.it</a></span>
+  </div>
+</div>
+
+<div id="toast-container"></div>
 
 <script>
-  // URL del Web App Apps Script (sostituisce il vecchio eventi.json statico)
   const JSON_URL = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
 
   const CATEGORIE = {
-    'Concerto':                   { bg: '#6366f1', emoji: '🎤' },
-    'Evento gastronomico':        { bg: '#f59e0b', emoji: '🍷' },
-    'Evento sportivo':            { bg: '#10b981', emoji: '⚽' },
-    'Festa paesana':              { bg: '#ec4899', emoji: '🎪' },
-    'Festival':                   { bg: '#f97316', emoji: '🎵' },
-    'Fiera':                      { bg: '#14b8a6', emoji: '🏪' },
-    'Mercato':                    { bg: '#84cc16', emoji: '🛍️' },
-    'Mostra/Esposizione':         { bg: '#a855f7', emoji: '🎨' },
-    'Rievocazione storica/Palio': { bg: '#92400e', emoji: '⚔️' },
-    'Sagra':                      { bg: '#CC0000', emoji: '🍽️' },
-    'Spettacolo teatrale':        { bg: '#7c3aed', emoji: '🎭' },
-    'Serata/Discoteca':           { bg: '#4c1d95', emoji: '🪩' },
-    'Altro':                      { bg: '#6b7280', emoji: '📌' },
+    'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
+    'Evento gastronomico':        { bg: '#f59e0b', emoji: '\u{1F377}' },
+    'Evento sportivo':            { bg: '#10b981', emoji: '\u{26BD}' },
+    'Festa paesana':              { bg: '#ec4899', emoji: '\u{1F389}' },
+    'Festival':                   { bg: '#FF3131', emoji: '\u{1F3B5}' },
+    'Fiera':                      { bg: '#14b8a6', emoji: '\u{1F3EA}' },
+    'Mercato':                    { bg: '#84cc16', emoji: '\u{1F6D2}' },
+    'Mostra/Esposizione':         { bg: '#a855f7', emoji: '\u{1F3A8}' },
+    'Rievocazione storica/Palio': { bg: '#92400e', emoji: '\u{1F3F0}' },
+    'Sagra':                      { bg: '#FF3131', emoji: '\u{1F958}' },
+    'Spettacolo teatrale':        { bg: '#7c3aed', emoji: '\u{1F3AD}' },
+    'Serata/Discoteca':           { bg: '#4c1d95', emoji: '\u{1F57A}' },
+    'Altro':                      { bg: '#6b7280', emoji: '\u{1F4CC}' },
   };
+  function getCat(nome) { return CATEGORIE[nome] || { bg: '#6b7280', emoji: '\u{1F4CC}' }; }
 
-  function getCat(nome) {
-    return CATEGORIE[nome] || { bg: '#6b7280', emoji: '📌' };
+  const DATI_DEMO = [
+    { id: 'demo1', nome: 'Sagra della Bistecca - Firenze', locandina: 'https://picsum.photos/seed/sagra1/400/300', categoria: 'Sagra', provincia: 'Firenze', comune: 'Firenze', indirizzo: 'Piazza della Signoria', riepilogoDate: '15/07/2026 - 20:00', dataSort: '2026-07-15', dataFine: '2026-07-15', mapsUrl: 'https://maps.google.com/?q=Piazza+della+Signoria,Firenze', lat: 43.7699, lon: 11.2556, instagram: 'https://instagram.com/sagrafirenze', descrizione: 'La tradizionale sagra con bistecca alla fiorentina, vino locale e musica dal vivo.' },
+    { id: 'demo2', nome: 'Concerto Estate - Lucca', locandina: 'https://picsum.photos/seed/concerto1/400/300', categoria: 'Concerto', provincia: 'Lucca', comune: 'Lucca', indirizzo: 'Piazza Napoleone', riepilogoDate: '20/07/2026 - 21:30', dataSort: '2026-07-20', dataFine: '2026-07-20', mapsUrl: 'https://maps.google.com/?q=Piazza+Napoleone,Lucca', lat: 43.8429, lon: 10.5027, instagram: null, descrizione: 'Concerto all\'aperto con artisti internazionali.' },
+    { id: 'demo3', nome: 'Festa Medievale - San Gimignano', locandina: 'https://picsum.photos/seed/medioevo1/400/300', categoria: 'Rievocazione storica/Palio', provincia: 'Siena', comune: 'San Gimignano', indirizzo: 'Piazza del Duomo', riepilogoDate: '25-27/07/2026 - 10:00', dataSort: '2026-07-25', dataFine: '2026-07-27', mapsUrl: 'https://maps.google.com/?q=Piazza+del+Duomo,San+Gimignano', lat: 43.4676, lon: 11.0434, instagram: null, descrizione: 'Tre giorni di rievocazione storica con cortei, tornei e mercato medievale.' },
+    { id: 'demo4', nome: 'Festival del Vino - Montalcino', locandina: 'https://picsum.photos/seed/vino1/400/300', categoria: 'Festival', provincia: 'Siena', comune: 'Montalcino', indirizzo: 'Piazza del Popolo', riepilogoDate: '10/08/2026 - 18:00', dataSort: '2026-08-10', dataFine: '2026-08-12', mapsUrl: 'https://maps.google.com/?q=Piazza+del+Popolo,Montalcino', lat: 43.0586, lon: 11.4896, instagram: null, descrizione: 'Festival enogastronomico con degustazioni di Brunello.' },
+    { id: 'demo5', nome: 'Mercato Contadino - Pisa', locandina: 'https://picsum.photos/seed/mercato1/400/300', categoria: 'Mercato', provincia: 'Pisa', comune: 'Pisa', indirizzo: 'Piazza dei Miracoli', riepilogoDate: '12/07/2026 - 08:00', dataSort: '2026-07-12', dataFine: '2026-07-12', mapsUrl: 'https://maps.google.com/?q=Piazza+dei+Miracoli,Pisa', lat: 43.7230, lon: 10.3966, instagram: null, descrizione: 'Mercato di prodotti biologici e artigianali locali.' },
+    { id: 'demo6', nome: 'Spettacolo Teatrale - Arezzo', locandina: 'https://picsum.photos/seed/teatro1/400/300', categoria: 'Spettacolo teatrale', provincia: 'Arezzo', comune: 'Arezzo', indirizzo: 'Teatro Petrarca', riepilogoDate: '18/07/2026 - 21:00', dataSort: '2026-07-18', dataFine: '2026-07-18', mapsUrl: 'https://maps.google.com/?q=Teatro+Petrarca,Arezzo', lat: 43.4633, lon: 11.8784, instagram: null, descrizione: 'Rappresentazione teatrale all\'aperto.' },
+  ];
+
+  function mostraTab(tab) {
+    document.getElementById('view-esplora').style.display = tab === 'esplora' ? 'flex' : 'none';
+    document.getElementById('controlli').style.display = tab === 'esplora' ? 'flex' : 'none';
+    document.getElementById('view-aggiungi').style.display = tab === 'aggiungi' ? 'block' : 'none';
+    document.getElementById('tab-esplora').classList.toggle('attivo', tab === 'esplora');
+    document.getElementById('tab-aggiungi').classList.toggle('attivo', tab === 'aggiungi');
+    if (tab === 'esplora') setTimeout(function() { map.invalidateSize(); }, 100);
   }
 
-  // Popola legenda
-  const legendaBody = document.getElementById('legenda-body');
-  Object.entries(CATEGORIE).forEach(([nome, cat]) => {
-    const item = document.createElement('div');
-    item.className = 'legenda-item';
-    item.innerHTML = `<div class="legenda-dot" style="background:${cat.bg}"></div><span>${cat.emoji} ${nome}</span>`;
-    legendaBody.appendChild(item);
-  });
-
-  function toggleLegenda() {
-    const body = document.getElementById('legenda-body');
-    const arrow = document.getElementById('legenda-arrow');
-    body.classList.toggle('aperta');
-    arrow.textContent = body.classList.contains('aperta') ? '▲' : '▼';
+  function caricaTally() {
+    var d = document, w = "https://tally.so/widgets/embed.js",
+      v = function () {
+        if (typeof Tally !== "undefined")
+          Tally.loadEmbeds();
+        else
+          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) { e.src = e.dataset.tallySrc; });
+      };
+    if (typeof Tally !== "undefined") v();
+    else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script"); s.src = w; s.onload = v; s.onerror = function() {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) { e.src = e.dataset.tallySrc; });
+      }; d.body.appendChild(s);
+    } else v();
   }
+  caricaTally();
 
-  // Mappa minimal
   const map = L.map('map').setView([43.5, 11.0], 8);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap © CARTO',
-    subdomains: 'abcd', maxZoom: 19
+    attribution: '&#169; OpenStreetMap &#169; CARTO', subdomains: 'abcd', maxZoom: 19
   }).addTo(map);
-
-  // Cluster group
   const clusterGroup = L.markerClusterGroup({
     maxClusterRadius: 50,
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
+    iconCreateFunction: function(cluster) {
+      var count = cluster.getChildCount();
+      var size = count < 10 ? 40 : count < 50 ? 48 : 56;
+      return L.divIcon({
+        html: '<div style="background:linear-gradient(135deg,#FF3131,#CC0000);width:' + size + 'px;height:' + size + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:' + (size*0.35) + 'px;box-shadow:0 4px 16px rgba(255,68,56,0.4);border:3px solid white;">' + count + '</div>',
+        className: 'marker-cluster-custom',
+        iconSize: [size, size]
+      });
+    }
   });
   map.addLayer(clusterGroup);
 
-  function creaIcona(cat) {
-    const c = getCat(cat);
+  function creaIcona(cat, evidenziata) {
+    var c = getCat(cat);
+    var size = evidenziata ? 46 : 36;
+    var glow = evidenziata ? 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);' : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
     return L.divIcon({
       className: '',
-      html: `<div style="background:${c.bg};width:36px;height:36px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);font-size:16px;display:block;line-height:1">${c.emoji}</span></div>`,
-      iconSize: [36, 36], iconAnchor: [18, 36], popupAnchor: [0, -38]
+      html: '<div style="background:' + c.bg + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
+      iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
     });
   }
 
-  const geocodeCache = {};
-  async function geocodifica(indirizzo) {
-    if (geocodeCache[indirizzo]) return geocodeCache[indirizzo];
+  async function leggiEventi() {
+    // Se aperto da file://, il fetch fallira per CORS. Salta direttamente ai dati demo.
+    if (window.location.protocol === 'file:') {
+      console.log('Aperto da file://, uso dati demo');
+      return DATI_DEMO;
+    }
     try {
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(indirizzo)}&limit=1`, { headers: { 'Accept-Language': 'it' } });
-      const data = await res.json();
-      if (data && data.length > 0) {
-        const coords = { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-        geocodeCache[indirizzo] = coords;
-        return coords;
-      }
-    } catch(e) {}
-    return null;
+      var res = await fetch(JSON_URL + '?t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      return normalizzaEventi(data);
+    } catch (err) {
+      console.warn('Fetch fallito, provo JSONP...', err);
+    }
+    try {
+      var data = await fetchJsonp(JSON_URL + '?callback=cb&t=' + Date.now());
+      return normalizzaEventi(data);
+    } catch (err) {
+      console.warn('JSONP fallito, uso dati demo...', err);
+    }
+    mostraToast('Modalita demo: dati di esempio caricati');
+    return DATI_DEMO;
   }
 
-  async function leggiEventi() {
-    const res = await fetch(JSON_URL + '?t=' + Date.now());
-    const data = await res.json();
-    // Converti formato JSON nel formato che si aspetta il codice
-    return data.map((e, i) => ({
-      id: e.id || ('json_' + i),
-      fields: {
-        'Nome evento': e.nome,
-        'Locandina': e.locandina ? [{ url: e.locandina }] : null,
-        'Categoria': e.categoria,
-        'Provincia': e.provincia,
-        'Comune': e.comune,
-        'Indirizzo completo': e.indirizzo,
-        'Riepilogo date': e.riepilogo_date,
-        'Data sort': e.data_sort,
-        'data_fine': e.data_fine,
-        'Apri su Google Maps': e.maps_url,
-        'Lat': e.lat,
-        'Lon': e.lon,
-        'Softr Record ID': e.softr_record_id,
-      }
-    }));
+  function fetchJsonp(url) {
+    return new Promise(function(resolve, reject) {
+      var script = document.createElement('script');
+      var cbName = 'cb_' + Date.now();
+      window[cbName] = function(data) { resolve(data); cleanup(); };
+      script.src = url.replace('callback=cb', 'callback=' + cbName);
+      script.onerror = function() { reject(); cleanup(); };
+      document.head.appendChild(script);
+      setTimeout(function() { reject(); cleanup(); }, 10000);
+      function cleanup() { delete window[cbName]; script.remove(); }
+    });
+  }
+
+  function normalizzaEventi(data) {
+    return data.map(function(e, i) {
+      return {
+        id: e.id || ('json_' + i),
+        nome: e.nome,
+        locandina: e.locandina || null,
+        categoria: e.categoria || 'Altro',
+        descrizione: e.descrizione || '',
+        provincia: e.provincia,
+        comune: e.comune,
+        indirizzo: e.indirizzo,
+        riepilogoDate: e.riepilogo_date,
+        dataSort: e.data_sort,
+        dataFine: e.data_fine,
+        mapsUrl: e.maps_url,
+        lat: e.lat ? parseFloat(e.lat) : null,
+        lon: e.lon ? parseFloat(e.lon) : null,
+        instagram: e.instagram || null,
+      };
+    });
   }
 
   function parseData(d) {
     if (!d) return null;
-    try {
-      const parts = d.split('-');
-      return new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
-    } catch(e) { return null; }
+    try { var p = d.split('-'); return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2])); }
+    catch (e) { return null; }
   }
-
-  function isFuturo(r) {
-    const d = r.fields['Data sort'];
+  function isFuturo(ev) {
+    var d = parseData(ev.dataSort);
     if (!d) return true;
-    const dataEvento = parseData(d);
-    if (!dataEvento) return true;
-    const oggi = new Date(); oggi.setHours(0,0,0,0);
-    return dataEvento >= oggi;
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    return d >= oggi;
   }
-
-  function inPeriodo(fields, filtro) {
-    if (filtro === 'tutti') return true;
-    const d = fields['Data sort'];
-    if (!d) return false;
-    const dataInizio = parseData(d);
+  function calcolaLimiti_() {
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    var day = oggi.getDay();
+    var giorniASabato = day === 0 ? 6 : day === 6 ? 0 : 6 - day;
+    var sabato = new Date(oggi); sabato.setDate(oggi.getDate() + giorniASabato);
+    var domenica = new Date(sabato); domenica.setDate(sabato.getDate() + 1);
+    var tra30 = new Date(oggi); tra30.setDate(oggi.getDate() + 30);
+    return { oggi: oggi, sabato: sabato, domenica: domenica, tra30: tra30 };
+  }
+  function inPeriodo(ev, periodo) {
+    if (periodo === 'tutti') return true;
+    var dataInizio = parseData(ev.dataSort);
     if (!dataInizio) return false;
-    const dataFine = fields['data_fine'] ? parseData(fields['data_fine']) : dataInizio;
-    const oggi = new Date(); oggi.setHours(0,0,0,0);
-    const day = oggi.getDay(); // 0=domenica, 1=lunedì, ..., 6=sabato
-
-    // Questo weekend: il sabato più vicino da oggi (incluso oggi se è sabato)
-    // Se oggi è domenica (0), sabato era ieri — prendiamo il prossimo sabato
-    let giorniASabato;
-    if (day === 0) giorniASabato = 6;       // domenica → sabato prossimo
-    else if (day === 6) giorniASabato = 0;  // sabato → oggi
-    else giorniASabato = 6 - day;           // altri giorni → giorni mancanti a sabato
-
-    const sabato = new Date(oggi); sabato.setDate(oggi.getDate() + giorniASabato);
-    const domenica = new Date(sabato); domenica.setDate(sabato.getDate() + 1);
-    const lunediDopoWeekend = new Date(domenica); lunediDopoWeekend.setDate(domenica.getDate() + 1);
-
-    const tra30 = new Date(oggi); tra30.setDate(oggi.getDate() + 30);
-
-    if (filtro === 'oggi') return dataInizio <= oggi && dataFine >= oggi;
-    if (filtro === 'weekend') return dataInizio <= domenica && dataFine >= sabato;
-    // "Questa settimana" ora copre da oggi fino alla domenica corrente inclusa
-    // (prima si fermava al venerdì, facendo sparire gli eventi del weekend
-    // che invece comparivano nel filtro "Weekend" — corretto qui)
-    if (filtro === 'settimana') return dataInizio <= domenica && dataFine >= oggi;
-    if (filtro === 'mese') return dataInizio <= tra30 && dataFine >= oggi;
+    var dataFine = ev.dataFine ? parseData(ev.dataFine) : dataInizio;
+    var lim = calcolaLimiti_();
+    if (periodo === 'oggi') return dataInizio <= lim.oggi && dataFine >= lim.oggi;
+    if (periodo === 'weekend') return dataInizio <= lim.domenica && dataFine >= lim.sabato;
+    if (periodo === 'settimana') return dataInizio <= lim.domenica && dataFine >= lim.oggi;
+    if (periodo === 'mese') return dataInizio <= lim.tra30 && dataFine >= lim.oggi;
     return true;
   }
 
-  let tuttiMarker = [];
-  let filtroCorrente = 'tutti';
+  var tuttiEventi = [];
+  var periodoCorrente = 'tutti';
+  var categorieSelezionate = new Set();
+  var provinceSelezionate = new Set();
+  var markersById = {};
+  var cardsById = {};
 
-  function filtra(periodo, btn) {
-    filtroCorrente = periodo;
-    document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('attivo'));
+  function setPeriodo(p, btn) {
+    periodoCorrente = p;
+    document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.remove('attivo'); });
     btn.classList.add('attivo');
-    clusterGroup.clearLayers();
-    let visibili = 0;
-    tuttiMarker.forEach(item => {
-      if (inPeriodo(item.fields, periodo)) {
-        clusterGroup.addLayer(item.marker);
-        visibili++;
-      }
-    });
-    document.getElementById('contatore').textContent = `${visibili} eventi in Toscana`;
+    aggiornaUrl();
+    applicaFiltri();
   }
 
-  // Geolocalizzazione
-  let raggioLayer = null;
-  let markerUtente = null;
+  function toggleMultiselect(tipo) {
+    var panel = document.getElementById('ms-panel-' + tipo);
+    var giaAperto = panel.classList.contains('aperto');
+    document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+    if (!giaAperto) panel.classList.add('aperto');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.multiselect')) document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+  });
 
+  function costruisciMultiselect(tipo, valori, selezionati) {
+    var panel = document.getElementById('ms-panel-' + tipo);
+    panel.innerHTML = '';
+    valori.forEach(function(v) {
+      var label = document.createElement('label');
+      label.className = 'ms-opzione';
+      var checked = selezionati.has(v) ? 'checked' : '';
+      var testo = tipo === 'categoria' ? (getCat(v).emoji + ' ' + v) : v;
+      label.innerHTML = '<input type="checkbox" value="' + v + '" ' + checked + ' /> ' + testo;
+      label.querySelector('input').addEventListener('change', function(e) {
+        if (e.target.checked) selezionati.add(v); else selezionati.delete(v);
+        aggiornaBadgeMultiselect(tipo, selezionati);
+        aggiornaUrl();
+        applicaFiltri();
+      });
+      panel.appendChild(label);
+    });
+    var clearBtn = document.createElement('button');
+    clearBtn.className = 'ms-clear';
+    clearBtn.textContent = 'Deseleziona tutto';
+    clearBtn.onclick = function() {
+      selezionati.clear();
+      costruisciMultiselect(tipo, valori, selezionati);
+      aggiornaBadgeMultiselect(tipo, selezionati);
+      aggiornaUrl();
+      applicaFiltri();
+    };
+    panel.appendChild(clearBtn);
+  }
+  function aggiornaBadgeMultiselect(tipo, selezionati) {
+    var badge = document.getElementById('ms-badge-' + tipo);
+    var toggle = document.querySelector('#ms-' + tipo + ' .ms-toggle');
+    if (selezionati.size > 0) { badge.style.display = 'inline-block'; badge.textContent = selezionati.size; toggle.classList.add('attivo'); }
+    else { badge.style.display = 'none'; toggle.classList.remove('attivo'); }
+  }
+  function popolaFiltriOpzioni() {
+    var categorie = [];
+    var province = [];
+    var catSet = new Set();
+    var provSet = new Set();
+    tuttiEventi.forEach(function(e) {
+      if (e.categoria) catSet.add(e.categoria);
+      if (e.provincia) provSet.add(e.provincia);
+    });
+    catSet.forEach(function(c) { categorie.push(c); });
+    provSet.forEach(function(p) { province.push(p); });
+    categorie.sort();
+    province.sort();
+    costruisciMultiselect('categoria', categorie, categorieSelezionate);
+    costruisciMultiselect('provincia', province, provinceSelezionate);
+  }
+
+  function toggleFiltriPanel() {
+    var panel = document.getElementById('filtri-riga');
+    var btn = document.getElementById('btn-filtri-toggle');
+    panel.classList.toggle('aperto');
+    btn.classList.toggle('attivo', panel.classList.contains('aperto'));
+  }
+
+  function azzeraFiltri() {
+    periodoCorrente = 'tutti';
+    document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.toggle('attivo', b.dataset.periodo === 'tutti'); });
+    categorieSelezionate.clear();
+    provinceSelezionate.clear();
+    var categorie = [].concat(new Set(tuttiEventi.map(function(e) { return e.categoria; }).filter(Boolean))).sort();
+    var province = [].concat(new Set(tuttiEventi.map(function(e) { return e.provincia; }).filter(Boolean))).sort();
+    costruisciMultiselect('categoria', categorie, categorieSelezionate);
+    costruisciMultiselect('provincia', province, provinceSelezionate);
+    aggiornaBadgeMultiselect('categoria', categorieSelezionate);
+    aggiornaBadgeMultiselect('provincia', provinceSelezionate);
+    document.getElementById('input-ricerca').value = '';
+    applicaFiltri();
+  }
+
+  function aggiornaBadgeFiltri() {
+    var count = (periodoCorrente !== 'tutti' ? 1 : 0) + categorieSelezionate.size + provinceSelezionate.size;
+    var badge = document.getElementById('filtri-badge');
+    var btnAzzera = document.getElementById('btn-azzera-filtri');
+    if (count > 0) { badge.style.display = 'inline-block'; badge.textContent = count; btnAzzera.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; btnAzzera.style.display = 'none'; }
+  }
+
+  function applicaFiltri() {
+    var testo = document.getElementById('input-ricerca').value.trim().toLowerCase();
+    aggiornaBadgeFiltri();
+    var filtrati = tuttiEventi.filter(function(ev) {
+      if (!inPeriodo(ev, periodoCorrente)) return false;
+      if (categorieSelezionate.size > 0 && !categorieSelezionate.has(ev.categoria)) return false;
+      if (provinceSelezionate.size > 0 && !provinceSelezionate.has(ev.provincia)) return false;
+      if (testo) {
+        var hay = ((ev.nome || '') + ' ' + (ev.comune || '') + ' ' + (ev.provincia || '') + ' ' + (ev.categoria || '')).toLowerCase();
+        if (!hay.includes(testo)) return false;
+      }
+      return true;
+    });
+    filtrati.sort(function(a, b) {
+      var da = parseData(a.dataSort), db = parseData(b.dataSort);
+      if (!da) return 1; if (!db) return -1;
+      return da - db;
+    });
+    renderLista(filtrati);
+    renderMappa(filtrati);
+  }
+
+  function formattaGiorno(dataStr) {
+    var d = parseData(dataStr);
+    if (!d) return '';
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    var dNorm = new Date(d); dNorm.setHours(0,0,0,0);
+    var diff = Math.round((dNorm - oggi) / (1000*60*60*24));
+    var nomiGiorni = ['Domenica','Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'];
+    var nome = nomiGiorni[d.getDay()];
+    if (diff === 0) return 'OGGI - ' + nome + ' ' + d.getDate() + '/' + (d.getMonth()+1);
+    if (diff === 1) return 'DOMANI - ' + nome + ' ' + d.getDate() + '/' + (d.getMonth()+1);
+    return nome + ' ' + d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+  }
+
+  function renderLista(eventi) {
+    var cont = document.getElementById('lista-eventi');
+    var contatore = document.getElementById('contatore-lista');
+    var vuoto = document.getElementById('stato-vuoto');
+    cont.innerHTML = '';
+    contatore.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
+    vuoto.style.display = eventi.length === 0 ? 'block' : 'none';
+    Object.keys(cardsById).forEach(function(k) { delete cardsById[k]; });
+
+    var gruppi = {};
+    eventi.forEach(function(ev) {
+      var chiave = ev.dataSort || 'senza-data';
+      if (!gruppi[chiave]) gruppi[chiave] = [];
+      gruppi[chiave].push(ev);
+    });
+
+    var chiavi = Object.keys(gruppi).sort();
+    chiavi.forEach(function(chiave) {
+      var evs = gruppi[chiave];
+      var gruppoDiv = document.createElement('div');
+      gruppoDiv.className = 'gruppo-data';
+      var header = document.createElement('div');
+      header.className = 'gruppo-data-header';
+      header.innerHTML = '<span class="giorno-nome">' + formattaGiorno(chiave) + '</span> <span>' + evs.length + (evs.length === 1 ? ' evento' : ' eventi') + '</span>';
+      gruppoDiv.appendChild(header);
+
+      var grid = document.createElement('div');
+      grid.className = 'eventi-grid';
+
+      evs.forEach(function(ev) {
+        var cat = getCat(ev.categoria);
+        var card = document.createElement('div');
+        card.className = 'card-evento';
+        var imgHtml = ev.locandina ? '<img class="card-img" src="' + ev.locandina + '" alt="' + ev.nome + '" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
+        card.innerHTML = imgHtml +
+          '<div class="card-body">' +
+          '<div class="card-nome">' + (ev.nome || 'Evento senza nome') + '</div>' +
+          '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + ev.categoria + '</span>' +
+          '<div class="card-data">&#128197; ' + (ev.riepilogoDate || '') + '</div>' +
+          '<div class="card-luogo">&#128205; ' + [ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ') + '</div>' +
+          '</div>';
+        card.addEventListener('click', function() { apriDettaglio(ev); });
+        card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
+        card.addEventListener('mouseleave', function() { evidenziaMarker(ev.id, false); });
+        grid.appendChild(card);
+        cardsById[ev.id] = card;
+      });
+      gruppoDiv.appendChild(grid);
+      cont.appendChild(gruppoDiv);
+    });
+  }
+
+  function renderMappa(eventi) {
+    clusterGroup.clearLayers();
+    Object.keys(markersById).forEach(function(k) { delete markersById[k]; });
+    var nuoviMarker = [];
+    eventi.forEach(function(ev) {
+      if (ev.lat == null || ev.lon == null || isNaN(ev.lat) || isNaN(ev.lon)) return;
+      var cat = getCat(ev.categoria);
+      var imgHtml = ev.locandina ? '<img src="' + ev.locandina + '" class="popup-img" alt="' + ev.nome + '" onerror="this.style.display=\'none\'" />' : '';
+      var mapsBtn = ev.mapsUrl ? '<a href="' + ev.mapsUrl + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
+      var popupHtml = imgHtml +
+        '<div class="popup-header" style="background:' + cat.bg + '">' + ev.nome + '</div>' +
+        '<div class="popup-body">' +
+        '<div class="popup-quando">&#128197; ' + (ev.riepilogoDate || '') + '</div>' +
+        '<div>&#128205; ' + [ev.comune, ev.provincia].filter(Boolean).join(', ') + '</div>' +
+        '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
+        mapsBtn +
+        '</div>';
+      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, { maxWidth: 260 });
+      marker.on('click', function() { evidenziaCard(ev.id); });
+      nuoviMarker.push(marker);
+      markersById[ev.id] = marker;
+    });
+    clusterGroup.addLayers(nuoviMarker);
+  }
+
+  function evidenziaMarker(id, on) {
+    var card = cardsById[id];
+    if (card) card.classList.toggle('hover-marker', on);
+    var marker = markersById[id];
+    if (marker) {
+      var ev = tuttiEventi.find(function(e) { return e.id === id; });
+      if (ev) marker.setIcon(creaIcona(ev.categoria, on));
+    }
+  }
+  function evidenziaCard(id) {
+    var card = cardsById[id];
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('hover-marker');
+    setTimeout(function() { card.classList.remove('hover-marker'); }, 1500);
+  }
+
+  function apriDettaglioDaId(id) {
+    var ev = tuttiEventi.find(function(e) { return e.id === id; });
+    if (ev) apriDettaglio(ev);
+  }
+
+  function apriDettaglio(ev) {
+    var cat = getCat(ev.categoria);
+    var imgWrap = document.getElementById('dettaglio-img-wrap');
+    var img = document.getElementById('dettaglio-img');
+    if (ev.locandina) { img.src = ev.locandina; img.alt = ev.nome || ''; imgWrap.style.display = 'block'; }
+    else { imgWrap.style.display = 'none'; }
+
+    document.getElementById('dettaglio-nome').textContent = ev.nome || 'Evento senza nome';
+    var badge = document.getElementById('dettaglio-badge');
+    badge.textContent = cat.emoji + ' ' + (ev.categoria || 'Altro');
+    badge.style.background = cat.bg + '20';
+    badge.style.color = cat.bg;
+
+    document.getElementById('dett-data').textContent = ev.riepilogoDate || '';
+    document.getElementById('dett-luogo').textContent = ev.indirizzo || [ev.comune, ev.provincia].filter(Boolean).join(', ');
+
+    var descBox = document.getElementById('dettaglio-descrizione');
+    if (ev.descrizione) { descBox.textContent = ev.descrizione; descBox.style.display = 'block'; }
+    else { descBox.style.display = 'none'; }
+
+    var azioniHtml = '';
+    if (ev.mapsUrl) azioniHtml += '<a class="btn-azione" style="background:' + cat.bg + '" href="' + ev.mapsUrl + '" target="_blank">Google Maps</a>';
+    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + ev.instagram + '" target="_blank">Instagram</a>';
+    azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
+    document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
+
+    aggiornaUrlDettaglio(ev.id);
+    document.getElementById('dettaglio-backdrop').classList.add('aperto');
+  }
+
+  function chiudiDettaglio() {
+    document.getElementById('dettaglio-backdrop').classList.remove('aperto');
+    aggiornaUrl();
+  }
+
+  function apriLightbox() {
+    var src = document.getElementById('dettaglio-img').src;
+    if (!src) return;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('aperto');
+  }
+  function chiudiLightbox() {
+    document.getElementById('lightbox').classList.remove('aperto');
+  }
+
+  function condividiEvento(id) {
+    var ev = tuttiEventi.find(function(e) { return e.id === id; });
+    var url = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(id);
+
+    if (navigator.share) {
+      navigator.share({
+        title: ev ? ev.nome : 'Evento in Toscana',
+        text: ev ? (ev.nome + ' - ' + (ev.riepilogoDate || '')) : '',
+        url: url
+      }).catch(function(err) {
+        // L'utente ha annullato la condivisione, o il browser ha rifiutato: nessuna azione necessaria.
+      });
+      return;
+    }
+
+    // Fallback per browser desktop senza supporto alla condivisione nativa
+    navigator.clipboard.writeText(url).then(function() {
+      mostraToast('Link copiato negli appunti!');
+    }).catch(function() {
+      alert('Link: ' + url);
+    });
+  }
+
+  function mostraToast(msg) {
+    var container = document.getElementById('toast-container');
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = msg;
+    container.appendChild(toast);
+    setTimeout(function() { toast.remove(); }, 3000);
+  }
+
+  function aggiornaUrl() {
+    var params = new URLSearchParams();
+    if (periodoCorrente !== 'tutti') params.set('periodo', periodoCorrente);
+    if (categorieSelezionate.size) params.set('cat', Array.from(categorieSelezionate).join(','));
+    if (provinceSelezionate.size) params.set('prov', Array.from(provinceSelezionate).join(','));
+    var q = document.getElementById('input-ricerca').value.trim();
+    if (q) params.set('q', q);
+    var newUrl = params.toString() ? '?' + params.toString() : window.location.pathname;
+    history.replaceState(null, '', newUrl);
+  }
+  function aggiornaUrlDettaglio(id) {
+    var params = new URLSearchParams(window.location.search);
+    params.set('id', id);
+    history.replaceState(null, '', '?' + params.toString());
+  }
+  function caricaFiltriDaUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var p = params.get('periodo');
+    if (p) {
+      var btn = document.querySelector('.btn-filtro[data-periodo="' + p + '"]');
+      if (btn) setPeriodo(p, btn);
+    }
+    var cats = params.get('cat');
+    if (cats) {
+      cats.split(',').forEach(function(c) { categorieSelezionate.add(c); });
+    }
+    var provs = params.get('prov');
+    if (provs) {
+      provs.split(',').forEach(function(p) { provinceSelezionate.add(p); });
+    }
+    var q = params.get('q');
+    if (q) document.getElementById('input-ricerca').value = q;
+  }
+
+  function mostraVista(vista) {
+    var lista = document.getElementById('pannello-lista');
+    var mapWrap = document.getElementById('map-wrap');
+    var btnLista = document.getElementById('btn-vista-lista');
+    var btnMappa = document.getElementById('btn-vista-mappa');
+    if (vista === 'lista') {
+      lista.classList.remove('nascosto'); mapWrap.classList.add('nascosto');
+      btnLista.classList.add('attivo'); btnMappa.classList.remove('attivo');
+    } else {
+      lista.classList.add('nascosto'); mapWrap.classList.remove('nascosto');
+      btnMappa.classList.add('attivo'); btnLista.classList.remove('attivo');
+      setTimeout(function() { map.invalidateSize(); }, 100);
+    }
+  }
+  function adattaLayoutIniziale() {
+    if (window.innerWidth > 760) { document.getElementById('map-wrap').classList.remove('nascosto'); setTimeout(function() { map.invalidateSize(); }, 100); }
+  }
+  window.addEventListener('resize', adattaLayoutIniziale);
+
+  var markerUtente = null;
   function geolocate() {
     if (!navigator.geolocation) { alert('Geolocalizzazione non supportata dal browser.'); return; }
-    const btn = document.getElementById('btn-geolocate');
-    btn.textContent = '⏳ Ricerco...';
-    navigator.geolocation.getCurrentPosition(pos => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      map.setView([lat, lon], 11);
-
+    var btn = document.getElementById('btn-geolocate');
+    btn.textContent = 'Ricerco...';
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      mostraVista('mappa');
+      map.setView([lat, lon], 12);
       if (markerUtente) map.removeLayer(markerUtente);
-      if (raggioLayer) map.removeLayer(raggioLayer);
-
       markerUtente = L.marker([lat, lon], {
-        icon: L.divIcon({
-          className: '',
-          html: '<div style="width:16px;height:16px;background:#CC0000;border:3px solid white;border-radius:50%;box-shadow:0 0 0 4px rgba(204,0,0,0.3);"></div>',
-          iconSize: [16,16], iconAnchor: [8,8]
-        })
-      }).addTo(map).bindPopup('<b>Sei qui</b>');
-
-      raggioLayer = L.circle([lat, lon], {
-        radius: 15000,
-        color: '#CC0000', fillColor: '#CC0000',
-        fillOpacity: 0.05, weight: 1.5, dashArray: '5,5'
-      }).addTo(map);
-
-      btn.textContent = '📍 Vicino a me';
-    }, () => {
-      btn.textContent = '📍 Vicino a me';
-      alert('Non riesco a trovare la tua posizione.');
-    });
+        icon: L.divIcon({ className: '', html: '<div style="width:16px;height:16px;background:#FF3131;border:3px solid white;border-radius:50%;box-shadow:0 0 0 4px rgba(255,68,56,0.3);"></div>', iconSize: [16,16], iconAnchor: [8,8] })
+      }).addTo(map).bindPopup('<b>Sei qui</b>').openPopup();
+      btn.textContent = 'Vicino a me';
+    }, function() { btn.textContent = 'Vicino a me'; alert('Non riesco a trovare la tua posizione.'); });
   }
+
+  var BANNERS = [
+    { img: 'https://via.placeholder.com/300x60/FF4438/FFFFFF?text=Il+tuo+banner+qui', link: 'https://www.instagram.com/', attivo: false },
+  ];
+  var bannerIndex = 0;
+
+  function bannerAttivi() {
+    return BANNERS.filter(function(b) { return b.attivo; });
+  }
+
+  function mostraBanner(banner) {
+    var haSponsor = !!banner;
+    document.getElementById('banner-label').style.display = haSponsor ? 'block' : 'none';
+    document.getElementById('banner-link').style.display = haSponsor ? 'flex' : 'none';
+    document.getElementById('banner-cta-content').style.display = haSponsor ? 'none' : 'flex';
+    if (haSponsor) {
+      document.getElementById('banner-img').src = banner.img;
+      document.getElementById('banner-link').href = banner.link;
+    }
+  }
+
+  function inizializzaBanner() {
+    var attivi = bannerAttivi();
+    bannerIndex = 0;
+    mostraBanner(attivi.length > 0 ? attivi[0] : null);
+  }
+
+  function rotazioneBanner() {
+    var attivi = bannerAttivi();
+    if (attivi.length <= 1) return;
+    bannerIndex = (bannerIndex + 1) % attivi.length;
+    mostraBanner(attivi[bannerIndex]);
+  }
+  setInterval(rotazioneBanner, 10000);
+
+  
+
+  // Compact header on scroll (desktop + mobile)
+  (function() {
+    var topBar = document.getElementById('top-bar');
+    var scrollThreshold = 60;
+    var lastScroll = 0;
+
+    function checkScroll() {
+      var y;
+      if (window.innerWidth > 760) {
+        // Desktop: check scroll of the lista panel
+        var lista = document.getElementById('pannello-lista');
+        y = lista ? lista.scrollTop : 0;
+      } else {
+        // Mobile: check window scroll
+        y = window.scrollY || document.documentElement.scrollTop;
+      }
+      if (y > scrollThreshold) {
+        topBar.classList.add('compact');
+      } else {
+        topBar.classList.remove('compact');
+      }
+      lastScroll = y;
+    }
+
+    // Window scroll (mobile)
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    // Lista panel scroll (desktop)
+    var lista = document.getElementById('pannello-lista');
+    if (lista) lista.addEventListener('scroll', checkScroll, { passive: true });
+    // Resize
+    window.addEventListener('resize', checkScroll);
+    // Initial check
+    checkScroll();
+  })();
 
   async function init() {
     try {
-      const records = await leggiEventi();
-      const eventiFuturi = records.filter(isFuturo);
-      let piazzati = 0;
+      var eventi = await leggiEventi();
+      tuttiEventi = eventi.filter(isFuturo);
+      popolaFiltriOpzioni();
+      caricaFiltriDaUrl();
+      applicaFiltri();
+      adattaLayoutIniziale();
+      inizializzaBanner();
 
-      for (const record of eventiFuturi) {
-        const f = record.fields;
-        let coords = null;
-
-        if (f['Lat'] && f['Lon']) {
-          coords = { lat: parseFloat(f['Lat']), lon: parseFloat(f['Lon']) };
-        } else {
-          const indirizzo = f['Indirizzo completo'] || f['Comune'] || f['Indirizzo'];
-          if (!indirizzo) continue;
-          await new Promise(r => setTimeout(r, 1100));
-          coords = await geocodifica(indirizzo);
-        }
-
-        if (!coords) continue;
-
-        const nome      = f['Nome evento'] || 'Evento senza nome';
-        const quando    = f['Riepilogo date'] || f['Data principale'] || '';
-        const categoria = f['Categoria'] || 'Altro';
-        const luogo     = [f['Comune'], f['Provincia'] ? `(${f['Provincia']})` : ''].filter(Boolean).join(' ');
-        const mapsUrl   = f['Apri su Google Maps'] || `https://maps.google.com/?q=${encodeURIComponent(f['Indirizzo completo'] || '')}`;
-        const locandina = f['Locandina'] && f['Locandina'][0] ? f['Locandina'][0].url : null;
-        const cat       = getCat(categoria);
-
-        document.getElementById('loading-msg').textContent = `Carico... ${piazzati + 1}/${eventiFuturi.length} eventi`;
-
-        const imgHtml = locandina ? `<img src="${locandina}" class="popup-img" alt="${nome}" onerror="this.style.display='none'" />` : '';
-
-        const popupHtml = `
-          ${imgHtml}
-          <div class="popup-header" style="background:${cat.bg}">${nome}</div>
-          <div class="popup-body">
-            <span class="popup-cat" style="background:${cat.bg}20;color:${cat.bg}">${cat.emoji} ${categoria}</span><br>
-            ${quando ? `<div class="popup-quando">📅 ${quando}</div>` : ''}
-            ${luogo ? `<div class="popup-luogo">📍 ${luogo}</div>` : ''}
-            <a href="${mapsUrl}" target="_blank" class="popup-btn" style="background:${cat.bg}">🗺️ Google Maps</a>
-            ${f['Softr Record ID'] ? `<a href="https://luis70695.softr.app/eventi-details?recordId=${f['Softr Record ID']}" target="_blank" class="popup-btn" style="background:#333;margin-top:6px;display:inline-block;">📋 Vedi dettagli</a>` : ''}
-          </div>
-        `;
-
-        const marker = L.marker([coords.lat, coords.lon], { icon: creaIcona(categoria) })
-          .bindPopup(popupHtml, { maxWidth: 280 });
-
-        tuttiMarker.push({ fields: f, marker });
-
-        if (inPeriodo(f, filtroCorrente)) {
-          clusterGroup.addLayer(marker);
-          piazzati++;
-        }
-
-        // Aggiorna contatore in tempo reale
-        document.getElementById('contatore').textContent = `${piazzati} eventi caricati...`;
+      var idNellUrl = new URLSearchParams(window.location.search).get('id');
+      if (idNellUrl) {
+        var ev = tuttiEventi.find(function(e) { return e.id === idNellUrl; });
+        if (ev) apriDettaglio(ev);
       }
-
+    } catch (err) {
+      console.error('Errore init:', err);
+      mostraToast('Errore di caricamento. Dati demo attivi.');
+    } finally {
       document.getElementById('loading').style.display = 'none';
-      const visibili = tuttiMarker.filter(i => inPeriodo(i.fields, filtroCorrente)).length;
-      document.getElementById('contatore').textContent = `${visibili} eventi in Toscana`;
-
-    } catch(err) {
-      console.error(err);
-      document.getElementById('loading').innerHTML = `
-        <img src="https://raw.githubusercontent.com/StaseToscana/mappa-stase-toscana/main/logo.png" style="height:100px;" alt="Stase" />
-        <p style="color:white;text-align:center;padding:0 20px;">Errore nel caricamento.<br>Riprova più tardi.</p>
-      `;
     }
   }
 
