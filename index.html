@@ -383,6 +383,27 @@
     }
     #banner-cta-content a { color: var(--rosso); text-decoration: underline; font-weight: 700; }
     #banner-cta-content a:hover { text-decoration: none; }
+    #cookie-banner {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 4000;
+      background: var(--inchiostro); color: white;
+      padding: 16px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    #cookie-banner.visibile { display: flex; }
+    #cookie-banner p { font-size: 0.82rem; line-height: 1.5; max-width: 520px; margin: 0; color: rgba(255,255,255,0.9); }
+    #cookie-banner p a { color: white; text-decoration: underline; }
+    #cookie-banner .cookie-azioni { display: flex; gap: 8px; flex-shrink: 0; }
+    #cookie-banner button {
+      border: none; border-radius: 20px; padding: 9px 18px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    }
+    #btn-cookie-accetta { background: var(--rosso); color: white; }
+    #btn-cookie-rifiuta { background: rgba(255,255,255,0.15); color: white; }
+
     #banner-pubblicitario {
       position: relative; flex-shrink: 0;
       height: var(--banner-h, 68px);
@@ -556,6 +577,14 @@
   </a>
   <div id="banner-cta-content">
     <span>Vuoi comparire qui? Contattaci su <a href="https://www.instagram.com/stase.toscana/" target="_blank">Instagram</a> o scrivi a <a href="mailto:stasetoscana@gmail.com">stasetoscana@gmail.com</a></span>
+  </div>
+</div>
+
+<div id="cookie-banner">
+  <p>Usiamo cookie statistici (Google Analytics) per capire come viene usato il sito. Nessun dato personale viene venduto o condiviso con terzi a scopo pubblicitario. <a href="#" onclick="return false;">Maggiori info</a></p>
+  <div class="cookie-azioni">
+    <button id="btn-cookie-rifiuta" onclick="rifiutaCookie()">Rifiuta</button>
+    <button id="btn-cookie-accetta" onclick="accettaCookie()">Accetta</button>
   </div>
 </div>
 
@@ -1198,6 +1227,46 @@
     checkScroll();
   })();
 
+  // ===================== GOOGLE ANALYTICS (con consenso) =====================
+  var GA_ID = 'G-8YSDREEZ24';
+
+  function caricaGA() {
+    if (window.gaCaricato) return;
+    window.gaCaricato = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  function accettaCookie() {
+    localStorage.setItem('cookie_consent', 'accettato');
+    document.getElementById('cookie-banner').classList.remove('visibile');
+    caricaGA();
+  }
+
+  function rifiutaCookie() {
+    localStorage.setItem('cookie_consent', 'rifiutato');
+    document.getElementById('cookie-banner').classList.remove('visibile');
+  }
+
+  function inizializzaCookieBanner() {
+    var scelta = localStorage.getItem('cookie_consent');
+    if (scelta === 'accettato') {
+      caricaGA();
+    } else if (scelta === 'rifiutato') {
+      // nessuna azione, l'utente ha già scelto di non essere tracciato
+    } else {
+      document.getElementById('cookie-banner').classList.add('visibile');
+    }
+  }
+
   async function init() {
     try {
       var eventi = await leggiEventi();
@@ -1222,6 +1291,7 @@
   }
 
   init();
+  inizializzaCookieBanner();
 </script>
 </body>
 </html>
