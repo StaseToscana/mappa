@@ -741,7 +741,7 @@
     catch (e) { return null; }
   }
   function isFuturo(ev) {
-    var d = parseData(ev.dataSort);
+    var d = parseData(ev.dataFine || ev.dataSort);
     if (!d) return true;
     var oggi = new Date(); oggi.setHours(0,0,0,0);
     return d >= oggi;
