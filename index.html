@@ -979,8 +979,16 @@
         '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
         mapsBtn +
         '</div>';
-      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, { maxWidth: 260 });
-      marker.on('click', function() { evidenziaCard(ev.id); });
+      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, {
+        maxWidth: 260,
+        closeButton: true,
+        autoClose: false,
+        closeOnClick: false
+      });
+      marker.on('click', function(e) {
+        L.DomEvent.stopPropagation(e);
+        evidenziaCard(ev.id);
+      });
       nuoviMarker.push(marker);
       markersById[ev.id] = marker;
     });
