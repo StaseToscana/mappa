@@ -654,7 +654,7 @@
   }
   caricaTally();
 
-  const map = L.map('map').setView([43.5, 11.0], 8);
+  const map = L.map('map', { tap: false }).setView([43.5, 11.0], 8);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&#169; OpenStreetMap &#169; CARTO', subdomains: 'abcd', maxZoom: 19
   }).addTo(map);
@@ -995,7 +995,7 @@
         closeOnClick: false
       });
       marker.on('click', function(e) {
-        L.DomEvent.stopPropagation(e);
+        L.DomEvent.stopPropagation(e.originalEvent);
         evidenziaCard(ev.id);
       });
       nuoviMarker.push(marker);
