@@ -11,14 +11,15 @@
   <meta property="og:site_name" content="Stase - Eventi in Toscana" />
   <meta property="og:title" content="Stase - Eventi in Toscana" />
   <meta property="og:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
-  <meta property="og:image" content="logo-stase.png" />
+  <meta property="og:image" content="https://stasetoscana.it/logo-stase.png" />
   <meta property="og:url" content="https://stasetoscana.it/" />
+  <link rel="canonical" href="https://stasetoscana.it/" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Stase - Eventi in Toscana" />
   <meta name="twitter:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana." />
-  <meta name="twitter:image" content="logo-stase.png" />
+  <meta name="twitter:image" content="https://stasetoscana.it/logo-stase.png" />
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -952,7 +953,7 @@
         var cat = getCat(ev.categoria);
         var card = document.createElement('div');
         card.className = 'card-evento';
-        var imgHtml = ev.locandina ? '<img class="card-img" src="' + ev.locandina + '" alt="' + ev.nome + '" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
+        var imgHtml = ev.locandina ? '<img class="card-img" src="' + ev.locandina + '" alt="' + ev.nome + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
         card.innerHTML = imgHtml +
           '<div class="card-body">' +
           '<div class="card-nome">' + (ev.nome || 'Evento senza nome') + '</div>' +
@@ -978,7 +979,7 @@
     eventi.forEach(function(ev) {
       if (ev.lat == null || ev.lon == null || isNaN(ev.lat) || isNaN(ev.lon)) return;
       var cat = getCat(ev.categoria);
-      var imgHtml = ev.locandina ? '<img src="' + ev.locandina + '" class="popup-img" alt="' + ev.nome + '" onerror="this.style.display=\'none\'" />' : '';
+      var imgHtml = ev.locandina ? '<img src="' + ev.locandina + '" class="popup-img" alt="' + ev.nome + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
       var mapsBtn = ev.mapsUrl ? '<a href="' + ev.mapsUrl + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
       var popupHtml = imgHtml +
         '<div class="popup-header" style="background:' + cat.bg + '">' + ev.nome + '</div>' +
@@ -1173,8 +1174,14 @@
     }, function() { btn.textContent = 'Vicino a me'; alert('Non riesco a trovare la tua posizione.'); });
   }
 
+  // Esempio di banner sponsor: sostituisci "img" e "link" quando attivi un vero sponsor,
+  // e imposta attivo:true. L'immagine placeholder qui sotto è generata via SVG inline
+  // per non dipendere da servizi esterni.
+  var PLACEHOLDER_BANNER_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="60"><rect width="300" height="60" fill="%23FF3131"/><text x="150" y="35" font-family="Arial" font-size="16" fill="white" text-anchor="middle">Il tuo banner qui</text></svg>'
+  );
   var BANNERS = [
-    { img: 'https://via.placeholder.com/300x60/FF4438/FFFFFF?text=Il+tuo+banner+qui', link: 'https://www.instagram.com/', attivo: false },
+    { img: PLACEHOLDER_BANNER_SVG, link: 'https://www.instagram.com/stase.toscana/', attivo: false },
   ];
   var bannerIndex = 0;
 
@@ -1284,6 +1291,43 @@
     }
   }
 
+  // *** NUOVO: dati strutturati Schema.org per Google Rich Results ***
+  function aggiornaDatiStrutturati(eventi) {
+    var esistente = document.getElementById('ld-json-eventi');
+    if (esistente) esistente.remove();
+
+    var eventiValidi = eventi.filter(function(ev) { return ev.nome && ev.dataSort; }).slice(0, 30);
+    if (eventiValidi.length === 0) return;
+
+    var lista = eventiValidi.map(function(ev) {
+      var obj = {
+        '@type': 'Event',
+        'name': ev.nome,
+        'startDate': ev.dataSort,
+        'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+        'eventStatus': 'https://schema.org/EventScheduled',
+        'location': {
+          '@type': 'Place',
+          'name': [ev.comune, ev.provincia].filter(Boolean).join(', '),
+          'address': ev.indirizzo || ev.comune || ''
+        }
+      };
+      if (ev.dataFine) obj.endDate = ev.dataFine;
+      if (ev.locandina) obj.image = [ev.locandina];
+      if (ev.descrizione) obj.description = ev.descrizione;
+      if (ev.lat != null && ev.lon != null) {
+        obj.location.geo = { '@type': 'GeoCoordinates', latitude: ev.lat, longitude: ev.lon };
+      }
+      return obj;
+    });
+
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'ld-json-eventi';
+    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': lista });
+    document.head.appendChild(script);
+  }
+
   async function init() {
     try {
       var eventi = await leggiEventi();
@@ -1293,6 +1337,7 @@
       applicaFiltri();
       adattaLayoutIniziale();
       inizializzaBanner();
+      aggiornaDatiStrutturati(tuttiEventi);
 
       var idNellUrl = new URLSearchParams(window.location.search).get('id');
       if (idNellUrl) {
