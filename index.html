@@ -1009,7 +1009,6 @@
       var cat = getCat(ev.categoria);
       var imgHtml = ev.locandina ? '<img src="' + escapeHtml_(ev.locandina) + '" class="popup-img" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
       var mapsBtn = ev.mapsUrl ? '<a href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
-      var gygBtn = ev.comune ? '<a href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank" class="popup-btn" style="background:#FF5533;">🎟️ Esperienze</a>' : '';
       var popupHtml = imgHtml +
         '<div class="popup-header" style="background:' + cat.bg + '">' + escapeHtml_(ev.nome) + '</div>' +
         '<div class="popup-body">' +
@@ -1017,7 +1016,6 @@
         '<div>&#128205; ' + escapeHtml_([ev.comune, ev.provincia].filter(Boolean).join(', ')) + '</div>' +
         '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
         mapsBtn +
-        gygBtn +
         '</div>';
       var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, {
         maxWidth: 260,
@@ -1081,7 +1079,7 @@
     var azioniHtml = '';
     if (ev.mapsUrl) azioniHtml += '<a class="btn-azione" style="background:' + cat.bg + '" href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank">Google Maps</a>';
     if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
-    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🎟️ Esperienze a ' + escapeHtml_(ev.comune) + '</a>';
+    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
     azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
