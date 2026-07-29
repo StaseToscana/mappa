@@ -258,18 +258,6 @@
       transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .card-evento:hover, .card-evento.hover-marker { border-color: var(--rosso); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,68,56,0.12); }
-    .card-evento.evidenza { border-color: #E8A33D; box-shadow: 0 2px 10px rgba(232,163,61,0.25); position: relative; }
-    .card-evento.evidenza:hover, .card-evento.evidenza.hover-marker { border-color: #E8A33D; box-shadow: 0 4px 14px rgba(232,163,61,0.35); }
-    .badge-evidenza {
-      position: absolute; top: 6px; left: 6px; z-index: 2;
-      background: #E8A33D; color: white; font-size: 0.62rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 20px; display: flex; align-items: center; gap: 3px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    }
-    #dettaglio-badge-evidenza {
-      display: inline-flex; align-items: center; gap: 4px; background: #E8A33D; color: white;
-      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
-    }
     .card-evento:active { transform: scale(0.98); }
     .card-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
     .card-img[src=""], .card-img:not([src]) {
@@ -579,7 +567,6 @@
     <div id="dettaglio-body">
       <div id="dettaglio-nome"></div>
       <span id="dettaglio-badge"></span>
-      <span id="dettaglio-badge-evidenza" style="display:none;">⭐ In evidenza</span>
       <div class="dett-riga"><span class="icona">&#128197;</span><span id="dett-data"></span></div>
       <div class="dett-riga"><span class="icona">&#128205;</span><span id="dett-luogo"></span></div>
       <div id="dettaglio-descrizione"></div>
@@ -632,19 +619,6 @@
     'Altro':                      { bg: '#6b7280', emoji: '\u{1F4CC}' },
   };
   function getCat(nome) { return CATEGORIE[nome] || { bg: '#6b7280', emoji: '\u{1F4CC}' }; }
-
-  // *** NUOVO: sanifica il testo prima di iniettarlo in innerHTML/attributi.
-  // I dati arrivano da un form pubblico (Tally) — senza questo, chiunque
-  // potrebbe inserire tag HTML/script nel nome evento, descrizione, ecc. ***
-  function escapeHtml_(valore) {
-    if (valore == null) return '';
-    return String(valore)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
 
   const DATI_DEMO = [
     { id: 'demo1', nome: 'Sagra della Bistecca - Firenze', locandina: 'https://picsum.photos/seed/sagra1/400/300', categoria: 'Sagra', provincia: 'Firenze', comune: 'Firenze', indirizzo: 'Piazza della Signoria', riepilogoDate: '15/07/2026 - 20:00', dataSort: '2026-07-15', dataFine: '2026-07-15', mapsUrl: 'https://maps.google.com/?q=Piazza+della+Signoria,Firenze', lat: 43.7699, lon: 11.2556, instagram: 'https://instagram.com/sagrafirenze', descrizione: 'La tradizionale sagra con bistecca alla fiorentina, vino locale e musica dal vivo.' },
@@ -767,7 +741,6 @@
         lat: e.lat ? parseFloat(e.lat) : null,
         lon: e.lon ? parseFloat(e.lon) : null,
         instagram: e.instagram || null,
-        inEvidenza: !!e.in_evidenza,
       };
     });
   }
@@ -837,8 +810,8 @@
       var label = document.createElement('label');
       label.className = 'ms-opzione';
       var checked = selezionati.has(v) ? 'checked' : '';
-      var testo = tipo === 'categoria' ? (getCat(v).emoji + ' ' + escapeHtml_(v)) : escapeHtml_(v);
-      label.innerHTML = '<input type="checkbox" value="' + escapeHtml_(v) + '" ' + checked + ' /> ' + testo;
+      var testo = tipo === 'categoria' ? (getCat(v).emoji + ' ' + v) : v;
+      label.innerHTML = '<input type="checkbox" value="' + v + '" ' + checked + ' /> ' + testo;
       label.querySelector('input').addEventListener('change', function(e) {
         if (e.target.checked) selezionati.add(v); else selezionati.delete(v);
         aggiornaBadgeMultiselect(tipo, selezionati);
@@ -979,15 +952,14 @@
       evs.forEach(function(ev) {
         var cat = getCat(ev.categoria);
         var card = document.createElement('div');
-        card.className = 'card-evento' + (ev.inEvidenza ? ' evidenza' : '');
-        var imgHtml = ev.locandina ? '<img class="card-img" src="' + escapeHtml_(ev.locandina) + '" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
-        var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ In evidenza</span>' : '';
-        card.innerHTML = badgeEvidenzaHtml + imgHtml +
+        card.className = 'card-evento';
+        var imgHtml = ev.locandina ? '<img class="card-img" src="' + ev.locandina + '" alt="' + ev.nome + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
+        card.innerHTML = imgHtml +
           '<div class="card-body">' +
-          '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
-          '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
-          '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
-          '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
+          '<div class="card-nome">' + (ev.nome || 'Evento senza nome') + '</div>' +
+          '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + ev.categoria + '</span>' +
+          '<div class="card-data">&#128197; ' + (ev.riepilogoDate || '') + '</div>' +
+          '<div class="card-luogo">&#128205; ' + [ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ') + '</div>' +
           '</div>';
         card.addEventListener('click', function() { apriDettaglio(ev); });
         card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
@@ -1007,17 +979,15 @@
     eventi.forEach(function(ev) {
       if (ev.lat == null || ev.lon == null || isNaN(ev.lat) || isNaN(ev.lon)) return;
       var cat = getCat(ev.categoria);
-      var imgHtml = ev.locandina ? '<img src="' + escapeHtml_(ev.locandina) + '" class="popup-img" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
-      var mapsBtn = ev.mapsUrl ? '<a href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
-      var gygBtn = ev.comune ? '<a href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank" class="popup-btn" style="background:#FF5533;">🎟️ Esperienze</a>' : '';
+      var imgHtml = ev.locandina ? '<img src="' + ev.locandina + '" class="popup-img" alt="' + ev.nome + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
+      var mapsBtn = ev.mapsUrl ? '<a href="' + ev.mapsUrl + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
       var popupHtml = imgHtml +
-        '<div class="popup-header" style="background:' + cat.bg + '">' + escapeHtml_(ev.nome) + '</div>' +
+        '<div class="popup-header" style="background:' + cat.bg + '">' + ev.nome + '</div>' +
         '<div class="popup-body">' +
-        '<div class="popup-quando">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
-        '<div>&#128205; ' + escapeHtml_([ev.comune, ev.provincia].filter(Boolean).join(', ')) + '</div>' +
+        '<div class="popup-quando">&#128197; ' + (ev.riepilogoDate || '') + '</div>' +
+        '<div>&#128205; ' + [ev.comune, ev.provincia].filter(Boolean).join(', ') + '</div>' +
         '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
         mapsBtn +
-        gygBtn +
         '</div>';
       var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, {
         maxWidth: 260,
@@ -1069,7 +1039,6 @@
     badge.textContent = cat.emoji + ' ' + (ev.categoria || 'Altro');
     badge.style.background = cat.bg + '20';
     badge.style.color = cat.bg;
-    document.getElementById('dettaglio-badge-evidenza').style.display = ev.inEvidenza ? 'inline-flex' : 'none';
 
     document.getElementById('dett-data').textContent = ev.riepilogoDate || '';
     document.getElementById('dett-luogo').textContent = ev.indirizzo || [ev.comune, ev.provincia].filter(Boolean).join(', ');
@@ -1079,9 +1048,9 @@
     else { descBox.style.display = 'none'; }
 
     var azioniHtml = '';
-    if (ev.mapsUrl) azioniHtml += '<a class="btn-azione" style="background:' + cat.bg + '" href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank">Google Maps</a>';
-    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
-    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🎟️ Esperienze a ' + escapeHtml_(ev.comune) + '</a>';
+    if (ev.mapsUrl) azioniHtml += '<a class="btn-azione" style="background:' + cat.bg + '" href="' + ev.mapsUrl + '" target="_blank">Google Maps</a>';
+    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + ev.instagram + '" target="_blank">Instagram</a>';
+    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + ev.comune + '</a>';
     azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
