@@ -43,6 +43,7 @@
     html, body { height: 100vh; height: 100dvh; margin: 0; overflow: hidden; }
     body { font-family: 'League Spartan', sans-serif; color: var(--inchiostro); background: var(--crema); display: flex; flex-direction: column; }
     a { color: inherit; }
+    a.tab-link { text-decoration: none; }
     button { font-family: inherit; }
 
     #top-bar {
@@ -514,6 +515,7 @@
     <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
     <div id="tab-nav">
       <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
+      <a class="tab-btn tab-link" href="/eventi-in-toscana.html">Province</a>
       <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
     </div>
   </header>
