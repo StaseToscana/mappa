@@ -500,7 +500,28 @@
       .gruppo-data-header { font-size: 0.82rem; padding: 10px 4px 6px; }
       #contatore-lista { padding: 14px 16px 6px; font-size: 0.85rem; }
     }
-  </style>
+  
+    /* === Riga link province === */
+    #province-prompt {
+      background: var(--rosso-tenue);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--inchiostro);
+      border-bottom: 1px solid var(--bordo);
+    }
+    #province-prompt a {
+      color: var(--rosso);
+      text-decoration: underline;
+      font-weight: 700;
+      transition: color 0.15s;
+    }
+    #province-prompt a:hover {
+      color: var(--rosso-scuro);
+      text-decoration: none;
+    }
+</style>
 </head>
 <body>
 
@@ -520,6 +541,7 @@
   </header>
 </div>
 
+<div id="province-prompt">Non sai da dove iniziare? Sfoglia tutti gli eventi <a href="/eventi-in-toscana.html">qui</a></div>
 <div id="controlli">
   <div id="barra-ricerca">
     <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
