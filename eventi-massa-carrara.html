@@ -15,46 +15,63 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700;900&display=swap" rel="stylesheet" />
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[]}</script>
 <style>
-:root{--rosso:#FF3131;--crema:#FFF8EE;--inchiostro:#1B1B1B;--bordo:#F0E6DC;--grigio:#6B6258;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:"League Spartan",sans-serif;background:var(--crema);color:var(--inchiostro);line-height:1.5;}
-header{background:linear-gradient(135deg,#FF3131,#CC0000);padding:32px 20px;text-align:center;}
-header img{height:60px;margin-bottom:12px;}
-header h1{color:white;font-size:1.6rem;font-weight:900;}
-header p{color:rgba(255,255,255,0.9);margin-top:8px;}
-nav.province{padding:14px 20px;text-align:center;font-size:0.8rem;background:white;border-bottom:1px solid var(--bordo);}
-nav.province a{color:var(--grigio);text-decoration:none;margin:0 4px;}
-nav.province a:hover{color:var(--rosso);}
-nav.province .prov-corrente{color:var(--rosso);font-weight:700;margin:0 4px;}
-main{max-width:960px;margin:0 auto;padding:24px 20px 60px;}
-.data-header{font-size:1rem;font-weight:700;color:var(--rosso);margin:28px 0 12px;text-transform:uppercase;letter-spacing:0.5px;}
-.griglia-eventi{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
-.card-evento{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
-.card-evento img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
-.card-body{padding:14px;}
-.card-body h3{font-size:1rem;margin-bottom:6px;}
-.categoria{display:inline-block;font-size:0.7rem;font-weight:700;background:var(--rosso);color:white;padding:2px 10px;border-radius:20px;margin-bottom:8px;}
-.luogo{font-size:0.82rem;color:var(--grigio);margin-bottom:6px;}
-.descrizione{font-size:0.82rem;color:#444;margin-bottom:10px;}
-.azioni a{display:inline-block;font-size:0.78rem;font-weight:700;color:var(--rosso);text-decoration:none;margin-right:14px;}
-.azioni a:hover{text-decoration:underline;}
-.vuoto{text-align:center;padding:60px 20px;color:var(--grigio);}
-.vuoto a{color:var(--rosso);font-weight:700;}
-.intro-provincia{max-width:680px;margin:0 auto 20px;text-align:center;color:var(--grigio);font-size:0.9rem;}
-.btn-torna-home{display:block;width:fit-content;margin:0 auto 32px;background:var(--rosso);color:white;text-decoration:none;font-weight:700;font-size:0.85rem;padding:10px 22px;border-radius:20px;transition:background 0.15s;}
-.btn-torna-home:hover{background:#CC0000;}
-footer{text-align:center;padding:24px;font-size:0.78rem;color:var(--grigio);}
-footer a{color:var(--rosso);}
+:root{--rosso:#FF3131;--rosso-scuro:#CC0000;--crema:#FFF8EE;--inchiostro:#1B1B1B;--bordo:#F0E6DC;--grigio:#6B6258;--crema-card:#FFFFFF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"League Spartan",sans-serif;background:var(--crema);color:var(--inchiostro);line-height:1.5}
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:white;border-bottom:1px solid var(--bordo);position:sticky;top:0;z-index:50}
+.top-nav .nav-logo img{height:40px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-links a{color:var(--inchiostro);text-decoration:none;font-size:0.82rem;font-weight:700;padding:8px 14px;border-radius:20px;transition:background 0.15s}
+.nav-links a:hover{background:var(--crema)}
+.nav-links .nav-cta{background:var(--rosso);color:white}
+.nav-links .nav-cta:hover{background:var(--rosso-scuro)}
+.breadcrumb{padding:14px 20px;background:white;border-bottom:1px solid var(--bordo);font-size:0.78rem;color:var(--grigio)}
+.breadcrumb ol{display:flex;align-items:center;gap:6px;list-style:none;max-width:1100px;margin:0 auto;padding:0 20px}
+.breadcrumb a{color:var(--rosso);text-decoration:none;font-weight:700}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .sep{color:var(--bordo)}
+.breadcrumb li[aria-current]{font-weight:700;color:var(--inchiostro)}
+.hero-provincia{background:linear-gradient(135deg,var(--rosso),var(--rosso-scuro));padding:48px 20px 40px;text-align:center}
+.hero-provincia h1{color:white;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;margin-bottom:10px}
+.hero-provincia p{color:rgba(255,255,255,0.92);font-size:1rem;max-width:600px;margin:0 auto}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+.layout-provincia{display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
+.lista-eventi{min-width:0}
+.sidebar{background:white;border-radius:12px;border:1px solid var(--bordo);padding:18px;position:sticky;top:72px}
+.sidebar h3{font-size:0.95rem;font-weight:800;margin-bottom:14px;color:var(--inchiostro)}
+.altre-province{display:flex;flex-direction:column;gap:4px}
+.altre-province a{color:var(--grigio);text-decoration:none;font-size:0.84rem;font-weight:600;padding:7px 10px;border-radius:8px;transition:all 0.15s}
+.altre-province a:hover{background:var(--crema);color:var(--rosso)}
+.data-header{font-size:1rem;font-weight:700;color:var(--rosso);margin:24px 0 12px;text-transform:uppercase;letter-spacing:0.5px}
+.griglia-eventi{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card-evento{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid var(--bordo)}
+.card-evento img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.card-body{padding:14px}
+.card-body h3{font-size:1rem;margin-bottom:6px}
+.categoria{display:inline-block;font-size:0.7rem;font-weight:700;background:var(--rosso);color:white;padding:2px 10px;border-radius:20px;margin-bottom:8px}
+.luogo{font-size:0.82rem;color:var(--grigio);margin-bottom:6px}
+.descrizione{font-size:0.82rem;color:#444;margin-bottom:10px;line-height:1.5}
+.azioni a{display:inline-block;font-size:0.78rem;font-weight:700;color:var(--rosso);text-decoration:none;margin-right:14px}
+.azioni a:hover{text-decoration:underline}
+.vuoto{text-align:center;padding:60px 20px;color:var(--grigio)}
+.vuoto a{color:var(--rosso);font-weight:700}
+.site-footer{background:white;border-top:1px solid var(--bordo);padding:32px 20px}
+.footer-inner{max-width:1100px;margin:0 auto;text-align:center}
+.footer-inner>p{font-size:0.85rem;color:var(--grigio);margin-bottom:12px}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px}
+.footer-links a{color:var(--rosso);text-decoration:none;font-size:0.82rem;font-weight:700}
+.footer-links a:hover{text-decoration:underline}
+@media(max-width:860px){.layout-provincia{grid-template-columns:1fr}.sidebar{position:static;margin-top:24px}}
+@media(max-width:640px){.top-nav{padding:10px 14px}.nav-links a{font-size:0.75rem;padding:6px 10px}.nav-logo img{height:32px}.griglia-eventi{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>
-<a href="https://stasetoscana.it/"><img src="https://stasetoscana.it/logo-stase.png" alt="Stase Toscana" /></a>
-<h1>Eventi in provincia di Massa-Carrara</h1>
-<p>Sagre, concerti, fiere e feste — sempre aggiornato</p>
+<nav class="top-nav"><a class="nav-logo" href="https://stasetoscana.it/"><img src="https://stasetoscana.it/logo-stase.png" alt="Stase Toscana"></a><div class="nav-links"><a href="https://stasetoscana.it/">Mappa interattiva</a><a href="https://stasetoscana.it/#aggiungi" class="nav-cta">Pubblica evento</a></div></nav><nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="https://stasetoscana.it/">Home</a></li><li class="sep">&rsaquo;</li><li><a href="/eventi-in-toscana.html">Province</a></li><li class="sep">&rsaquo;</li><li aria-current="page">Massa-Carrara</li></ol></nav><header class="hero-provincia">
+<h1>Eventi a Massa-Carrara</h1>
+<p>Tra le imponenti Alpi Apuane e il mare della Versilia, eventi unici che intrecciano arte, marmo antico e tradizioni marinare.</p>
 </header>
-<nav class="province"><a href="/eventi-arezzo.html">Arezzo</a> · <a href="/eventi-firenze.html">Firenze</a> · <a href="/eventi-grosseto.html">Grosseto</a> · <a href="/eventi-livorno.html">Livorno</a> · <a href="/eventi-lucca.html">Lucca</a> · <span class="prov-corrente">Massa-Carrara</span> · <a href="/eventi-pisa.html">Pisa</a> · <a href="/eventi-pistoia.html">Pistoia</a> · <a href="/eventi-prato.html">Prato</a> · <a href="/eventi-siena.html">Siena</a></nav>
-<main><p class="intro-provincia">Tra le imponenti Alpi Apuane e il mare della Versilia, eventi unici che intrecciano arte, marmo antico e tradizioni marinare.</p><a class="btn-torna-home" href="https://stasetoscana.it/">← Torna alla mappa interattiva</a><p class="vuoto">Nessun evento in programma al momento in questa provincia. <a href="https://stasetoscana.it/">Esplora tutti gli eventi in Toscana</a>.</p></main>
-<footer>Vuoi la mappa interattiva con filtri e ricerca? <a href="https://stasetoscana.it/">Vai alla home di Stase Toscana</a> — <a href="https://stasetoscana.it/#aggiungi">Pubblica il tuo evento gratis</a></footer>
-</body>
+<main><div class="layout-provincia">
+<div class="lista-eventi"><p class="vuoto">Nessun evento in programma al momento in questa provincia. <a href="https://stasetoscana.it/">Esplora tutti gli eventi in Toscana</a>.</p></div>
+<aside class="sidebar"><h3>Esplora anche</h3><div class="altre-province"><a href="/eventi-arezzo.html">Arezzo</a><a href="/eventi-firenze.html">Firenze</a><a href="/eventi-grosseto.html">Grosseto</a><a href="/eventi-livorno.html">Livorno</a><a href="/eventi-lucca.html">Lucca</a><a href="/eventi-pisa.html">Pisa</a><a href="/eventi-pistoia.html">Pistoia</a><a href="/eventi-prato.html">Prato</a><a href="/eventi-siena.html">Siena</a></div></aside></div></main>
+<footer class="site-footer"><div class="footer-inner"><p>Stase Toscana — Il calendario eventi della Toscana</p><div class="footer-links"><a href="https://stasetoscana.it/">Mappa interattiva</a><a href="/eventi-in-toscana.html">Eventi per provincia</a><a href="https://stasetoscana.it/#aggiungi">Pubblica il tuo evento</a><a href="https://www.instagram.com/stase.toscana/" target="_blank" rel="noopener">Instagram</a></div></div></footer></body>
 </html>
