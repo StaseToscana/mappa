@@ -474,7 +474,7 @@
       header { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; padding: 10px 12px 6px; transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
       header img.logo { height: 48px; width: auto; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
       #tab-nav { display: flex; gap: 4px; padding: 0; flex-shrink: 1; min-width: 0; }
-      .tab-btn { padding: 9px 16px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; }
+      .tab-btn { padding: 9px 16px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
       #tab-esplora .testo-lunga, #tab-aggiungi .testo-lunga { display: none; }
       .tab-btn .testo-corta { display: inline; }
       #dettaglio-panel { width: 100%; }
@@ -515,7 +515,6 @@
     <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
     <div id="tab-nav">
       <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
-      <a class="tab-btn tab-link" href="/eventi-in-toscana.html">Province</a>
       <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
     </div>
   </header>
