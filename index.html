@@ -1419,7 +1419,12 @@
       caricaFiltriDaUrl();
       applicaFiltri();
       adattaLayoutIniziale();
-      await caricaBanner();
+      // *** Il banner NON è "await": si carica in sottofondo, senza bloccare
+      // lo spinner. L'endpoint Apps Script del banner ha una latenza di
+      // "risveglio" incostante (a volte 1s, a volte 10-20s) — se lo aspettassimo
+      // qui, la pagina resterebbe bloccata sullo spinner anche quando gli
+      // eventi (letti dal file statico veloce) sono già pronti. ***
+      caricaBanner();
       aggiornaDatiStrutturati(tuttiEventi);
 
       var idNellUrl = new URLSearchParams(window.location.search).get('id');
