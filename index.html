@@ -637,7 +637,12 @@
 <div id="toast-container"></div>
 
 <script>
-  const JSON_URL = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
+  // *** NUOVO: legge prima il file statico eventi.json (pubblicato su GitHub,
+  // veloce, nessun ritardo di avvio) e usa il vecchio Web App di Apps Script
+  // solo come riserva, nel caso il file statico non sia ancora stato pubblicato
+  // o ci sia un problema. ***
+  const JSON_URL_STATICO = 'https://stasetoscana.it/eventi.json';
+  const JSON_URL_FALLBACK = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
 
   const CATEGORIE = {
     'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
@@ -741,8 +746,18 @@
       console.log('Aperto da file://, uso dati demo');
       return DATI_DEMO;
     }
+    // 1. Prova il file statico (veloce, servito da GitHub Pages)
     try {
-      var res = await fetch(JSON_URL + '?t=' + Date.now());
+      var res = await fetch(JSON_URL_STATICO + '?t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      return normalizzaEventi(data);
+    } catch (err) {
+      console.warn('File statico non disponibile, provo il Web App...', err);
+    }
+    // 2. Fallback: Web App di Apps Script (più lento ma sempre aggiornato)
+    try {
+      var res = await fetch(JSON_URL_FALLBACK + '?t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
       return normalizzaEventi(data);
@@ -750,7 +765,7 @@
       console.warn('Fetch fallito, provo JSONP...', err);
     }
     try {
-      var data = await fetchJsonp(JSON_URL + '?callback=cb&t=' + Date.now());
+      var data = await fetchJsonp(JSON_URL_FALLBACK + '?callback=cb&t=' + Date.now());
       return normalizzaEventi(data);
     } catch (err) {
       console.warn('JSONP fallito, uso dati demo...', err);
@@ -1270,7 +1285,7 @@
 
   async function caricaBanner() {
     try {
-      var res = await fetch(JSON_URL + '?action=banner&t=' + Date.now());
+      var res = await fetch(JSON_URL_FALLBACK + '?action=banner&t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
       BANNERS = data;
