@@ -267,6 +267,16 @@
       padding: 2px 8px; border-radius: 20px; display: flex; align-items: center; gap: 3px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
+    .badge-vt {
+      position: absolute; top: 6px; right: 6px; z-index: 2;
+      background: #0066CC; color: white; font-size: 0.6rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    #dettaglio-badge-vt {
+      display: none; align-items: center; gap: 4px; background: #0066CC; color: white;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
+    }
     #dettaglio-badge-evidenza {
       display: inline-flex; align-items: center; gap: 4px; background: #E8A33D; color: white;
       font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
@@ -603,6 +613,7 @@
       <div id="dettaglio-nome"></div>
       <span id="dettaglio-badge"></span>
       <span id="dettaglio-badge-evidenza" style="display:none;">⭐ In evidenza</span>
+      <span id="dettaglio-badge-vt">🏛️ VisitTuscany</span>
       <div class="dett-riga"><span class="icona">&#128197;</span><span id="dett-data"></span></div>
       <div class="dett-riga"><span class="icona">&#128205;</span><span id="dett-luogo"></span></div>
       <div id="dettaglio-descrizione"></div>
@@ -643,6 +654,7 @@
   // o ci sia un problema. ***
   const JSON_URL_STATICO = 'https://stasetoscana.it/eventi.json';
   const JSON_URL_FALLBACK = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
+  const JSON_URL_VT = 'https://stasetoscana.it/eventi_visittuscany.json';
 
   const CATEGORIE = {
     'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
@@ -746,32 +758,57 @@
       console.log('Aperto da file://, uso dati demo');
       return DATI_DEMO;
     }
-    // 1. Prova il file statico (veloce, servito da GitHub Pages)
+    var eventiStase = [];
+    var eventiVT = [];
+    // 1. Carica eventi Stase (file statico o fallback)
     try {
       var res = await fetch(JSON_URL_STATICO + '?t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
-      return normalizzaEventi(data);
+      eventiStase = normalizzaEventi(data);
     } catch (err) {
       console.warn('File statico non disponibile, provo il Web App...', err);
+      try {
+        var res = await fetch(JSON_URL_FALLBACK + '?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
+        eventiStase = normalizzaEventi(data);
+      } catch (err2) {
+        console.warn('Fetch fallito, provo JSONP...', err2);
+        try {
+          var data = await fetchJsonp(JSON_URL_FALLBACK + '?callback=cb&t=' + Date.now());
+          eventiStase = normalizzaEventi(data);
+        } catch (err3) {
+          console.warn('JSONP fallito, uso dati demo per Stase...', err3);
+          eventiStase = DATI_DEMO;
+        }
+      }
     }
-    // 2. Fallback: Web App di Apps Script (più lento ma sempre aggiornato)
+    // 2. Carica eventi VisitTuscany (opzionale, non blocca)
     try {
-      var res = await fetch(JSON_URL_FALLBACK + '?t=' + Date.now());
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      var data = await res.json();
-      return normalizzaEventi(data);
+      var resVT = await fetch(JSON_URL_VT + '?t=' + Date.now());
+      if (resVT.ok) {
+        var dataVT = await resVT.json();
+        eventiVT = normalizzaEventiVT(dataVT);
+        console.log('Eventi VisitTuscany caricati:', eventiVT.length);
+      }
     } catch (err) {
-      console.warn('Fetch fallito, provo JSONP...', err);
+      console.warn('VisitTuscany non disponibile (forse il robot non ha ancora scaricato):', err);
     }
-    try {
-      var data = await fetchJsonp(JSON_URL_FALLBACK + '?callback=cb&t=' + Date.now());
-      return normalizzaEventi(data);
-    } catch (err) {
-      console.warn('JSONP fallito, uso dati demo...', err);
+    // Unisci e rimuovi duplicati (nome + data + comune)
+    var tutti = eventiStase.concat(eventiVT);
+    var visti = new Set();
+    var unici = tutti.filter(function(ev) {
+      var chiave = (ev.nome || '') + '|' + (ev.dataSort || '') + '|' + (ev.comune || '');
+      if (visti.has(chiave)) return false;
+      visti.add(chiave);
+      return true;
+    });
+    if (unici.length === 0) {
+      mostraToast('Modalita demo: dati di esempio caricati');
+      return DATI_DEMO;
     }
-    mostraToast('Modalita demo: dati di esempio caricati');
-    return DATI_DEMO;
+    return unici;
   }
 
   function fetchJsonp(url) {
@@ -806,6 +843,110 @@
         lon: e.lon ? parseFloat(e.lon) : null,
         instagram: e.instagram || null,
         inEvidenza: !!e.in_evidenza,
+        fonte: 'stase',
+      };
+    });
+  }
+
+
+  function normalizzaEventiVT(data) {
+    if (!Array.isArray(data)) {
+      if (data && Array.isArray(data.events)) data = data.events;
+      else if (data && Array.isArray(data.items)) data = data.items;
+      else if (data && Array.isArray(data.data)) data = data.data;
+      else if (data && Array.isArray(data.results)) data = data.results;
+      else return [];
+    }
+    function getField(obj, names) {
+      for (var j = 0; j < names.length; j++) {
+        if (obj[names[j]] != null) return obj[names[j]];
+        var lc = names[j].toLowerCase();
+        if (obj[lc] != null) return obj[lc];
+      }
+      return null;
+    }
+    return data.map(function(e, i) {
+      var nome = getField(e, ['nome','name','title','denominazione','eventName']);
+      var categoria = getField(e, ['categoria','category','type','tipo','eventType','tipologia']);
+      var comune = getField(e, ['comune','city','town','locality','municipality']);
+      var provincia = getField(e, ['provincia','province','prov']);
+      var indirizzo = getField(e, ['indirizzo','address','street','via','location','place']);
+      var descrizione = getField(e, ['descrizione','description','text','desc','abstract']);
+      var locandina = getField(e, ['locandina','image','photo','picture','img','thumbnail','cover']);
+      var mapsUrl = getField(e, ['maps_url','mapsUrl','url','link','externalUrl','website']);
+      var instagram = getField(e, ['instagram','social','ig']);
+      var dataSort = getField(e, ['data_sort','startDate','date','data','start','from','eventDate']);
+      var dataFine = getField(e, ['data_fine','endDate','end','to','fine']);
+      var riepilogoDate = getField(e, ['riepilogo_date','dateSummary','dateRange','when']);
+      var lat = getField(e, ['lat','latitude','Lat','Latitude']);
+      var lon = getField(e, ['lon','lng','longitude','Lon','Longitude','Lng']);
+      if (lat == null && e.geo) lat = getField(e.geo, ['lat','latitude']);
+      if (lon == null && e.geo) lon = getField(e.geo, ['lon','lng','longitude']);
+      if (lat == null && e.location && e.location.geo) {
+        lat = getField(e.location.geo, ['lat','latitude']);
+        lon = getField(e.location.geo, ['lon','lng','longitude']);
+      }
+      if (categoria) {
+        var catLower = String(categoria).toLowerCase();
+        if (catLower.includes('concert')) categoria = 'Concerto';
+        else if (catLower.includes('sagra')) categoria = 'Sagra';
+        else if (catLower.includes('fest')) categoria = 'Festa paesana';
+        else if (catLower.includes('fiera')) categoria = 'Fiera';
+        else if (catLower.includes('mercat')) categoria = 'Mercato';
+        else if (catLower.includes('mostra') || catLower.includes('expo')) categoria = 'Mostra/Esposizione';
+        else if (catLower.includes('teatr')) categoria = 'Spettacolo teatrale';
+        else if (catLower.includes('sport')) categoria = 'Evento sportivo';
+        else if (catLower.includes('gastro') || catLower.includes('food') || catLower.includes('vino')) categoria = 'Evento gastronomico';
+        else if (catLower.includes('festival')) categoria = 'Festival';
+        else if (catLower.includes('discotec') || catLower.includes('serata')) categoria = 'Serata/Discoteca';
+        else if (catLower.includes('rievoc') || catLower.includes('palio') || catLower.includes('storica')) categoria = 'Rievocazione storica/Palio';
+        else categoria = 'Altro';
+      }
+      if (dataSort && typeof dataSort === 'string') {
+        if (dataSort.includes('T')) dataSort = dataSort.split('T')[0];
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dataSort)) {
+          var parts = dataSort.split('/');
+          dataSort = parts[2] + '-' + parts[1] + '-' + parts[0];
+        }
+      }
+      if (dataFine && typeof dataFine === 'string') {
+        if (dataFine.includes('T')) dataFine = dataFine.split('T')[0];
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dataFine)) {
+          var parts = dataFine.split('/');
+          dataFine = parts[2] + '-' + parts[1] + '-' + parts[0];
+        }
+      }
+      if (!riepilogoDate && dataSort) {
+        var d = parseData(dataSort);
+        if (d) {
+          riepilogoDate = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+          if (dataFine && dataFine !== dataSort) {
+            var df = parseData(dataFine);
+            if (df) riepilogoDate += ' - ' + df.getDate() + '/' + (df.getMonth()+1) + '/' + df.getFullYear();
+          }
+        }
+      }
+      if (!mapsUrl && (indirizzo || comune)) {
+        mapsUrl = 'https://maps.google.com/?q=' + encodeURIComponent((indirizzo ? indirizzo + ', ' : '') + (comune || ''));
+      }
+      return {
+        id: 'vt_' + (e.id || i),
+        nome: nome || 'Evento VisitTuscany',
+        locandina: locandina || null,
+        categoria: categoria || 'Altro',
+        descrizione: descrizione || '',
+        provincia: provincia,
+        comune: comune,
+        indirizzo: indirizzo,
+        riepilogoDate: riepilogoDate || '',
+        dataSort: dataSort,
+        dataFine: dataFine,
+        mapsUrl: mapsUrl,
+        lat: lat ? parseFloat(lat) : null,
+        lon: lon ? parseFloat(lon) : null,
+        instagram: instagram,
+        inEvidenza: false,
+        fonte: 'visittuscany'
       };
     });
   }
@@ -1020,7 +1161,8 @@
         card.className = 'card-evento' + (ev.inEvidenza ? ' evidenza' : '');
         var imgHtml = ev.locandina ? '<img class="card-img" src="' + escapeHtml_(ev.locandina) + '" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
         var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ In evidenza</span>' : '';
-        card.innerHTML = badgeEvidenzaHtml + imgHtml +
+        var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
+        card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + imgHtml +
           '<div class="card-body">' +
           '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
           '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
@@ -1106,6 +1248,7 @@
     badge.style.background = cat.bg + '20';
     badge.style.color = cat.bg;
     document.getElementById('dettaglio-badge-evidenza').style.display = ev.inEvidenza ? 'inline-flex' : 'none';
+    document.getElementById('dettaglio-badge-vt').style.display = ev.fonte === 'visittuscany' ? 'inline-flex' : 'none';
 
     document.getElementById('dett-data').textContent = ev.riepilogoDate || '';
     document.getElementById('dett-luogo').textContent = ev.indirizzo || [ev.comune, ev.provincia].filter(Boolean).join(', ');
