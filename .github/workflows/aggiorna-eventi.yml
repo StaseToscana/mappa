@@ -2,8 +2,11 @@ name: Aggiorna Eventi VisitTuscany
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # ogni giorno alle 6:00 del mattino
-  workflow_dispatch:  # permette di lanciare manualmente cliccando un bottone
+    - cron: '0 6 * * *'  # ogni giorno alle 6:00
+  workflow_dispatch:      # permette di lanciare manualmente
+
+permissions:
+  contents: write
 
 jobs:
   aggiorna:
@@ -16,22 +19,45 @@ jobs:
         run: |
           echo "${{ secrets.P12_CERTIFICATE }}" | base64 -d > certificato.p12
 
-      - name: Estrai certificato e chiave privata
+      - name: Estrai certificato e chiave privata (separati)
         run: |
-          openssl pkcs12 -in certificato.p12 -out certificato.pem -nodes -password pass:"${{ secrets.P12_PASSWORD }}"
+          openssl pkcs12 -in certificato.p12 -out cert.pem -nokeys -password pass:"${{ secrets.P12_PASSWORD }}"
+          openssl pkcs12 -in certificato.p12 -out key.pem -nocerts -nodes -password pass:"${{ secrets.P12_PASSWORD }}"
 
       - name: Chiama VisitTuscany e scarica gli eventi
         run: |
-          curl -f -s --cert certificato.pem --key certificato.pem \
-            "${{ secrets.API_URL }}" \
-            -H "Accept: application/json" \
-            -o eventi_visittuscany.json
-        continue-on-error: true
+          TODAY=$(date +%Y-%m-%d)
+          FUTURE=$(date -d "+90 days" +%Y-%m-%d)
+
+          echo "URL API: ${{ secrets.API_URL }}"
+          echo "Date range: $TODAY -> $FUTURE"
+
+          HTTP_CODE=$(curl -s -o eventi_visittuscany.json -w "%{http_code}"             --cert cert.pem --key key.pem             "${{ secrets.API_URL }}?startDate=${TODAY}&endDate=${FUTURE}&limit=1000"             -H "Accept: application/json"             -L --max-time 60)
+
+          echo "HTTP Status: $HTTP_CODE"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "ERRORE: il server ha risposto con HTTP $HTTP_CODE"
+            echo "Risposta del server:"
+            cat eventi_visittuscany.json 2>/dev/null || echo "(nessun contenuto ricevuto)"
+            exit 1
+          fi
+
+          echo "Download OK. Dimensione:"
+          wc -c eventi_visittuscany.json
+
+      - name: Verifica che sia JSON valido
+        run: |
+          python3 -c "import json; d=json.load(open('eventi_visittuscany.json')); print('JSON valido. Tipo:', type(d).__name__)"
 
       - name: Salva il file nel repository
         run: |
           git config user.name "Robot Eventi"
           git config user.email "robot@stasetoscana.it"
           git add eventi_visittuscany.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Aggiornamento eventi $(date +%d-%m-%Y)"
-          git push
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da committare"
+          else
+            git commit -m "Aggiornamento eventi VisitTuscany $(date +%d-%m-%Y)"
+            git push
+          fi
