@@ -791,6 +791,7 @@
         var dataVT = await resVT.json();
         eventiVT = normalizzaEventiVT(dataVT);
         console.log('Eventi VisitTuscany caricati:', eventiVT.length);
+      console.log('Eventi VT futuri:', eventiVT.filter(function(e){return isFuturo(e);}).length);
       }
     } catch (err) {
       console.warn('VisitTuscany non disponibile (forse il robot non ha ancora scaricato):', err);
@@ -901,15 +902,40 @@
         }
       }
 
-      // Coordinate e località
+      // Coordinate e località (struttura reale VT)
       var comune = null, provincia = null, lat = null, lon = null, indirizzo = null;
+
+      // Coordinate da location.map
+      if (e.location && e.location.map) {
+        lat = e.location.map.lat != null ? parseFloat(e.location.map.lat) : null;
+        lon = e.location.map.lng != null ? parseFloat(e.location.map.lng) : null;
+        indirizzo = e.location.map.address || null;
+      }
+
+      // Comune da locality[0].name (alcuni hanno solo id, senza name)
       if (e.location && e.location.locality && e.location.locality.length > 0) {
         var loc = e.location.locality[0];
         comune = loc.name || loc.locality || null;
-        provincia = loc.province || null;
-        lat = loc.lat != null ? parseFloat(loc.lat) : null;
-        lon = loc.lng != null ? parseFloat(loc.lng) : (loc.lon != null ? parseFloat(loc.lon) : null);
-        indirizzo = loc.address || comune;
+      }
+      // Se ancora senza comune, prova a estrarlo dall'indirizzo
+      if (!comune && indirizzo) {
+        var parts = indirizzo.split(',');
+        for (var k = parts.length - 1; k >= 0; k--) {
+          var part = parts[k].trim();
+          if (part !== 'Italia' && !/^[A-Z]{2}$/.test(part) && part.length > 2) {
+            comune = part;
+            break;
+          }
+        }
+      }
+
+      // Provincia: cerca in locality, altrimenti estrai dall'indirizzo (es. ", FI, Italia")
+      if (e.location && e.location.locality && e.location.locality.length > 0) {
+        provincia = e.location.locality[0].province || null;
+      }
+      if (!provincia && indirizzo) {
+        var m = indirizzo.match(/,\s*([A-Z]{2})\s*,/);
+        if (m) provincia = m[1];
       }
 
       // Immagine
@@ -918,6 +944,9 @@
 
       // Link: usa url VisitTuscany come mapsUrl
       var mapsUrl = url;
+
+      // topevent nel JSON VT è stringa "true"/"false", non booleano
+      var inEvidenza = e.topevent === true || e.topevent === 'true';
 
       return {
         id: 'vt_' + (e.id || i),
@@ -935,7 +964,7 @@
         lat: lat,
         lon: lon,
         instagram: null,
-        inEvidenza: !!e.topevent,
+        inEvidenza: inEvidenza,
         fonte: 'visittuscany'
       };
     });
@@ -1388,17 +1417,17 @@
   var bannerIndex = 0;
 
   function bannerAttivi() {
-    return BANNERS;
+    return BANNERS.filter(function(b) { return b && b.img; });
   }
 
   function mostraBanner(banner) {
-    var haSponsor = !!banner;
+    var haSponsor = !!(banner && banner.img);
     document.getElementById('banner-label').style.display = haSponsor ? 'block' : 'none';
     document.getElementById('banner-link').style.display = haSponsor ? 'flex' : 'none';
     document.getElementById('banner-cta-content').style.display = haSponsor ? 'none' : 'flex';
     if (haSponsor) {
       document.getElementById('banner-img').src = banner.img;
-      document.getElementById('banner-link').href = banner.link;
+      document.getElementById('banner-link').href = banner.link || '#';
     }
   }
 
@@ -1548,6 +1577,7 @@
     try {
       var eventi = await leggiEventi();
       tuttiEventi = eventi.filter(isFuturo);
+      console.log('Totale eventi:', tuttiEventi.length, '- VT:', tuttiEventi.filter(function(e){return e.fonte==='visittuscany';}).length, '- Stase:', tuttiEventi.filter(function(e){return e.fonte==='stase';}).length);
       popolaFiltriOpzioni();
       caricaFiltriDaUrl();
       applicaFiltri();
