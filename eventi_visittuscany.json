@@ -1,0 +1,566 @@
+{
+  "response": {
+    "numResult": "10",
+    "numTotResult": "1374",
+    "page": "1",
+    "code": "200",
+    "message": "OK",
+    "status": "SUCCESS",
+    "description": "Success",
+    "data": {
+      "doc": [
+        {
+          "id": "0009fae6-d3fe-11eb-97a0-c25849f3fc0c",
+          "title": "Il Libero Arbitrio e la Divina Sapienza in Dante Alighieri e Menachem Recanati",
+          "subtitle": "Modalità di interazione tra pensiero ebraico e pensiero cristiano",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/il-libero-arbitrio-e-la-divina-sapienza-in-dante-alighieri-e-menachem-recanati/",
+          "classification": {
+            "season": [
+              "estate"
+            ],
+            "landscape": [
+              "arte"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "convegni",
+          "priceType": "gratis",
+          "periods": [
+            {
+              "startDate": "2021-06-28",
+              "endDate": "2021-06-28"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/fake_8FI.jpg"
+          },
+          "location": {
+            "locality": [
+              {
+                "id": "7047686e-29ee-11e3-96f7-495d93063fdb"
+              }
+            ],
+            "map": {
+              "lat": "43.7776426",
+              "lng": "11.259765",
+              "address": "Università di Firenze, Piazza di San Marco, Firenze, FI, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "00689dd8-fab6-11eb-999d-c25849f3fc0c",
+          "title": "Rassegna Amiata Lirica",
+          "subtitle": "Aree d'opera di Giacomo Puccini \"Festival Pucciniano Torre del Lago\u201D",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/rassegna-amiata-lirica/",
+          "priceValue": "8,00",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "estate"
+            ],
+            "landscape": [
+              "arte",
+              "montagna"
+            ],
+            "theme": [
+              "arte-e-cultura",
+              "sport-e-avventura",
+              "toscana-romantica"
+            ]
+          },
+          "typology": "musica",
+          "priceType": "prezzounico",
+          "periods": [
+            {
+              "startDate": "2021-08-16",
+              "endDate": "2021-08-16"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/opera_senza_titolo-3_jeE.jpg"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/abbadia-san-salvatore/",
+                "id": "7a47398c-29ee-11e3-96f7-495d93063fdb",
+                "name": "Abbadia San Salvatore"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/amiata/",
+                "id": "adc738e3-2c05-11e3-af86-495d93063fdb",
+                "name": "Amiata"
+              }
+            ],
+            "map": {
+              "lat": "42.882634",
+              "lng": "11.6760121",
+              "address": "Via del Monastero, 50, Abbadia San Salvatore, SI, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "0076f620-f053-11eb-bb0f-c25849f3fc0c",
+          "title": "ORT | DANIEL COHEN direttore | IAN BOSTRIDGE tenore",
+          "subtitle": "Venerdì 22 ottobre al Teatro Verdi di Firenze",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/ort-daniel-cohen-direttore-ian-bostridge-tenore/",
+          "priceValue": "15,00",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "autunno"
+            ],
+            "landscape": [
+              "arte"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "musica",
+          "priceType": "apartireda",
+          "periods": [
+            {
+              "startDate": "2021-10-22",
+              "endDate": "2021-10-22"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/02-cohen_PIj.png",
+            "copyrightHolder": "©Kaupo Kikkas"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/firenze/",
+                "id": "7047686e-29ee-11e3-96f7-495d93063fdb",
+                "name": "Firenze"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/firenze-e-area-fiorentina/",
+                "id": "aef7066e-2c05-11e3-af86-495d93063fdb",
+                "name": "Firenze e Area Fiorentina"
+              }
+            ],
+            "map": {
+              "lat": "43.7702276",
+              "lng": "11.2610361",
+              "address": "Teatro Verdi, Via Ghibellina, Firenze, FI, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "00c1438c-c12d-11f0-9207-5afaad4a75a0",
+          "title": "Processioni di Pasqua",
+          "subtitle": "Un'atmosfera suggestiva con gli Incappucciati delle varie compagnie",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/castiglion-fiorentino-settimana-santa-2026/",
+          "classification": {
+            "season": [
+              "primavera"
+            ],
+            "landscape": [
+              "campagna"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "eventi",
+          "priceType": "gratis",
+          "periods": [
+            {
+              "startDate": "2026-03-31",
+              "endDate": "2026-04-01"
+            },
+            {
+              "startDate": "2026-04-03",
+              "endDate": "2026-04-04"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/processioni-2_llb.jpg",
+            "caption": "Processioni di Pasqua a Castiglion Fiorentino"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/castiglion-fiorentino/",
+                "id": "7cf20db4-29ee-11e3-96f7-495d93063fdb",
+                "name": "Castiglion Fiorentino"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/valdichiana-aretina/",
+                "id": "f41e0069-b1af-11e8-9632-c25849f3fc0c",
+                "name": "Valdichiana Aretina"
+              }
+            ],
+            "map": {
+              "lat": "43.3438788",
+              "lng": "11.9212183",
+              "address": "Castiglion Fiorentino, AR, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "00d6ac6d-f054-11eb-bb0f-c25849f3fc0c",
+          "title": "ORT | ALPESH CHAUHAN direttore | PABLO FERRÁNDEZ violoncello",
+          "subtitle": "Venerdì 12 novembre al Teatro Verdi di Firenze",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/ort-alpesh-chauhan-direttore-pablo-ferrandez-violoncello/",
+          "priceValue": "15,00",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "autunno"
+            ],
+            "landscape": [
+              "arte"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "musica",
+          "priceType": "apartireda",
+          "periods": [
+            {
+              "startDate": "2021-11-12",
+              "endDate": "2021-11-12"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/05-ferrandez_7mv.png",
+            "copyrightHolder": "© Igor Studio"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/firenze/",
+                "id": "7047686e-29ee-11e3-96f7-495d93063fdb",
+                "name": "Firenze"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/firenze-e-area-fiorentina/",
+                "id": "aef7066e-2c05-11e3-af86-495d93063fdb",
+                "name": "Firenze e Area Fiorentina"
+              }
+            ],
+            "map": {
+              "lat": "43.7702276",
+              "lng": "11.2610361",
+              "address": "Teatro Verdi, Via Ghibellina, Firenze, FI, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "01684f5b-3e13-11f1-92f8-5afaad4a75a0",
+          "title": "Merenda nell'Oliveta",
+          "subtitle": "Il gusto della tradizione all'ombra degli ulivi",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/civitella-marittima-merenda-nelloliveta-9-maggio-2026/",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "primavera"
+            ],
+            "landscape": [
+              "campagna"
+            ],
+            "theme": [
+              "enogastronomia",
+              "famiglie-e-bambini"
+            ]
+          },
+          "typology": "altri",
+          "priceType": "gratis",
+          "periods": [
+            {
+              "startDate": "2026-05-09",
+              "endDate": "2026-05-09"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/foto-oliveta-modifica_a4j.jpg",
+            "caption": "Immagine della merenda nell'oliveta"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/civitella-paganico/",
+                "id": "73e37b78-29ee-11e3-96f7-495d93063fdb",
+                "name": "Civitella Paganico"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/maremma-sud/",
+                "id": "ab56d4f0-2c05-11e3-af86-495d93063fdb",
+                "name": "Maremma Sud"
+              }
+            ],
+            "map": {
+              "lat": "42.9941513",
+              "lng": "11.2816536",
+              "address": "Civitella Marittima, GR, Italia"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "0275e3db-c627-11f0-9207-5afaad4a75a0",
+          "title": "Girogustando a Siena",
+          "subtitle": "Il Ristorante il Tufo di Siena ospita il Ristorante Voltalacarta di Genova",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/siena-girogustando-3-dicembre-2025/",
+          "priceValue": "40,00",
+          "classification": {
+            "season": [
+              "inverno"
+            ],
+            "landscape": [
+              "arte"
+            ],
+            "theme": [
+              "enogastronomia"
+            ]
+          },
+          "typology": "altri",
+          "priceType": "prezzounico",
+          "periods": [
+            {
+              "startDate": "2025-12-03",
+              "endDate": "2025-12-03"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/109_34c747cf-1033-4594-b897-289505ab5a1c.jpg",
+            "caption": "Un piatto di Girogustando a Siena"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/siena/",
+                "id": "6cd3ecf5-29ee-11e3-96f7-495d93063fdb",
+                "name": "Siena"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/terre-di-siena/",
+                "id": "aca10848-2c05-11e3-af86-495d93063fdb",
+                "name": "Terre di Siena"
+              }
+            ],
+            "map": {
+              "lng": "11.315554",
+              "address": "Via Paolo Frajese, 69, 53100 Siena SI"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "027f87a3-8cba-11eb-a6b1-c25849f3fc0c",
+          "title": "Tra i versi di Dante e D'Annunzio",
+          "subtitle": "Visita dantesca tra le bellezze del Casentino",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/tra-i-versi-di-dante-e-dannunzio/",
+          "priceValue": "5,00",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "estate"
+            ],
+            "landscape": [
+              "arte",
+              "campagna"
+            ],
+            "theme": [
+              "arte-e-cultura",
+              "famiglie-e-bambini"
+            ]
+          },
+          "typology": "altri",
+          "priceType": "prezzounico",
+          "periods": [
+            {
+              "startDate": "2021-07-17",
+              "endDate": "2021-07-17"
+            },
+            {
+              "startDate": "2021-08-01",
+              "endDate": "2021-08-01"
+            },
+            {
+              "startDate": "2021-08-13",
+              "endDate": "2021-08-13"
+            },
+            {
+              "startDate": "2021-08-28",
+              "endDate": "2021-08-28"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/carlo-gabrielli-casentino-castello-di-romena-2018-12-10-08-25-45-_dsc6904_gEU.jpg"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/pratovecchio-stia/",
+                "id": "7cd07bee-29ee-11e3-96f7-495d93063fdb",
+                "name": "Pratovecchio Stia"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/casentino/",
+                "id": "adef3346-2c05-11e3-af86-495d93063fdb",
+                "name": "Casentino"
+              }
+            ],
+            "map": {
+              "lat": "43.770744",
+              "lng": "11.256112",
+              "address": "castello di rome"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "0345d955-5b4b-11f1-bc56-5afaad4a75a0",
+          "title": "Collezionare storie con Stefano Bardini, principe degli antiquari",
+          "subtitle": "Visita speciale al Museo Bardini",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/collezionare-storie-con-stefano-bardini-principe-degli-antiquari/",
+          "classification": {
+            "season": [
+              "primavera"
+            ],
+            "landscape": [
+              "arte"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "altri",
+          "priceType": "gratis",
+          "periods": [
+            {
+              "startDate": "2026-06-07",
+              "endDate": "2026-06-07"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/amir_bardini_7c0c8462-532e-4543-8dc0-d504fc480e7f.jpg",
+            "caption": "Amir al Bardini",
+            "copyrightHolder": "Fondazione MUS.E"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/firenze/",
+                "id": "7047686e-29ee-11e3-96f7-495d93063fdb",
+                "name": "Firenze"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/firenze-e-area-fiorentina/",
+                "id": "aef7066e-2c05-11e3-af86-495d93063fdb",
+                "name": "Firenze e Area Fiorentina"
+              }
+            ],
+            "map": {
+              "lat": "43.76509",
+              "lng": "11.258464",
+              "address": "Via dei Renai, 37, 50125 Firenze FI"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        },
+        {
+          "id": "03552a1d-1d53-11f1-aab2-5afaad4a75a0",
+          "title": "Notte Bianca",
+          "subtitle": "Una notte di luci, musica e festa a Colle di Val D'Elsa",
+          "locale": "it",
+          "url": "https://www.visittuscany.com/it/eventi/colle-di-val-delsa-notte-bianca-26-giugno-2026/",
+          "accessibility": "true",
+          "classification": {
+            "season": [
+              "estate"
+            ],
+            "landscape": [
+              "campagna"
+            ],
+            "theme": [
+              "arte-e-cultura"
+            ]
+          },
+          "typology": "festival",
+          "priceType": "gratis",
+          "periods": [
+            {
+              "startDate": "2026-06-26",
+              "endDate": "2026-06-26"
+            }
+          ],
+          "image": {
+            "url": "https://www.visittuscany.com/shared/make/immagini/notte_bianca_piazza_1818eeb3-2dee-4d2b-aa25-f8906473d219.jpeg",
+            "caption": "Una serata di spettacoli a Colle Val D'Elsa"
+          },
+          "location": {
+            "locality": [
+              {
+                "url": "https://www.visittuscany.com/it/citta-e-borghi/colle-val-delsa/",
+                "id": "791b3c79-29ee-11e3-96f7-495d93063fdb",
+                "name": "Colle Val d\u2019Elsa"
+              }
+            ],
+            "area": [
+              {
+                "url": "https://www.visittuscany.com/it/territori/valdelsa-valdicecina/",
+                "id": "ad8ca0dd-2c05-11e3-af86-495d93063fdb",
+                "name": "Valdelsa Valdicecina"
+              }
+            ],
+            "map": {
+              "lat": "43.422756",
+              "lng": "11.126048",
+              "address": "Piazza Arnolfo di Cambio, 53034 Colle di Val d'Elsa SI"
+            }
+          },
+          "status": "not-expired",
+          "topevent": "false"
+        }
+      ]
+    }
+  }
+}
