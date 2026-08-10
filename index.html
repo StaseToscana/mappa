@@ -850,102 +850,92 @@
 
 
   function normalizzaEventiVT(data) {
-    if (!Array.isArray(data)) {
+    // Gestisce la struttura response.data.doc di VisitTuscany
+    if (data && data.response && data.response.data && Array.isArray(data.response.data.doc)) {
+      data = data.response.data.doc;
+    } else if (!Array.isArray(data)) {
       if (data && Array.isArray(data.events)) data = data.events;
       else if (data && Array.isArray(data.items)) data = data.items;
       else if (data && Array.isArray(data.data)) data = data.data;
       else if (data && Array.isArray(data.results)) data = data.results;
       else return [];
     }
-    function getField(obj, names) {
-      for (var j = 0; j < names.length; j++) {
-        if (obj[names[j]] != null) return obj[names[j]];
-        var lc = names[j].toLowerCase();
-        if (obj[lc] != null) return obj[lc];
-      }
-      return null;
-    }
+
     return data.map(function(e, i) {
-      var nome = getField(e, ['nome','name','title','denominazione','eventName']);
-      var categoria = getField(e, ['categoria','category','type','tipo','eventType','tipologia']);
-      var comune = getField(e, ['comune','city','town','locality','municipality']);
-      var provincia = getField(e, ['provincia','province','prov']);
-      var indirizzo = getField(e, ['indirizzo','address','street','via','location','place']);
-      var descrizione = getField(e, ['descrizione','description','text','desc','abstract']);
-      var locandina = getField(e, ['locandina','image','photo','picture','img','thumbnail','cover']);
-      var mapsUrl = getField(e, ['maps_url','mapsUrl','url','link','externalUrl','website']);
-      var instagram = getField(e, ['instagram','social','ig']);
-      var dataSort = getField(e, ['data_sort','startDate','date','data','start','from','eventDate']);
-      var dataFine = getField(e, ['data_fine','endDate','end','to','fine']);
-      var riepilogoDate = getField(e, ['riepilogo_date','dateSummary','dateRange','when']);
-      var lat = getField(e, ['lat','latitude','Lat','Latitude']);
-      var lon = getField(e, ['lon','lng','longitude','Lon','Longitude','Lng']);
-      if (lat == null && e.geo) lat = getField(e.geo, ['lat','latitude']);
-      if (lon == null && e.geo) lon = getField(e.geo, ['lon','lng','longitude']);
-      if (lat == null && e.location && e.location.geo) {
-        lat = getField(e.location.geo, ['lat','latitude']);
-        lon = getField(e.location.geo, ['lon','lng','longitude']);
-      }
-      if (categoria) {
-        var catLower = String(categoria).toLowerCase();
-        if (catLower.includes('concert')) categoria = 'Concerto';
-        else if (catLower.includes('sagra')) categoria = 'Sagra';
-        else if (catLower.includes('fest')) categoria = 'Festa paesana';
-        else if (catLower.includes('fiera')) categoria = 'Fiera';
-        else if (catLower.includes('mercat')) categoria = 'Mercato';
-        else if (catLower.includes('mostra') || catLower.includes('expo')) categoria = 'Mostra/Esposizione';
-        else if (catLower.includes('teatr')) categoria = 'Spettacolo teatrale';
-        else if (catLower.includes('sport')) categoria = 'Evento sportivo';
-        else if (catLower.includes('gastro') || catLower.includes('food') || catLower.includes('vino')) categoria = 'Evento gastronomico';
-        else if (catLower.includes('festival')) categoria = 'Festival';
-        else if (catLower.includes('discotec') || catLower.includes('serata')) categoria = 'Serata/Discoteca';
-        else if (catLower.includes('rievoc') || catLower.includes('palio') || catLower.includes('storica')) categoria = 'Rievocazione storica/Palio';
-        else categoria = 'Altro';
-      }
-      if (dataSort && typeof dataSort === 'string') {
-        if (dataSort.includes('T')) dataSort = dataSort.split('T')[0];
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dataSort)) {
-          var parts = dataSort.split('/');
-          dataSort = parts[2] + '-' + parts[1] + '-' + parts[0];
-        }
-      }
-      if (dataFine && typeof dataFine === 'string') {
-        if (dataFine.includes('T')) dataFine = dataFine.split('T')[0];
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dataFine)) {
-          var parts = dataFine.split('/');
-          dataFine = parts[2] + '-' + parts[1] + '-' + parts[0];
-        }
-      }
-      if (!riepilogoDate && dataSort) {
-        var d = parseData(dataSort);
-        if (d) {
-          riepilogoDate = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
-          if (dataFine && dataFine !== dataSort) {
-            var df = parseData(dataFine);
-            if (df) riepilogoDate += ' - ' + df.getDate() + '/' + (df.getMonth()+1) + '/' + df.getFullYear();
+      // Campi base
+      var nome = e.title || e.name || 'Evento VisitTuscany';
+      var url = e.url || null;
+      var descrizione = e.subtitle || '';
+
+      // Categoria (typology VT → categorie Stase)
+      var categoria = e.typology || 'Altro';
+      var catLower = String(categoria).toLowerCase();
+      if (catLower.includes('concert') || catLower.includes('musica')) categoria = 'Concerto';
+      else if (catLower.includes('sagra')) categoria = 'Sagra';
+      else if (catLower.includes('fest') && !catLower.includes('festival')) categoria = 'Festa paesana';
+      else if (catLower.includes('fiera') || catLower.includes('mercat')) categoria = 'Fiera';
+      else if (catLower.includes('mostra') || catLower.includes('expo')) categoria = 'Mostra/Esposizione';
+      else if (catLower.includes('teatr') || catLower.includes('cinema') || catLower.includes('spettacolo')) categoria = 'Spettacolo teatrale';
+      else if (catLower.includes('sport')) categoria = 'Evento sportivo';
+      else if (catLower.includes('gastro') || catLower.includes('food') || catLower.includes('vino') || catLower.includes('enogastronomia')) categoria = 'Evento gastronomico';
+      else if (catLower.includes('festival')) categoria = 'Festival';
+      else if (catLower.includes('discotec') || catLower.includes('serata')) categoria = 'Serata/Discoteca';
+      else if (catLower.includes('rievoc') || catLower.includes('palio') || catLower.includes('storica')) categoria = 'Rievocazione storica/Palio';
+      else if (catLower.includes('convegn')) categoria = 'Altro';
+
+      // Date (periods è un array di oggetti con startDate/endDate)
+      var dataSort = null, dataFine = null, riepilogoDate = '';
+      if (e.periods && e.periods.length > 0) {
+        var p = e.periods[0];
+        dataSort = p.startDate || null;
+        dataFine = p.endDate || dataSort;
+        if (dataSort) {
+          var d = parseData(dataSort);
+          if (d) {
+            riepilogoDate = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+            if (dataFine && dataFine !== dataSort) {
+              var df = parseData(dataFine);
+              if (df) riepilogoDate += ' - ' + df.getDate() + '/' + (df.getMonth()+1) + '/' + df.getFullYear();
+            }
           }
         }
       }
-      if (!mapsUrl && (indirizzo || comune)) {
-        mapsUrl = 'https://maps.google.com/?q=' + encodeURIComponent((indirizzo ? indirizzo + ', ' : '') + (comune || ''));
+
+      // Coordinate e località
+      var comune = null, provincia = null, lat = null, lon = null, indirizzo = null;
+      if (e.location && e.location.locality && e.location.locality.length > 0) {
+        var loc = e.location.locality[0];
+        comune = loc.name || loc.locality || null;
+        provincia = loc.province || null;
+        lat = loc.lat != null ? parseFloat(loc.lat) : null;
+        lon = loc.lng != null ? parseFloat(loc.lng) : (loc.lon != null ? parseFloat(loc.lon) : null);
+        indirizzo = loc.address || comune;
       }
+
+      // Immagine
+      var locandina = null;
+      if (e.image && e.image.url) locandina = e.image.url;
+
+      // Link: usa url VisitTuscany come mapsUrl
+      var mapsUrl = url;
+
       return {
         id: 'vt_' + (e.id || i),
-        nome: nome || 'Evento VisitTuscany',
-        locandina: locandina || null,
-        categoria: categoria || 'Altro',
-        descrizione: descrizione || '',
+        nome: nome,
+        locandina: locandina,
+        categoria: categoria,
+        descrizione: descrizione,
         provincia: provincia,
         comune: comune,
         indirizzo: indirizzo,
-        riepilogoDate: riepilogoDate || '',
+        riepilogoDate: riepilogoDate,
         dataSort: dataSort,
         dataFine: dataFine,
         mapsUrl: mapsUrl,
-        lat: lat ? parseFloat(lat) : null,
-        lon: lon ? parseFloat(lon) : null,
-        instagram: instagram,
-        inEvidenza: false,
+        lat: lat,
+        lon: lon,
+        instagram: null,
+        inEvidenza: !!e.topevent,
         fonte: 'visittuscany'
       };
     });
