@@ -2,8 +2,8 @@ name: Aggiorna Eventi VisitTuscany
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # ogni giorno alle 6:00
-  workflow_dispatch:      # permette di lanciare manualmente
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,44 +19,78 @@ jobs:
         run: |
           echo "${{ secrets.P12_CERTIFICATE }}" | base64 -d > certificato.p12
 
-      - name: Estrai certificato e chiave privata (separati)
+      - name: Estrai certificato e chiave privata
         run: |
           openssl pkcs12 -in certificato.p12 -out cert.pem -nokeys -password pass:"${{ secrets.P12_PASSWORD }}"
           openssl pkcs12 -in certificato.p12 -out key.pem -nocerts -nodes -password pass:"${{ secrets.P12_PASSWORD }}"
 
-      - name: Chiama VisitTuscany e scarica gli eventi
+      - name: Scarica eventi da VisitTuscany (paginazione)
         run: |
-          TODAY=$(date +%Y-%m-%d)
-          FUTURE=$(date -d "+90 days" +%Y-%m-%d)
+          mkdir -p vt_pages
+          for page in $(seq 1 30); do
+            echo "Scarico pagina $page..."
+            HTTP_CODE=$(curl -s -o "vt_pages/page_${page}.json" -w "%{http_code}" \
+              --cert cert.pem --key key.pem \
+              "${{ secrets.API_URL }}?page=${page}&limit=10" \
+              -H "Accept: application/json" \
+              -L --max-time 60)
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "Pagina $page: HTTP $HTTP_CODE (fine dati)"
+              rm -f "vt_pages/page_${page}.json"
+              break
+            fi
+            # Se la pagina ha 0 eventi, ci fermiamo
+            COUNT=$(python3 -c "import json; d=json.load(open('vt_pages/page_${page}.json')); print(len(d.get('response',{}).get('data',{}).get('doc',[])))" 2>/dev/null || echo "0")
+            if [ "$COUNT" = "0" ]; then
+              echo "Pagina $page: 0 eventi"
+              rm -f "vt_pages/page_${page}.json"
+              break
+            fi
+          done
 
-          echo "URL API: ${{ secrets.API_URL }}"
-          echo "Date range: $TODAY -> $FUTURE"
-
-          HTTP_CODE=$(curl -s -o eventi_visittuscany.json -w "%{http_code}"             --cert cert.pem --key key.pem             "${{ secrets.API_URL }}?startDate=${TODAY}&endDate=${FUTURE}&limit=1000"             -H "Accept: application/json"             -L --max-time 60)
-
-          echo "HTTP Status: $HTTP_CODE"
-
-          if [ "$HTTP_CODE" != "200" ]; then
-            echo "ERRORE: il server ha risposto con HTTP $HTTP_CODE"
-            echo "Risposta del server:"
-            cat eventi_visittuscany.json 2>/dev/null || echo "(nessun contenuto ricevuto)"
-            exit 1
-          fi
-
-          echo "Download OK. Dimensione:"
-          wc -c eventi_visittuscany.json
-
-      - name: Verifica che sia JSON valido
+      - name: Unisci tutte le pagine in un unico JSON
         run: |
-          python3 -c "import json; d=json.load(open('eventi_visittuscany.json')); print('JSON valido. Tipo:', type(d).__name__)"
+          python3 << 'PYEOF'
+          import json, glob, os
+          from datetime import date
 
-      - name: Salva il file nel repository
+          eventi = []
+          files = sorted(glob.glob("vt_pages/page_*.json"))
+          print(f"File trovati: {len(files)}")
+
+          for f in files:
+              with open(f) as fp:
+                  d = json.load(fp)
+              docs = d.get('response', {}).get('data', {}).get('doc', [])
+              eventi.extend(docs)
+
+          print(f"Eventi totali scaricati: {len(eventi)}")
+
+          # Filtra solo eventi futuri (startDate >= oggi)
+          oggi = date.today().isoformat()
+          futuri = []
+          for ev in eventi:
+              periods = ev.get('periods', [])
+              if periods and len(periods) > 0:
+                  start = periods[0].get('startDate', '9999-12-31')
+                  if start >= oggi:
+                      futuri.append(ev)
+
+          print(f"Eventi futuri: {len(futuri)}")
+
+          # Salva nel formato che il sito si aspetta: {response: {data: {doc: [...]}}}
+          output = {"response": {"data": {"doc": futuri}}}
+          with open("eventi_visittuscany.json", "w") as out:
+              json.dump(output, out, ensure_ascii=False)
+          PYEOF
+
+      - name: Salva nel repository
         run: |
           git config user.name "Robot Eventi"
           git config user.email "robot@stasetoscana.it"
           git add eventi_visittuscany.json
           if git diff --cached --quiet; then
-            echo "Nessuna modifica da committare"
+            echo "Nessuna modifica"
           else
             git commit -m "Aggiornamento eventi VisitTuscany $(date +%d-%m-%Y)"
             git push
