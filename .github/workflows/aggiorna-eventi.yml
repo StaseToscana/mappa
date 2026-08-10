@@ -27,15 +27,18 @@ jobs:
       - name: Scarica eventi da VisitTuscany (paginazione)
         run: |
           mkdir -p vt_pages
-          for page in $(seq 1 30); do
+
+          # Prova prima con limit=100 (più veloce, meno chiamate)
+          # Se l'API non lo supporta, il codice Python gestisce il fallback
+          for page in $(seq 1 200); do
             echo "Scarico pagina $page..."
             HTTP_CODE=$(curl -s -o "vt_pages/page_${page}.json" -w "%{http_code}" \
               --cert cert.pem --key key.pem \
-              "${{ secrets.API_URL }}?page=${page}&limit=10" \
+              "${{ secrets.API_URL }}?page=${page}&limit=100" \
               -H "Accept: application/json" \
               -L --max-time 60)
             if [ "$HTTP_CODE" != "200" ]; then
-              echo "Pagina $page: HTTP $HTTP_CODE (fine dati)"
+              echo "Pagina $page: HTTP $HTTP_CODE (fine dati o errore)"
               rm -f "vt_pages/page_${page}.json"
               break
             fi
