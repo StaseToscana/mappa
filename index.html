@@ -1158,8 +1158,22 @@
     Object.keys(cardsById).forEach(function(k) { delete cardsById[k]; });
 
     var gruppi = {};
+    var oggiDate = new Date(); oggiDate.setHours(0,0,0,0);
+    var mm = oggiDate.getMonth() + 1;
+    var dd = oggiDate.getDate();
+    var oggiISO = oggiDate.getFullYear() + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
+
     eventi.forEach(function(ev) {
       var chiave = ev.dataSort || 'senza-data';
+      var dStart = parseData(ev.dataSort);
+      var dFine = parseData(ev.dataFine || ev.dataSort);
+
+      // Se l'evento è in corso (iniziato prima di oggi, finisce oggi o dopo),
+      // mostralo nel gruppo "OGGI" invece che nel gruppo della data di inizio
+      if (dStart && dFine && dStart < oggiDate && dFine >= oggiDate) {
+        chiave = oggiISO;
+      }
+
       if (!gruppi[chiave]) gruppi[chiave] = [];
       gruppi[chiave].push(ev);
     });
@@ -1612,4 +1626,3 @@
 </script>
 </body>
 </html>
-
