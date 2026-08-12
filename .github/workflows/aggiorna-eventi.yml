@@ -41,7 +41,6 @@ jobs:
               rm -f "vt_pages/page_${page}.json"
               break
             fi
-            # Se la pagina ha 0 eventi, ci fermiamo
             COUNT=$(python3 -c "import json; d=json.load(open('vt_pages/page_${page}.json')); print(len(d.get('response',{}).get('data',{}).get('doc',[])))" 2>/dev/null || echo "0")
             echo "  Eventi nella pagina: $COUNT"
             if [ "$COUNT" = "0" ]; then
@@ -55,7 +54,18 @@ jobs:
         run: |
           python3 << 'PYEOF'
           import json, glob, os
-          from datetime import date
+          from datetime import date, datetime
+
+          def durata_giorni(start, end):
+              """Calcola durata in giorni (inclusivo)."""
+              if not start or not end:
+                  return 0
+              try:
+                  d1 = datetime.strptime(start, '%Y-%m-%d').date()
+                  d2 = datetime.strptime(end, '%Y-%m-%d').date()
+                  return (d2 - d1).days + 1
+              except:
+                  return 0
 
           eventi = []
           files = sorted(glob.glob("vt_pages/page_*.json"))
@@ -75,36 +85,41 @@ jobs:
               json.dump(output_raw, out, ensure_ascii=False)
           print(f"Salvato RAW: {len(eventi)} eventi")
 
-          # Filtra eventi futuri: un evento è futuro se ALMENO UN periodo ha endDate >= oggi
-          # (o se non ha endDate, se startDate >= oggi)
+          # Filtra:
+          # 1. Eventi futuri: almeno un periodo con endDate >= oggi
+          # 2. Durata max 40 giorni (scarta mostre/festival lunghissimi)
           oggi = date.today().isoformat()
           futuri = []
           scartati = 0
+          scartati_lunghi = 0
 
           for ev in eventi:
               periods = ev.get('periods', [])
               is_futuro = False
+              durata = 0
+
               if periods and len(periods) > 0:
-                  for p in periods:
-                      start = p.get('startDate', '9999-12-31')
-                      end = p.get('endDate', start)
-                      # Se endDate non c'è, usa startDate
-                      if end >= oggi:
-                          is_futuro = True
-                          break
+                  p = periods[0]
+                  start = p.get('startDate', '9999-12-31')
+                  end = p.get('endDate', start)
+                  durata = durata_giorni(start, end)
+                  if end >= oggi:
+                      is_futuro = True
               else:
                   # Se non ha periodi, consideriamolo futuro per sicurezza
                   is_futuro = True
 
-              if is_futuro:
+              if is_futuro and durata <= 40:
                   futuri.append(ev)
               else:
                   scartati += 1
+                  if durata > 40:
+                      scartati_lunghi += 1
 
           print(f"Eventi futuri (endDate >= {oggi}): {len(futuri)}")
-          print(f"Eventi scartati (tutti scaduti): {scartati}")
+          print(f"Eventi scartati (totali): {scartati}")
+          print(f"Eventi scartati (durata > 40 gg): {scartati_lunghi}")
 
-          # Salva filtrato
           output = {"response": {"data": {"doc": futuri}}}
           with open("eventi_visittuscany.json", "w") as out:
               json.dump(output, out, ensure_ascii=False)
