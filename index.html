@@ -1095,8 +1095,14 @@
     document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.toggle('attivo', b.dataset.periodo === 'tutti'); });
     categorieSelezionate.clear();
     provinceSelezionate.clear();
-    var categorie = [].concat(new Set(tuttiEventi.map(function(e) { return e.categoria; }).filter(Boolean))).sort();
-    var province = [].concat(new Set(tuttiEventi.map(function(e) { return e.provincia; }).filter(Boolean))).sort();
+    var catSet = new Set();
+    var provSet = new Set();
+    tuttiEventi.forEach(function(e) {
+      if (e.categoria) catSet.add(e.categoria);
+      if (e.provincia) provSet.add(e.provincia);
+    });
+    var categorie = Array.from(catSet).sort();
+    var province = Array.from(provSet).sort();
     costruisciMultiselect('categoria', categorie, categorieSelezionate);
     costruisciMultiselect('provincia', province, provinceSelezionate);
     aggiornaBadgeMultiselect('categoria', categorieSelezionate);
