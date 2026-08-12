@@ -28,8 +28,6 @@ jobs:
         run: |
           mkdir -p vt_pages
 
-          # Prova prima con limit=100 (più veloce, meno chiamate)
-          # Se l'API non lo supporta, il codice Python gestisce il fallback
           for page in $(seq 1 200); do
             echo "Scarico pagina $page..."
             HTTP_CODE=$(curl -s -o "vt_pages/page_${page}.json" -w "%{http_code}" \
@@ -37,15 +35,17 @@ jobs:
               "${{ secrets.API_URL }}?page=${page}&limit=100" \
               -H "Accept: application/json" \
               -L --max-time 60)
+            echo "  HTTP code: $HTTP_CODE"
             if [ "$HTTP_CODE" != "200" ]; then
-              echo "Pagina $page: HTTP $HTTP_CODE (fine dati o errore)"
+              echo "  Pagina $page: HTTP $HTTP_CODE (fine dati o errore)"
               rm -f "vt_pages/page_${page}.json"
               break
             fi
             # Se la pagina ha 0 eventi, ci fermiamo
             COUNT=$(python3 -c "import json; d=json.load(open('vt_pages/page_${page}.json')); print(len(d.get('response',{}).get('data',{}).get('doc',[])))" 2>/dev/null || echo "0")
+            echo "  Eventi nella pagina: $COUNT"
             if [ "$COUNT" = "0" ]; then
-              echo "Pagina $page: 0 eventi"
+              echo "  Pagina $page: 0 eventi"
               rm -f "vt_pages/page_${page}.json"
               break
             fi
@@ -69,29 +69,53 @@ jobs:
 
           print(f"Eventi totali scaricati: {len(eventi)}")
 
-          # Filtra solo eventi futuri (startDate >= oggi)
+          # Salva raw senza filtri per debug
+          output_raw = {"response": {"data": {"doc": eventi}}}
+          with open("eventi_visittuscany_raw.json", "w") as out:
+              json.dump(output_raw, out, ensure_ascii=False)
+          print(f"Salvato RAW: {len(eventi)} eventi")
+
+          # Filtra eventi futuri: un evento è futuro se ALMENO UN periodo ha endDate >= oggi
+          # (o se non ha endDate, se startDate >= oggi)
           oggi = date.today().isoformat()
           futuri = []
+          scartati = 0
+
           for ev in eventi:
               periods = ev.get('periods', [])
+              is_futuro = False
               if periods and len(periods) > 0:
-                  start = periods[0].get('startDate', '9999-12-31')
-                  if start >= oggi:
-                      futuri.append(ev)
+                  for p in periods:
+                      start = p.get('startDate', '9999-12-31')
+                      end = p.get('endDate', start)
+                      # Se endDate non c'è, usa startDate
+                      if end >= oggi:
+                          is_futuro = True
+                          break
+              else:
+                  # Se non ha periodi, consideriamolo futuro per sicurezza
+                  is_futuro = True
 
-          print(f"Eventi futuri: {len(futuri)}")
+              if is_futuro:
+                  futuri.append(ev)
+              else:
+                  scartati += 1
 
-          # Salva nel formato che il sito si aspetta: {response: {data: {doc: [...]}}}
+          print(f"Eventi futuri (endDate >= {oggi}): {len(futuri)}")
+          print(f"Eventi scartati (tutti scaduti): {scartati}")
+
+          # Salva filtrato
           output = {"response": {"data": {"doc": futuri}}}
           with open("eventi_visittuscany.json", "w") as out:
               json.dump(output, out, ensure_ascii=False)
+          print(f"Salvato FILTRATO: {len(futuri)} eventi")
           PYEOF
 
       - name: Salva nel repository
         run: |
           git config user.name "Robot Eventi"
           git config user.email "robot@stasetoscana.it"
-          git add eventi_visittuscany.json
+          git add eventi_visittuscany.json eventi_visittuscany_raw.json
           if git diff --cached --quiet; then
             echo "Nessuna modifica"
           else
