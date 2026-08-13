@@ -852,6 +852,12 @@
   }
 
 
+  var PROVINCE_MAP = {
+    'AR': 'Arezzo', 'FI': 'Firenze', 'GR': 'Grosseto', 'LI': 'Livorno',
+    'LU': 'Lucca', 'MS': 'Massa-Carrara', 'PI': 'Pisa', 'PT': 'Pistoia',
+    'PO': 'Prato', 'SI': 'Siena'
+  };
+
   function normalizzaEventiVT(data) {
     // Gestisce la struttura response.data.doc di VisitTuscany
     if (data && data.response && data.response.data && Array.isArray(data.response.data.doc)) {
@@ -938,6 +944,10 @@
       if (!provincia && indirizzo) {
         var m = indirizzo.match(/,\s*([A-Z]{2})\s*,/);
         if (m) provincia = m[1];
+      }
+      // Normalizza sigla VT → nome provincia (per unificare con eventi Stase)
+      if (provincia && PROVINCE_MAP[provincia]) {
+        provincia = PROVINCE_MAP[provincia];
       }
 
       // Immagine
