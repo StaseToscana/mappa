@@ -179,7 +179,6 @@
     .ms-toggle:active { transform: scale(0.95); }
     .ms-badge { background: var(--rosso); color: white; border-radius: 10px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; }
     .ms-panel {
-      display: none;
       position: absolute;
       top: calc(100% + 6px);
       left: 0;
@@ -192,8 +191,18 @@
       overflow-y: auto;
       padding: 8px;
       z-index: 100;
+      /* Apertura di un menu: nessun rimbalzo (è un fade-in, non un gesto con
+         momentum) — solo una dissolvenza morbida in stile "critically damped". */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.97);
+      transform-origin: top left;
+      transition: opacity 0.16s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.18s;
     }
-    .ms-panel.aperto { display: block; }
+    .ms-panel.aperto { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+    @media (prefers-reduced-motion: reduce) {
+      .ms-panel { transition: opacity 0.16s ease, visibility 0.16s; transform: none !important; }
+    }
     .ms-opzione { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; }
     .ms-opzione:hover { background: var(--crema); }
     .ms-opzione input { accent-color: var(--rosso); width: 15px; height: 15px; cursor: pointer; }
@@ -341,7 +350,7 @@
       background: rgba(255,255,255,0.08);
       border-radius: 50%;
     }
-    .aggiungi-hero h1 { font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 8px; position: relative; z-index: 1; }
+    .aggiungi-hero h1 { font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 8px; position: relative; z-index: 1; letter-spacing: -0.015em; line-height: 1.15; }
     .aggiungi-hero p.sub { font-size: 0.95rem; color: rgba(255,255,255,0.9); margin-bottom: 0; line-height: 1.5; position: relative; z-index: 1; }
     .aggiungi-badge {
       display: inline-block;
@@ -361,15 +370,30 @@
 
     #dettaglio-backdrop {
       display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
+      opacity: 0; /* l'opacità è guidata dalla molla JS, in sincronia 1:1 col pannello */
     }
     #dettaglio-panel {
       position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
       background: var(--crema-card); z-index: 1001; overflow-y: auto;
       box-shadow: -8px 0 32px rgba(0,0,0,0.2);
-      transform: translateX(100%); transition: transform 0.25s ease;
+      transform: translateX(100%);
+      will-change: transform;
+      /* niente "transition" qui: l'apertura, la chiusura e il trascinamento
+         sono guidati dalla molla JS, che può essere interrotta e invertita
+         in qualsiasi istante senza scatti (vedi funzione animaMolla). */
     }
-    #dettaglio-backdrop.aperto { display: block; }
-    #dettaglio-backdrop.aperto #dettaglio-panel { transform: translateX(0); }
+    #dettaglio-drag-handle {
+      display: none;
+    }
+    @media (max-width: 760px) {
+      #dettaglio-drag-handle {
+        display: block; position: sticky; top: 0; z-index: 3;
+        width: 40px; height: 5px; margin: 10px auto 2px;
+        background: rgba(0,0,0,0.15); border-radius: 3px;
+        touch-action: none; cursor: grab;
+      }
+      #dettaglio-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
+    }
     #btn-chiudi-dettaglio {
       position: absolute; top: 14px; right: 14px; z-index: 2;
       background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%;
@@ -385,17 +409,26 @@
     }
 
     #lightbox {
-      display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(10,6,5,0.92);
+      display: flex; position: fixed; inset: 0; z-index: 2000; background: rgba(10,6,5,0.92);
       align-items: center; justify-content: center; cursor: zoom-out;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s;
     }
-    #lightbox.aperto { display: flex; }
-    #lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 6px; }
+    #lightbox.aperto { opacity: 1; visibility: visible; pointer-events: auto; }
+    #lightbox img {
+      max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 6px;
+      transform: scale(0.96); transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #lightbox.aperto img { transform: scale(1); }
+    @media (prefers-reduced-motion: reduce) {
+      #lightbox img { transition: none; transform: none !important; }
+    }
     #lightbox-chiudi {
       position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.15); color: white;
       border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.2rem; cursor: pointer;
     }
     #dettaglio-body { padding: 22px; }
-    #dettaglio-nome { font-size: 1.3rem; font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
+    #dettaglio-nome { font-size: 1.3rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.012em; margin-bottom: 10px; }
     #dettaglio-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
     .dett-riga { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-top: 1px solid var(--bordo); font-size: 0.88rem; }
     .dett-riga .icona { font-size: 1.05rem; flex-shrink: 0; }
@@ -533,6 +566,12 @@
       color: var(--rosso-scuro);
       text-decoration: none;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab-btn.tab-cta { animation: none; }
+      .card-img[src=""], .card-img:not([src]) { animation: none; background: #f0e6dc; }
+      .toast { animation: none; opacity: 1; }
+    }
 </style>
 </head>
 <body>
@@ -606,6 +645,7 @@
 
 <div id="dettaglio-backdrop" onclick="if(event.target===this) chiudiDettaglio()">
   <div id="dettaglio-panel">
+    <div id="dettaglio-drag-handle" aria-hidden="true"></div>
     <button id="btn-chiudi-dettaglio" onclick="chiudiDettaglio()">&#10005;</button>
     <div id="dettaglio-img-wrap" onclick="apriLightbox()">
       <img id="dettaglio-img" src="" alt="" onerror="this.parentElement.style.display='none'" />
@@ -686,6 +726,64 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
+  }
+
+  // ===================== MICRO-MOLLA (spring) =====================
+  // Piccolo motore di animazione a molla, senza librerie esterne.
+  // Traduce i due parametri "alla Apple" (damping = rimbalzo, response = velocità)
+  // in una molla fisica reale, interrompibile in ogni istante: se la si richiama
+  // mentre è già in corso, riparte dal valore *a schermo* in quel momento (mai
+  // dal valore di partenza "logico"), così un tocco durante l'animazione non
+  // causa mai uno scatto visivo.
+  function motionRidotto() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function animaMolla(opts) {
+    if (motionRidotto()) {
+      // Accessibilità: niente molla/rimbalzo, solo una breve dissolvenza lineare.
+      var start = performance.now(), durata = 180, from = opts.from, to = opts.to, cancellata = false;
+      function passoRidotto(t) {
+        if (cancellata) return;
+        var p = Math.min(1, (t - start) / durata);
+        opts.onUpdate(from + (to - from) * p);
+        if (p < 1) requestAnimationFrame(passoRidotto); else opts.onComplete && opts.onComplete();
+      }
+      requestAnimationFrame(passoRidotto);
+      return { cancel: function() { cancellata = true; }, retarget: function() {} };
+    }
+
+    var damping = opts.damping == null ? 1 : opts.damping;
+    var response = opts.response == null ? 0.35 : opts.response;
+    var stiffness = Math.pow(2 * Math.PI / response, 2);
+    var smorzamento = damping * 2 * Math.sqrt(stiffness);
+
+    var pos = opts.from;
+    var vel = opts.velocity || 0;
+    var target = opts.to;
+    var cancellata = false;
+    var last = performance.now();
+
+    function passo(now) {
+      if (cancellata) return;
+      var dt = Math.min((now - last) / 1000, 0.032);
+      last = now;
+      var forza = -stiffness * (pos - target) - smorzamento * vel;
+      vel += forza * dt;
+      pos += vel * dt;
+      opts.onUpdate(pos);
+      if (Math.abs(pos - target) < 0.4 && Math.abs(vel) < 40) {
+        opts.onUpdate(target);
+        opts.onComplete && opts.onComplete();
+        return;
+      }
+      requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+    return {
+      cancel: function() { cancellata = true; },
+      retarget: function(nuovoTarget) { target = nuovoTarget; } // reindirizza senza tagliare la velocità
+    };
   }
 
   const DATI_DEMO = [
@@ -1318,13 +1416,99 @@
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
     aggiornaUrlDettaglio(ev.id);
-    document.getElementById('dettaglio-backdrop').classList.add('aperto');
+    apriPannelloDettaglio();
   }
 
-  function chiudiDettaglio() {
-    document.getElementById('dettaglio-backdrop').classList.remove('aperto');
-    aggiornaUrl();
+  // ===================== Pannello dettaglio: apertura/chiusura/drag a molla =====================
+  var dettPannello = { x: 0, molla: null, trascinando: false };
+
+  function larghezzaPannelloDettaglio() {
+    var panel = document.getElementById('dettaglio-panel');
+    return panel.getBoundingClientRect().width || panel.offsetWidth || 460;
   }
+
+  function impostaXPannello(x) {
+    var panel = document.getElementById('dettaglio-panel');
+    var w = larghezzaPannelloDettaglio();
+    var clamped = Math.max(0, x);
+    panel.style.transform = 'translateX(' + clamped + 'px)';
+    document.getElementById('dettaglio-backdrop').style.opacity = String(1 - Math.min(1, clamped / w));
+    dettPannello.x = clamped;
+  }
+
+  function animaPannelloA(target, velocity, onComplete) {
+    if (dettPannello.molla) dettPannello.molla.cancel();
+    dettPannello.molla = animaMolla({
+      from: dettPannello.x, to: target, velocity: velocity || 0,
+      damping: 1, response: 0.4, // "Move / reposition" — critically damped, nessun rimbalzo
+      onUpdate: impostaXPannello, onComplete: onComplete
+    });
+  }
+
+  function apriPannelloDettaglio() {
+    var backdrop = document.getElementById('dettaglio-backdrop');
+    backdrop.style.display = 'block';
+    dettPannello.x = larghezzaPannelloDettaglio(); // parte dal valore reale a schermo (fuori vista)
+    impostaXPannello(dettPannello.x);
+    // Un frame di respiro per far applicare lo stato "chiuso" prima di animare,
+    // altrimenti il browser potrebbe fondere le due transform in un unico salto.
+    requestAnimationFrame(function() { animaPannelloA(0, 0); });
+    document.addEventListener('keydown', chiudiPannelloConEsc);
+  }
+
+  function chiudiDettaglio(velocity) {
+    aggiornaUrl();
+    var w = larghezzaPannelloDettaglio();
+    animaPannelloA(w, velocity || 0, function() {
+      document.getElementById('dettaglio-backdrop').style.display = 'none';
+    });
+    document.removeEventListener('keydown', chiudiPannelloConEsc);
+  }
+  function chiudiPannelloConEsc(e) { if (e.key === 'Escape') chiudiDettaglio(); }
+
+  // Drag-to-dismiss dalla maniglia in alto (mobile): tracking 1:1 col dito,
+  // rubber-band se si tenta di trascinare oltre l'aperto, e alla fine del
+  // gesto la scelta chiudi/riapri dipende dalla velocità e dalla posizione
+  // di rilascio — non solo dalla posizione, come indicato dalla skill.
+  (function initDragPannelloDettaglio() {
+    var handle = document.getElementById('dettaglio-drag-handle');
+    if (!handle) return;
+    var startClientX = 0, startPanelX = 0, storico = [];
+
+    handle.addEventListener('pointerdown', function(e) {
+      if (dettPannello.molla) dettPannello.molla.cancel();
+      handle.setPointerCapture(e.pointerId);
+      dettPannello.trascinando = true;
+      startClientX = e.clientX;
+      startPanelX = dettPannello.x;
+      storico = [{ x: e.clientX, t: performance.now() }];
+    });
+    handle.addEventListener('pointermove', function(e) {
+      if (!dettPannello.trascinando) return;
+      var delta = e.clientX - startClientX;
+      var nuovaX = startPanelX + delta;
+      if (nuovaX < 0) nuovaX = nuovaX * 0.25; // resistenza progressiva oltre l'aperto
+      impostaXPannello(nuovaX);
+      storico.push({ x: e.clientX, t: performance.now() });
+      if (storico.length > 5) storico.shift();
+    });
+    function fineTrascinamento() {
+      if (!dettPannello.trascinando) return;
+      dettPannello.trascinando = false;
+      var v = 0;
+      if (storico.length >= 2) {
+        var a = storico[0], b = storico[storico.length - 1];
+        var dt = (b.t - a.t) / 1000;
+        if (dt > 0) v = (b.x - a.x) / dt; // px/s, portata alla molla di chiusura/riapertura
+      }
+      var w = larghezzaPannelloDettaglio();
+      var soglia = w * 0.3;
+      if (dettPannello.x > soglia || v > 500) chiudiDettaglio(v);
+      else animaPannelloA(0, v);
+    }
+    handle.addEventListener('pointerup', fineTrascinamento);
+    handle.addEventListener('pointercancel', fineTrascinamento);
+  })();
 
   function apriLightbox() {
     var src = document.getElementById('dettaglio-img').src;
