@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>Installa Stase Toscana | Stase Toscana</title>
+  <meta name="description" content="Installa Stase Toscana sul tuo dispositivo: sagre, concerti e feste in Toscana sempre a portata di mano, con un'icona sulla schermata Home." />
+  <link rel="canonical" href="https://stasetoscana.it/installa.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Installa Stase Toscana" />
+  <meta property="og:description" content="Sagre, concerti e feste in Toscana sempre a portata di mano. Installa l'app dal browser, senza store." />
+  <meta property="og:image" content="https://stasetoscana.it/logo-stase.png" />
+  <meta property="og:url" content="https://stasetoscana.it/installa.html" />
+
+  <!-- ===== PWA ===== -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#FF3131" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Stase Toscana" />
+
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--rosso:#FF3131;--rosso-scuro:#CC0000;--crema:#FFF8EE;--inchiostro:#1B1B1B;--bordo:#F0E6DC;--grigio:#6B6258;--crema-card:#FFFFFF}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"League Spartan",sans-serif;background:var(--crema);color:var(--inchiostro);line-height:1.5}
+
+    .top-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:white;border-bottom:1px solid var(--bordo);position:sticky;top:0;z-index:50}
+    .top-nav .nav-logo img{height:40px;width:auto;display:block}
+    .nav-links a{color:var(--inchiostro);text-decoration:none;font-size:0.82rem;font-weight:700;padding:8px 14px;border-radius:20px}
+    .nav-links a:hover{background:var(--crema)}
+
+    .hero{background:linear-gradient(135deg,var(--rosso),var(--rosso-scuro));padding:56px 20px 44px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:rgba(255,255,255,0.06);border-radius:50%}
+    .hero-emoji{font-size:2.8rem;margin-bottom:8px;position:relative;z-index:1}
+    .hero h1{color:white;font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:900;margin-bottom:10px;position:relative;z-index:1;letter-spacing:-0.01em}
+    .hero p{color:rgba(255,255,255,0.92);font-size:1rem;max-width:480px;margin:0 auto 26px;position:relative;z-index:1}
+
+    #btn-installa{display:none;align-items:center;gap:8px;background:white;color:var(--rosso);text-decoration:none;font-weight:800;font-size:0.95rem;padding:13px 30px;border-radius:30px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.15);position:relative;z-index:1;transition:transform 0.15s,box-shadow 0.15s}
+    #btn-installa:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.2)}
+    #stato-installazione{color:rgba(255,255,255,0.85);font-size:0.85rem;margin-top:16px;position:relative;z-index:1;font-weight:600}
+
+    main{max-width:640px;margin:0 auto;padding:36px 20px 60px}
+
+    section.blocco{margin-bottom:36px}
+    section.blocco h2{font-size:1.2rem;font-weight:800;margin-bottom:10px}
+    section.blocco p{color:var(--grigio);font-size:0.92rem;line-height:1.7}
+    section.blocco .callout{background:var(--rosso-tenue,#FFF1EE);border-left:3px solid var(--rosso);padding:10px 14px;border-radius:8px;font-size:0.85rem;color:var(--inchiostro);margin-top:12px}
+
+    .griglia-benefici{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px}
+    .beneficio{background:var(--crema-card);border:1px solid var(--bordo);border-radius:14px;padding:16px}
+    .beneficio .emoji{font-size:1.4rem;margin-bottom:8px;display:block}
+    .beneficio h3{font-size:0.9rem;font-weight:800;margin-bottom:4px}
+    .beneficio p{font-size:0.78rem;color:var(--grigio);line-height:1.45}
+
+    #istruzioni-ios{display:none;background:var(--crema-card);border:1px solid var(--bordo);border-radius:14px;padding:18px;margin-top:14px}
+    #istruzioni-ios ol{padding-left:20px;font-size:0.88rem;color:var(--inchiostro);line-height:1.9}
+    #istruzioni-ios strong{color:var(--rosso)}
+
+    details{background:var(--crema-card);border:1px solid var(--bordo);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+    details summary{font-weight:700;font-size:0.9rem;cursor:pointer;list-style:none}
+    details summary::-webkit-details-marker{display:none}
+    details summary::after{content:"+";float:right;font-weight:800;color:var(--rosso)}
+    details[open] summary::after{content:"–"}
+    details p{margin-top:10px;font-size:0.85rem;color:var(--grigio);line-height:1.6}
+    details p strong{color:var(--inchiostro)}
+
+    .cta-finale{text-align:center;padding:8px 0 4px}
+    .cta-finale a{display:inline-block;color:var(--rosso);text-decoration:none;font-weight:800;font-size:0.92rem}
+    .cta-finale a:hover{text-decoration:underline}
+
+    .site-footer{background:white;border-top:1px solid var(--bordo);padding:28px 20px;text-align:center}
+    .site-footer p{font-size:0.82rem;color:var(--grigio)}
+
+    @media(max-width:480px){.griglia-benefici{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a class="nav-logo" href="https://stasetoscana.it/"><img src="/logo-stase.png" alt="Stase Toscana"></a>
+    <div class="nav-links"><a href="https://stasetoscana.it/">Torna alla mappa</a></div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-emoji">📲</div>
+    <h1>Stase Toscana sempre con te</h1>
+    <p>Sagre, concerti e feste in un tap. Installa l'app per un accesso diretto, senza passare dal browser ogni volta.</p>
+    <button id="btn-installa">⬇️ Installa l'app</button>
+    <div id="stato-installazione">Verifica installazione…</div>
+  </header>
+
+  <main>
+    <section class="blocco">
+      <h2>Cos'è una Web App?</h2>
+      <p>Stase Toscana è una <strong>Progressive Web App (PWA)</strong>: si installa direttamente dal browser, senza passare dagli store. È leggera, veloce e occupa pochissimo spazio sul tuo dispositivo.</p>
+      <div class="callout">💡 Funziona su Android, iPhone, iPad e computer.</div>
+    </section>
+
+    <section class="blocco">
+      <h2>Perché installarla</h2>
+      <div class="griglia-benefici">
+        <div class="beneficio"><span class="emoji">⚡</span><h3>Veloce</h3><p>Apri la mappa degli eventi con un tap, senza cercare il sito nel browser.</p></div>
+        <div class="beneficio"><span class="emoji">🏠</span><h3>Icona Home</h3><p>Un'icona dedicata sulla schermata principale del tuo telefono.</p></div>
+        <div class="beneficio"><span class="emoji">📶</span><h3>Offline</h3><p>Anche senza connessione, l'app si apre e mostra l'ultima versione salvata.</p></div>
+        <div class="beneficio"><span class="emoji">📱</span><h3>Come un'app</h3><p>Schermo intero, senza barra degli indirizzi: esperienza da app nativa.</p></div>
+      </div>
+    </section>
+
+    <section class="blocco" id="istruzioni-ios">
+      <h2>📱 Installazione su iPhone / iPad</h2>
+      <ol>
+        <li>Apri <strong>stasetoscana.it</strong> in <strong>Safari</strong> (l'installazione funziona solo da Safari, non da Chrome o altri browser su iOS)</li>
+        <li>Tocca l'icona <strong>Condividi</strong> ⬆️ in basso (o in alto, a seconda del modello)</li>
+        <li>Scorri e seleziona <strong>"Aggiungi a Home"</strong></li>
+        <li>Conferma toccando <strong>"Aggiungi"</strong> in alto a destra</li>
+      </ol>
+    </section>
+
+    <section class="blocco">
+      <h2>Domande frequenti</h2>
+
+      <details>
+        <summary>Non vedo il pulsante "Installa" su Android</summary>
+        <p>Assicurati di usare <strong>Google Chrome</strong> (non il browser predefinito del produttore, se diverso). Se non compare comunque, apri il menu <strong>⋮</strong> in alto a destra e cerca <strong>"Installa app"</strong> o <strong>"Aggiungi a schermata Home"</strong>.</p>
+      </details>
+
+      <details>
+        <summary>Su iPhone non riesco a installare</summary>
+        <p>Su iOS l'installazione funziona <strong>solo con Safari</strong>. Chrome, Firefox e altri browser su iPhone non supportano questa funzionalità per limitazione del sistema operativo, non del sito.</p>
+      </details>
+
+      <details>
+        <summary>L'app occupa spazio sul telefono?</summary>
+        <p>Pochissimo — è una web app leggera, non paragonabile alle app tradizionali degli store.</p>
+      </details>
+
+      <details>
+        <summary>Posso disinstallarla?</summary>
+        <p>Certo, come qualsiasi altra app: tieni premuta l'icona e seleziona <strong>"Disinstalla"</strong> (Android) o <strong>"Rimuovi app"</strong> (iOS).</p>
+      </details>
+    </section>
+
+    <div class="cta-finale">
+      <a href="https://stasetoscana.it/">🗺️ Torna alla mappa</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Stase Toscana — Il calendario eventi della Toscana</p>
+  </footer>
+
+  <script>
+    var btnInstalla = document.getElementById('btn-installa');
+    var statoEl = document.getElementById('stato-installazione');
+    var istruzioniIOS = document.getElementById('istruzioni-ios');
+    var deferredPrompt = null;
+
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+
+    function impostaStato(testo) { statoEl.textContent = testo; }
+
+    if (isStandalone) {
+      impostaStato('✅ App già installata e in uso!');
+    } else if (isIOS) {
+      impostaStato('📱 Su iPhone/iPad: segui le istruzioni qui sotto (solo con Safari)');
+      istruzioniIOS.style.display = 'block';
+    } else {
+      impostaStato('In attesa di conferma dal browser…');
+    }
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (!isStandalone) {
+        btnInstalla.style.display = 'inline-flex';
+        impostaStato('👇 Pronta per essere installata!');
+      }
+    });
+
+    btnInstalla.addEventListener('click', function() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(scelta) {
+        if (scelta.outcome === 'accepted') {
+          impostaStato('✅ Installazione avviata!');
+        } else {
+          impostaStato('Installazione annullata. Puoi riprovare quando vuoi.');
+        }
+        deferredPrompt = null;
+        btnInstalla.style.display = 'none';
+      });
+    });
+
+    window.addEventListener('appinstalled', function() {
+      impostaStato('✅ App installata con successo!');
+      btnInstalla.style.display = 'none';
+    });
+
+    // Se dopo 2.5s il browser non ha ancora proposto l'evento di installazione
+    // (già installata, non supportato, o condizioni non ancora soddisfatte),
+    // mostriamo un messaggio onesto invece di lasciare "Verifica..." per sempre.
+    setTimeout(function() {
+      if (!deferredPrompt && !isStandalone && !isIOS) {
+        impostaStato('Se non vedi il pulsante, usa il menu del browser → "Installa app" o "Aggiungi a schermata Home".');
+      }
+    }, 2500);
+
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    }
+  </script>
+</body>
+</html>

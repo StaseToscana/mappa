@@ -1,0 +1,19 @@
+{
+  "name": "Stase Toscana - Eventi in Toscana",
+  "short_name": "Stase Toscana",
+  "description": "Sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale.",
+  "id": "/",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFF8EE",
+  "theme_color": "#FF3131",
+  "lang": "it",
+  "categories": ["travel", "lifestyle", "events"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

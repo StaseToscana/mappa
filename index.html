@@ -6,6 +6,16 @@
   <title>Eventi in Toscana – Stase Toscana</title>
   <meta name="description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
 
+  <!-- ===== PWA: installabilità come app ===== -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#FF3131" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Stase Toscana" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
   <!-- Open Graph (anteprime su WhatsApp, Facebook, Instagram, ecc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Stase - Eventi in Toscana" />
@@ -588,6 +598,7 @@
     <div id="tab-nav">
       <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
       <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
+      <a class="tab-btn" id="btn-installa-header" href="/installa.html" title="Installa Stase Toscana come app" style="display:none;">📲</a>
     </div>
   </header>
 </div>
@@ -1820,6 +1831,23 @@
       document.getElementById('loading').style.display = 'none';
     }
   }
+
+  // ===================== PWA: service worker + pulsante Installa =====================
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.log('Service worker non registrato:', err);
+      });
+    });
+  }
+
+  (function gestisciPulsanteInstalla() {
+    var btn = document.getElementById('btn-installa-header');
+    if (!btn) return;
+    var giaInstallata = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (giaInstallata) return; // già installata: nessun bisogno di mostrare il pulsante
+    btn.style.display = 'inline-flex';
+  })();
 
   init();
   inizializzaCookieBanner();
