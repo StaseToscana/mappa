@@ -30,17 +30,35 @@ jobs:
 
           for page in $(seq 1 200); do
             echo "Scarico pagina $page..."
-            HTTP_CODE=$(curl -s -o "vt_pages/page_${page}.json" -w "%{http_code}" \
-              --cert cert.pem --key key.pem \
-              "${{ secrets.API_URL }}?page=${page}&limit=100" \
-              -H "Accept: application/json" \
-              -L --max-time 60)
-            echo "  HTTP code: $HTTP_CODE"
+
+            HTTP_CODE=""
+            TENTATIVO=1
+            MAX_TENTATIVI=3
+
+            while [ "$TENTATIVO" -le "$MAX_TENTATIVI" ]; do
+              HTTP_CODE=$(curl -s -o "vt_pages/page_${page}.json" -w "%{http_code}" \
+                --cert cert.pem --key key.pem \
+                "${{ secrets.API_URL }}?page=${page}&limit=100" \
+                -H "Accept: application/json" \
+                -L --max-time 60)
+
+              if [ "$HTTP_CODE" = "200" ]; then
+                break
+              fi
+
+              echo "  Tentativo $TENTATIVO: HTTP $HTTP_CODE, riprovo tra 5s..."
+              rm -f "vt_pages/page_${page}.json"
+              sleep 5
+              TENTATIVO=$((TENTATIVO + 1))
+            done
+
+            echo "  HTTP code finale: $HTTP_CODE"
             if [ "$HTTP_CODE" != "200" ]; then
-              echo "  Pagina $page: HTTP $HTTP_CODE (fine dati o errore)"
+              echo "  Pagina $page: HTTP $HTTP_CODE dopo $MAX_TENTATIVI tentativi (fine dati o errore persistente)"
               rm -f "vt_pages/page_${page}.json"
               break
             fi
+
             COUNT=$(python3 -c "import json; d=json.load(open('vt_pages/page_${page}.json')); print(len(d.get('response',{}).get('data',{}).get('doc',[])))" 2>/dev/null || echo "0")
             echo "  Eventi nella pagina: $COUNT"
             if [ "$COUNT" = "0" ]; then
@@ -53,7 +71,7 @@ jobs:
       - name: Unisci tutte le pagine in un unico JSON
         run: |
           python3 << 'PYEOF'
-          import json, glob, os
+          import json, glob, os, sys
           from datetime import date, datetime
 
           def durata_giorni(start, end):
@@ -119,6 +137,28 @@ jobs:
           print(f"Eventi futuri (endDate >= {oggi}): {len(futuri)}")
           print(f"Eventi scartati (totali): {scartati}")
           print(f"Eventi scartati (durata > 40 gg): {scartati_lunghi}")
+
+          # --- CONTROLLO DI SICUREZZA ANTI-SVUOTAMENTO ---
+          # Se il download è fallito/parziale, non sovrascrivere il file buono già pubblicato.
+          SOGLIA_MINIMA = 10  # sotto questo numero, sospettiamo un fallimento del download
+
+          esistente_count = 0
+          if os.path.exists("eventi_visittuscany.json"):
+              try:
+                  with open("eventi_visittuscany.json") as fp:
+                      esistente = json.load(fp)
+                  esistente_count = len(esistente.get('response', {}).get('data', {}).get('doc', []))
+              except Exception as e:
+                  print(f"Attenzione: impossibile leggere il file esistente: {e}")
+
+          print(f"Eventi nel file esistente: {esistente_count}")
+
+          if len(futuri) < SOGLIA_MINIMA and esistente_count >= SOGLIA_MINIMA:
+              print(f"❌ ERRORE: solo {len(futuri)} eventi scaricati (soglia minima {SOGLIA_MINIMA}), "
+                    f"ma il file esistente ne aveva {esistente_count}. "
+                    "Probabile fallimento del download da VisitTuscany. "
+                    "NON sovrascrivo il file esistente. Il job fallisce volutamente.")
+              sys.exit(1)
 
           output = {"response": {"data": {"doc": futuri}}}
           with open("eventi_visittuscany.json", "w") as out:
