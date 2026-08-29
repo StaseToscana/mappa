@@ -713,7 +713,7 @@
   </div>
 </div>
 
-<div id="dettaglio-backdrop" onclick="if(event.target===this) chiudiDettaglio()">
+<div id="dettaglio-backdrop" onclick="chiudiDettaglioSeCliccatoFuori(event)">
   <div id="dettaglio-panel">
     <div id="dettaglio-drag-handle" aria-hidden="true"></div>
     <button id="btn-chiudi-dettaglio" onclick="chiudiDettaglio()">&#10005;</button>
@@ -1429,11 +1429,16 @@
         maxWidth: 260,
         closeButton: true,
         autoClose: false,
-        closeOnClick: false
+        closeOnClick: false,
+        autoPan: false
       });
       marker.on('click', function(e) {
         L.DomEvent.stopPropagation(e.originalEvent);
         evidenziaCard(ev.id);
+        // Forza il ridisegno del marker nel cluster: su mobile, dopo il tap, a volte
+        // il marker sparisce visivamente finche' non si muove la mappa. Questo
+        // refresh esplicito evita che l'utente debba muovere la mappa per vederlo di nuovo.
+        if (clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
       });
       nuoviMarker.push(marker);
       markersById[ev.id] = marker;
@@ -1499,6 +1504,16 @@
 
   // ===================== Pannello dettaglio: apertura/chiusura/drag a molla =====================
   var dettPannello = { x: 0, molla: null, trascinando: false };
+  var dettPannelloApertoIl = 0;
+
+  function chiudiDettaglioSeCliccatoFuori(event) {
+    if (event.target !== event.currentTarget) return;
+    // Ignora i click che arrivano nei primi istanti dopo l'apertura: su mobile il "click"
+    // sintetico generato dal touch puo' arrivare dopo che il backdrop e' gia' visibile,
+    // colpendo lo sfondo invece del bottone e chiudendo il pannello appena aperto.
+    if (Date.now() - dettPannelloApertoIl < 350) return;
+    chiudiDettaglio();
+  }
 
   function larghezzaPannelloDettaglio() {
     var panel = document.getElementById('dettaglio-panel');
@@ -1524,6 +1539,7 @@
   }
 
   function apriPannelloDettaglio() {
+    dettPannelloApertoIl = Date.now();
     var backdrop = document.getElementById('dettaglio-backdrop');
     backdrop.style.display = 'block';
     dettPannello.x = larghezzaPannelloDettaglio(); // parte dal valore reale a schermo (fuori vista)
