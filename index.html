@@ -1690,6 +1690,11 @@
   function adattaLayoutIniziale() {
     if (window.innerWidth > 760) { document.getElementById('map-wrap').classList.remove('nascosto'); setTimeout(function() { map.invalidateSize(); }, 100); }
   }
+    if (window.innerWidth <= 760) {
+  mostraVista('mappa');
+} else {
+  adattaLayoutIniziale();
+}
   window.addEventListener('resize', adattaLayoutIniziale);
 
   var markerUtente = null;
