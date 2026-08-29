@@ -29,6 +29,7 @@ import re
 import sys
 from datetime import date, datetime
 from html import escape
+from urllib.parse import quote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = "https://stasetoscana.it"
@@ -294,7 +295,9 @@ body{font-family:"League Spartan",sans-serif;background:var(--crema);color:var(-
 .breadcrumb li[aria-current]{font-weight:700;color:var(--inchiostro)}
 .hero-provincia{background:linear-gradient(135deg,var(--rosso),var(--rosso-scuro));padding:48px 20px 40px;text-align:center}
 .hero-provincia h1{color:white;font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;margin-bottom:10px}
-.hero-provincia p{color:rgba(255,255,255,0.92);font-size:1rem;max-width:600px;margin:0 auto}
+.hero-provincia p{color:rgba(255,255,255,0.92);font-size:1rem;max-width:600px;margin:0 auto 18px}
+.cta-mappa-provincia{display:inline-block;background:white;color:var(--rosso);text-decoration:none;font-weight:800;font-size:0.88rem;padding:10px 22px;border-radius:24px;transition:transform 0.15s}
+.cta-mappa-provincia:hover{transform:translateY(-2px)}
 main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
 .layout-provincia{display:grid;grid-template-columns:1fr 260px;gap:28px;align-items:start}
 .lista-eventi{min-width:0}
@@ -327,14 +330,20 @@ main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
 @media(max-width:640px){.top-nav{padding:10px 14px}.nav-links a{font-size:0.75rem;padding:6px 10px}.nav-logo img{height:32px}.griglia-eventi{grid-template-columns:1fr}}"""
 
 
-TOP_NAV = (
-    '<nav class="top-nav">'
-    f'<a class="nav-logo" href="{SITE_URL}/"><img src="{SITE_URL}/logo-stase.png" alt="Stase Toscana"></a>'
-    '<div class="nav-links">'
-    f'<a href="{SITE_URL}/">Mappa interattiva</a>'
-    f'<a href="{SITE_URL}/#aggiungi" class="nav-cta">Pubblica evento</a>'
-    '</div></nav>'
-)
+def top_nav(provincia=None):
+    """Nav condivisa. Se 'provincia' e' passata, il link alla mappa porta
+    direttamente alla vista gia' filtrata su quella provincia (stesso
+    meccanismo ?prov= gia' usato da index.html per filtri condivisibili),
+    cosi' il passaggio dalla pagina statica alla mappa non e' un salto a vuoto."""
+    mappa_href = f"{SITE_URL}/?prov={quote(provincia)}" if provincia else f"{SITE_URL}/"
+    return (
+        '<nav class="top-nav">'
+        f'<a class="nav-logo" href="{SITE_URL}/"><img src="{SITE_URL}/logo-stase.png" alt="Stase Toscana"></a>'
+        '<div class="nav-links">'
+        f'<a href="{mappa_href}">Mappa interattiva</a>'
+        f'<a href="{SITE_URL}/?tab=aggiungi" class="nav-cta">Pubblica evento</a>'
+        '</div></nav>'
+    )
 
 FOOTER = (
     '<footer class="site-footer"><div class="footer-inner">'
@@ -361,9 +370,12 @@ def genera_pagina_provincia(nome_provincia, eventi_prov, config):
         f'<li aria-current="page">{escape(nome_provincia)}</li></ol></nav>'
     )
 
+    mappa_filtrata = f"{SITE_URL}/?prov={quote(nome_provincia)}"
     hero = (
         f'<header class="hero-provincia"><h1>Eventi a {escape(nome_provincia)}</h1>'
-        f'<p>{escape(info["desc"])}</p></header>'
+        f'<p>{escape(info["desc"])}</p>'
+        f'<a href="{mappa_filtrata}" class="cta-mappa-provincia">Vedi su mappa interattiva &rarr;</a>'
+        '</header>'
     )
 
     if eventi_prov:
@@ -419,7 +431,7 @@ def genera_pagina_provincia(nome_provincia, eventi_prov, config):
 </style>
 </head>
 <body>
-{TOP_NAV}{breadcrumb}{hero}
+{top_nav(nome_provincia)}{breadcrumb}{hero}
 <main><div class="layout-provincia">
 <div class="lista-eventi">{lista_html}</div>
 {sidebar}
@@ -473,7 +485,7 @@ def genera_pagina_hub(conteggi, config):
     url = f"{SITE_URL}/eventi-in-toscana.html"
 
     return f"""<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(desc_meta, quote=True)}"><link rel="canonical" href="{url}"><meta property="og:type" content="website"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="Sagre, concerti, fiere e feste in tutte le province toscane."><meta property="og:image" content="{SITE_URL}/logo-stase.png"><meta property="og:url" content="{url}">{HEAD_COMUNE}<style>{CSS_PROVINCIA}
-{CSS_HUB_EXTRA}</style></head><body>{TOP_NAV}<header class="hero"><a href="{SITE_URL}/"><img src="{SITE_URL}/logo-stase.png" alt="Stase Toscana"></a><h1>Scopri gli eventi in Toscana</h1><p>Sagre, concerti, fiere e feste in tutte le province toscane. Scegli la tua destinazione e trova subito cosa fare.</p><a href="{SITE_URL}/" class="cta-primario">Esplora la mappa interattiva</a></header><section class="intro-seo"><div class="intro-seo-inner"><h2>Eventi in Toscana: cosa fare oggi, domani e nel weekend</h2><p>Stase Toscana è il portale dedicato agli eventi della Toscana. Ogni giorno raccogliamo sagre, concerti, festival, fiere, mercatini, mostre ed eventi sportivi in tutte le province: Firenze, Siena, Pisa, Lucca, Arezzo, Livorno, Pistoia, Prato, Grosseto e Massa-Carrara. Gli organizzatori possono pubblicare gratuitamente i propri appuntamenti, che compaiono in tempo reale sulla mappa interattiva e nelle pagine provinciali. Che tu stia cercando una sagra di paese, un concerto all'aperto o una fiera enogastronomica, qui trovi l'evento giusto per ogni occasione.</p></div></section><main><div class="griglia">{griglia}</div></main>{FOOTER}</body></html>"""
+{CSS_HUB_EXTRA}</style></head><body>{top_nav()}<header class="hero"><a href="{SITE_URL}/"><img src="{SITE_URL}/logo-stase.png" alt="Stase Toscana"></a><h1>Scopri gli eventi in Toscana</h1><p>Sagre, concerti, fiere e feste in tutte le province toscane. Scegli la tua destinazione e trova subito cosa fare.</p><a href="{SITE_URL}/" class="cta-primario">Esplora la mappa interattiva</a></header><section class="intro-seo"><div class="intro-seo-inner"><h2>Eventi in Toscana: cosa fare oggi, domani e nel weekend</h2><p>Stase Toscana è il portale dedicato agli eventi della Toscana. Ogni giorno raccogliamo sagre, concerti, festival, fiere, mercatini, mostre ed eventi sportivi in tutte le province: Firenze, Siena, Pisa, Lucca, Arezzo, Livorno, Pistoia, Prato, Grosseto e Massa-Carrara. Gli organizzatori possono pubblicare gratuitamente i propri appuntamenti, che compaiono in tempo reale sulla mappa interattiva e nelle pagine provinciali. Che tu stia cercando una sagra di paese, un concerto all'aperto o una fiera enogastronomica, qui trovi l'evento giusto per ogni occasione.</p></div></section><main><div class="griglia">{griglia}</div></main>{FOOTER}</body></html>"""
 
 
 # ===================== Main =====================
