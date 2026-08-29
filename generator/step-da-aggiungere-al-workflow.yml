@@ -1,0 +1,25 @@
+# ============================================================================
+# COME INTEGRARLO
+# ============================================================================
+# Nel file .github/workflows/aggiorna-eventi.yml esistente, aggiungi questo
+# step SUBITO DOPO "Unisci tutte le pagine in un unico JSON" e PRIMA di
+# "Salva nel repository". In questo modo le pagine provincia vengono
+# rigenerate ogni volta che arrivano nuovi eventi da VisitTuscany (ogni
+# giorno alle 6:00, come gia' fa il resto del workflow).
+#
+# Nota: lo step usa eventi.json (eventi Stase, quello che aggiorni tu tramite
+# il form Tally / foglio Google) ed eventi_visittuscany.json (appena
+# scaricato). Entrambi devono gia' esistere nella working directory del job
+# quando questo step gira, che e' il caso dato che sono nella root del repo
+# gia' clonato da actions/checkout.
+#
+# Ricordati anche di aggiungere "eventi-*.html" e "eventi-in-toscana.html"
+# al comando "git add" nello step finale "Salva nel repository", cosi'
+# vengono committate insieme al resto:
+#
+#   git add eventi_visittuscany.json eventi_visittuscany_raw.json \
+#           eventi-*.html eventi-in-toscana.html
+# ============================================================================
+
+      - name: Rigenera le pagine statiche per provincia
+        run: python3 generator/genera_pagine_province.py
