@@ -166,11 +166,14 @@ jobs:
           print(f"Salvato FILTRATO: {len(futuri)} eventi")
           PYEOF
 
+      - name: Rigenera le pagine statiche per provincia
+        run: python3 generator/genera_pagine_province.py
+
       - name: Salva nel repository
         run: |
           git config user.name "Robot Eventi"
           git config user.email "robot@stasetoscana.it"
-          git add eventi_visittuscany.json eventi_visittuscany_raw.json
+          git add eventi_visittuscany.json eventi_visittuscany_raw.json eventi-*.html eventi-in-toscana.html
           if git diff --cached --quiet; then
             echo "Nessuna modifica"
           else
