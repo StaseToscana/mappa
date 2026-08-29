@@ -655,6 +655,7 @@
     <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
     <div id="tab-nav">
       <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
+      <a class="tab-btn" id="tab-provincia" href="/eventi-in-toscana.html">Provincia</a>
       <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
     </div>
   </header>
@@ -863,13 +864,21 @@
     { id: 'demo6', nome: 'Spettacolo Teatrale - Arezzo', locandina: 'https://picsum.photos/seed/teatro1/400/300', categoria: 'Spettacolo teatrale', provincia: 'Arezzo', comune: 'Arezzo', indirizzo: 'Teatro Petrarca', riepilogoDate: '18/07/2026 - 21:00', dataSort: '2026-07-18', dataFine: '2026-07-18', mapsUrl: 'https://maps.google.com/?q=Teatro+Petrarca,Arezzo', lat: 43.4633, lon: 11.8784, instagram: null, descrizione: 'Rappresentazione teatrale all\'aperto.' },
   ];
 
-  function mostraTab(tab) {
+  function mostraTab(tab, aggiornaUrlTab) {
     document.getElementById('view-esplora').style.display = tab === 'esplora' ? 'flex' : 'none';
     document.getElementById('controlli').style.display = tab === 'esplora' ? 'flex' : 'none';
     document.getElementById('view-aggiungi').style.display = tab === 'aggiungi' ? 'block' : 'none';
     document.getElementById('tab-esplora').classList.toggle('attivo', tab === 'esplora');
     document.getElementById('tab-aggiungi').classList.toggle('attivo', tab === 'aggiungi');
     if (tab === 'esplora') setTimeout(function() { map.invalidateSize(); }, 100);
+    // Rende il tab bookmarkable/condivisibile senza mai ricaricare la pagina,
+    // riusando lo stesso pattern di query-string gia' usato per filtri e dettaglio evento.
+    if (aggiornaUrlTab !== false) {
+      var params = new URLSearchParams(window.location.search);
+      if (tab === 'aggiungi') params.set('tab', 'aggiungi'); else params.delete('tab');
+      var newUrl = params.toString() ? '?' + params.toString() : window.location.pathname;
+      history.replaceState(null, '', newUrl);
+    }
   }
 
   function caricaTally() {
@@ -1652,6 +1661,15 @@
     }
     var q = params.get('q');
     if (q) document.getElementById('input-ricerca').value = q;
+    // Ricostruisce i pannelli multiselect cosi' le caselle di categoria/provincia
+    // risultano visivamente spuntate quando il filtro arriva da un link esterno
+    // (es. da una pagina provincia con ?prov=Firenze), non solo applicato ai dati.
+    popolaFiltriOpzioni();
+    aggiornaBadgeMultiselect('categoria', categorieSelezionate);
+    aggiornaBadgeMultiselect('provincia', provinceSelezionate);
+    aggiornaBadgeFiltri();
+    var tabParam = params.get('tab');
+    if (tabParam === 'aggiungi') mostraTab('aggiungi', false);
   }
 
   function mostraVista(vista) {
