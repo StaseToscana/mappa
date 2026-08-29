@@ -900,7 +900,7 @@
   caricaTally();
 
   const map = L.map('map', { tap: false }).setView([43.5, 11.0], 8);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2jkv_1_f5a56c4907bce0dfb51b358e', {
     attribution: '&#169; OpenStreetMap &#169; CARTO', subdomains: 'abcd', maxZoom: 19
   }).addTo(map);
   const clusterGroup = L.markerClusterGroup({
