@@ -1,0 +1,52 @@
+{
+  "Arezzo": {
+    "slug": "arezzo",
+    "img": "https://lh3.googleusercontent.com/d/1Ut_qcHZYh-WU1I59gXp2tWwO6FancNjQ",
+    "desc": "Tra la Fiera Antica e il verde del Casentino, la provincia di Arezzo mescola arte, natura e tradizione in eventi che valgono il viaggio."
+  },
+  "Firenze": {
+    "slug": "firenze",
+    "img": "https://lh3.googleusercontent.com/d/1UiZ9ubLkHSqzCMsMMjLabFlitPUTzusL",
+    "desc": "La culla del Rinascimento non è solo arte e musei. Scopri concerti all'aperto, sagre di quartiere e mercatini che animano Firenze e la sua provincia tutto l'anno."
+  },
+  "Grosseto": {
+    "slug": "grosseto",
+    "img": "https://lh3.googleusercontent.com/d/1odGjmoHi_I8bayJA8YGEKLtBk7GHdDpr",
+    "desc": "La Maremma più autentica: butteri, cantine aperte, feste in borghi medievali e sagre immersi nella natura incontaminata."
+  },
+  "Livorno": {
+    "slug": "livorno",
+    "img": "https://lh3.googleusercontent.com/d/1VP5KupZcp0o1KkgJalpLIMM5Hz1ko8aL",
+    "desc": "Mare, tramonti sulla costa degli Etruschi e un'anima libera. Livorno è musica dal vivo, street food di qualità e mercatini al crepuscolo."
+  },
+  "Lucca": {
+    "slug": "lucca",
+    "img": "https://lh3.googleusercontent.com/d/1zfOXPUQyLw5Zm2Y9Ob7t0XMyH9tg0lNB",
+    "desc": "Cinta da mura rinascimentali, Lucca è un palcoscenico naturale per concerti, rievocazioni storiche, fiere di San Paolino e mercatini sotto le centuriate."
+  },
+  "Massa-Carrara": {
+    "slug": "massa-carrara",
+    "img": "https://lh3.googleusercontent.com/d/1ysnOaXBKOEWRLFnDdwbYnvvame70MaG1",
+    "desc": "Tra le imponenti Alpi Apuane e il mare della Versilia, eventi unici che intrecciano arte, marmo antico e tradizioni marinare."
+  },
+  "Pisa": {
+    "slug": "pisa",
+    "img": "https://lh3.googleusercontent.com/d/1tqBh8N2zccwthC43K0SU4kPspVZNSemA",
+    "desc": "Oltre alla Torre Pendente, Pisa offre un calendario ricco di appuntamenti: festival della luce, rassegne musicali lungo l'Arno e mercati contadini in piazza."
+  },
+  "Pistoia": {
+    "slug": "pistoia",
+    "img": "https://lh3.googleusercontent.com/d/1tqpMORYlkjMwc56oM9QDv7czzy3EZIDL",
+    "desc": "Capitale italiana della cultura, Pistoia sorprende con festival teatrali, giardini storici aperti al pubblico e sagre in alta montagna."
+  },
+  "Prato": {
+    "slug": "prato",
+    "img": "https://lh3.googleusercontent.com/d/1_0K2FGG_ks1rCHJMH8X-uNPOY0PB4yyo",
+    "desc": "Un territorio che sa reinventarsi: Prato offre eventi contemporanei, festival multietnici e riscoperta del patrimonio industriale tessile."
+  },
+  "Siena": {
+    "slug": "siena",
+    "img": "https://lh3.googleusercontent.com/d/1_Aqae21QvnLw4ySFow_BDgpD_dWwLctu",
+    "desc": "Dalla celebre Piazza del Campo alle dolci colline del Chianti, la provincia di Siena vive di tradizioni secolari: Palii, sagre contadine e feste nei borghi più belli d'Italia."
+  }
+}
