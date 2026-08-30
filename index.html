@@ -16,8 +16,7 @@
   <meta name="apple-mobile-web-app-title" content="Stase Toscana" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Open Graph (anteprime
- su WhatsApp, Facebook, Instagram, ecc.) -->
+  <!-- Open Graph (anteprime su WhatsApp, Facebook, Instagram, ecc.) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Stase - Eventi in Toscana" />
   <meta property="og:title" content="Stase - Eventi in Toscana" />
@@ -51,6 +50,11 @@
       --banner-h: 68px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    :focus-visible {
+      outline: 2.5px solid var(--rosso-scuro);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
     html, body { height: 100vh; height: 100dvh; margin: 0; overflow: hidden; }
     body { font-family: 'League Spartan', sans-serif; color: var(--inchiostro); background: var(--crema); display: flex; flex-direction: column; }
     a { color: inherit; }
@@ -86,7 +90,7 @@
     }
     .tab-btn {
   background: var(--crema-card);
-  color: var(--rosso);
+  color: var(--rosso-scuro);
   border: 1.5px solid var(--rosso);
   border-radius: 20px;
   padding: 7px 18px;
@@ -95,8 +99,8 @@
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.tab-btn:hover { background: var(--rosso); color: var(--crema-card); }
-.tab-btn.attivo { background: var(--crema-card); color: var(--rosso); border-color: var(--rosso); }
+.tab-btn:hover { background: var(--rosso-scuro); color: var(--crema-card); }
+.tab-btn.attivo { background: var(--crema-card); color: var(--rosso-scuro); border-color: var(--rosso); }
 
     .tab-btn:active { transform: scale(0.95); }
     .tab-btn .testo-corta { display: none; }
@@ -150,8 +154,8 @@
       background: var(--crema); color: var(--inchiostro); border: 1.5px solid var(--bordo);
       border-radius: 20px; padding: 9px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
     }
-    #btn-filtri-toggle:hover { border-color: var(--rosso); color: var(--rosso); }
-    #btn-filtri-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso); }
+    #btn-filtri-toggle:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    #btn-filtri-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso-scuro); }
 
     #filtri-riga { display: none; gap: 8px; flex-wrap: wrap; align-items: center; }
     #filtri-riga.aperto { display: flex; }
@@ -167,8 +171,8 @@
       cursor: pointer;
       transition: all 0.15s ease;
     }
-    .btn-filtro:hover { border-color: var(--rosso); color: var(--rosso); }
-    .btn-filtro.attivo { background: var(--rosso); color: white; border-color: var(--rosso); }
+    .btn-filtro:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    .btn-filtro.attivo { background: var(--rosso-scuro); color: white; border-color: var(--rosso-scuro); }
     .btn-filtro:active { transform: scale(0.95); }
 
     .multiselect { position: relative; }
@@ -186,10 +190,10 @@
       gap: 6px;
       transition: all 0.15s ease;
     }
-    .ms-toggle:hover { border-color: var(--rosso); color: var(--rosso); }
-    .ms-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso); }
+    .ms-toggle:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    .ms-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso-scuro); }
     .ms-toggle:active { transform: scale(0.95); }
-    .ms-badge { background: var(--rosso); color: white; border-radius: 10px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; }
+    .ms-badge { background: var(--rosso-scuro); color: white; border-radius: 10px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; }
     .ms-panel {
       position: absolute;
       top: calc(100% + 6px);
@@ -220,7 +224,7 @@
     .ms-opzione input { accent-color: var(--rosso); width: 15px; height: 15px; cursor: pointer; }
     .ms-clear {
       display: block; width: 100%; text-align: center; background: none; border: none;
-      color: var(--rosso); font-size: 0.76rem; font-weight: 700; padding: 8px 4px 2px;
+      color: var(--rosso-scuro); font-size: 0.76rem; font-weight: 700; padding: 8px 4px 2px;
       cursor: pointer; border-top: 1px solid var(--bordo); margin-top: 4px;
     }
 
@@ -230,7 +234,7 @@
       border-radius: 20px; padding: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
       transition: all 0.15s ease;
     }
-    #toggle-vista button.attivo { background: var(--rosso); color: white; border-color: var(--rosso); }
+    #toggle-vista button.attivo { background: var(--rosso-scuro); color: white; border-color: var(--rosso-scuro); }
     #toggle-vista button:active { transform: scale(0.95); }
 
     #view-esplora { display: flex; flex: 1; min-height: 0; }
@@ -259,7 +263,7 @@
       background: var(--crema);
       z-index: 2;
     }
-    .gruppo-data-header .giorno-nome { color: var(--rosso); }
+    .gruppo-data-header .giorno-nome { color: var(--rosso-scuro); }
 
     #lista-eventi {
       display: flex;
@@ -461,7 +465,7 @@
       width: 100%;
       line-height: 1.35;
     }
-    #banner-cta-content a { color: var(--rosso); text-decoration: underline; font-weight: 700; }
+    #banner-cta-content a { color: var(--rosso-scuro); text-decoration: underline; font-weight: 700; }
     #banner-cta-content a:hover { text-decoration: none; }
     #cookie-banner {
       display: none;
@@ -481,7 +485,7 @@
     #cookie-banner button {
       border: none; border-radius: 20px; padding: 9px 18px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
     }
-    #btn-cookie-accetta { background: var(--rosso); color: white; }
+    #btn-cookie-accetta { background: var(--rosso-scuro); color: white; }
     #btn-cookie-rifiuta { background: rgba(255,255,255,0.15); color: white; }
 
     #banner-pubblicitario {
@@ -576,7 +580,7 @@
       border-bottom: 1px solid var(--bordo);
     }
     #province-prompt a {
-      color: var(--rosso);
+      color: var(--rosso-scuro);
       text-decoration: underline;
       font-weight: 700;
       transition: color 0.15s;
@@ -632,15 +636,15 @@
     }
     #fab-installa-chiudi {
       position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 22px;
-      height: 22px;
+      top: -8px;
+      right: -8px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--inchiostro);
       color: white;
       border: 2px solid var(--crema);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       line-height: 1;
       cursor: pointer;
       display: flex;
