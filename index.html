@@ -157,8 +157,7 @@
     #btn-filtri-toggle:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
     #btn-filtri-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso-scuro); }
 
-    #filtri-riga { display: none; gap: 8px; flex-wrap: wrap; align-items: center; }
-    #filtri-riga.aperto { display: flex; }
+    #filtri-riga { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
     .btn-filtro {
       background: var(--crema);
@@ -216,6 +215,33 @@
       transition: opacity 0.16s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.18s;
     }
     .ms-panel.aperto { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+    /* Dentro il bottom sheet dei filtri, i due menu (Categoria/Provincia) si aprono
+       a fisarmonica nel flusso della pagina invece che come dropdown fluttuanti:
+       dentro un cassetto stretto, un pannello assoluto rischierebbe di uscire dai
+       bordi o sovrapporsi in modo confuso agli altri filtri. */
+    #filtri-sheet .ms-panel {
+      position: static;
+      min-width: 0;
+      max-height: 0;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      overflow: hidden;
+      padding: 0 4px;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      transition: max-height 0.22s cubic-bezier(0.22, 1, 0.36, 1), padding 0.22s ease;
+    }
+    #filtri-sheet .ms-panel.aperto {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 8px 4px;
+      margin-top: 6px;
+      border-top: 1px solid var(--bordo);
+    }
+    .ms-freccia { transition: transform 0.2s ease; display: inline-block; }
+    .multiselect.espanso .ms-freccia { transform: rotate(180deg); }
     @media (prefers-reduced-motion: reduce) {
       .ms-panel { transition: opacity 0.16s ease, visibility 0.16s; transform: none !important; }
     }
@@ -387,6 +413,59 @@
     #dettaglio-backdrop {
       display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
       opacity: 0; /* l'opacità è guidata dalla molla JS, in sincronia 1:1 col pannello */
+    }
+    /* ===== Bottom sheet filtri ===== */
+    #filtri-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
+      opacity: 0; /* l'opacità è guidata dalla molla JS, in sincronia 1:1 col cassetto */
+    }
+    #filtri-sheet {
+      position: fixed; left: 0; right: 0; bottom: 0; margin: 0 auto;
+      width: 100%; max-width: 480px;
+      max-height: 78vh;
+      background: var(--crema-card); z-index: 1001;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
+      transform: translateY(100%);
+      will-change: transform;
+      display: flex; flex-direction: column;
+      /* niente "transition": apertura/chiusura/trascinamento guidati dalla molla JS */
+    }
+    #filtri-drag-handle {
+      flex-shrink: 0; width: 40px; height: 5px; margin: 10px auto 2px;
+      background: rgba(0,0,0,0.15); border-radius: 3px;
+      touch-action: none; cursor: grab;
+    }
+    #filtri-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
+    #filtri-sheet-header {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: 6px 18px 12px; border-bottom: 1px solid var(--bordo);
+    }
+    #filtri-sheet-titolo { font-size: 1.05rem; font-weight: 800; flex: 1; }
+    #btn-azzera-filtri {
+      background: none; border: none; color: var(--rosso-scuro); font-weight: 700;
+      font-size: 0.82rem; cursor: pointer; padding: 6px 4px;
+    }
+    #btn-chiudi-filtri {
+      background: var(--crema); border: none; color: var(--inchiostro);
+      width: 30px; height: 30px; border-radius: 50%; font-size: 0.85rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    #filtri-sheet-body {
+      flex: 1; overflow-y: auto; padding: 16px 18px 8px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    #filtri-sheet-footer {
+      flex-shrink: 0; padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--bordo);
+    }
+    #btn-mostra-risultati {
+      width: 100%; background: var(--rosso-scuro); color: white; border: none;
+      border-radius: 20px; padding: 13px; font-size: 0.95rem; font-weight: 800; cursor: pointer;
+    }
+    #btn-mostra-risultati:active { transform: scale(0.98); }
+    @media (prefers-reduced-motion: reduce) {
+      #filtri-sheet { transition: none; }
     }
     #dettaglio-panel {
       position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
@@ -708,24 +787,7 @@
 <div id="controlli">
   <div id="barra-ricerca">
     <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
-    <button id="btn-filtri-toggle" onclick="toggleFiltriPanel()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
-  </div>
-  <div id="filtri-riga">
-    <button class="btn-filtro" id="btn-geolocate" onclick="geolocate()">Vicino a me</button>
-    <button class="btn-filtro attivo" data-periodo="tutti" onclick="setPeriodo('tutti', this)">Tutti</button>
-    <button class="btn-filtro" data-periodo="oggi" onclick="setPeriodo('oggi', this)">Oggi</button>
-    <button class="btn-filtro" data-periodo="weekend" onclick="setPeriodo('weekend', this)">Weekend</button>
-    <button class="btn-filtro" data-periodo="settimana" onclick="setPeriodo('settimana', this)">Settimana</button>
-    <button class="btn-filtro" data-periodo="mese" onclick="setPeriodo('mese', this)">Prossimi 30gg</button>
-    <div class="multiselect" id="ms-categoria">
-      <button class="ms-toggle" onclick="toggleMultiselect('categoria')">Categoria <span class="ms-badge" id="ms-badge-categoria" style="display:none;"></span> &#9662;</button>
-      <div class="ms-panel" id="ms-panel-categoria"></div>
-    </div>
-    <div class="multiselect" id="ms-provincia">
-      <button class="ms-toggle" onclick="toggleMultiselect('provincia')">Provincia <span class="ms-badge" id="ms-badge-provincia" style="display:none;"></span> &#9662;</button>
-      <div class="ms-panel" id="ms-panel-provincia"></div>
-    </div>
-    <button class="btn-filtro" id="btn-azzera-filtri" onclick="azzeraFiltri()" style="display:none;">&#10005; Azzera filtri</button>
+    <button id="btn-filtri-toggle" onclick="apriFiltriSheet()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
   </div>
   <div id="toggle-vista">
     <button class="attivo" id="btn-vista-lista" onclick="mostraVista('lista')">Lista</button>
@@ -752,6 +814,38 @@
   </div>
   <div id="form-card">
     <iframe id="tally-form" data-tally-src="https://tally.so/embed/pb5GDE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" height="700" title="Invia il tuo evento"></iframe>
+  </div>
+</div>
+
+<div id="filtri-backdrop" onclick="chiudiFiltriSeCliccatoFuori(event)">
+  <div id="filtri-sheet">
+    <div id="filtri-drag-handle" aria-hidden="true"></div>
+    <div id="filtri-sheet-header">
+      <span id="filtri-sheet-titolo">Filtri</span>
+      <button id="btn-azzera-filtri" onclick="azzeraFiltri()" style="display:none;">Azzera</button>
+      <button id="btn-chiudi-filtri" onclick="chiudiFiltriSheet()" aria-label="Chiudi">&#10005;</button>
+    </div>
+    <div id="filtri-sheet-body">
+      <div id="filtri-riga">
+        <button class="btn-filtro" id="btn-geolocate" onclick="geolocate()">Vicino a me</button>
+        <button class="btn-filtro attivo" data-periodo="tutti" onclick="setPeriodo('tutti', this)">Tutti</button>
+        <button class="btn-filtro" data-periodo="oggi" onclick="setPeriodo('oggi', this)">Oggi</button>
+        <button class="btn-filtro" data-periodo="weekend" onclick="setPeriodo('weekend', this)">Weekend</button>
+        <button class="btn-filtro" data-periodo="settimana" onclick="setPeriodo('settimana', this)">Settimana</button>
+        <button class="btn-filtro" data-periodo="mese" onclick="setPeriodo('mese', this)">Prossimi 30gg</button>
+      </div>
+      <div class="multiselect" id="ms-categoria">
+        <button class="ms-toggle" onclick="toggleMultiselect('categoria')">Categoria <span class="ms-badge" id="ms-badge-categoria" style="display:none;"></span> <span class="ms-freccia">&#9662;</span></button>
+        <div class="ms-panel" id="ms-panel-categoria"></div>
+      </div>
+      <div class="multiselect" id="ms-provincia">
+        <button class="ms-toggle" onclick="toggleMultiselect('provincia')">Provincia <span class="ms-badge" id="ms-badge-provincia" style="display:none;"></span> <span class="ms-freccia">&#9662;</span></button>
+        <div class="ms-panel" id="ms-panel-provincia"></div>
+      </div>
+    </div>
+    <div id="filtri-sheet-footer">
+      <button id="btn-mostra-risultati" onclick="chiudiFiltriSheet()">Mostra risultati</button>
+    </div>
   </div>
 </div>
 
@@ -1253,10 +1347,17 @@
     var panel = document.getElementById('ms-panel-' + tipo);
     var giaAperto = panel.classList.contains('aperto');
     document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
-    if (!giaAperto) panel.classList.add('aperto');
+    document.querySelectorAll('.multiselect').forEach(function(m) { m.classList.remove('espanso'); });
+    if (!giaAperto) {
+      panel.classList.add('aperto');
+      document.getElementById('ms-' + tipo).classList.add('espanso');
+    }
   }
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.multiselect')) document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+    if (!e.target.closest('.multiselect')) {
+      document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+      document.querySelectorAll('.multiselect').forEach(function(m) { m.classList.remove('espanso'); });
+    }
   });
 
   function costruisciMultiselect(tipo, valori, selezionati) {
@@ -1311,12 +1412,8 @@
     costruisciMultiselect('provincia', province, provinceSelezionate);
   }
 
-  function toggleFiltriPanel() {
-    var panel = document.getElementById('filtri-riga');
-    var btn = document.getElementById('btn-filtri-toggle');
-    panel.classList.toggle('aperto');
-    btn.classList.toggle('attivo', panel.classList.contains('aperto'));
-  }
+  // apriFiltriSheet() e chiudiFiltriSheet() sono definite più sotto, insieme
+  // al resto della logica del bottom sheet (molla, trascinamento, guardia anti-tap-fantasma).
 
   function azzeraFiltri() {
     periodoCorrente = 'tutti';
@@ -1367,6 +1464,11 @@
     });
     renderLista(filtrati);
     renderMappa(filtrati);
+    var btnRisultati = document.getElementById('btn-mostra-risultati');
+    if (btnRisultati) {
+      btnRisultati.textContent = filtrati.length === 0 ? 'Mostra risultati (nessun evento)' :
+        'Mostra ' + filtrati.length + (filtrati.length === 1 ? ' evento' : ' eventi');
+    }
   }
 
   function formattaGiorno(dataStr) {
@@ -1641,6 +1743,101 @@
       var soglia = w * 0.3;
       if (dettPannello.x > soglia || v > 500) chiudiDettaglio(v);
       else animaPannelloA(0, v);
+    }
+    handle.addEventListener('pointerup', fineTrascinamento);
+    handle.addEventListener('pointercancel', fineTrascinamento);
+  })();
+
+  // ===== Bottom sheet filtri (stessa fisica a molla del pannello di dettaglio,
+  // ma sull'asse verticale invece che orizzontale) =====
+  var filtriSheet = { y: 0, molla: null, trascinando: false };
+  var filtriSheetApertoIl = 0;
+
+  function chiudiFiltriSeCliccatoFuori(event) {
+    if (event.target !== event.currentTarget) return;
+    if (Date.now() - filtriSheetApertoIl < 350) return; // guardia anti-tap-fantasma, vedi chiudiDettaglioSeCliccatoFuori
+    chiudiFiltriSheet();
+  }
+
+  function altezzaSheetFiltri() {
+    var sheet = document.getElementById('filtri-sheet');
+    return sheet.getBoundingClientRect().height || sheet.offsetHeight || 400;
+  }
+
+  function impostaYFiltri(y) {
+    var sheet = document.getElementById('filtri-sheet');
+    var h = altezzaSheetFiltri();
+    var clamped = Math.max(0, y);
+    sheet.style.transform = 'translateY(' + clamped + 'px)';
+    document.getElementById('filtri-backdrop').style.opacity = String(1 - Math.min(1, clamped / h));
+    filtriSheet.y = clamped;
+  }
+
+  function animaFiltriA(target, velocity, onComplete) {
+    if (filtriSheet.molla) filtriSheet.molla.cancel();
+    filtriSheet.molla = animaMolla({
+      from: filtriSheet.y, to: target, velocity: velocity || 0,
+      damping: 1, response: 0.4,
+      onUpdate: impostaYFiltri, onComplete: onComplete
+    });
+  }
+
+  function apriFiltriSheet() {
+    filtriSheetApertoIl = Date.now();
+    var backdrop = document.getElementById('filtri-backdrop');
+    backdrop.style.display = 'block';
+    filtriSheet.y = altezzaSheetFiltri();
+    impostaYFiltri(filtriSheet.y);
+    requestAnimationFrame(function() { animaFiltriA(0, 0); });
+    document.getElementById('btn-filtri-toggle').classList.add('attivo');
+    document.addEventListener('keydown', chiudiFiltriConEsc);
+  }
+
+  function chiudiFiltriSheet(velocity) {
+    var h = altezzaSheetFiltri();
+    animaFiltriA(h, velocity || 0, function() {
+      document.getElementById('filtri-backdrop').style.display = 'none';
+    });
+    document.getElementById('btn-filtri-toggle').classList.remove('attivo');
+    document.removeEventListener('keydown', chiudiFiltriConEsc);
+  }
+  function chiudiFiltriConEsc(e) { if (e.key === 'Escape') chiudiFiltriSheet(); }
+
+  (function initDragSheetFiltri() {
+    var handle = document.getElementById('filtri-drag-handle');
+    if (!handle) return;
+    var startClientY = 0, startSheetY = 0, storico = [];
+
+    handle.addEventListener('pointerdown', function(e) {
+      if (filtriSheet.molla) filtriSheet.molla.cancel();
+      handle.setPointerCapture(e.pointerId);
+      filtriSheet.trascinando = true;
+      startClientY = e.clientY;
+      startSheetY = filtriSheet.y;
+      storico = [{ y: e.clientY, t: performance.now() }];
+    });
+    handle.addEventListener('pointermove', function(e) {
+      if (!filtriSheet.trascinando) return;
+      var delta = e.clientY - startClientY;
+      var nuovaY = startSheetY + delta;
+      if (nuovaY < 0) nuovaY = nuovaY * 0.25; // resistenza oltre l'aperto
+      impostaYFiltri(nuovaY);
+      storico.push({ y: e.clientY, t: performance.now() });
+      if (storico.length > 5) storico.shift();
+    });
+    function fineTrascinamento() {
+      if (!filtriSheet.trascinando) return;
+      filtriSheet.trascinando = false;
+      var v = 0;
+      if (storico.length >= 2) {
+        var a = storico[0], b = storico[storico.length - 1];
+        var dt = (b.t - a.t) / 1000;
+        if (dt > 0) v = (b.y - a.y) / dt;
+      }
+      var h = altezzaSheetFiltri();
+      var soglia = h * 0.3;
+      if (filtriSheet.y > soglia || v > 500) chiudiFiltriSheet(v);
+      else animaFiltriA(0, v);
     }
     handle.addEventListener('pointerup', fineTrascinamento);
     handle.addEventListener('pointercancel', fineTrascinamento);
