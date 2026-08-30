@@ -585,49 +585,81 @@
       text-decoration: none;
     }
 
-    /* ===== Banner installazione app ===== */
-    #banner-installa {
+    /* ===== Cerchietto flottante installazione app ===== */
+    #fab-installa {
+      position: fixed;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 500;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-end;
       gap: 10px;
+    }
+    #fab-installa.nascosto { display: none; }
+    #fab-installa-riga { display: flex; align-items: center; gap: 10px; }
+    #fab-installa-etichetta {
       background: var(--inchiostro);
       color: white;
-      padding: 10px 14px;
+      padding: 9px 15px;
+      border-radius: 20px;
       font-size: 0.82rem;
-      font-weight: 600;
-      position: relative;
-      z-index: 200;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.24);
     }
-    #banner-installa.nascosto { display: none; }
-    #banner-installa-testo { flex: 1; min-width: 0; line-height: 1.35; }
-    .banner-installa-azione {
-      flex-shrink: 0;
+    #fab-installa-wrap { position: relative; }
+    #fab-installa-cerchio {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
       background: var(--rosso);
       color: white;
       border: none;
-      border-radius: 20px;
-      padding: 7px 16px;
-      font-size: 0.8rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+      animation: fab-installa-pulse 2.4s ease-in-out infinite;
     }
-    .banner-installa-azione:hover { background: var(--rosso-scuro); }
-    #banner-installa-chiudi {
-      flex-shrink: 0;
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
-      cursor: pointer;
-      padding: 4px 6px;
+    @keyframes fab-installa-pulse {
+      0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,0.28), 0 0 0 0 rgba(255,49,49,0.45); }
+      50% { box-shadow: 0 4px 16px rgba(0,0,0,0.28), 0 0 0 10px rgba(255,49,49,0); }
+    }
+    #fab-installa-chiudi {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--inchiostro);
+      color: white;
+      border: 2px solid var(--crema);
+      font-size: 0.7rem;
       line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
-    #banner-installa-chiudi:hover { color: white; }
-    @media (max-width: 480px) {
-      #banner-installa { font-size: 0.76rem; padding: 9px 10px; gap: 8px; }
-      .banner-installa-azione { padding: 6px 12px; font-size: 0.76rem; }
+    #fab-installa-tooltip {
+      max-width: 220px;
+      background: var(--inchiostro);
+      color: white;
+      padding: 10px 13px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+    }
+    #fab-installa-tooltip.nascosto { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      #fab-installa-cerchio { animation: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -645,10 +677,15 @@
   <p id="loading-msg">Carico gli eventi in Toscana...</p>
 </div>
 
-<div id="banner-installa" class="nascosto">
-  <span id="banner-installa-testo">📲 Installa Stase Toscana per un accesso più veloce</span>
-  <button id="banner-installa-btn" class="banner-installa-azione">Installa</button>
-  <button id="banner-installa-chiudi" aria-label="Chiudi">&#10005;</button>
+<div id="fab-installa" class="nascosto">
+  <div id="fab-installa-tooltip" class="nascosto"></div>
+  <div id="fab-installa-riga">
+    <div id="fab-installa-etichetta">Installa l'app</div>
+    <div id="fab-installa-wrap">
+      <button id="fab-installa-cerchio" aria-label="Installa l'app Stase Toscana">📲</button>
+      <button id="fab-installa-chiudi" aria-label="Chiudi">&#10005;</button>
+    </div>
+  </div>
 </div>
 
 <div id="top-bar">
@@ -900,7 +937,7 @@
   caricaTally();
 
   const map = L.map('map', { tap: false }).setView([43.5, 11.0], 8);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2jkv_1_f5a56c4907bce0dfb51b358e', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=INSERISCI_QUI_LA_TUA_API_KEY', {
     attribution: '&#169; OpenStreetMap &#169; CARTO', subdomains: 'abcd', maxZoom: 19
   }).addTo(map);
   const clusterGroup = L.markerClusterGroup({
@@ -1938,12 +1975,18 @@
     });
   }
 
-  (function gestisciBannerInstalla() {
-    var banner = document.getElementById('banner-installa');
-    var testoEl = document.getElementById('banner-installa-testo');
-    var btnAzione = document.getElementById('banner-installa-btn');
-    var btnChiudi = document.getElementById('banner-installa-chiudi');
-    if (!banner) return;
+  (function gestisciFabInstalla() {
+    var fab = document.getElementById('fab-installa');
+    var cerchio = document.getElementById('fab-installa-cerchio');
+    var etichetta = document.getElementById('fab-installa-etichetta');
+    var chiudiBtn = document.getElementById('fab-installa-chiudi');
+    var tooltip = document.getElementById('fab-installa-tooltip');
+    if (!fab) return;
+
+    function alClic(fn) {
+      cerchio.addEventListener('click', fn);
+      etichetta.addEventListener('click', fn);
+    }
 
     var CHIAVE_CHIUSURA = 'stase_banner_installa_chiuso_il';
     var GIORNI_PRIMA_DI_RIPROPORRE = 14;
@@ -1957,11 +2000,21 @@
       } catch (e) { return false; }
     }
 
-    function chiudiBanner() {
-      banner.classList.add('nascosto');
+    function chiudiFab() {
+      fab.classList.add('nascosto');
+      tooltip.classList.add('nascosto');
       try { localStorage.setItem(CHIAVE_CHIUSURA, String(Date.now())); } catch (e) {}
     }
-    btnChiudi.addEventListener('click', chiudiBanner);
+    chiudiBtn.addEventListener('click', function(e) { e.stopPropagation(); chiudiFab(); });
+
+    function mostraTooltip(testo) {
+      tooltip.textContent = testo;
+      tooltip.classList.remove('nascosto');
+    }
+    function toggleTooltip(testo) {
+      if (tooltip.classList.contains('nascosto')) mostraTooltip(testo);
+      else tooltip.classList.add('nascosto');
+    }
 
     var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
     if (isStandalone || bannerChiusoDiRecente()) return; // app già installata, o utente l'ha già chiuso di recente
@@ -1984,29 +2037,27 @@
         var urlSenzaSchema = location.href.replace(/^https?:\/\//, '');
         location.href = 'intent://' + urlSenzaSchema + '#Intent;scheme=https;package=com.android.chrome;end;';
       }
-      return; // non mostriamo il banner: o si è aperto Chrome, o il tentativo è già stato fatto
+      return; // non mostriamo il cerchietto: o si è aperto Chrome, o il tentativo è già stato fatto
     }
 
     // === Caso 2: dentro il browser in-app di Instagram/Facebook, su iOS ===
     // Apple non permette a nessun sito di reindirizzare forzatamente verso Safari:
     // è una restrizione del sistema operativo, non aggirabile via JavaScript.
-    // La buona notizia è che il browser in-app di Instagram su iOS è basato su
-    // Safari (SFSafariViewController) e supporta comunque "Aggiungi alla schermata
-    // Home" tramite l'icona di condivisione in basso — va solo segnalato, perché
-    // pochi la notano da soli.
+    // Il tap sul cerchietto mostra le istruzioni in una fumetto sopra al cerchietto,
+    // dato che il browser in-app di Instagram su iOS supporta comunque "Aggiungi
+    // alla schermata Home" tramite l'icona di condivisione — va solo segnalato.
     if (isInstagramOFacebookWebview && isIOS) {
-      testoEl.textContent = '📲 Sei arrivato da Instagram: tocca l\'icona con i 3 puntini ⬆️ qui sopra, poi "Apri nel browser esterno". Poi clicca su "come si fa" nel banner in alto';
-      btnAzione.style.display = 'none';
-      banner.classList.remove('nascosto');
+      fab.classList.remove('nascosto');
+      alClic(function() {
+        toggleTooltip('Sei arrivato da Instagram: tocca l\'icona con i 3 puntini ⬆️ qui sopra, poi "Apri nel browser esterno". Poi torna qui e tocca di nuovo questo pulsante.');
+      });
       return;
     }
 
     // === Caso 3: Safari su iOS (fuori da app in-app) ===
     if (isIOS) {
-      testoEl.textContent = '📲 Installa Stase Toscana per un accesso più veloce';
-      btnAzione.textContent = 'Come si fa';
-      btnAzione.addEventListener('click', function() { location.href = '/installa.html'; });
-      banner.classList.remove('nascosto');
+      fab.classList.remove('nascosto');
+      alClic(function() { location.href = '/installa.html'; });
       return;
     }
 
@@ -2015,17 +2066,17 @@
     window.addEventListener('beforeinstallprompt', function(e) {
       e.preventDefault();
       deferredPrompt = e;
-      banner.classList.remove('nascosto');
+      fab.classList.remove('nascosto');
     });
-    btnAzione.addEventListener('click', function() {
+    alClic(function() {
       if (!deferredPrompt) { location.href = '/installa.html'; return; }
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then(function() {
         deferredPrompt = null;
-        chiudiBanner();
+        chiudiFab();
       });
     });
-    window.addEventListener('appinstalled', chiudiBanner);
+    window.addEventListener('appinstalled', chiudiFab);
   })();
 
   init();
