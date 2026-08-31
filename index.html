@@ -1266,8 +1266,17 @@
       var locandina = null;
       if (e.image && e.image.url) locandina = e.image.url;
 
-      // Link: usa url VisitTuscany come mapsUrl
-      var mapsUrl = url;
+      // Link a Google Maps: va costruito da coordinate/indirizzo, NON deve essere
+      // il link alla pagina VisitTuscany (quello resta solo nel campo "url",
+      // usato dal bottone "Vedi su VisitTuscany").
+      var mapsUrl = null;
+      if (lat != null && lon != null && !isNaN(lat) && !isNaN(lon)) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lon;
+      } else if (indirizzo) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(indirizzo);
+      } else if (comune) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(comune + ', ' + (provincia || '') + ', Toscana');
+      }
 
       // topevent nel JSON VT è stringa "true"/"false", non booleano
       var inEvidenza = e.topevent === true || e.topevent === 'true';
@@ -1635,7 +1644,7 @@
     else { descBox.style.display = 'none'; }
 
     var azioniHtml = '';
-    if (ev.fonte === 'visittuscany' && ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\">🏛️ Vedi su VisitTuscany</a>';
+    if (ev.fonte === 'visittuscany' && ev.url) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.url) + '\" target=\"_blank\">🏛️ Vedi su VisitTuscany</a>';
     if (ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:' + cat.bg + '\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\">Google Maps</a>';
     if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
     if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
