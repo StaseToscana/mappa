@@ -166,6 +166,27 @@ jobs:
           print(f"Salvato FILTRATO: {len(futuri)} eventi")
           PYEOF
 
+      - name: Ricrea le credenziali Google Drive dal segreto
+        run: |
+          cat > gdrive-sa.json << 'EOF'
+          ${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}
+          EOF
+
+      - name: Installa dipendenze per il caching immagini
+        run: |
+          pip install --quiet requests google-auth google-api-python-client
+
+      - name: Carica locandine VT su Google Drive (cache)
+        env:
+          GDRIVE_SA_JSON: gdrive-sa.json
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+        run: |
+          python3 scripts/cache_vt_images.py
+
+      - name: Rimuovi le credenziali Google Drive dal runner
+        if: always()
+        run: rm -f gdrive-sa.json
+
       - name: Rigenera le pagine statiche per provincia
         run: python3 generator/genera_pagine_province.py
 
@@ -173,7 +194,7 @@ jobs:
         run: |
           git config user.name "Robot Eventi"
           git config user.email "robot@stasetoscana.it"
-          git add eventi_visittuscany.json eventi_visittuscany_raw.json eventi-*.html eventi-in-toscana.html
+          git add eventi_visittuscany.json eventi_visittuscany_raw.json vt_image_cache.json eventi-*.html eventi-in-toscana.html
           if git diff --cached --quiet; then
             echo "Nessuna modifica"
           else
