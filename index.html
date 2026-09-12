@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -290,6 +291,22 @@
       z-index: 2;
     }
     .gruppo-data-header .giorno-nome { color: var(--rosso-scuro); }
+
+    /* ===== Sezione "In evidenza" pinnata in cima alla lista ===== */
+    .gruppo-evidenza {
+      background: linear-gradient(180deg, rgba(232,163,61,0.09), rgba(232,163,61,0) 70px);
+      border-radius: 14px;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+    .gruppo-evidenza .gruppo-data-header .giorno-nome { color: #C4801A; }
+    .etichetta-sponsorizzato {
+      font-size: 0.66rem;
+      font-weight: 600;
+      color: var(--grigio-testo);
+      text-transform: none;
+      letter-spacing: 0;
+    }
 
     #lista-eventi {
       display: flex;
@@ -746,6 +763,12 @@
       #fab-installa-cerchio { animation: none; }
     }
 
+    /* ===== Pin evidenza sulla mappa: pulsare morbido, disattivato con reduced-motion ===== */
+    @keyframes pinEvidenzaPulse {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 0 11px rgba(232,163,61,0.14), 0 2px 10px rgba(0,0,0,0.3); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .tab-btn.tab-cta { animation: none; }
       .card-img[src=""], .card-img:not([src]) { animation: none; background: #f0e6dc; }
@@ -1055,13 +1078,19 @@
   });
   map.addLayer(clusterGroup);
 
-  function creaIcona(cat, evidenziata) {
+  function creaIcona(cat, hover, isEvidenza) {
     var c = getCat(cat);
-    var size = evidenziata ? 46 : 36;
-    var glow = evidenziata ? 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);' : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
+    var attivo = hover || isEvidenza;
+    var size = attivo ? 46 : 36;
+    var animazione = (isEvidenza && !motionRidotto()) ? 'animation:pinEvidenzaPulse 1.8s ease-in-out infinite;' : '';
+    var glow = attivo
+      ? (isEvidenza
+          ? 'box-shadow:0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3);'
+          : 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);')
+      : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
     return L.divIcon({
       className: '',
-      html: '<div style="background:' + c.bg + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
+      html: '<div style="background:' + c.bg + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
       iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
     });
   }
@@ -1493,6 +1522,33 @@
     return nome + ' ' + d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
   }
 
+  // *** NUOVO: crea l'elemento DOM di una card evento. Estratto in funzione
+  // riutilizzabile cosi' la sezione "In evidenza" pinnata in cima e la lista
+  // cronologica sotto condividono esattamente lo stesso markup. ***
+  function creaCardEvento(ev, opts) {
+    opts = opts || {};
+    var cat = getCat(ev.categoria);
+    var card = document.createElement('div');
+    card.className = 'card-evento' + (ev.inEvidenza ? ' evidenza' : '');
+    var imgHtml = ev.locandina ? '<img class="card-img" src="' + escapeHtml_(ev.locandina) + '" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
+    var testoBadgeEvidenza = opts.etichettaSponsor ? 'Sponsorizzato' : 'In evidenza';
+    var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ ' + testoBadgeEvidenza + '</span>' : '';
+    var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
+    card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + imgHtml +
+      '<div class="card-body">' +
+      '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
+      '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
+      '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
+      '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
+      '</div>';
+    card.addEventListener('click', function() { apriDettaglio(ev); });
+    if (!opts.senzaHoverMappa) {
+      card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
+      card.addEventListener('mouseleave', function() { evidenziaMarker(ev.id, false); });
+    }
+    return card;
+  }
+
   function renderLista(eventi) {
     var cont = document.getElementById('lista-eventi');
     var contatore = document.getElementById('contatore-lista');
@@ -1501,6 +1557,28 @@
     contatore.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
     vuoto.style.display = eventi.length === 0 ? 'block' : 'none';
     Object.keys(cardsById).forEach(function(k) { delete cardsById[k]; });
+
+    // ===== Sezione "In evidenza" pinnata in cima, separata dall'ordine
+    // cronologico e chiaramente etichettata come contenuto sponsorizzato.
+    // Gli stessi eventi restano ANCHE nella loro posizione cronologica
+    // sotto, cosi' chi cerca per data li trova comunque al posto giusto. =====
+    var MAX_EVIDENZA_LISTA = 6;
+    var eventiEvidenza = eventi.filter(function(e) { return e.inEvidenza; }).slice(0, MAX_EVIDENZA_LISTA);
+    if (eventiEvidenza.length > 0) {
+      var sezioneEvidenza = document.createElement('div');
+      sezioneEvidenza.className = 'gruppo-data gruppo-evidenza';
+      var headerEv = document.createElement('div');
+      headerEv.className = 'gruppo-data-header';
+      headerEv.innerHTML = '<span class="giorno-nome">⭐ In evidenza</span> <span class="etichetta-sponsorizzato">Contenuto sponsorizzato</span>';
+      sezioneEvidenza.appendChild(headerEv);
+      var gridEv = document.createElement('div');
+      gridEv.className = 'eventi-grid';
+      eventiEvidenza.forEach(function(ev) {
+        gridEv.appendChild(creaCardEvento(ev, { etichettaSponsor: true, senzaHoverMappa: true }));
+      });
+      sezioneEvidenza.appendChild(gridEv);
+      cont.appendChild(sezioneEvidenza);
+    }
 
     var gruppi = {};
     var oggiDate = new Date(); oggiDate.setHours(0,0,0,0);
@@ -1537,22 +1615,7 @@
       grid.className = 'eventi-grid';
 
       evs.forEach(function(ev) {
-        var cat = getCat(ev.categoria);
-        var card = document.createElement('div');
-        card.className = 'card-evento' + (ev.inEvidenza ? ' evidenza' : '');
-        var imgHtml = ev.locandina ? '<img class="card-img" src="' + escapeHtml_(ev.locandina) + '" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
-        var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ In evidenza</span>' : '';
-        var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
-        card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + imgHtml +
-          '<div class="card-body">' +
-          '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
-          '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
-          '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
-          '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
-          '</div>';
-        card.addEventListener('click', function() { apriDettaglio(ev); });
-        card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
-        card.addEventListener('mouseleave', function() { evidenziaMarker(ev.id, false); });
+        var card = creaCardEvento(ev);
         grid.appendChild(card);
         cardsById[ev.id] = card;
       });
@@ -1578,7 +1641,7 @@
         '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
         mapsBtn +
         '</div>';
-      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false) }).bindPopup(popupHtml, {
+      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false, ev.inEvidenza) }).bindPopup(popupHtml, {
         maxWidth: 260,
         closeButton: true,
         autoClose: false,
@@ -1605,7 +1668,7 @@
     var marker = markersById[id];
     if (marker) {
       var ev = tuttiEventi.find(function(e) { return e.id === id; });
-      if (ev) marker.setIcon(creaIcona(ev.categoria, on));
+      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza));
     }
   }
   function evidenziaCard(id) {
