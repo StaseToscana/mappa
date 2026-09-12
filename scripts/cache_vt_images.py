@@ -28,6 +28,7 @@ import json
 import os
 import sys
 import io
+import time
 import hashlib
 import mimetypes
 
@@ -75,18 +76,31 @@ def estensione_da_url_o_content_type(url, content_type):
     return guessed
 
 
-def scarica_immagine(url):
-    try:
-        r = requests.get(url, timeout=REQUEST_TIMEOUT, headers={"User-Agent": "StaseToscana-bot/1.0"})
-        r.raise_for_status()
-        content_type = r.headers.get("Content-Type", "")
-        if not content_type.startswith("image/"):
-            print(f"  Salto (non e' un'immagine, content-type={content_type}): {url}")
-            return None, None
-        return r.content, content_type
-    except Exception as e:
-        print(f"  Download fallito per {url}: {e}")
-        return None, None
+HEADERS_BROWSER = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+    "Referer": "https://www.visittuscany.com/",
+}
+
+
+def scarica_immagine(url, tentativi=3):
+    for tentativo in range(1, tentativi + 1):
+        try:
+            r = requests.get(url, timeout=REQUEST_TIMEOUT, headers=HEADERS_BROWSER)
+            r.raise_for_status()
+            content_type = r.headers.get("Content-Type", "")
+            if not content_type.startswith("image/"):
+                print(f"  Salto (non e' un'immagine, content-type={content_type}): {url}")
+                return None, None
+            return r.content, content_type
+        except Exception as e:
+            print(f"  Tentativo {tentativo}/{tentativi} fallito per {url}: {e}")
+            if tentativo < tentativi:
+                time.sleep(2 * tentativo)
+    return None, None
 
 
 def carica_su_drive(service, folder_id, filename, content, content_type):
@@ -150,6 +164,7 @@ def main():
 
         print(f"Scarico e carico: {url_originale}")
         content, content_type = scarica_immagine(url_originale)
+        time.sleep(0.4)  # piccola pausa per non sembrare traffico anomalo
         if content is None:
             fallite += 1
             continue  # lascia l'URL originale di VisitTuscany come fallback
