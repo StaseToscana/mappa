@@ -1308,7 +1308,10 @@
       }
 
       // topevent nel JSON VT è stringa "true"/"false", non booleano
-      var inEvidenza = e.topevent === true || e.topevent === 'true';
+      // Ignoriamo il parametro topevent di VisitTuscany.
+      // Impostiamo SEMPRE a false in modo che gli eventi sponsorizzati (in evidenza)
+      // provengano esclusivamente dal Google Sheet di Stase Toscana.
+      var inEvidenza = false;
 
       return {
         id: 'vt_' + (e.id || i),
@@ -1327,8 +1330,9 @@
         lat: lat,
         lon: lon,
         instagram: null,
-        inEvidenza: inEvidenza,
+        inEvidenza: inEvidenza, // Ora è forzato a false per tutti gli eventi VisitTuscany
         fonte: 'visittuscany'
+      };
       };
     });
   }
