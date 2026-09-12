@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventi in Toscana – Stase Toscana</title>
+  <meta name="description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
+
+  <!-- ===== PWA: installabilità come app ===== -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#FF3131" />
+  <link rel="icon" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Stase Toscana" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Open Graph (anteprime su WhatsApp, Facebook, Instagram, ecc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Stase - Eventi in Toscana" />
+  <meta property="og:title" content="Stase - Eventi in Toscana" />
+  <meta property="og:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
+  <meta property="og:image" content="https://stasetoscana.it/logo-stase.png" />
+  <meta property="og:url" content="https://stasetoscana.it/" />
+  <link rel="canonical" href="https://stasetoscana.it/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stase - Eventi in Toscana" />
+  <meta name="twitter:description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana." />
+  <meta name="twitter:image" content="https://stasetoscana.it/logo-stase.png" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --rosso: #FF3131;
+      --rosso-scuro: #CC0000;
+      --rosso-tenue: #FFF1EE;
+      --inchiostro: #1B1B1B;
+      --crema: #FFF8EE;
+      --crema-card: #FFFFFF;
+      --bordo: #F0E6DC;
+      --grigio-testo: #6B6258;
+      --banner-h: 68px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :focus-visible {
+      outline: 2.5px solid var(--rosso-scuro);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    html, body { height: 100vh; height: 100dvh; margin: 0; overflow: hidden; }
+    body { font-family: 'League Spartan', sans-serif; color: var(--inchiostro); background: var(--crema); display: flex; flex-direction: column; }
+    a { color: inherit; }
+    a.tab-link { text-decoration: none; }
+    button { font-family: inherit; }
+
+    #top-bar {
+      background-image: url('sfondo-header.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    header {
+      padding: 16px 24px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100px;
+      transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    header img.logo { height: 80px; width: auto; display: block; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+
+
+    #tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 20px 16px;
+      transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tab-btn {
+  background: var(--crema-card);
+  color: var(--rosso-scuro);
+  border: 1.5px solid var(--rosso);
+  border-radius: 20px;
+  padding: 7px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover { background: var(--rosso-scuro); color: var(--crema-card); }
+.tab-btn.attivo { background: var(--crema-card); color: var(--rosso-scuro); border-color: var(--rosso); }
+
+    .tab-btn:active { transform: scale(0.95); }
+    .tab-btn .testo-corta { display: none; }
+    .tab-btn.tab-cta {
+      background: #FF3131;
+      color: white;
+      border-color: #FF3131;
+      box-shadow: 0 4px 16px rgba(255,49,49,0.4);
+      animation: pulse-cta 2s ease infinite;
+    }
+    .tab-btn.tab-cta:hover {
+      background: #ff5252;
+      border-color: #ff5252;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255,49,49,0.5);
+    }
+    @keyframes pulse-cta {
+      0%, 100% { box-shadow: 0 4px 16px rgba(255,49,49,0.4); }
+      50% { box-shadow: 0 4px 24px rgba(255,49,49,0.6); }
+    }
+
+    #controlli {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid var(--bordo);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 20;
+    }
+    #barra-ricerca { display: flex; gap: 8px; }
+    #input-ricerca {
+      flex: 1;
+      border: 1.5px solid var(--bordo);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-size: 0.85rem;
+      outline: none;
+      background: var(--crema);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    #input-ricerca:focus { border-color: var(--rosso); box-shadow: 0 0 0 3px rgba(255,68,56,0.1); }
+
+    #btn-filtri-toggle {
+      display: flex; align-items: center; gap: 6px; white-space: nowrap;
+      background: var(--crema); color: var(--inchiostro); border: 1.5px solid var(--bordo);
+      border-radius: 20px; padding: 9px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    }
+    #btn-filtri-toggle:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    #btn-filtri-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso-scuro); }
+
+    #filtri-riga { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .btn-filtro {
+      background: var(--crema);
+      color: var(--inchiostro);
+      border: 1.5px solid var(--bordo);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-filtro:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    .btn-filtro.attivo { background: var(--rosso-scuro); color: white; border-color: var(--rosso-scuro); }
+    .btn-filtro:active { transform: scale(0.95); }
+
+    .multiselect { position: relative; }
+    .ms-toggle {
+      background: var(--crema);
+      color: var(--inchiostro);
+      border: 1.5px solid var(--bordo);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .ms-toggle:hover { border-color: var(--rosso); color: var(--rosso-scuro); }
+    .ms-toggle.attivo { background: var(--rosso-tenue); border-color: var(--rosso); color: var(--rosso-scuro); }
+    .ms-toggle:active { transform: scale(0.95); }
+    .ms-badge { background: var(--rosso-scuro); color: white; border-radius: 10px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; }
+    .ms-panel {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      background: var(--crema-card);
+      border: 1px solid var(--bordo);
+      border-radius: 12px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+      min-width: 220px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 8px;
+      z-index: 100;
+      /* Apertura di un menu: nessun rimbalzo (è un fade-in, non un gesto con
+         momentum) — solo una dissolvenza morbida in stile "critically damped". */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.97);
+      transform-origin: top left;
+      transition: opacity 0.16s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.18s;
+    }
+    .ms-panel.aperto { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+    /* Dentro il bottom sheet dei filtri, i due menu (Categoria/Provincia) si aprono
+       a fisarmonica nel flusso della pagina invece che come dropdown fluttuanti:
+       dentro un cassetto stretto, un pannello assoluto rischierebbe di uscire dai
+       bordi o sovrapporsi in modo confuso agli altri filtri. */
+    #filtri-sheet .ms-panel {
+      position: static;
+      min-width: 0;
+      max-height: 0;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      overflow: hidden;
+      padding: 0 4px;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      transition: max-height 0.22s cubic-bezier(0.22, 1, 0.36, 1), padding 0.22s ease;
+    }
+    #filtri-sheet .ms-panel.aperto {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 8px 4px;
+      margin-top: 6px;
+      border-top: 1px solid var(--bordo);
+    }
+    .ms-freccia { transition: transform 0.2s ease; display: inline-block; }
+    .multiselect.espanso .ms-freccia { transform: rotate(180deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .ms-panel { transition: opacity 0.16s ease, visibility 0.16s; transform: none !important; }
+    }
+    .ms-opzione { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; }
+    .ms-opzione:hover { background: var(--crema); }
+    .ms-opzione input { accent-color: var(--rosso); width: 15px; height: 15px; cursor: pointer; }
+    .ms-clear {
+      display: block; width: 100%; text-align: center; background: none; border: none;
+      color: var(--rosso-scuro); font-size: 0.76rem; font-weight: 700; padding: 8px 4px 2px;
+      cursor: pointer; border-top: 1px solid var(--bordo); margin-top: 4px;
+    }
+
+    #toggle-vista { display: none; gap: 8px; }
+    #toggle-vista button {
+      flex: 1; background: var(--crema); color: var(--inchiostro); border: 1.5px solid var(--bordo);
+      border-radius: 20px; padding: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    #toggle-vista button.attivo { background: var(--rosso-scuro); color: white; border-color: var(--rosso-scuro); }
+    #toggle-vista button:active { transform: scale(0.95); }
+
+    #view-esplora { display: flex; flex: 1; min-height: 0; }
+    #pannello-lista { width: 480px; min-width: 480px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--crema); border-right: 1px solid var(--bordo); }
+    #map-wrap { flex: 1; position: relative; z-index: 0; }
+    #map { width: 100%; height: 100%; }
+
+    #contatore-lista { padding: 12px 16px 4px; font-size: 0.8rem; font-weight: 700; color: var(--grigio-testo); letter-spacing: 0.3px; text-transform: uppercase; }
+
+    .gruppo-data {
+      padding: 0 8px;
+      margin-top: 8px;
+    }
+    .gruppo-data-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 4px 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--grigio-testo);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      background: var(--crema);
+      z-index: 2;
+    }
+    .gruppo-data-header .giorno-nome { color: var(--rosso-scuro); }
+
+    /* ===== Sezione "In evidenza" pinnata in cima alla lista ===== */
+    .gruppo-evidenza {
+      background: linear-gradient(180deg, rgba(232,163,61,0.09), rgba(232,163,61,0) 70px);
+      border-radius: 14px;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+    .gruppo-evidenza .gruppo-data-header .giorno-nome { color: #C4801A; }
+    .etichetta-sponsorizzato {
+      font-size: 0.66rem;
+      font-weight: 600;
+      color: var(--grigio-testo);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    #lista-eventi {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px;
+    }
+    .eventi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .card-evento {
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 12px; cursor: pointer; border: 2px solid transparent; background: var(--crema-card);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .card-evento:hover, .card-evento.hover-marker { border-color: var(--rosso); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,68,56,0.12); }
+    .card-evento.evidenza { border-color: #E8A33D; box-shadow: 0 2px 10px rgba(232,163,61,0.25); position: relative; }
+    .card-evento.evidenza:hover, .card-evento.evidenza.hover-marker { border-color: #E8A33D; box-shadow: 0 4px 14px rgba(232,163,61,0.35); }
+    .badge-evidenza {
+      position: absolute; top: 6px; left: 6px; z-index: 2;
+      background: #E8A33D; color: white; font-size: 0.62rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px; display: flex; align-items: center; gap: 3px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    .badge-vt {
+      position: absolute; top: 6px; right: 6px; z-index: 2;
+      background: #0066CC; color: white; font-size: 0.6rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    #dettaglio-badge-vt {
+      display: none; align-items: center; gap: 4px; background: #0066CC; color: white;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
+    }
+    #dettaglio-badge-evidenza {
+      display: inline-flex; align-items: center; gap: 4px; background: #E8A33D; color: white;
+      font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; margin-left: 6px;
+    }
+    .card-evento:active { transform: scale(0.98); }
+    .card-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+    .card-img[src=""], .card-img:not([src]) {
+      background: linear-gradient(90deg, #f0e6dc 25%, #e8ddd0 50%, #f0e6dc 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .card-body { flex: 1; min-width: 0; padding: 10px; }
+    .card-nome {
+      font-weight: 700; font-size: 0.86rem; line-height: 1.25; margin-bottom: 4px;
+      overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+    .card-cat { display: inline-block; font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 5px; }
+    .card-data { font-size: 0.72rem; color: #555; font-weight: 600; display: block; margin-bottom: 2px; }
+    .card-luogo { font-size: 0.7rem; color: var(--grigio-testo); display: block; }
+
+    #stato-vuoto { grid-column: 1 / -1; padding: 40px 24px; text-align: center; color: var(--grigio-testo); font-size: 0.9rem; display: none; }
+
+    .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 220px; max-width: 260px; font-family: 'League Spartan', sans-serif; }
+    .leaflet-popup-close-button {
+      width: 28px !important; height: 28px !important;
+      font-size: 20px !important; font-weight: 900 !important;
+      color: white !important; text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+      background: rgba(0,0,0,0.45) !important; border-radius: 50% !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      top: 6px !important; right: 6px !important; padding: 0 !important;
+      line-height: 1 !important; transition: background 0.15s !important;
+    }
+    .leaflet-popup-close-button:hover { background: rgba(0,0,0,0.7) !important; }
+    .leaflet-popup-content { margin: 0; width: 100% !important; }
+    .popup-img { width: 100%; height: 110px; object-fit: cover; display: block; }
+    .popup-header { padding: 8px 12px 6px; font-weight: 700; font-size: 0.88rem; color: white; line-height: 1.25; }
+    .popup-body { padding: 8px 12px 10px; font-size: 0.78rem; color: #333; line-height: 1.5; background: white; }
+    .popup-quando { font-weight: 600; margin-bottom: 2px; color: #444; }
+    .popup-btn { display: inline-block; padding: 5px 12px; border-radius: 20px; color: white !important; text-decoration: none !important; font-weight: 700; font-size: 0.74rem; margin-top: 6px; margin-right: 6px; cursor: pointer; border: none; transition: transform 0.1s; }
+    .popup-btn:active { transform: scale(0.95); }
+
+    #view-aggiungi { display: none; flex: 1; min-height: 0; overflow-y: auto; max-width: 640px; margin: 0 auto; padding: 28px 20px 60px; width: 100%; }
+    .aggiungi-hero {
+      background: linear-gradient(135deg, #FF3131, #CC0000);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .aggiungi-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .aggiungi-hero h1 { font-size: 1.6rem; font-weight: 900; color: white; margin-bottom: 8px; position: relative; z-index: 1; letter-spacing: -0.015em; line-height: 1.15; }
+    .aggiungi-hero p.sub { font-size: 0.95rem; color: rgba(255,255,255,0.9); margin-bottom: 0; line-height: 1.5; position: relative; z-index: 1; }
+    .aggiungi-badge {
+      display: inline-block;
+      background: white;
+      color: #FF3131;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #form-card { background: var(--crema-card); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); overflow: hidden; padding: 8px; }
+    iframe#tally-form { width: 100%; border: none; }
+
+    #dettaglio-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
+      opacity: 0; /* l'opacità è guidata dalla molla JS, in sincronia 1:1 col pannello */
+    }
+    /* ===== Bottom sheet filtri ===== */
+    #filtri-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(20,10,8,0.55); z-index: 1000;
+      opacity: 0; /* l'opacità è guidata dalla molla JS, in sincronia 1:1 col cassetto */
+    }
+    #filtri-sheet {
+      position: fixed; left: 0; right: 0; bottom: 0; margin: 0 auto;
+      width: 100%; max-width: 480px;
+      max-height: 78vh;
+      background: var(--crema-card); z-index: 1001;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
+      transform: translateY(100%);
+      will-change: transform;
+      display: flex; flex-direction: column;
+      /* niente "transition": apertura/chiusura/trascinamento guidati dalla molla JS */
+    }
+    #filtri-drag-handle {
+      flex-shrink: 0; width: 40px; height: 5px; margin: 10px auto 2px;
+      background: rgba(0,0,0,0.15); border-radius: 3px;
+      touch-action: none; cursor: grab;
+    }
+    #filtri-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
+    #filtri-sheet-header {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: 6px 18px 12px; border-bottom: 1px solid var(--bordo);
+    }
+    #filtri-sheet-titolo { font-size: 1.05rem; font-weight: 800; flex: 1; }
+    #btn-azzera-filtri {
+      background: none; border: none; color: var(--rosso-scuro); font-weight: 700;
+      font-size: 0.82rem; cursor: pointer; padding: 6px 4px;
+    }
+    #btn-chiudi-filtri {
+      background: var(--crema); border: none; color: var(--inchiostro);
+      width: 30px; height: 30px; border-radius: 50%; font-size: 0.85rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    #filtri-sheet-body {
+      flex: 1; overflow-y: auto; padding: 16px 18px 8px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    #filtri-sheet-footer {
+      flex-shrink: 0; padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--bordo);
+    }
+    #btn-mostra-risultati {
+      width: 100%; background: var(--rosso-scuro); color: white; border: none;
+      border-radius: 20px; padding: 13px; font-size: 0.95rem; font-weight: 800; cursor: pointer;
+    }
+    #btn-mostra-risultati:active { transform: scale(0.98); }
+    @media (prefers-reduced-motion: reduce) {
+      #filtri-sheet { transition: none; }
+    }
+    #dettaglio-panel {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
+      background: var(--crema-card); z-index: 1001; overflow-y: auto;
+      box-shadow: -8px 0 32px rgba(0,0,0,0.2);
+      transform: translateX(100%);
+      will-change: transform;
+      /* niente "transition" qui: l'apertura, la chiusura e il trascinamento
+         sono guidati dalla molla JS, che può essere interrotta e invertita
+         in qualsiasi istante senza scatti (vedi funzione animaMolla). */
+    }
+    #dettaglio-drag-handle {
+      display: none;
+    }
+    @media (max-width: 760px) {
+      #dettaglio-drag-handle {
+        display: block; position: sticky; top: 0; z-index: 3;
+        width: 40px; height: 5px; margin: 10px auto 2px;
+        background: rgba(0,0,0,0.15); border-radius: 3px;
+        touch-action: none; cursor: grab;
+      }
+      #dettaglio-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
+    }
+    #btn-chiudi-dettaglio {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%;
+      width: 34px; height: 34px; font-size: 1.1rem; cursor: pointer; line-height: 1;
+      transition: background 0.15s;
+    }
+    #btn-chiudi-dettaglio:hover { background: rgba(0,0,0,0.7); }
+    #dettaglio-img-wrap { position: relative; cursor: zoom-in; }
+    #dettaglio-img { width: 100%; max-height: 380px; object-fit: contain; background: var(--inchiostro); display: block; }
+    #dettaglio-zoom-hint {
+      position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.55); color: white;
+      border-radius: 20px; padding: 4px 10px; font-size: 0.72rem; font-weight: 700; pointer-events: none;
+    }
+
+    #lightbox {
+      display: flex; position: fixed; inset: 0; z-index: 2000; background: rgba(10,6,5,0.92);
+      align-items: center; justify-content: center; cursor: zoom-out;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s;
+    }
+    #lightbox.aperto { opacity: 1; visibility: visible; pointer-events: auto; }
+    #lightbox img {
+      max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 6px;
+      transform: scale(0.96); transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #lightbox.aperto img { transform: scale(1); }
+    @media (prefers-reduced-motion: reduce) {
+      #lightbox img { transition: none; transform: none !important; }
+    }
+    #lightbox-chiudi {
+      position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.15); color: white;
+      border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.2rem; cursor: pointer;
+    }
+    #dettaglio-body { padding: 22px; }
+    #dettaglio-nome { font-size: 1.3rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.012em; margin-bottom: 10px; }
+    #dettaglio-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px; }
+    .dett-riga { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-top: 1px solid var(--bordo); font-size: 0.88rem; }
+    .dett-riga .icona { font-size: 1.05rem; flex-shrink: 0; }
+    #dettaglio-descrizione { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--bordo); font-size: 0.88rem; line-height: 1.6; white-space: pre-line; }
+    #dettaglio-azioni { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .btn-azione { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 20px; font-weight: 700; font-size: 0.82rem; text-decoration: none !important; color: white !important; border: none; cursor: pointer; transition: transform 0.1s; }
+    .btn-azione:active { transform: scale(0.95); }
+
+    #banner-cta-content {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--inchiostro);
+      max-width: 640px;
+      width: 100%;
+      line-height: 1.35;
+    }
+    #banner-cta-content a { color: var(--rosso-scuro); text-decoration: underline; font-weight: 700; }
+    #banner-cta-content a:hover { text-decoration: none; }
+    #cookie-banner {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 4000;
+      background: var(--inchiostro); color: white;
+      padding: 16px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    #cookie-banner.visibile { display: flex; }
+    #cookie-banner p { font-size: 0.82rem; line-height: 1.5; max-width: 520px; margin: 0; color: rgba(255,255,255,0.9); }
+    #cookie-banner p a { color: white; text-decoration: underline; }
+    #cookie-banner .cookie-azioni { display: flex; gap: 8px; flex-shrink: 0; }
+    #cookie-banner button {
+      border: none; border-radius: 20px; padding: 9px 18px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    }
+    #btn-cookie-accetta { background: var(--rosso-scuro); color: white; }
+    #btn-cookie-rifiuta { background: rgba(255,255,255,0.15); color: white; }
+
+    #banner-pubblicitario {
+      position: relative; flex-shrink: 0;
+      height: var(--banner-h, 68px);
+      background: var(--crema-card); border-top: 1px solid var(--bordo);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 0 14px; box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+    }
+    #banner-pubblicitario a.banner-link { display: flex; align-items: center; height: 100%; max-width: 640px; width: 100%; justify-content: center; }
+    #banner-pubblicitario img { max-height: calc(var(--banner-h, 68px) - 16px); max-width: 100%; object-fit: contain; border-radius: 6px; }
+    #banner-label { position: absolute; left: 8px; top: 3px; font-size: 0.6rem; color: var(--grigio-testo); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    #loading {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('sfondo-header.jpg');
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; gap: 20px;
+    }
+    #loading p { color: white; font-size: 1rem; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #toast-container {
+      position: fixed; bottom: calc(var(--banner-h, 68px) + 28px + 16px); left: 50%; transform: translateX(-50%);
+      z-index: 3000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+    }
+    .toast {
+      background: var(--inchiostro); color: white; padding: 10px 20px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
+      pointer-events: auto;
+    }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(10px); } }
+
+        #top-bar.compact header img.logo { height: 40px; }
+    #top-bar.compact header { padding: 8px 24px 4px; min-height: auto; }
+    #top-bar.compact { padding-bottom: 0; }
+
+    @media (max-width: 760px) {
+      :root { --banner-h: 60px; }
+      #toggle-vista { display: flex; }
+      #pannello-lista { width: 100%; min-width: 0; }
+      #pannello-lista.nascosto, #map-wrap.nascosto { display: none; }
+      header { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; padding: 10px 12px 6px; transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+      header img.logo { height: 48px; width: auto; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
+      #tab-nav { display: flex; gap: 4px; padding: 0; flex-shrink: 1; min-width: 0; }
+      .tab-btn { padding: 9px 16px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
+      #tab-esplora .testo-lunga, #tab-aggiungi .testo-lunga { display: none; }
+      .tab-btn .testo-corta { display: inline; }
+      #dettaglio-panel { width: 100%; }
+      #input-ricerca { padding: 11px 18px; font-size: 0.9rem; }
+      #btn-filtri-toggle { padding: 11px 18px; font-size: 0.9rem; }
+      #top-bar { transition: all 0.3s ease; }
+      #top-bar.compact header img.logo { height: 32px; }
+      #top-bar.compact header { padding: 6px 12px 2px; }
+      #top-bar.compact .tab-btn { padding: 5px 10px; font-size: 0.7rem; }
+      #top-bar.compact { padding-bottom: 0; }
+    }
+
+    @media (max-width: 400px) {
+      header { padding: 8px 10px 5px; gap: 6px; }
+      header img.logo { height: 38px; }
+      #tab-nav { gap: 3px; }
+      .tab-btn { padding: 7px 11px; font-size: 0.76rem; }
+    }
+
+    @media (max-width: 640px) {
+      #lista-eventi { padding: 12px; }
+      .eventi-grid { grid-template-columns: 1fr; gap: 10px; }
+      .card-evento { flex-direction: row; border-radius: 12px; }
+      .card-img { width: 92px; height: 92px; aspect-ratio: unset; flex-shrink: 0; border-radius: 12px 0 0 12px; }
+      .card-body { padding: 10px 12px; display: flex; flex-direction: column; justify-content: center; }
+      .card-nome { font-size: 0.9rem; -webkit-line-clamp: 2; }
+      .card-cat { font-size: 0.68rem; padding: 3px 9px; }
+      .card-data { font-size: 0.76rem; }
+      .card-luogo { font-size: 0.72rem; }
+      .gruppo-data-header { font-size: 0.82rem; padding: 10px 4px 6px; }
+      #contatore-lista { padding: 14px 16px 6px; font-size: 0.85rem; }
+    }
+  
+    /* === Riga link province === */
+    #province-prompt {
+      background: var(--rosso-tenue);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--inchiostro);
+      border-bottom: 1px solid var(--bordo);
+    }
+    #province-prompt a {
+      color: var(--rosso-scuro);
+      text-decoration: underline;
+      font-weight: 700;
+      transition: color 0.15s;
+    }
+    #province-prompt a:hover {
+      color: var(--rosso-scuro);
+      text-decoration: none;
+    }
+
+    /* ===== Cerchietto flottante installazione app ===== */
+    #fab-installa {
+      position: fixed;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    #fab-installa.nascosto { display: none; }
+    #fab-installa-riga { display: flex; align-items: center; gap: 10px; }
+    #fab-installa-etichetta {
+      background: var(--inchiostro);
+      color: white;
+      padding: 9px 15px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.24);
+    }
+    #fab-installa-wrap { position: relative; }
+    #fab-installa-cerchio {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--rosso);
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+      animation: fab-installa-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes fab-installa-pulse {
+      0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,0.28), 0 0 0 0 rgba(255,49,49,0.45); }
+      50% { box-shadow: 0 4px 16px rgba(0,0,0,0.28), 0 0 0 10px rgba(255,49,49,0); }
+    }
+    #fab-installa-chiudi {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--inchiostro);
+      color: white;
+      border: 2px solid var(--crema);
+      font-size: 0.72rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    #fab-installa-tooltip {
+      max-width: 220px;
+      background: var(--inchiostro);
+      color: white;
+      padding: 10px 13px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+    }
+    #fab-installa-tooltip.nascosto { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      #fab-installa-cerchio { animation: none; }
+    }
+
+    /* ===== Pin evidenza sulla mappa: pulsare morbido, disattivato con reduced-motion ===== */
+    @keyframes pinEvidenzaPulse {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 0 11px rgba(232,163,61,0.14), 0 2px 10px rgba(0,0,0,0.3); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab-btn.tab-cta { animation: none; }
+      .card-img[src=""], .card-img:not([src]) { animation: none; background: #f0e6dc; }
+      .toast { animation: none; opacity: 1; }
+    }
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <img src="logo-stase.png" style="height:100px;width:auto;" alt="Stase Toscana" />
+  <div class="spinner"></div>
+  <p id="loading-msg">Carico gli eventi in Toscana...</p>
+</div>
+
+<div id="fab-installa" class="nascosto">
+  <div id="fab-installa-tooltip" class="nascosto"></div>
+  <div id="fab-installa-riga">
+    <div id="fab-installa-etichetta">Installa l'app</div>
+    <div id="fab-installa-wrap">
+      <button id="fab-installa-cerchio" aria-label="Installa l'app Stase Toscana">📲</button>
+      <button id="fab-installa-chiudi" aria-label="Chiudi">&#10005;</button>
+    </div>
+  </div>
+</div>
+
+<div id="top-bar">
+  <header>
+    <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
+    <div id="tab-nav">
+      <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
+      <a class="tab-btn" id="tab-provincia" href="/eventi-in-toscana.html">...per provincia</a>
+      <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
+    </div>
+  </header>
+</div>
+
+<div id="province-prompt">Non sai da dove iniziare? Sfoglia tutti gli eventi <a href="/eventi-in-toscana.html">qui</a></div>
+<div id="controlli">
+  <div id="barra-ricerca">
+    <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
+    <button id="btn-filtri-toggle" onclick="apriFiltriSheet()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
+  </div>
+  <div id="toggle-vista">
+    <button class="attivo" id="btn-vista-lista" onclick="mostraVista('lista')">Lista</button>
+    <button id="btn-vista-mappa" onclick="mostraVista('mappa')">Mappa</button>
+  </div>
+</div>
+
+<div id="view-esplora">
+  <div id="pannello-lista">
+    <div id="contatore-lista"></div>
+    <div id="lista-eventi"></div>
+    <div id="stato-vuoto">Nessun evento trovato con questi filtri.<br>Prova ad allargare la ricerca.</div>
+  </div>
+  <div id="map-wrap" class="nascosto">
+    <div id="map"></div>
+  </div>
+</div>
+
+<div id="view-aggiungi">
+  <div class="aggiungi-hero">
+    <h1>Invia il tuo evento</h1>
+    <p class="sub">Compila il modulo qui sotto: il tuo evento comparirà sulla mappa e nella lista entro pochi minuti dall'invio.</p>
+    <div class="aggiungi-badge">GRATIS</div>
+  </div>
+  <div id="form-card">
+    <iframe id="tally-form" data-tally-src="https://tally.so/embed/pb5GDE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" height="700" title="Invia il tuo evento"></iframe>
+  </div>
+</div>
+
+<div id="filtri-backdrop" onclick="chiudiFiltriSeCliccatoFuori(event)">
+  <div id="filtri-sheet">
+    <div id="filtri-drag-handle" aria-hidden="true"></div>
+    <div id="filtri-sheet-header">
+      <span id="filtri-sheet-titolo">Filtri</span>
+      <button id="btn-azzera-filtri" onclick="azzeraFiltri()" style="display:none;">Azzera</button>
+      <button id="btn-chiudi-filtri" onclick="chiudiFiltriSheet()" aria-label="Chiudi">&#10005;</button>
+    </div>
+    <div id="filtri-sheet-body">
+      <div id="filtri-riga">
+        <button class="btn-filtro" id="btn-geolocate" onclick="geolocate()">Vicino a me</button>
+        <button class="btn-filtro attivo" data-periodo="tutti" onclick="setPeriodo('tutti', this)">Tutti</button>
+        <button class="btn-filtro" data-periodo="oggi" onclick="setPeriodo('oggi', this)">Oggi</button>
+        <button class="btn-filtro" data-periodo="weekend" onclick="setPeriodo('weekend', this)">Weekend</button>
+        <button class="btn-filtro" data-periodo="settimana" onclick="setPeriodo('settimana', this)">Settimana</button>
+        <button class="btn-filtro" data-periodo="mese" onclick="setPeriodo('mese', this)">Prossimi 30gg</button>
+      </div>
+      <div class="multiselect" id="ms-categoria">
+        <button class="ms-toggle" onclick="toggleMultiselect('categoria')">Categoria <span class="ms-badge" id="ms-badge-categoria" style="display:none;"></span> <span class="ms-freccia">&#9662;</span></button>
+        <div class="ms-panel" id="ms-panel-categoria"></div>
+      </div>
+      <div class="multiselect" id="ms-provincia">
+        <button class="ms-toggle" onclick="toggleMultiselect('provincia')">Provincia <span class="ms-badge" id="ms-badge-provincia" style="display:none;"></span> <span class="ms-freccia">&#9662;</span></button>
+        <div class="ms-panel" id="ms-panel-provincia"></div>
+      </div>
+    </div>
+    <div id="filtri-sheet-footer">
+      <button id="btn-mostra-risultati" onclick="chiudiFiltriSheet()">Mostra risultati</button>
+    </div>
+  </div>
+</div>
+
+<div id="dettaglio-backdrop" onclick="chiudiDettaglioSeCliccatoFuori(event)">
+  <div id="dettaglio-panel">
+    <div id="dettaglio-drag-handle" aria-hidden="true"></div>
+    <button id="btn-chiudi-dettaglio" onclick="chiudiDettaglio()">&#10005;</button>
+    <div id="dettaglio-img-wrap" onclick="apriLightbox()">
+      <img id="dettaglio-img" src="" alt="" onerror="this.parentElement.style.display='none'" />
+      <span id="dettaglio-zoom-hint">Zoom</span>
+    </div>
+    <div id="dettaglio-body">
+      <div id="dettaglio-nome"></div>
+      <span id="dettaglio-badge"></span>
+      <span id="dettaglio-badge-evidenza" style="display:none;">⭐ In evidenza</span>
+      <span id="dettaglio-badge-vt">🏛️ VisitTuscany</span>
+      <div class="dett-riga"><span class="icona">&#128197;</span><span id="dett-data"></span></div>
+      <div class="dett-riga"><span class="icona">&#128205;</span><span id="dett-luogo"></span></div>
+      <div id="dettaglio-descrizione"></div>
+      <div id="dettaglio-azioni"></div>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" onclick="chiudiLightbox()">
+  <button id="lightbox-chiudi" onclick="chiudiLightbox()">&#10005;</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<div id="banner-pubblicitario">
+  <span id="banner-label">Sponsorizzato</span>
+  <a class="banner-link" id="banner-link" href="#" target="_blank">
+    <img id="banner-img" src="" alt="Banner sponsor" />
+  </a>
+  <div id="banner-cta-content">
+    <span>Vuoi questo banner, con il tuo evento, tutto per te? Contattaci su <a href="https://www.instagram.com/stase.toscana/" target="_blank">Instagram</a> o scrivi a <a href="mailto:stasetoscana@gmail.com">stasetoscana@gmail.com</a></span>
+  </div>
+</div>
+
+<div id="cookie-banner">
+  <p>Usiamo cookie statistici (Google Analytics) per capire come viene usato il sito. Nessun dato personale viene venduto o condiviso con terzi a scopo pubblicitario. <a href="#" onclick="return false;">Maggiori info</a></p>
+  <div class="cookie-azioni">
+    <button id="btn-cookie-rifiuta" onclick="rifiutaCookie()">Rifiuta</button>
+    <button id="btn-cookie-accetta" onclick="accettaCookie()">Accetta</button>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+  // *** NUOVO: legge prima il file statico eventi.json (pubblicato su GitHub,
+  // veloce, nessun ritardo di avvio) e usa il vecchio Web App di Apps Script
+  // solo come riserva, nel caso il file statico non sia ancora stato pubblicato
+  // o ci sia un problema. ***
+  const JSON_URL_STATICO = 'https://stasetoscana.it/eventi.json';
+  const JSON_URL_FALLBACK = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
+  const JSON_URL_VT = 'https://stasetoscana.it/eventi_visittuscany.json';
+
+  const CATEGORIE = {
+    'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
+    'Evento gastronomico':        { bg: '#f59e0b', emoji: '\u{1F377}' },
+    'Evento sportivo':            { bg: '#10b981', emoji: '\u{26BD}' },
+    'Festa paesana':              { bg: '#ec4899', emoji: '\u{1F389}' },
+    'Festival':                   { bg: '#FF3131', emoji: '\u{1F3B5}' },
+    'Fiera':                      { bg: '#14b8a6', emoji: '\u{1F3EA}' },
+    'Mercato':                    { bg: '#84cc16', emoji: '\u{1F6D2}' },
+    'Mostra/Esposizione':         { bg: '#a855f7', emoji: '\u{1F3A8}' },
+    'Rievocazione storica/Palio': { bg: '#92400e', emoji: '\u{1F3F0}' },
+    'Sagra':                      { bg: '#FF3131', emoji: '\u{1F958}' },
+    'Spettacolo teatrale':        { bg: '#7c3aed', emoji: '\u{1F3AD}' },
+    'Serata/Discoteca':           { bg: '#4c1d95', emoji: '\u{1F57A}' },
+    'Altro':                      { bg: '#6b7280', emoji: '\u{1F4CC}' },
+  };
+  function getCat(nome) { return CATEGORIE[nome] || { bg: '#6b7280', emoji: '\u{1F4CC}' }; }
+
+  // *** NUOVO: sanifica il testo prima di iniettarlo in innerHTML/attributi.
+  // I dati arrivano da un form pubblico (Tally) — senza questo, chiunque
+  // potrebbe inserire tag HTML/script nel nome evento, descrizione, ecc. ***
+  function escapeHtml_(valore) {
+    if (valore == null) return '';
+    return String(valore)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // ===================== MICRO-MOLLA (spring) =====================
+  // Piccolo motore di animazione a molla, senza librerie esterne.
+  // Traduce i due parametri "alla Apple" (damping = rimbalzo, response = velocità)
+  // in una molla fisica reale, interrompibile in ogni istante: se la si richiama
+  // mentre è già in corso, riparte dal valore *a schermo* in quel momento (mai
+  // dal valore di partenza "logico"), così un tocco durante l'animazione non
+  // causa mai uno scatto visivo.
+  function motionRidotto() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function animaMolla(opts) {
+    if (motionRidotto()) {
+      // Accessibilità: niente molla/rimbalzo, solo una breve dissolvenza lineare.
+      var start = performance.now(), durata = 180, from = opts.from, to = opts.to, cancellata = false;
+      function passoRidotto(t) {
+        if (cancellata) return;
+        var p = Math.min(1, (t - start) / durata);
+        opts.onUpdate(from + (to - from) * p);
+        if (p < 1) requestAnimationFrame(passoRidotto); else opts.onComplete && opts.onComplete();
+      }
+      requestAnimationFrame(passoRidotto);
+      return { cancel: function() { cancellata = true; }, retarget: function() {} };
+    }
+
+    var damping = opts.damping == null ? 1 : opts.damping;
+    var response = opts.response == null ? 0.35 : opts.response;
+    var stiffness = Math.pow(2 * Math.PI / response, 2);
+    var smorzamento = damping * 2 * Math.sqrt(stiffness);
+
+    var pos = opts.from;
+    var vel = opts.velocity || 0;
+    var target = opts.to;
+    var cancellata = false;
+    var last = performance.now();
+
+    function passo(now) {
+      if (cancellata) return;
+      var dt = Math.min((now - last) / 1000, 0.032);
+      last = now;
+      var forza = -stiffness * (pos - target) - smorzamento * vel;
+      vel += forza * dt;
+      pos += vel * dt;
+      opts.onUpdate(pos);
+      if (Math.abs(pos - target) < 0.4 && Math.abs(vel) < 40) {
+        opts.onUpdate(target);
+        opts.onComplete && opts.onComplete();
+        return;
+      }
+      requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+    return {
+      cancel: function() { cancellata = true; },
+      retarget: function(nuovoTarget) { target = nuovoTarget; } // reindirizza senza tagliare la velocità
+    };
+  }
+
+  const DATI_DEMO = [
+    { id: 'demo1', nome: 'Sagra della Bistecca - Firenze', locandina: 'https://picsum.photos/seed/sagra1/400/300', categoria: 'Sagra', provincia: 'Firenze', comune: 'Firenze', indirizzo: 'Piazza della Signoria', riepilogoDate: '15/07/2026 - 20:00', dataSort: '2026-07-15', dataFine: '2026-07-15', mapsUrl: 'https://maps.google.com/?q=Piazza+della+Signoria,Firenze', lat: 43.7699, lon: 11.2556, instagram: 'https://instagram.com/sagrafirenze', descrizione: 'La tradizionale sagra con bistecca alla fiorentina, vino locale e musica dal vivo.' },
+    { id: 'demo2', nome: 'Concerto Estate - Lucca', locandina: 'https://picsum.photos/seed/concerto1/400/300', categoria: 'Concerto', provincia: 'Lucca', comune: 'Lucca', indirizzo: 'Piazza Napoleone', riepilogoDate: '20/07/2026 - 21:30', dataSort: '2026-07-20', dataFine: '2026-07-20', mapsUrl: 'https://maps.google.com/?q=Piazza+Napoleone,Lucca', lat: 43.8429, lon: 10.5027, instagram: null, descrizione: 'Concerto all\'aperto con artisti internazionali.' },
+    { id: 'demo3', nome: 'Festa Medievale - San Gimignano', locandina: 'https://picsum.photos/seed/medioevo1/400/300', categoria: 'Rievocazione storica/Palio', provincia: 'Siena', comune: 'San Gimignano', indirizzo: 'Piazza del Duomo', riepilogoDate: '25-27/07/2026 - 10:00', dataSort: '2026-07-25', dataFine: '2026-07-27', mapsUrl: 'https://maps.google.com/?q=Piazza+del+Duomo,San+Gimignano', lat: 43.4676, lon: 11.0434, instagram: null, descrizione: 'Tre giorni di rievocazione storica con cortei, tornei e mercato medievale.' },
+    { id: 'demo4', nome: 'Festival del Vino - Montalcino', locandina: 'https://picsum.photos/seed/vino1/400/300', categoria: 'Festival', provincia: 'Siena', comune: 'Montalcino', indirizzo: 'Piazza del Popolo', riepilogoDate: '10/08/2026 - 18:00', dataSort: '2026-08-10', dataFine: '2026-08-12', mapsUrl: 'https://maps.google.com/?q=Piazza+del+Popolo,Montalcino', lat: 43.0586, lon: 11.4896, instagram: null, descrizione: 'Festival enogastronomico con degustazioni di Brunello.' },
+    { id: 'demo5', nome: 'Mercato Contadino - Pisa', locandina: 'https://picsum.photos/seed/mercato1/400/300', categoria: 'Mercato', provincia: 'Pisa', comune: 'Pisa', indirizzo: 'Piazza dei Miracoli', riepilogoDate: '12/07/2026 - 08:00', dataSort: '2026-07-12', dataFine: '2026-07-12', mapsUrl: 'https://maps.google.com/?q=Piazza+dei+Miracoli,Pisa', lat: 43.7230, lon: 10.3966, instagram: null, descrizione: 'Mercato di prodotti biologici e artigianali locali.' },
+    { id: 'demo6', nome: 'Spettacolo Teatrale - Arezzo', locandina: 'https://picsum.photos/seed/teatro1/400/300', categoria: 'Spettacolo teatrale', provincia: 'Arezzo', comune: 'Arezzo', indirizzo: 'Teatro Petrarca', riepilogoDate: '18/07/2026 - 21:00', dataSort: '2026-07-18', dataFine: '2026-07-18', mapsUrl: 'https://maps.google.com/?q=Teatro+Petrarca,Arezzo', lat: 43.4633, lon: 11.8784, instagram: null, descrizione: 'Rappresentazione teatrale all\'aperto.' },
+  ];
+
+  function mostraTab(tab, aggiornaUrlTab) {
+    document.getElementById('view-esplora').style.display = tab === 'esplora' ? 'flex' : 'none';
+    document.getElementById('controlli').style.display = tab === 'esplora' ? 'flex' : 'none';
+    document.getElementById('view-aggiungi').style.display = tab === 'aggiungi' ? 'block' : 'none';
+    document.getElementById('tab-esplora').classList.toggle('attivo', tab === 'esplora');
+    document.getElementById('tab-aggiungi').classList.toggle('attivo', tab === 'aggiungi');
+    if (tab === 'esplora') setTimeout(function() { map.invalidateSize(); }, 100);
+    // Rende il tab bookmarkable/condivisibile senza mai ricaricare la pagina,
+    // riusando lo stesso pattern di query-string gia' usato per filtri e dettaglio evento.
+    if (aggiornaUrlTab !== false) {
+      var params = new URLSearchParams(window.location.search);
+      if (tab === 'aggiungi') params.set('tab', 'aggiungi'); else params.delete('tab');
+      var newUrl = params.toString() ? '?' + params.toString() : window.location.pathname;
+      history.replaceState(null, '', newUrl);
+    }
+  }
+
+  function caricaTally() {
+    var d = document, w = "https://tally.so/widgets/embed.js",
+      v = function () {
+        if (typeof Tally !== "undefined")
+          Tally.loadEmbeds();
+        else
+          d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) { e.src = e.dataset.tallySrc; });
+      };
+    if (typeof Tally !== "undefined") v();
+    else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement("script"); s.src = w; s.onload = v; s.onerror = function() {
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) { e.src = e.dataset.tallySrc; });
+      }; d.body.appendChild(s);
+    } else v();
+  }
+  caricaTally();
+
+  const map = L.map('map', { tap: false }).setView([43.5, 11.0], 8);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2jkv_1_f5a56c4907bce0dfb51b358e', {
+    attribution: '&#169; OpenStreetMap &#169; CARTO', subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+  const clusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 50,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    iconCreateFunction: function(cluster) {
+      var count = cluster.getChildCount();
+      var size = count < 10 ? 40 : count < 50 ? 48 : 56;
+      return L.divIcon({
+        html: '<div style="background:linear-gradient(135deg,#FF3131,#CC0000);width:' + size + 'px;height:' + size + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:' + (size*0.35) + 'px;box-shadow:0 4px 16px rgba(255,68,56,0.4);border:3px solid white;">' + count + '</div>',
+        className: 'marker-cluster-custom',
+        iconSize: [size, size]
+      });
+    }
+  });
+  map.addLayer(clusterGroup);
+
+  function creaIcona(cat, hover, isEvidenza) {
+    var c = getCat(cat);
+    var attivo = hover || isEvidenza;
+    var size = attivo ? 46 : 36;
+    var animazione = (isEvidenza && !motionRidotto()) ? 'animation:pinEvidenzaPulse 1.8s ease-in-out infinite;' : '';
+    var glow = attivo
+      ? (isEvidenza
+          ? 'box-shadow:0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3);'
+          : 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);')
+      : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
+    return L.divIcon({
+      className: '',
+      html: '<div style="background:' + c.bg + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
+      iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
+    });
+  }
+
+  async function leggiEventi() {
+    // Se aperto da file://, il fetch fallira per CORS. Salta direttamente ai dati demo.
+    if (window.location.protocol === 'file:') {
+      console.log('Aperto da file://, uso dati demo');
+      return DATI_DEMO;
+    }
+    var eventiStase = [];
+    var eventiVT = [];
+    // 1. Carica eventi Stase (file statico o fallback)
+    try {
+      var res = await fetch(JSON_URL_STATICO + '?t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      eventiStase = normalizzaEventi(data);
+    } catch (err) {
+      console.warn('File statico non disponibile, provo il Web App...', err);
+      try {
+        var res = await fetch(JSON_URL_FALLBACK + '?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
+        eventiStase = normalizzaEventi(data);
+      } catch (err2) {
+        console.warn('Fetch fallito, provo JSONP...', err2);
+        try {
+          var data = await fetchJsonp(JSON_URL_FALLBACK + '?callback=cb&t=' + Date.now());
+          eventiStase = normalizzaEventi(data);
+        } catch (err3) {
+          console.warn('JSONP fallito, uso dati demo per Stase...', err3);
+          eventiStase = DATI_DEMO;
+        }
+      }
+    }
+    // 2. Carica eventi VisitTuscany (opzionale, non blocca)
+    try {
+      var resVT = await fetch(JSON_URL_VT + '?t=' + Date.now());
+      if (resVT.ok) {
+        var dataVT = await resVT.json();
+        eventiVT = normalizzaEventiVT(dataVT);
+        console.log('Eventi VisitTuscany caricati:', eventiVT.length);
+      console.log('Eventi VT futuri:', eventiVT.filter(function(e){return isFuturo(e);}).length);
+      }
+    } catch (err) {
+      console.warn('VisitTuscany non disponibile (forse il robot non ha ancora scaricato):', err);
+    }
+    // Unisci e rimuovi duplicati (nome + data + comune)
+    var tutti = eventiStase.concat(eventiVT);
+    var visti = new Set();
+    var unici = tutti.filter(function(ev) {
+      var chiave = (ev.nome || '') + '|' + (ev.dataSort || '') + '|' + (ev.comune || '');
+      if (visti.has(chiave)) return false;
+      visti.add(chiave);
+      return true;
+    });
+    if (unici.length === 0) {
+      mostraToast('Modalita demo: dati di esempio caricati');
+      return DATI_DEMO;
+    }
+    return unici;
+  }
+
+  function fetchJsonp(url) {
+    return new Promise(function(resolve, reject) {
+      var script = document.createElement('script');
+      var cbName = 'cb_' + Date.now();
+      window[cbName] = function(data) { resolve(data); cleanup(); };
+      script.src = url.replace('callback=cb', 'callback=' + cbName);
+      script.onerror = function() { reject(); cleanup(); };
+      document.head.appendChild(script);
+      setTimeout(function() { reject(); cleanup(); }, 10000);
+      function cleanup() { delete window[cbName]; script.remove(); }
+    });
+  }
+
+  function normalizzaEventi(data) {
+    return data.map(function(e, i) {
+      return {
+        id: e.id || ('json_' + i),
+        nome: e.nome,
+        locandina: e.locandina || null,
+        categoria: e.categoria || 'Altro',
+        descrizione: e.descrizione || '',
+        provincia: e.provincia,
+        comune: e.comune,
+        indirizzo: e.indirizzo,
+        riepilogoDate: e.riepilogo_date,
+        dataSort: e.data_sort,
+        dataFine: e.data_fine,
+        mapsUrl: e.maps_url,
+        lat: e.lat ? parseFloat(e.lat) : null,
+        lon: e.lon ? parseFloat(e.lon) : null,
+        instagram: e.instagram || null,
+        inEvidenza: !!e.in_evidenza,
+        fonte: 'stase',
+      };
+    });
+  }
+
+
+  var PROVINCE_MAP = {
+    'AR': 'Arezzo', 'FI': 'Firenze', 'GR': 'Grosseto', 'LI': 'Livorno',
+    'LU': 'Lucca', 'MS': 'Massa-Carrara', 'PI': 'Pisa', 'PT': 'Pistoia',
+    'PO': 'Prato', 'SI': 'Siena'
+  };
+
+  function normalizzaEventiVT(data) {
+    // Gestisce la struttura response.data.doc di VisitTuscany
+    if (data && data.response && data.response.data && Array.isArray(data.response.data.doc)) {
+      data = data.response.data.doc;
+    } else if (!Array.isArray(data)) {
+      if (data && Array.isArray(data.events)) data = data.events;
+      else if (data && Array.isArray(data.items)) data = data.items;
+      else if (data && Array.isArray(data.data)) data = data.data;
+      else if (data && Array.isArray(data.results)) data = data.results;
+      else return [];
+    }
+
+    return data.map(function(e, i) {
+      // Campi base
+      var nome = e.title || e.name || 'Evento VisitTuscany';
+      var url = e.url || null;
+      var descrizione = e.subtitle || '';
+
+      // Categoria (typology VT → categorie Stase)
+      var categoria = e.typology || 'Altro';
+      var catLower = String(categoria).toLowerCase();
+      if (catLower.includes('concert') || catLower.includes('musica')) categoria = 'Concerto';
+      else if (catLower.includes('sagra')) categoria = 'Sagra';
+      else if (catLower.includes('fest') && !catLower.includes('festival')) categoria = 'Festa paesana';
+      else if (catLower.includes('fiera') || catLower.includes('mercat')) categoria = 'Fiera';
+      else if (catLower.includes('mostra') || catLower.includes('expo')) categoria = 'Mostra/Esposizione';
+      else if (catLower.includes('teatr') || catLower.includes('cinema') || catLower.includes('spettacolo')) categoria = 'Spettacolo teatrale';
+      else if (catLower.includes('sport')) categoria = 'Evento sportivo';
+      else if (catLower.includes('gastro') || catLower.includes('food') || catLower.includes('vino') || catLower.includes('enogastronomia')) categoria = 'Evento gastronomico';
+      else if (catLower.includes('festival')) categoria = 'Festival';
+      else if (catLower.includes('discotec') || catLower.includes('serata')) categoria = 'Serata/Discoteca';
+      else if (catLower.includes('rievoc') || catLower.includes('palio') || catLower.includes('storica')) categoria = 'Rievocazione storica/Palio';
+      else if (catLower.includes('convegn')) categoria = 'Altro';
+
+      // Date (periods è un array di oggetti con startDate/endDate)
+      var dataSort = null, dataFine = null, riepilogoDate = '';
+      if (e.periods && e.periods.length > 0) {
+        var p = e.periods[0];
+        dataSort = p.startDate || null;
+        dataFine = p.endDate || dataSort;
+        if (dataSort) {
+          var d = parseData(dataSort);
+          if (d) {
+            riepilogoDate = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+            if (dataFine && dataFine !== dataSort) {
+              var df = parseData(dataFine);
+              if (df) riepilogoDate += ' - ' + df.getDate() + '/' + (df.getMonth()+1) + '/' + df.getFullYear();
+            }
+          }
+        }
+      }
+
+      // Coordinate e località (struttura reale VT)
+      var comune = null, provincia = null, lat = null, lon = null, indirizzo = null;
+
+      // Coordinate da location.map
+      if (e.location && e.location.map) {
+        lat = e.location.map.lat != null ? parseFloat(e.location.map.lat) : null;
+        lon = e.location.map.lng != null ? parseFloat(e.location.map.lng) : null;
+        indirizzo = e.location.map.address || null;
+      }
+
+      // Comune da locality[0].name (alcuni hanno solo id, senza name)
+      if (e.location && e.location.locality && e.location.locality.length > 0) {
+        var loc = e.location.locality[0];
+        comune = loc.name || loc.locality || null;
+      }
+      // Se ancora senza comune, prova a estrarlo dall'indirizzo
+      if (!comune && indirizzo) {
+        var parts = indirizzo.split(',');
+        for (var k = parts.length - 1; k >= 0; k--) {
+          var part = parts[k].trim();
+          if (part !== 'Italia' && !/^[A-Z]{2}$/.test(part) && part.length > 2) {
+            comune = part;
+            break;
+          }
+        }
+      }
+
+      // Provincia: cerca in locality, altrimenti estrai dall'indirizzo (es. ", FI, Italia")
+      if (e.location && e.location.locality && e.location.locality.length > 0) {
+        provincia = e.location.locality[0].province || null;
+      }
+      if (!provincia && indirizzo) {
+        var m = indirizzo.match(/,\s*([A-Z]{2})\s*,/);
+        if (m) provincia = m[1];
+      }
+      // Normalizza sigla VT → nome provincia (per unificare con eventi Stase)
+      if (provincia && PROVINCE_MAP[provincia]) {
+        provincia = PROVINCE_MAP[provincia];
+      }
+
+      // Immagine
+      var locandina = null;
+      if (e.image && e.image.url) locandina = e.image.url;
+
+      // Link a Google Maps: va costruito da coordinate/indirizzo, NON deve essere
+      // il link alla pagina VisitTuscany (quello resta solo nel campo "url",
+      // usato dal bottone "Vedi su VisitTuscany").
+      var mapsUrl = null;
+      if (lat != null && lon != null && !isNaN(lat) && !isNaN(lon)) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lon;
+      } else if (indirizzo) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(indirizzo);
+      } else if (comune) {
+        mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(comune + ', ' + (provincia || '') + ', Toscana');
+      }
+
+      // topevent nel JSON VT è stringa "true"/"false", non booleano
+      var inEvidenza = e.topevent === true || e.topevent === 'true';
+
+      return {
+        id: 'vt_' + (e.id || i),
+        nome: nome,
+        locandina: locandina,
+        categoria: categoria,
+        descrizione: descrizione,
+        provincia: provincia,
+        comune: comune,
+        indirizzo: indirizzo,
+        riepilogoDate: riepilogoDate,
+        dataSort: dataSort,
+        dataFine: dataFine,
+        mapsUrl: mapsUrl,
+        url: url,
+        lat: lat,
+        lon: lon,
+        instagram: null,
+        inEvidenza: inEvidenza,
+        fonte: 'visittuscany'
+      };
+    });
+  }
+
+  function parseData(d) {
+    if (!d) return null;
+    try { var p = d.split('-'); return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2])); }
+    catch (e) { return null; }
+  }
+  function isFuturo(ev) {
+    var d = parseData(ev.dataFine || ev.dataSort);
+    if (!d) return true;
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    return d >= oggi;
+  }
+  function calcolaLimiti_() {
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    var day = oggi.getDay();
+    var giorniASabato = day === 0 ? 6 : day === 6 ? 0 : 6 - day;
+    var sabato = new Date(oggi); sabato.setDate(oggi.getDate() + giorniASabato);
+    var domenica = new Date(sabato); domenica.setDate(sabato.getDate() + 1);
+    var tra30 = new Date(oggi); tra30.setDate(oggi.getDate() + 30);
+    return { oggi: oggi, sabato: sabato, domenica: domenica, tra30: tra30 };
+  }
+  function inPeriodo(ev, periodo) {
+    if (periodo === 'tutti') return true;
+    var dataInizio = parseData(ev.dataSort);
+    if (!dataInizio) return false;
+    var dataFine = ev.dataFine ? parseData(ev.dataFine) : dataInizio;
+    var lim = calcolaLimiti_();
+    if (periodo === 'oggi') return dataInizio <= lim.oggi && dataFine >= lim.oggi;
+    if (periodo === 'weekend') return dataInizio <= lim.domenica && dataFine >= lim.sabato;
+    if (periodo === 'settimana') return dataInizio <= lim.domenica && dataFine >= lim.oggi;
+    if (periodo === 'mese') return dataInizio <= lim.tra30 && dataFine >= lim.oggi;
+    return true;
+  }
+
+  var tuttiEventi = [];
+  var periodoCorrente = 'tutti';
+  var categorieSelezionate = new Set();
+  var provinceSelezionate = new Set();
+  var markersById = {};
+  var cardsById = {};
+
+  function setPeriodo(p, btn) {
+    periodoCorrente = p;
+    document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.remove('attivo'); });
+    btn.classList.add('attivo');
+    aggiornaUrl();
+    applicaFiltri();
+  }
+
+  function toggleMultiselect(tipo) {
+    var panel = document.getElementById('ms-panel-' + tipo);
+    var giaAperto = panel.classList.contains('aperto');
+    document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+    document.querySelectorAll('.multiselect').forEach(function(m) { m.classList.remove('espanso'); });
+    if (!giaAperto) {
+      panel.classList.add('aperto');
+      document.getElementById('ms-' + tipo).classList.add('espanso');
+    }
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.multiselect')) {
+      document.querySelectorAll('.ms-panel').forEach(function(p) { p.classList.remove('aperto'); });
+      document.querySelectorAll('.multiselect').forEach(function(m) { m.classList.remove('espanso'); });
+    }
+  });
+
+  function costruisciMultiselect(tipo, valori, selezionati) {
+    var panel = document.getElementById('ms-panel-' + tipo);
+    panel.innerHTML = '';
+    valori.forEach(function(v) {
+      var label = document.createElement('label');
+      label.className = 'ms-opzione';
+      var checked = selezionati.has(v) ? 'checked' : '';
+      var testo = tipo === 'categoria' ? (getCat(v).emoji + ' ' + escapeHtml_(v)) : escapeHtml_(v);
+      label.innerHTML = '<input type="checkbox" value="' + escapeHtml_(v) + '" ' + checked + ' /> ' + testo;
+      label.querySelector('input').addEventListener('change', function(e) {
+        if (e.target.checked) selezionati.add(v); else selezionati.delete(v);
+        aggiornaBadgeMultiselect(tipo, selezionati);
+        aggiornaUrl();
+        applicaFiltri();
+      });
+      panel.appendChild(label);
+    });
+    var clearBtn = document.createElement('button');
+    clearBtn.className = 'ms-clear';
+    clearBtn.textContent = 'Deseleziona tutto';
+    clearBtn.onclick = function() {
+      selezionati.clear();
+      costruisciMultiselect(tipo, valori, selezionati);
+      aggiornaBadgeMultiselect(tipo, selezionati);
+      aggiornaUrl();
+      applicaFiltri();
+    };
+    panel.appendChild(clearBtn);
+  }
+  function aggiornaBadgeMultiselect(tipo, selezionati) {
+    var badge = document.getElementById('ms-badge-' + tipo);
+    var toggle = document.querySelector('#ms-' + tipo + ' .ms-toggle');
+    if (selezionati.size > 0) { badge.style.display = 'inline-block'; badge.textContent = selezionati.size; toggle.classList.add('attivo'); }
+    else { badge.style.display = 'none'; toggle.classList.remove('attivo'); }
+  }
+  function popolaFiltriOpzioni() {
+    var categorie = [];
+    var province = [];
+    var catSet = new Set();
+    var provSet = new Set();
+    tuttiEventi.forEach(function(e) {
+      if (e.categoria) catSet.add(e.categoria);
+      if (e.provincia) provSet.add(e.provincia);
+    });
+    catSet.forEach(function(c) { categorie.push(c); });
+    provSet.forEach(function(p) { province.push(p); });
+    categorie.sort();
+    province.sort();
+    costruisciMultiselect('categoria', categorie, categorieSelezionate);
+    costruisciMultiselect('provincia', province, provinceSelezionate);
+  }
+
+  // apriFiltriSheet() e chiudiFiltriSheet() sono definite più sotto, insieme
+  // al resto della logica del bottom sheet (molla, trascinamento, guardia anti-tap-fantasma).
+
+  function azzeraFiltri() {
+    periodoCorrente = 'tutti';
+    document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.toggle('attivo', b.dataset.periodo === 'tutti'); });
+    categorieSelezionate.clear();
+    provinceSelezionate.clear();
+    var catSet = new Set();
+    var provSet = new Set();
+    tuttiEventi.forEach(function(e) {
+      if (e.categoria) catSet.add(e.categoria);
+      if (e.provincia) provSet.add(e.provincia);
+    });
+    var categorie = Array.from(catSet).sort();
+    var province = Array.from(provSet).sort();
+    costruisciMultiselect('categoria', categorie, categorieSelezionate);
+    costruisciMultiselect('provincia', province, provinceSelezionate);
+    aggiornaBadgeMultiselect('categoria', categorieSelezionate);
+    aggiornaBadgeMultiselect('provincia', provinceSelezionate);
+    document.getElementById('input-ricerca').value = '';
+    applicaFiltri();
+  }
+
+  function aggiornaBadgeFiltri() {
+    var count = (periodoCorrente !== 'tutti' ? 1 : 0) + categorieSelezionate.size + provinceSelezionate.size;
+    var badge = document.getElementById('filtri-badge');
+    var btnAzzera = document.getElementById('btn-azzera-filtri');
+    if (count > 0) { badge.style.display = 'inline-block'; badge.textContent = count; btnAzzera.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; btnAzzera.style.display = 'none'; }
+  }
+
+  function applicaFiltri() {
+    var testo = document.getElementById('input-ricerca').value.trim().toLowerCase();
+    aggiornaBadgeFiltri();
+    var filtrati = tuttiEventi.filter(function(ev) {
+      if (!inPeriodo(ev, periodoCorrente)) return false;
+      if (categorieSelezionate.size > 0 && !categorieSelezionate.has(ev.categoria)) return false;
+      if (provinceSelezionate.size > 0 && !provinceSelezionate.has(ev.provincia)) return false;
+      if (testo) {
+        var hay = ((ev.nome || '') + ' ' + (ev.comune || '') + ' ' + (ev.provincia || '') + ' ' + (ev.categoria || '')).toLowerCase();
+        if (!hay.includes(testo)) return false;
+      }
+      return true;
+    });
+    filtrati.sort(function(a, b) {
+      var da = parseData(a.dataSort), db = parseData(b.dataSort);
+      if (!da) return 1; if (!db) return -1;
+      return da - db;
+    });
+    renderLista(filtrati);
+    renderMappa(filtrati);
+    var btnRisultati = document.getElementById('btn-mostra-risultati');
+    if (btnRisultati) {
+      btnRisultati.textContent = filtrati.length === 0 ? 'Mostra risultati (nessun evento)' :
+        'Mostra ' + filtrati.length + (filtrati.length === 1 ? ' evento' : ' eventi');
+    }
+  }
+
+  function formattaGiorno(dataStr) {
+    var d = parseData(dataStr);
+    if (!d) return '';
+    var oggi = new Date(); oggi.setHours(0,0,0,0);
+    var dNorm = new Date(d); dNorm.setHours(0,0,0,0);
+    var diff = Math.round((dNorm - oggi) / (1000*60*60*24));
+    var nomiGiorni = ['Domenica','Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'];
+    var nome = nomiGiorni[d.getDay()];
+    if (diff === 0) return 'OGGI - ' + nome + ' ' + d.getDate() + '/' + (d.getMonth()+1);
+    if (diff === 1) return 'DOMANI - ' + nome + ' ' + d.getDate() + '/' + (d.getMonth()+1);
+    return nome + ' ' + d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+  }
+
+  // *** NUOVO: crea l'elemento DOM di una card evento. Estratto in funzione
+  // riutilizzabile cosi' la sezione "In evidenza" pinnata in cima e la lista
+  // cronologica sotto condividono esattamente lo stesso markup. ***
+  function creaCardEvento(ev, opts) {
+    opts = opts || {};
+    var cat = getCat(ev.categoria);
+    var card = document.createElement('div');
+    card.className = 'card-evento' + (ev.inEvidenza ? ' evidenza' : '');
+    var imgHtml = ev.locandina ? '<img class="card-img" src="' + escapeHtml_(ev.locandina) + '" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '<div class="card-img"></div>';
+    var testoBadgeEvidenza = opts.etichettaSponsor ? 'Sponsorizzato' : 'In evidenza';
+    var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ ' + testoBadgeEvidenza + '</span>' : '';
+    var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
+    card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + imgHtml +
+      '<div class="card-body">' +
+      '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
+      '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
+      '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
+      '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
+      '</div>';
+    card.addEventListener('click', function() { apriDettaglio(ev); });
+    if (!opts.senzaHoverMappa) {
+      card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
+      card.addEventListener('mouseleave', function() { evidenziaMarker(ev.id, false); });
+    }
+    return card;
+  }
+
+  function renderLista(eventi) {
+    var cont = document.getElementById('lista-eventi');
+    var contatore = document.getElementById('contatore-lista');
+    var vuoto = document.getElementById('stato-vuoto');
+    cont.innerHTML = '';
+    contatore.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
+    vuoto.style.display = eventi.length === 0 ? 'block' : 'none';
+    Object.keys(cardsById).forEach(function(k) { delete cardsById[k]; });
+
+    // ===== Sezione "In evidenza" pinnata in cima, separata dall'ordine
+    // cronologico e chiaramente etichettata come contenuto sponsorizzato.
+    // Gli stessi eventi restano ANCHE nella loro posizione cronologica
+    // sotto, cosi' chi cerca per data li trova comunque al posto giusto. =====
+    var MAX_EVIDENZA_LISTA = 6;
+    var eventiEvidenza = eventi.filter(function(e) { return e.inEvidenza; }).slice(0, MAX_EVIDENZA_LISTA);
+    if (eventiEvidenza.length > 0) {
+      var sezioneEvidenza = document.createElement('div');
+      sezioneEvidenza.className = 'gruppo-data gruppo-evidenza';
+      var headerEv = document.createElement('div');
+      headerEv.className = 'gruppo-data-header';
+      headerEv.innerHTML = '<span class="giorno-nome">⭐ In evidenza</span> <span class="etichetta-sponsorizzato">Contenuto sponsorizzato</span>';
+      sezioneEvidenza.appendChild(headerEv);
+      var gridEv = document.createElement('div');
+      gridEv.className = 'eventi-grid';
+      eventiEvidenza.forEach(function(ev) {
+        gridEv.appendChild(creaCardEvento(ev, { etichettaSponsor: true, senzaHoverMappa: true }));
+      });
+      sezioneEvidenza.appendChild(gridEv);
+      cont.appendChild(sezioneEvidenza);
+    }
+
+    var gruppi = {};
+    var oggiDate = new Date(); oggiDate.setHours(0,0,0,0);
+    var mm = oggiDate.getMonth() + 1;
+    var dd = oggiDate.getDate();
+    var oggiISO = oggiDate.getFullYear() + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
+
+    eventi.forEach(function(ev) {
+      var chiave = ev.dataSort || 'senza-data';
+      var dStart = parseData(ev.dataSort);
+      var dFine = parseData(ev.dataFine || ev.dataSort);
+
+      // Se l'evento è in corso (iniziato prima di oggi, finisce oggi o dopo),
+      // mostralo nel gruppo "OGGI" invece che nel gruppo della data di inizio
+      if (dStart && dFine && dStart < oggiDate && dFine >= oggiDate) {
+        chiave = oggiISO;
+      }
+
+      if (!gruppi[chiave]) gruppi[chiave] = [];
+      gruppi[chiave].push(ev);
+    });
+
+    var chiavi = Object.keys(gruppi).sort();
+    chiavi.forEach(function(chiave) {
+      var evs = gruppi[chiave];
+      var gruppoDiv = document.createElement('div');
+      gruppoDiv.className = 'gruppo-data';
+      var header = document.createElement('div');
+      header.className = 'gruppo-data-header';
+      header.innerHTML = '<span class="giorno-nome">' + formattaGiorno(chiave) + '</span> <span>' + evs.length + (evs.length === 1 ? ' evento' : ' eventi') + '</span>';
+      gruppoDiv.appendChild(header);
+
+      var grid = document.createElement('div');
+      grid.className = 'eventi-grid';
+
+      evs.forEach(function(ev) {
+        var card = creaCardEvento(ev);
+        grid.appendChild(card);
+        cardsById[ev.id] = card;
+      });
+      gruppoDiv.appendChild(grid);
+      cont.appendChild(gruppoDiv);
+    });
+  }
+
+  function renderMappa(eventi) {
+    clusterGroup.clearLayers();
+    Object.keys(markersById).forEach(function(k) { delete markersById[k]; });
+    var nuoviMarker = [];
+    eventi.forEach(function(ev) {
+      if (ev.lat == null || ev.lon == null || isNaN(ev.lat) || isNaN(ev.lon)) return;
+      var cat = getCat(ev.categoria);
+      var imgHtml = ev.locandina ? '<img src="' + escapeHtml_(ev.locandina) + '" class="popup-img" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
+      var mapsBtn = ev.mapsUrl ? '<a href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
+      var popupHtml = imgHtml +
+        '<div class="popup-header" style="background:' + cat.bg + '">' + escapeHtml_(ev.nome) + '</div>' +
+        '<div class="popup-body">' +
+        '<div class="popup-quando">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
+        '<div>&#128205; ' + escapeHtml_([ev.comune, ev.provincia].filter(Boolean).join(', ')) + '</div>' +
+        '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
+        mapsBtn +
+        '</div>';
+      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false, ev.inEvidenza) }).bindPopup(popupHtml, {
+        maxWidth: 260,
+        closeButton: true,
+        autoClose: false,
+        closeOnClick: false,
+        autoPan: false
+      });
+      marker.on('click', function(e) {
+        L.DomEvent.stopPropagation(e.originalEvent);
+        evidenziaCard(ev.id);
+        // Forza il ridisegno del marker nel cluster: su mobile, dopo il tap, a volte
+        // il marker sparisce visivamente finche' non si muove la mappa. Questo
+        // refresh esplicito evita che l'utente debba muovere la mappa per vederlo di nuovo.
+        if (clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
+      });
+      nuoviMarker.push(marker);
+      markersById[ev.id] = marker;
+    });
+    clusterGroup.addLayers(nuoviMarker);
+  }
+
+  function evidenziaMarker(id, on) {
+    var card = cardsById[id];
+    if (card) card.classList.toggle('hover-marker', on);
+    var marker = markersById[id];
+    if (marker) {
+      var ev = tuttiEventi.find(function(e) { return e.id === id; });
+      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza));
+    }
+  }
+  function evidenziaCard(id) {
+    var card = cardsById[id];
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('hover-marker');
+    setTimeout(function() { card.classList.remove('hover-marker'); }, 1500);
+  }
+
+  function apriDettaglioDaId(id) {
+    var ev = tuttiEventi.find(function(e) { return e.id === id; });
+    if (ev) apriDettaglio(ev);
+  }
+
+  function apriDettaglio(ev) {
+    var cat = getCat(ev.categoria);
+    var imgWrap = document.getElementById('dettaglio-img-wrap');
+    var img = document.getElementById('dettaglio-img');
+    if (ev.locandina) { img.src = ev.locandina; img.alt = ev.nome || ''; imgWrap.style.display = 'block'; }
+    else { imgWrap.style.display = 'none'; }
+
+    document.getElementById('dettaglio-nome').textContent = ev.nome || 'Evento senza nome';
+    var badge = document.getElementById('dettaglio-badge');
+    badge.textContent = cat.emoji + ' ' + (ev.categoria || 'Altro');
+    badge.style.background = cat.bg + '20';
+    badge.style.color = cat.bg;
+    document.getElementById('dettaglio-badge-evidenza').style.display = ev.inEvidenza ? 'inline-flex' : 'none';
+    document.getElementById('dettaglio-badge-vt').style.display = ev.fonte === 'visittuscany' ? 'inline-flex' : 'none';
+
+    document.getElementById('dett-data').textContent = ev.riepilogoDate || '';
+    document.getElementById('dett-luogo').textContent = ev.indirizzo || [ev.comune, ev.provincia].filter(Boolean).join(', ');
+
+    var descBox = document.getElementById('dettaglio-descrizione');
+    if (ev.descrizione) { descBox.textContent = ev.descrizione; descBox.style.display = 'block'; }
+    else { descBox.style.display = 'none'; }
+
+    var azioniHtml = '';
+    if (ev.fonte === 'visittuscany' && ev.url) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.url) + '\" target=\"_blank\">🏛️ Vedi su VisitTuscany</a>';
+    if (ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:' + cat.bg + '\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\">Google Maps</a>';
+    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
+    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
+    azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
+    document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
+
+    aggiornaUrlDettaglio(ev.id);
+    apriPannelloDettaglio();
+  }
+
+  // ===================== Pannello dettaglio: apertura/chiusura/drag a molla =====================
+  var dettPannello = { x: 0, molla: null, trascinando: false };
+  var dettPannelloApertoIl = 0;
+
+  function chiudiDettaglioSeCliccatoFuori(event) {
+    if (event.target !== event.currentTarget) return;
+    // Ignora i click che arrivano nei primi istanti dopo l'apertura: su mobile il "click"
+    // sintetico generato dal touch puo' arrivare dopo che il backdrop e' gia' visibile,
+    // colpendo lo sfondo invece del bottone e chiudendo il pannello appena aperto.
+    if (Date.now() - dettPannelloApertoIl < 350) return;
+    chiudiDettaglio();
+  }
+
+  function larghezzaPannelloDettaglio() {
+    var panel = document.getElementById('dettaglio-panel');
+    return panel.getBoundingClientRect().width || panel.offsetWidth || 460;
+  }
+
+  function impostaXPannello(x) {
+    var panel = document.getElementById('dettaglio-panel');
+    var w = larghezzaPannelloDettaglio();
+    var clamped = Math.max(0, x);
+    panel.style.transform = 'translateX(' + clamped + 'px)';
+    document.getElementById('dettaglio-backdrop').style.opacity = String(1 - Math.min(1, clamped / w));
+    dettPannello.x = clamped;
+  }
+
+  function animaPannelloA(target, velocity, onComplete) {
+    if (dettPannello.molla) dettPannello.molla.cancel();
+    dettPannello.molla = animaMolla({
+      from: dettPannello.x, to: target, velocity: velocity || 0,
+      damping: 1, response: 0.4, // "Move / reposition" — critically damped, nessun rimbalzo
+      onUpdate: impostaXPannello, onComplete: onComplete
+    });
+  }
+
+  function apriPannelloDettaglio() {
+    dettPannelloApertoIl = Date.now();
+    var backdrop = document.getElementById('dettaglio-backdrop');
+    backdrop.style.display = 'block';
+    dettPannello.x = larghezzaPannelloDettaglio(); // parte dal valore reale a schermo (fuori vista)
+    impostaXPannello(dettPannello.x);
+    // Un frame di respiro per far applicare lo stato "chiuso" prima di animare,
+    // altrimenti il browser potrebbe fondere le due transform in un unico salto.
+    requestAnimationFrame(function() { animaPannelloA(0, 0); });
+    document.addEventListener('keydown', chiudiPannelloConEsc);
+  }
+
+  function chiudiDettaglio(velocity) {
+    aggiornaUrl();
+    var w = larghezzaPannelloDettaglio();
+    animaPannelloA(w, velocity || 0, function() {
+      document.getElementById('dettaglio-backdrop').style.display = 'none';
+    });
+    document.removeEventListener('keydown', chiudiPannelloConEsc);
+  }
+  function chiudiPannelloConEsc(e) { if (e.key === 'Escape') chiudiDettaglio(); }
+
+  // Drag-to-dismiss dalla maniglia in alto (mobile): tracking 1:1 col dito,
+  // rubber-band se si tenta di trascinare oltre l'aperto, e alla fine del
+  // gesto la scelta chiudi/riapri dipende dalla velocità e dalla posizione
+  // di rilascio — non solo dalla posizione, come indicato dalla skill.
+  (function initDragPannelloDettaglio() {
+    var handle = document.getElementById('dettaglio-drag-handle');
+    if (!handle) return;
+    var startClientX = 0, startPanelX = 0, storico = [];
+
+    handle.addEventListener('pointerdown', function(e) {
+      if (dettPannello.molla) dettPannello.molla.cancel();
+      handle.setPointerCapture(e.pointerId);
+      dettPannello.trascinando = true;
+      startClientX = e.clientX;
+      startPanelX = dettPannello.x;
+      storico = [{ x: e.clientX, t: performance.now() }];
+    });
+    handle.addEventListener('pointermove', function(e) {
+      if (!dettPannello.trascinando) return;
+      var delta = e.clientX - startClientX;
+      var nuovaX = startPanelX + delta;
+      if (nuovaX < 0) nuovaX = nuovaX * 0.25; // resistenza progressiva oltre l'aperto
+      impostaXPannello(nuovaX);
+      storico.push({ x: e.clientX, t: performance.now() });
+      if (storico.length > 5) storico.shift();
+    });
+    function fineTrascinamento() {
+      if (!dettPannello.trascinando) return;
+      dettPannello.trascinando = false;
+      var v = 0;
+      if (storico.length >= 2) {
+        var a = storico[0], b = storico[storico.length - 1];
+        var dt = (b.t - a.t) / 1000;
+        if (dt > 0) v = (b.x - a.x) / dt; // px/s, portata alla molla di chiusura/riapertura
+      }
+      var w = larghezzaPannelloDettaglio();
+      var soglia = w * 0.3;
+      if (dettPannello.x > soglia || v > 500) chiudiDettaglio(v);
+      else animaPannelloA(0, v);
+    }
+    handle.addEventListener('pointerup', fineTrascinamento);
+    handle.addEventListener('pointercancel', fineTrascinamento);
+  })();
+
+  // ===== Bottom sheet filtri (stessa fisica a molla del pannello di dettaglio,
+  // ma sull'asse verticale invece che orizzontale) =====
+  var filtriSheet = { y: 0, molla: null, trascinando: false };
+  var filtriSheetApertoIl = 0;
+
+  function chiudiFiltriSeCliccatoFuori(event) {
+    if (event.target !== event.currentTarget) return;
+    if (Date.now() - filtriSheetApertoIl < 350) return; // guardia anti-tap-fantasma, vedi chiudiDettaglioSeCliccatoFuori
+    chiudiFiltriSheet();
+  }
+
+  function altezzaSheetFiltri() {
+    var sheet = document.getElementById('filtri-sheet');
+    return sheet.getBoundingClientRect().height || sheet.offsetHeight || 400;
+  }
+
+  function impostaYFiltri(y) {
+    var sheet = document.getElementById('filtri-sheet');
+    var h = altezzaSheetFiltri();
+    var clamped = Math.max(0, y);
+    sheet.style.transform = 'translateY(' + clamped + 'px)';
+    document.getElementById('filtri-backdrop').style.opacity = String(1 - Math.min(1, clamped / h));
+    filtriSheet.y = clamped;
+  }
+
+  function animaFiltriA(target, velocity, onComplete) {
+    if (filtriSheet.molla) filtriSheet.molla.cancel();
+    filtriSheet.molla = animaMolla({
+      from: filtriSheet.y, to: target, velocity: velocity || 0,
+      damping: 1, response: 0.4,
+      onUpdate: impostaYFiltri, onComplete: onComplete
+    });
+  }
+
+  function apriFiltriSheet() {
+    filtriSheetApertoIl = Date.now();
+    var backdrop = document.getElementById('filtri-backdrop');
+    backdrop.style.display = 'block';
+    filtriSheet.y = altezzaSheetFiltri();
+    impostaYFiltri(filtriSheet.y);
+    requestAnimationFrame(function() { animaFiltriA(0, 0); });
+    document.getElementById('btn-filtri-toggle').classList.add('attivo');
+    document.addEventListener('keydown', chiudiFiltriConEsc);
+  }
+
+  function chiudiFiltriSheet(velocity) {
+    var h = altezzaSheetFiltri();
+    animaFiltriA(h, velocity || 0, function() {
+      document.getElementById('filtri-backdrop').style.display = 'none';
+    });
+    document.getElementById('btn-filtri-toggle').classList.remove('attivo');
+    document.removeEventListener('keydown', chiudiFiltriConEsc);
+  }
+  function chiudiFiltriConEsc(e) { if (e.key === 'Escape') chiudiFiltriSheet(); }
+
+  (function initDragSheetFiltri() {
+    var handle = document.getElementById('filtri-drag-handle');
+    if (!handle) return;
+    var startClientY = 0, startSheetY = 0, storico = [];
+
+    handle.addEventListener('pointerdown', function(e) {
+      if (filtriSheet.molla) filtriSheet.molla.cancel();
+      handle.setPointerCapture(e.pointerId);
+      filtriSheet.trascinando = true;
+      startClientY = e.clientY;
+      startSheetY = filtriSheet.y;
+      storico = [{ y: e.clientY, t: performance.now() }];
+    });
+    handle.addEventListener('pointermove', function(e) {
+      if (!filtriSheet.trascinando) return;
+      var delta = e.clientY - startClientY;
+      var nuovaY = startSheetY + delta;
+      if (nuovaY < 0) nuovaY = nuovaY * 0.25; // resistenza oltre l'aperto
+      impostaYFiltri(nuovaY);
+      storico.push({ y: e.clientY, t: performance.now() });
+      if (storico.length > 5) storico.shift();
+    });
+    function fineTrascinamento() {
+      if (!filtriSheet.trascinando) return;
+      filtriSheet.trascinando = false;
+      var v = 0;
+      if (storico.length >= 2) {
+        var a = storico[0], b = storico[storico.length - 1];
+        var dt = (b.t - a.t) / 1000;
+        if (dt > 0) v = (b.y - a.y) / dt;
+      }
+      var h = altezzaSheetFiltri();
+      var soglia = h * 0.3;
+      if (filtriSheet.y > soglia || v > 500) chiudiFiltriSheet(v);
+      else animaFiltriA(0, v);
+    }
+    handle.addEventListener('pointerup', fineTrascinamento);
+    handle.addEventListener('pointercancel', fineTrascinamento);
+  })();
+
+  function apriLightbox() {
+    var src = document.getElementById('dettaglio-img').src;
+    if (!src) return;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('aperto');
+  }
+  function chiudiLightbox() {
+    document.getElementById('lightbox').classList.remove('aperto');
+  }
+
+  function condividiEvento(id) {
+    var ev = tuttiEventi.find(function(e) { return e.id === id; });
+    var url = window.location.origin + window.location.pathname + '?id=' + encodeURIComponent(id);
+
+    if (navigator.share) {
+      navigator.share({
+        title: ev ? ev.nome : 'Evento in Toscana',
+        text: ev ? (ev.nome + ' - ' + (ev.riepilogoDate || '')) : '',
+        url: url
+      }).catch(function(err) {
+        // L'utente ha annullato la condivisione, o il browser ha rifiutato: nessuna azione necessaria.
+      });
+      return;
+    }
+
+    // Fallback per browser desktop senza supporto alla condivisione nativa
+    navigator.clipboard.writeText(url).then(function() {
+      mostraToast('Link copiato negli appunti!');
+    }).catch(function() {
+      alert('Link: ' + url);
+    });
+  }
+
+  function mostraToast(msg) {
+    var container = document.getElementById('toast-container');
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = msg;
+    container.appendChild(toast);
+    setTimeout(function() { toast.remove(); }, 3000);
+  }
+
+  function aggiornaUrl() {
+    var params = new URLSearchParams();
+    if (periodoCorrente !== 'tutti') params.set('periodo', periodoCorrente);
+    if (categorieSelezionate.size) params.set('cat', Array.from(categorieSelezionate).join(','));
+    if (provinceSelezionate.size) params.set('prov', Array.from(provinceSelezionate).join(','));
+    var q = document.getElementById('input-ricerca').value.trim();
+    if (q) params.set('q', q);
+    var newUrl = params.toString() ? '?' + params.toString() : window.location.pathname;
+    history.replaceState(null, '', newUrl);
+  }
+  function aggiornaUrlDettaglio(id) {
+    var params = new URLSearchParams(window.location.search);
+    params.set('id', id);
+    history.replaceState(null, '', '?' + params.toString());
+  }
+  function caricaFiltriDaUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var p = params.get('periodo');
+    if (p) {
+      var btn = document.querySelector('.btn-filtro[data-periodo="' + p + '"]');
+      if (btn) setPeriodo(p, btn);
+    }
+    var cats = params.get('cat');
+    if (cats) {
+      cats.split(',').forEach(function(c) { categorieSelezionate.add(c); });
+    }
+    var provs = params.get('prov');
+    if (provs) {
+      provs.split(',').forEach(function(p) { provinceSelezionate.add(p); });
+    }
+    var q = params.get('q');
+    if (q) document.getElementById('input-ricerca').value = q;
+    // Ricostruisce i pannelli multiselect cosi' le caselle di categoria/provincia
+    // risultano visivamente spuntate quando il filtro arriva da un link esterno
+    // (es. da una pagina provincia con ?prov=Firenze), non solo applicato ai dati.
+    popolaFiltriOpzioni();
+    aggiornaBadgeMultiselect('categoria', categorieSelezionate);
+    aggiornaBadgeMultiselect('provincia', provinceSelezionate);
+    aggiornaBadgeFiltri();
+    var tabParam = params.get('tab');
+    if (tabParam === 'aggiungi') mostraTab('aggiungi', false);
+  }
+
+  function mostraVista(vista) {
+    var lista = document.getElementById('pannello-lista');
+    var mapWrap = document.getElementById('map-wrap');
+    var btnLista = document.getElementById('btn-vista-lista');
+    var btnMappa = document.getElementById('btn-vista-mappa');
+    if (vista === 'lista') {
+      lista.classList.remove('nascosto'); mapWrap.classList.add('nascosto');
+      btnLista.classList.add('attivo'); btnMappa.classList.remove('attivo');
+    } else {
+      lista.classList.add('nascosto'); mapWrap.classList.remove('nascosto');
+      btnMappa.classList.add('attivo'); btnLista.classList.remove('attivo');
+      setTimeout(function() { map.invalidateSize(); }, 100);
+    }
+  }
+  function adattaLayoutIniziale() {
+    if (window.innerWidth > 760) { document.getElementById('map-wrap').classList.remove('nascosto'); setTimeout(function() { map.invalidateSize(); }, 100); }
+  }
+    if (window.innerWidth <= 760) {
+  mostraVista('mappa');
+} else {
+  adattaLayoutIniziale();
+}
+  window.addEventListener('resize', adattaLayoutIniziale);
+
+  var markerUtente = null;
+  function geolocate() {
+    if (!navigator.geolocation) { alert('Geolocalizzazione non supportata dal browser.'); return; }
+    var btn = document.getElementById('btn-geolocate');
+    btn.textContent = 'Ricerco...';
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      mostraVista('mappa');
+      map.setView([lat, lon], 12);
+      if (markerUtente) map.removeLayer(markerUtente);
+      markerUtente = L.marker([lat, lon], {
+        icon: L.divIcon({ className: '', html: '<div style="width:16px;height:16px;background:#FF3131;border:3px solid white;border-radius:50%;box-shadow:0 0 0 4px rgba(255,68,56,0.3);"></div>', iconSize: [16,16], iconAnchor: [8,8] })
+      }).addTo(map).bindPopup('<b>Sei qui</b>').openPopup();
+      btn.textContent = 'Vicino a me';
+    }, function() { btn.textContent = 'Vicino a me'; alert('Non riesco a trovare la tua posizione.'); });
+  }
+
+  // ===================== BANNER PUBBLICITARI (dinamico da GAS) =====================
+  // I banner vengono caricati dal tuo Google Sheet "Banner" tramite l'endpoint GAS.
+  // Per aggiungere un banner: inserisci una riga nel foglio "Banner" con:
+  //   img = URL dell'immagine (es. https://tuo-sito.com/banner.png)
+  //   link = URL di destinazione al click
+  //   attivo = sì (scrivere proprio "sì")
+  //   dataInizio = (opzionale) data da cui mostrarlo, formato YYYY-MM-DD
+  //   dataFine = (opzionale) data fino a cui mostrarlo, formato YYYY-MM-DD
+
+  var BANNERS = [];
+  var bannerIndex = 0;
+
+  function bannerAttivi() {
+    return BANNERS.filter(function(b) { return b && b.img; });
+  }
+
+  function mostraBanner(banner) {
+    var haSponsor = !!(banner && banner.img);
+    document.getElementById('banner-label').style.display = haSponsor ? 'block' : 'none';
+    document.getElementById('banner-link').style.display = haSponsor ? 'flex' : 'none';
+    document.getElementById('banner-cta-content').style.display = haSponsor ? 'none' : 'flex';
+    if (haSponsor) {
+      document.getElementById('banner-img').src = banner.img;
+      document.getElementById('banner-link').href = banner.link || '#';
+    }
+  }
+
+  function inizializzaBanner() {
+    var attivi = bannerAttivi();
+    bannerIndex = 0;
+    mostraBanner(attivi.length > 0 ? attivi[0] : null);
+  }
+
+  function rotazioneBanner() {
+    var attivi = bannerAttivi();
+    if (attivi.length <= 1) return;
+    bannerIndex = (bannerIndex + 1) % attivi.length;
+    mostraBanner(attivi[bannerIndex]);
+  }
+  setInterval(rotazioneBanner, 10000);
+
+  async function caricaBanner() {
+    try {
+      var res = await fetch(JSON_URL_FALLBACK + '?action=banner&t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      BANNERS = data;
+      inizializzaBanner();
+    } catch (err) {
+      console.warn('Banner non caricati dal server:', err);
+      BANNERS = [];
+      inizializzaBanner();
+    }
+  }
+
+  
+
+  // Compact header on scroll (desktop + mobile)
+  (function() {
+    var topBar = document.getElementById('top-bar');
+    var scrollThreshold = 60;
+    var lastScroll = 0;
+
+    function checkScroll() {
+      var y;
+      if (window.innerWidth > 760) {
+        // Desktop: check scroll of the lista panel
+        var lista = document.getElementById('pannello-lista');
+        y = lista ? lista.scrollTop : 0;
+      } else {
+        // Mobile: check window scroll
+        y = window.scrollY || document.documentElement.scrollTop;
+      }
+      if (y > scrollThreshold) {
+        topBar.classList.add('compact');
+      } else {
+        topBar.classList.remove('compact');
+      }
+      lastScroll = y;
+    }
+
+    // Window scroll (mobile)
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    // Lista panel scroll (desktop)
+    var lista = document.getElementById('pannello-lista');
+    if (lista) lista.addEventListener('scroll', checkScroll, { passive: true });
+    // Resize
+    window.addEventListener('resize', checkScroll);
+    // Initial check
+    checkScroll();
+  })();
+
+  // ===================== GOOGLE ANALYTICS (con consenso) =====================
+  var GA_ID = 'G-8YSDREEZ24';
+
+  function caricaGA() {
+    if (window.gaCaricato) return;
+    window.gaCaricato = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  function accettaCookie() {
+    localStorage.setItem('cookie_consent', 'accettato');
+    document.getElementById('cookie-banner').classList.remove('visibile');
+    caricaGA();
+  }
+
+  function rifiutaCookie() {
+    localStorage.setItem('cookie_consent', 'rifiutato');
+    document.getElementById('cookie-banner').classList.remove('visibile');
+  }
+
+  function inizializzaCookieBanner() {
+    var scelta = localStorage.getItem('cookie_consent');
+    if (scelta === 'accettato') {
+      caricaGA();
+    } else if (scelta === 'rifiutato') {
+      // nessuna azione, l'utente ha già scelto di non essere tracciato
+    } else {
+      document.getElementById('cookie-banner').classList.add('visibile');
+    }
+  }
+
+  // *** NUOVO: dati strutturati Schema.org per Google Rich Results ***
+  function aggiornaDatiStrutturati(eventi) {
+    var esistente = document.getElementById('ld-json-eventi');
+    if (esistente) esistente.remove();
+
+    var eventiValidi = eventi.filter(function(ev) { return ev.nome && ev.dataSort; }).slice(0, 30);
+    if (eventiValidi.length === 0) return;
+
+    var lista = eventiValidi.map(function(ev) {
+      var obj = {
+        '@type': 'Event',
+        'name': ev.nome,
+        'startDate': ev.dataSort,
+        'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+        'eventStatus': 'https://schema.org/EventScheduled',
+        'location': {
+          '@type': 'Place',
+          'name': [ev.comune, ev.provincia].filter(Boolean).join(', '),
+          'address': ev.indirizzo || ev.comune || ''
+        }
+      };
+      if (ev.dataFine) obj.endDate = ev.dataFine;
+      if (ev.locandina) obj.image = [ev.locandina];
+      if (ev.descrizione) obj.description = ev.descrizione;
+      if (ev.lat != null && ev.lon != null) {
+        obj.location.geo = { '@type': 'GeoCoordinates', latitude: ev.lat, longitude: ev.lon };
+      }
+      return obj;
+    });
+
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'ld-json-eventi';
+    script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': lista });
+    document.head.appendChild(script);
+  }
+
+  async function init() {
+    try {
+      var eventi = await leggiEventi();
+      tuttiEventi = eventi.filter(isFuturo);
+      console.log('Totale eventi:', tuttiEventi.length, '- VT:', tuttiEventi.filter(function(e){return e.fonte==='visittuscany';}).length, '- Stase:', tuttiEventi.filter(function(e){return e.fonte==='stase';}).length);
+      popolaFiltriOpzioni();
+      caricaFiltriDaUrl();
+      applicaFiltri();
+      adattaLayoutIniziale();
+      // *** Il banner NON è "await": si carica in sottofondo, senza bloccare
+      // lo spinner. L'endpoint Apps Script del banner ha una latenza di
+      // "risveglio" incostante (a volte 1s, a volte 10-20s) — se lo aspettassimo
+      // qui, la pagina resterebbe bloccata sullo spinner anche quando gli
+      // eventi (letti dal file statico veloce) sono già pronti. ***
+      caricaBanner();
+      aggiornaDatiStrutturati(tuttiEventi);
+
+      var idNellUrl = new URLSearchParams(window.location.search).get('id');
+      if (idNellUrl) {
+        var ev = tuttiEventi.find(function(e) { return e.id === idNellUrl; });
+        if (ev) apriDettaglio(ev);
+      }
+    } catch (err) {
+      console.error('Errore init:', err);
+      mostraToast('Errore di caricamento. Dati demo attivi.');
+    } finally {
+      document.getElementById('loading').style.display = 'none';
+    }
+  }
+
+  // ===================== PWA: service worker + banner Installa =====================
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.log('Service worker non registrato:', err);
+      });
+    });
+  }
+
+  (function gestisciFabInstalla() {
+    var fab = document.getElementById('fab-installa');
+    var cerchio = document.getElementById('fab-installa-cerchio');
+    var etichetta = document.getElementById('fab-installa-etichetta');
+    var chiudiBtn = document.getElementById('fab-installa-chiudi');
+    var tooltip = document.getElementById('fab-installa-tooltip');
+    if (!fab) return;
+
+    function alClic(fn) {
+      cerchio.addEventListener('click', fn);
+      etichetta.addEventListener('click', fn);
+    }
+
+    var CHIAVE_CHIUSURA = 'stase_banner_installa_chiuso_il';
+    var GIORNI_PRIMA_DI_RIPROPORRE = 14;
+
+    function bannerChiusoDiRecente() {
+      try {
+        var val = localStorage.getItem(CHIAVE_CHIUSURA);
+        if (!val) return false;
+        var giorniPassati = (Date.now() - parseInt(val, 10)) / (1000 * 60 * 60 * 24);
+        return giorniPassati < GIORNI_PRIMA_DI_RIPROPORRE;
+      } catch (e) { return false; }
+    }
+
+    function chiudiFab() {
+      fab.classList.add('nascosto');
+      tooltip.classList.add('nascosto');
+      try { localStorage.setItem(CHIAVE_CHIUSURA, String(Date.now())); } catch (e) {}
+    }
+    chiudiBtn.addEventListener('click', function(e) { e.stopPropagation(); chiudiFab(); });
+
+    function mostraTooltip(testo) {
+      tooltip.textContent = testo;
+      tooltip.classList.remove('nascosto');
+    }
+    function toggleTooltip(testo) {
+      if (tooltip.classList.contains('nascosto')) mostraTooltip(testo);
+      else tooltip.classList.add('nascosto');
+    }
+
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone || bannerChiusoDiRecente()) return; // app già installata, o utente l'ha già chiuso di recente
+
+    var ua = navigator.userAgent || '';
+    var isInstagramOFacebookWebview = /Instagram|FBAN|FBAV/i.test(ua);
+    var isAndroid = /Android/i.test(ua);
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) && !window.MSStream;
+
+    // === Caso 1: dentro il browser in-app di Instagram/Facebook, su Android ===
+    // Il browser in-app non supporta l'installazione PWA: lo "scappatoio" noto e
+    // affidabile su Android è reindirizzare tramite intent:// per far riaprire
+    // la pagina in Chrome, dove l'installazione funziona normalmente.
+    // Lo facciamo una sola volta per sessione, per evitare loop se il reindirizzo
+    // dovesse fallire silenziosamente.
+    if (isInstagramOFacebookWebview && isAndroid) {
+      var giaTentato = sessionStorage.getItem('stase_redirect_chrome_tentato');
+      if (!giaTentato) {
+        try { sessionStorage.setItem('stase_redirect_chrome_tentato', '1'); } catch (e) {}
+        var urlSenzaSchema = location.href.replace(/^https?:\/\//, '');
+        location.href = 'intent://' + urlSenzaSchema + '#Intent;scheme=https;package=com.android.chrome;end;';
+      }
+      return; // non mostriamo il cerchietto: o si è aperto Chrome, o il tentativo è già stato fatto
+    }
+
+    // === Caso 2: dentro il browser in-app di Instagram/Facebook, su iOS ===
+    // Apple non permette a nessun sito di reindirizzare forzatamente verso Safari:
+    // è una restrizione del sistema operativo, non aggirabile via JavaScript.
+    // Il tap sul cerchietto mostra le istruzioni in una fumetto sopra al cerchietto,
+    // dato che il browser in-app di Instagram su iOS supporta comunque "Aggiungi
+    // alla schermata Home" tramite l'icona di condivisione — va solo segnalato.
+    if (isInstagramOFacebookWebview && isIOS) {
+      fab.classList.remove('nascosto');
+      alClic(function() {
+        toggleTooltip('Sei arrivato da Instagram: tocca l\'icona con i 3 puntini ⬆️ qui sopra, poi "Apri nel browser esterno". Poi torna qui e tocca di nuovo questo pulsante.');
+      });
+      return;
+    }
+
+    // === Caso 3: Safari su iOS (fuori da app in-app) ===
+    if (isIOS) {
+      fab.classList.remove('nascosto');
+      alClic(function() { location.href = '/installa.html'; });
+      return;
+    }
+
+    // === Caso 4: Chrome/Edge su Android o Desktop — installazione nativa diretta ===
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      fab.classList.remove('nascosto');
+    });
+    alClic(function() {
+      if (!deferredPrompt) { location.href = '/installa.html'; return; }
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function() {
+        deferredPrompt = null;
+        chiudiFab();
+      });
+    });
+    window.addEventListener('appinstalled', chiudiFab);
+  })();
+
+  init();
+  inizializzaCookieBanner();
+</script>
+</body>
+</html>
