@@ -48,6 +48,7 @@ HEADERS_BROWSER = {
     ),
     "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
     "Referer": "https://www.visittuscany.com/",
+    "Connection": "close",
 }
 
 
@@ -76,7 +77,7 @@ def estensione_da_url_o_content_type(url, content_type):
     return guessed
 
 
-def scarica_immagine(url, tentativi=3):
+def scarica_immagine(url, tentativi=5):
     for tentativo in range(1, tentativi + 1):
         try:
             r = requests.get(url, timeout=REQUEST_TIMEOUT, headers=HEADERS_BROWSER)
@@ -89,7 +90,7 @@ def scarica_immagine(url, tentativi=3):
         except Exception as e:
             print(f"  Tentativo {tentativo}/{tentativi} fallito per {url}: {e}")
             if tentativo < tentativi:
-                time.sleep(2 * tentativo)
+                time.sleep(3 * tentativo)
     return None, None
 
 
@@ -126,7 +127,7 @@ def main():
 
         print(f"Scarico: {url_originale}")
         content, content_type = scarica_immagine(url_originale)
-        time.sleep(0.4)  # piccola pausa per non sembrare traffico anomalo al WAF di VT
+        time.sleep(1.0)  # pausa per non sembrare traffico anomalo al WAF di VT
         if content is None:
             fallite += 1
             continue  # lascia l'URL originale di VisitTuscany come fallback
