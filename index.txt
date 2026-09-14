@@ -1198,6 +1198,65 @@
     'PO': 'Prato', 'SI': 'Siena'
   };
 
+  // *** NUOVO: mappatura tipologia VisitTuscany -> categorie Stase, corretta
+  // rispetto alla versione precedente. I dati reali di VT usano tipologie al
+  // PLURALE ("sagre", "mostre") mentre la vecchia mappatura cercava solo il
+  // singolare ("sagra", "mostra") come sottostringa: "sagre" non contiene
+  // "sagra" (l'ultima lettera cambia), quindi non scattava mai. Inoltre le
+  // tipologie molto comuni "eventi" e "altri" non avevano nessuna regola
+  // dedicata. Il risultato pratico: la maggior parte degli eventi VT finiva
+  // nella categoria generica con l'emoji 📌, sempre la stessa. Questa
+  // versione usa radici di parola (compatibili singolare/plurale) e, quando
+  // la tipologia da sola non basta, guarda anche titolo/sottotitolo
+  // dell'evento per riconoscere pattern tipici (Palio, Carnevale, mercato,
+  // tartufo, ecc.), cosi' gli eventi si distribuiscono su piu' categorie ed
+  // emoji reali invece di ammassarsi tutti sulla stessa.
+  function mappaCategoriaVT_(typologyRaw, titoloRaw, sottotitoloRaw) {
+    var tip = String(typologyRaw || '').toLowerCase();
+    var testo = (tip + ' ' + String(titoloRaw || '') + ' ' + String(sottotitoloRaw || '')).toLowerCase();
+
+    if (testo.indexOf('rievoc') !== -1 || testo.indexOf('palio') !== -1 ||
+        testo.indexOf('medioev') !== -1 || testo.indexOf('medieval') !== -1 ||
+        testo.indexOf('carnevale') !== -1 || testo.indexOf('corteo stor') !== -1 ||
+        testo.indexOf('giostra') !== -1 || testo.indexOf('calcio storico') !== -1) {
+      return 'Rievocazione storica/Palio';
+    }
+    if (tip.indexOf('sport') !== -1 || testo.indexOf('maratona') !== -1 ||
+        testo.indexOf('ciclostoric') !== -1 || testo.indexOf('trekking') !== -1 ||
+        testo.indexOf('trail') !== -1 || testo.indexOf('bike') !== -1) {
+      return 'Evento sportivo';
+    }
+    if (tip.indexOf('teatr') !== -1 || tip.indexOf('cinema') !== -1 || testo.indexOf('spettacolo') !== -1) {
+      return 'Spettacolo teatrale';
+    }
+    if (tip.indexOf('music') !== -1 || testo.indexOf('concert') !== -1 || testo.indexOf('blues') !== -1 || testo.indexOf('jazz') !== -1) {
+      return 'Concerto';
+    }
+    if (tip.indexOf('mostr') !== -1 || testo.indexOf('expo') !== -1) {
+      return 'Mostra/Esposizione';
+    }
+    if (tip.indexOf('sagr') !== -1 || testo.indexOf('tartufo') !== -1 || testo.indexOf('enogastr') !== -1 || testo.indexOf('degustazion') !== -1) {
+      return 'Sagra';
+    }
+    if (tip.indexOf('fiera') !== -1 || testo.indexOf('mercat') !== -1) {
+      return 'Fiera';
+    }
+    if (tip.indexOf('festival') !== -1) {
+      return 'Festival';
+    }
+    if (testo.indexOf('discotec') !== -1 || testo.indexOf('serata') !== -1) {
+      return 'Serata/Discoteca';
+    }
+    if (testo.indexOf('festa') !== -1) {
+      return 'Festa paesana';
+    }
+    // Fallback: la tipologia "eventi" di VisitTuscany raccoglie spesso feste
+    // e ricorrenze cittadine generiche senza altre parole chiave -> meglio
+    // "Festa paesana" (🎉) che il generico "Altro" (📌).
+    if (tip === 'eventi') return 'Festa paesana';
+    return 'Altro';
+  }
+
   function normalizzaEventiVT(data) {
     // Gestisce la struttura response.data.doc di VisitTuscany
     if (data && data.response && data.response.data && Array.isArray(data.response.data.doc)) {
@@ -1306,8 +1365,12 @@
         mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(comune + ', ' + (provincia || '') + ', Toscana');
       }
 
-      // topevent nel JSON VT è stringa "true"/"false", non booleano
-      var inEvidenza = e.topevent === true || e.topevent === 'true';
+      // "In evidenza" è riservato esclusivamente agli eventi Stase impostati
+      // a mano nel foglio Google (visibilità a pagamento). Il flag "topevent"
+      // di VisitTuscany è una loro selezione editoriale indipendente e va
+      // sempre ignorato qui, altrimenti eventi mai pagati finirebbero
+      // mescolati alla sezione sponsorizzata del sito.
+      var inEvidenza = false;
 
       return {
         id: 'vt_' + (e.id || i),
