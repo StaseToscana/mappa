@@ -1307,8 +1307,12 @@
         mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(comune + ', ' + (provincia || '') + ', Toscana');
       }
 
-      // topevent nel JSON VT è stringa "true"/"false", non booleano
-      var inEvidenza = e.topevent === true || e.topevent === 'true';
+      // "In evidenza" è riservato esclusivamente agli eventi Stase impostati
+      // a mano nel foglio Google (visibilità a pagamento). Il flag "topevent"
+      // di VisitTuscany è una loro selezione editoriale indipendente e va
+      // sempre ignorato qui, altrimenti eventi mai pagati finirebbero
+      // mescolati alla sezione sponsorizzata del sito.
+      var inEvidenza = false;
 
       return {
         id: 'vt_' + (e.id || i),
