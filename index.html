@@ -48,7 +48,7 @@
       --crema-card: #FFFFFF;
       --bordo: #F0E6DC;
       --grigio-testo: #6B6258;
-      --banner-h: 68px;
+      --banner-h: 76px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :focus-visible {
@@ -592,8 +592,9 @@
       padding: 0 14px; box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
     }
     #banner-pubblicitario a.banner-link { display: flex; align-items: center; height: 100%; max-width: 640px; width: 100%; justify-content: center; }
-    #banner-pubblicitario img { max-height: calc(var(--banner-h, 68px) - 16px); max-width: 100%; object-fit: contain; border-radius: 6px; }
-    #banner-label { position: absolute; left: 8px; top: 3px; font-size: 0.6rem; color: var(--grigio-testo); letter-spacing: 0.5px; text-transform: uppercase; }
+    #banner-pubblicitario img { max-height: calc(var(--banner-h, 76px) - 24px); max-width: 100%; object-fit: contain; border-radius: 6px; }
+    #banner-pubblicitario.con-sponsor { padding: 12px 14px; }
+    #banner-label { position: absolute; left: 8px; top: 2px; line-height: 1; font-size: 0.6rem; color: var(--grigio-testo); letter-spacing: 0.5px; text-transform: uppercase; }
 
     #loading {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -624,7 +625,7 @@
     #top-bar.compact { padding-bottom: 0; }
 
     @media (max-width: 760px) {
-      :root { --banner-h: 60px; }
+      :root { --banner-h: 68px; }
       #toggle-vista { display: flex; }
       #pannello-lista { width: 100%; min-width: 0; }
       #pannello-lista.nascosto, #map-wrap.nascosto { display: none; }
@@ -690,7 +691,7 @@
     #fab-installa {
       position: fixed;
       right: 16px;
-      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      bottom: calc(var(--banner-h, 76px) + 16px + env(safe-area-inset-bottom, 0px));
       z-index: 500;
       display: flex;
       flex-direction: column;
@@ -900,7 +901,7 @@
 
 <div id="banner-pubblicitario">
   <span id="banner-label">Sponsorizzato</span>
-  <a class="banner-link" id="banner-link" href="#" target="_blank">
+  <a class="banner-link" id="banner-link" href="#" target="_blank" rel="sponsored noopener">
     <img id="banner-img" src="" alt="Banner sponsor" />
   </a>
   <div id="banner-cta-content">
@@ -2058,24 +2059,51 @@
   var bannerIndex = 0;
 
   function bannerAttivi() {
-    return BANNERS.filter(function(b) { return b && b.img; });
+    return BANNERS.filter(function(b) {
+      return b && /^https?:\/\//i.test(b.img || '') && /^https?:\/\//i.test(b.link || '');
+    });
   }
 
+  // Aggiunge UTM al link dello sponsor: nelle statistiche dell'inserzionista
+  // le visite arrivate da Stase risultano come stasetoscana / banner.
+  function linkBannerConUtm_(url) {
+    try {
+      var u = new URL(url);
+      if (!u.searchParams.has('utm_source')) {
+        u.searchParams.set('utm_source', 'stasetoscana');
+        u.searchParams.set('utm_medium', 'banner');
+      }
+      return u.toString();
+    } catch (e) { return url; }
+  }
+
+  // Eventi GA4 banner_view / banner_click (partono solo dopo il consenso cookie).
+  function tracciaBanner_(nomeEvento, banner) {
+    if (typeof window.gtag !== 'function' || !banner) return;
+    window.gtag('event', nomeEvento, { banner_url: banner.link, banner_img: banner.img });
+  }
+
+  var bannerGiaVisti = {};
   function mostraBanner(banner) {
     var haSponsor = !!(banner && banner.img);
+    document.getElementById('banner-pubblicitario').classList.toggle('con-sponsor', haSponsor);
     document.getElementById('banner-label').style.display = haSponsor ? 'block' : 'none';
     document.getElementById('banner-link').style.display = haSponsor ? 'flex' : 'none';
     document.getElementById('banner-cta-content').style.display = haSponsor ? 'none' : 'flex';
     if (haSponsor) {
-      document.getElementById('banner-img').src = banner.img;
-      document.getElementById('banner-link').href = banner.link || '#';
+      var img = document.getElementById('banner-img');
+      img.onerror = function() { mostraBanner(null); }; // immagine rotta: mostra la CTA
+      img.src = banner.img;
+      document.getElementById('banner-link').href = linkBannerConUtm_(banner.link);
+      if (!bannerGiaVisti[banner.img]) { bannerGiaVisti[banner.img] = true; tracciaBanner_('banner_view', banner); }
     }
   }
 
+  // Partenza casuale: chi visita il sito per pochi secondi non vede sempre e solo il primo banner del foglio.
   function inizializzaBanner() {
     var attivi = bannerAttivi();
-    bannerIndex = 0;
-    mostraBanner(attivi.length > 0 ? attivi[0] : null);
+    bannerIndex = attivi.length > 1 ? Math.floor(Math.random() * attivi.length) : 0;
+    mostraBanner(attivi.length > 0 ? attivi[bannerIndex] : null);
   }
 
   function rotazioneBanner() {
@@ -2086,12 +2114,16 @@
   }
   setInterval(rotazioneBanner, 10000);
 
+  document.getElementById('banner-link').addEventListener('click', function() {
+    tracciaBanner_('banner_click', bannerAttivi()[bannerIndex]);
+  });
+
   async function caricaBanner() {
     try {
       var res = await fetch(JSON_URL_FALLBACK + '?action=banner&t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
-      BANNERS = data;
+      BANNERS = Array.isArray(data) ? data : [];
       inizializzaBanner();
     } catch (err) {
       console.warn('Banner non caricati dal server:', err);
