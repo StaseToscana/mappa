@@ -927,6 +927,7 @@
   const JSON_URL_STATICO = 'https://stasetoscana.it/eventi.json';
   const JSON_URL_FALLBACK = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
   const JSON_URL_VT = 'https://stasetoscana.it/eventi_visittuscany.json';
+  const JSON_URL_FI = 'https://stasetoscana.it/eventi_firenze.json';
 
   const CATEGORIE = {
     'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
@@ -1140,15 +1141,19 @@
     } catch (err) {
       console.warn('VisitTuscany non disponibile (forse il robot non ha ancora scaricato):', err);
     }
-    // Unisci e rimuovi duplicati (nome + data + comune)
-    var tutti = eventiStase.concat(eventiVT);
-    var visti = new Set();
-    var unici = tutti.filter(function(ev) {
-      var chiave = (ev.nome || '') + '|' + (ev.dataSort || '') + '|' + (ev.comune || '');
-      if (visti.has(chiave)) return false;
-      visti.add(chiave);
-      return true;
-    });
+        // 3. Carica eventi Firenze / FeelFlorence (opzionale, non blocca)
+    var eventiFI = [];
+    try {
+      var resFI = await fetch(JSON_URL_FI + '?t=' + Date.now());
+      if (resFI.ok) {
+        eventiFI = normalizzaEventiFirenze(await resFI.json());
+        console.log('Eventi Firenze caricati:', eventiFI.length);
+      }
+    } catch (err) {
+      console.warn('Eventi Firenze non disponibili:', err);
+    }
+    // Unisci le tre fonti e rimuovi i duplicati
+    var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI]);
     if (unici.length === 0) {
       mostraToast('Modalita demo: dati di esempio caricati');
       return DATI_DEMO;
@@ -1337,7 +1342,87 @@
       };
     });
   }
+  // ===================== EVENTI FIRENZE (FeelFlorence, CC BY 4.0) =====================
+  function normalizzaEventiFirenze(data) {
+    var lista = data && Array.isArray(data.eventi) ? data.eventi : [];
+    var urlSicuro = function(u) { return /^https?:\/\//i.test(u || '') ? u : ''; };
+    var dataOk = function(d) { return /^\d{4}-\d{2}-\d{2}$/.test(d || ''); };
+    return lista
+      .filter(function(e) { return e && e.nome && dataOk(e.dataSort); })
+      .map(function(e, i) {
+        return {
+          id: String(e.id || ('fi-' + i)).replace(/[^a-zA-Z0-9_-]/g, '-'),
+          nome: e.nome,
+          locandina: null,
+          categoria: e.categoria || 'Altro',
+          descrizione: e.descrizione || '',
+          provincia: e.provincia || 'Firenze',
+          comune: e.comune || 'Firenze',
+          indirizzo: e.indirizzo || '',
+          riepilogoDate: e.riepilogoDate || '',
+          dataSort: e.dataSort,
+          dataFine: dataOk(e.dataFine) ? e.dataFine : e.dataSort,
+          mapsUrl: urlSicuro(e.mapsUrl),
+          url: urlSicuro(e.url),
+          sitoUfficiale: urlSicuro(e.sitoUfficiale),
+          lat: e.lat != null ? parseFloat(e.lat) : null,
+          lon: e.lon != null ? parseFloat(e.lon) : null,
+          instagram: null,
+          inEvidenza: false,
+          fonte: 'firenze'
+        };
+      });
+  }
 
+  // ===================== DEDUPLICA TRA FONTI =====================
+  // Stessa data + stesso comune + titolo uguale (stessa fonte) o simile (fonti diverse).
+  // Vince la fonte con priorità più alta (Stase > Firenze > VisitTuscany) e,
+  // se manca la locandina, si tiene quella dell'altra scheda.
+  var _PAROLE_VUOTE = new Set(['il','lo','la','gli','le','di','del','della','dei','delle','alla','con','per','una','the','of']);
+  var _PRIORITA_FONTE = { stase: 3, firenze: 2, visittuscany: 1 };
+
+  function _normTesto(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function _parole(n) {
+    return n.split(' ').filter(function(w) { return w.length > 2 && !_PAROLE_VUOTE.has(w); });
+  }
+  function _titoliSimili(a, b, stessaFonte) {
+    var na = _normTesto(a), nb = _normTesto(b);
+    if (na === nb) return true;
+    if (stessaFonte) return false;
+    var A = _parole(na), B = _parole(nb);
+    if (!A.length || !B.length) return false;
+    var comuni = 0;
+    A.forEach(function(w) { if (B.indexOf(w) !== -1) comuni++; });
+    return comuni / Math.min(A.length, B.length) >= 0.6;
+  }
+  function _priorita(ev) { return _PRIORITA_FONTE[ev.fonte || 'stase'] || 0; }
+
+  function unisciEDeduplica(liste) {
+    var gruppi = {};
+    var risultato = [];
+    [].concat.apply([], liste).forEach(function(ev) {
+      var chiave = String(ev.dataSort || '') + '|' + _normTesto(ev.comune);
+      var gruppo = gruppi[chiave] || (gruppi[chiave] = []);
+      var gemello = null;
+      for (var k = 0; k < gruppo.length; k++) {
+        var stessaFonte = (gruppo[k].fonte || 'stase') === (ev.fonte || 'stase');
+        if (_titoliSimili(gruppo[k].nome, ev.nome, stessaFonte)) { gemello = gruppo[k]; break; }
+      }
+      if (!gemello) { gruppo.push(ev); risultato.push(ev); return; }
+      var vince = _priorita(ev) > _priorita(gemello) ? ev : gemello;
+      var perde = vince === ev ? gemello : ev;
+      if (!vince.locandina && perde.locandina) vince.locandina = perde.locandina;
+      if (vince !== gemello) {
+        risultato[risultato.indexOf(gemello)] = vince;
+        gruppo[gruppo.indexOf(gemello)] = vince;
+      }
+    });
+    return risultato;
+  }
+  
   function parseData(d) {
     if (!d) return null;
     try { var p = d.split('-'); return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2])); }
@@ -1539,7 +1624,8 @@
     var testoBadgeEvidenza = opts.etichettaSponsor ? 'Sponsorizzato' : 'In evidenza';
     var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ ' + testoBadgeEvidenza + '</span>' : '';
     var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
-    card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + imgHtml +
+    var badgeFIHtml = ev.fonte === 'firenze' ? '<span class="badge-vt" style="background:#8B1E3F">FeelFlorence</span>' : '';
+    card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + badgeFIHtml + imgHtml +
       '<div class="card-body">' +
       '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
       '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
@@ -1712,11 +1798,16 @@
     else { descBox.style.display = 'none'; }
 
     var azioniHtml = '';
+    if (ev.fonte === 'firenze') {
+      if (ev.url) azioniHtml += '<a class="btn-azione" style="background:#8B1E3F" href="' + escapeHtml_(ev.url) + '" target="_blank" rel="noopener">🏙️ Vedi su FeelFlorence</a>';
+      if (ev.sitoUfficiale) azioniHtml += '<a class="btn-azione" style="background:#444" href="' + escapeHtml_(ev.sitoUfficiale) + '" target="_blank" rel="noopener">Sito ufficiale</a>';
+    }
     if (ev.fonte === 'visittuscany' && ev.url) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.url) + '\" target=\"_blank\">🏛️ Vedi su VisitTuscany</a>';
     if (ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:' + cat.bg + '\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\">Google Maps</a>';
     if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
     if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
     azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
+    if (ev.fonte === 'firenze') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://www.feelflorence.it" target="_blank" rel="noopener">Comune di Firenze – FeelFlorence</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a></div>';
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
     aggiornaUrlDettaglio(ev.id);
