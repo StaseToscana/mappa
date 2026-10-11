@@ -1,0 +1,61 @@
+name: Aggiorna eventi Firenze (FeelFlorence)
+
+on:
+  schedule:
+    # 05:15 UTC = 07:15 ora legale / 06:15 ora solare. Sfalsato rispetto al workflow VisitTuscany (06:00)
+    # per evitare due push contemporanei sullo stesso branch.
+    - cron: '15 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-eventi-firenze
+  cancel-in-progress: false
+
+env:
+  TZ: Europe/Rome
+  URL_GEOJSON: https://datigis.comune.fi.it/resources/open-data/eventi-a-firenze/feelflorence_eventi.geojson
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Scarica il GeoJSON del Comune di Firenze
+        run: |
+          curl --fail --silent --show-error --location \
+               --retry 3 --retry-delay 15 --max-time 120 \
+               -A "StaseToscana/1.0 (+https://stasetoscana.it)" \
+               -o eventi_firenze_raw.geojson "$URL_GEOJSON"
+          test -s eventi_firenze_raw.geojson
+          # Se il file non è JSON valido il job fallisce qui e non tocca nulla.
+          node -e "JSON.parse(require('fs').readFileSync('eventi_firenze_raw.geojson','utf8'))"
+
+      - name: Normalizza nel formato Stase
+        # Se lo script esce con errore (file vuoto, calo anomalo) il job si ferma
+        # e resta online l'ultimo eventi_firenze.json valido.
+        run: node scripts/normalizza-firenze.js eventi_firenze_raw.geojson eventi_firenze.json
+
+      - name: Commit e push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eventi_firenze.json eventi_firenze_raw.geojson
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica."
+          else
+            git commit -m "Aggiorna eventi Firenze $(date +%F)"
+            # Apps Script pubblica eventi.json sullo stesso branch: allineiamoci prima del push.
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
