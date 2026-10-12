@@ -46,11 +46,19 @@ jobs:
         # e resta online l'ultimo eventi_firenze.json valido.
         run: node scripts/normalizza-firenze.js eventi_firenze_raw.geojson eventi_firenze.json
 
+      - name: Foto dei luoghi (Wikimedia Commons)
+        # Non blocca mai l'aggiornamento degli eventi: se fallisce restano le card colorate.
+        continue-on-error: true
+        run: |
+          mkdir -p dati foto-luoghi
+          node scripts/foto-luoghi.js eventi_firenze.json dati/foto_luoghi.json foto-luoghi
+
       - name: Commit e push
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add eventi_firenze.json eventi_firenze_raw.geojson
+          git add -A dati foto-luoghi
           if git diff --cached --quiet; then
             echo "Nessuna modifica."
           else
