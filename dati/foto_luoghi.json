@@ -378,5 +378,30 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Museo_Novecento_.jpg",
   "verificato": "2026-10-12"
+ },
+ "biblioteca nazionale centrale di firenze|firenze": {
+  "luogo": "Biblioteca Nazionale Centrale di Firenze",
+  "assente": true,
+  "verificato": "2026-10-13"
+ },
+ "conservatorio di musica luigi cherubini|firenze": {
+  "luogo": "Conservatorio di Musica Luigi Cherubini",
+  "file": "conservatorio-di-musica-luigi-cherubini-194sgu3.jpg",
+  "titolo": "Conservatorio Luigi Cherubini",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Conservatorio_cherubini_11.JPG",
+  "verificato": "2026-10-13"
+ },
+ "ospedale santa maria nuova|firenze": {
+  "luogo": "Ospedale Santa Maria Nuova",
+  "file": "ospedale-santa-maria-nuova-1q0wqop.jpg",
+  "titolo": "Ospedale di Santa Maria Nuova",
+  "autore": "Mongolo1984",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Ospedale_di_santa_maria_nuova%2C_porticato_(5).JPG",
+  "verificato": "2026-10-13"
  }
 }
