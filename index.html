@@ -1353,7 +1353,8 @@
         return {
           id: String(e.id || ('fi-' + i)).replace(/[^a-zA-Z0-9_-]/g, '-'),
           nome: e.nome,
-          locandina: null,
+          locandina: urlSicuro(e.locandina) || null,
+          fotoCrediti: (e.fotoCrediti && urlSicuro(e.fotoCrediti.url)) ? { testo: String(e.fotoCrediti.testo || ''), url: e.fotoCrediti.url } : null,
           categoria: e.categoria || 'Altro',
           descrizione: e.descrizione || '',
           provincia: e.provincia || 'Firenze',
@@ -1414,7 +1415,10 @@
       if (!gemello) { gruppo.push(ev); risultato.push(ev); return; }
       var vince = _priorita(ev) > _priorita(gemello) ? ev : gemello;
       var perde = vince === ev ? gemello : ev;
-      if (!vince.locandina && perde.locandina) vince.locandina = perde.locandina;
+      if ((!vince.locandina || vince.fotoCrediti) && perde.locandina && !perde.fotoCrediti) {
+      vince.locandina = perde.locandina;
+      vince.fotoCrediti = null;
+      }
       if (vince !== gemello) {
         risultato[risultato.indexOf(gemello)] = vince;
         gruppo[gruppo.indexOf(gemello)] = vince;
@@ -1808,6 +1812,7 @@
     if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
     azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
     if (ev.fonte === 'firenze') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://www.feelflorence.it" target="_blank" rel="noopener">Comune di Firenze – FeelFlorence</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a></div>';
+    if (ev.fotoCrediti) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">📷 <a href="' + escapeHtml_(ev.fotoCrediti.url) + '" target="_blank" rel="noopener">' + escapeHtml_(ev.fotoCrediti.testo) + '</a></div>';
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
     aggiornaUrlDettaglio(ev.id);
