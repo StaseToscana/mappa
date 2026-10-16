@@ -413,5 +413,15 @@
   "luogo": "Piazza del Duomo",
   "assente": true,
   "verificato": "2026-10-15"
+ },
+ "basilica di san lorenzo|firenze": {
+  "luogo": "Basilica di San Lorenzo",
+  "file": "basilica-di-san-lorenzo-vxrn2e.jpg",
+  "titolo": "Basilica di San Lorenzo (Firenze)",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Basilica_di_san_lorenzo_33.JPG",
+  "verificato": "2026-10-16"
  }
 }
