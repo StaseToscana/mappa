@@ -423,5 +423,25 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Basilica_di_san_lorenzo_33.JPG",
   "verificato": "2026-10-16"
+ },
+ "teatro goldoni|firenze": {
+  "luogo": "Teatro Goldoni",
+  "assente": true,
+  "verificato": "2026-10-17"
+ },
+ "oratorio santa maria vergine della croce al tempio|firenze": {
+  "luogo": "Oratorio Santa Maria Vergine della Croce al Tempio",
+  "file": "oratorio-santa-maria-vergine-della-croce-y0q3k8.jpg",
+  "titolo": "Oratorio di Santa Maria Vergine della Croce al Tempio",
+  "autore": "Sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Santa_Maria_Vergine_della_Croce_al_Tempio.JPG",
+  "verificato": "2026-10-17"
+ },
+ "viale manfredo fanti|firenze": {
+  "luogo": "Viale Manfredo Fanti",
+  "assente": true,
+  "verificato": "2026-10-17"
  }
 }
