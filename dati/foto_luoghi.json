@@ -443,5 +443,15 @@
   "luogo": "Viale Manfredo Fanti",
   "assente": true,
   "verificato": "2026-10-17"
+ },
+ "basilica di santa croce|firenze": {
+  "luogo": "Basilica di Santa Croce",
+  "file": "basilica-di-santa-croce-16r7t9e.jpg",
+  "titolo": "Crocifisso di Santa Croce (Donatello)",
+  "autore": "sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Installazione_florens_2012_crocifisso_donatello_02.JPG",
+  "verificato": "2026-10-18"
  }
 }
