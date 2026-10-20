@@ -458,5 +458,20 @@
   "luogo": "CCN Via Doni e dintorni",
   "assente": true,
   "verificato": "2026-10-19"
+ },
+ "basilica della ss annunziata|firenze": {
+  "luogo": "Basilica della SS. Annunziata",
+  "file": "basilica-della-ss-annunziata-1td8jv3.jpg",
+  "titolo": "Basilica della Santissima Annunziata",
+  "autore": "Francesco Bini",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palazzo_budini_gattai%2C_vista_verso_piazza_santissima_annunziata%2C_basilica_04.jpg",
+  "verificato": "2026-10-20"
+ },
+ "the square|firenze": {
+  "luogo": "The Square",
+  "assente": true,
+  "verificato": "2026-10-20"
  }
 }
