@@ -28,6 +28,10 @@ const CONFIG = {
   // come già fai per VisitTuscany. Gli eventi con date puntuali o ricorrenti NON sono toccati.
   MAX_DURATA_CONTINUI_GG: 40,
   MAX_DESCRIZIONE: 400,
+  // Il file contiene, per ogni evento con date puntuali o ricorrenti, tutte le date dei prossimi N giorni
+  // (serve ai contenuti social/caroselli settimanali, che guardano anche settimane future).
+  ORIZZONTE_OCCORRENZE_GG: 60,
+  MAX_OCCORRENZE_PER_EVENTO: 60,
   // Se il nuovo file ha meno del 30% degli eventi del precedente, il job fallisce
   // (protegge da download parziali o cambi di formato).
   SOGLIA_CALO_ANOMALO: 0.3,
@@ -99,16 +103,20 @@ function parseAppuntamenti(testo) {
 
     const range = /^da\s+(\d{2}\/\d{2}\/\d{4})\s+a\s+(\d{2}\/\d{2}\/\d{4})/i.exec(r);
     if (range) {
-      const per = { da: parseIT(range[1]), a: parseIT(range[2]), giorni: new Set(), ora: null };
+      const per = { da: parseIT(range[1]), a: parseIT(range[2]), giorni: new Set(), ora: null, orePerGiorno: {} };
       let j = i + 1;
       while (j < righe.length && /^-\s*/.test(righe[j])) {
         const mg = /^-\s*([A-Za-zÀ-ÿ]+)/.exec(righe[j]);
+        let g;
         if (mg) {
-          const g = GIORNI[senzaAccenti(mg[1]).toLowerCase()];
+          g = GIORNI[senzaAccenti(mg[1]).toLowerCase()];
           if (g !== undefined) per.giorni.add(g);
         }
         const mo = /dalle\s+(\d{1,2}:\d{2})/i.exec(righe[j]);
-        if (mo && !per.ora) per.ora = pad5(mo[1]);
+        if (mo) {
+          if (!per.ora) per.ora = pad5(mo[1]);
+          if (g !== undefined) per.orePerGiorno[g] = pad5(mo[1]); // ogni giorno può avere il suo orario
+        }
         j++;
       }
       i = j - 1;
@@ -147,7 +155,8 @@ function calcolaOccorrenza(parsed, inizioFeat, fineFeat) {
         const d = addDays(start, k);
         if (d > per.a) break;
         if (per.giorni.has(weekday(d))) {
-          cand.push({ tipo: 'ricorrente', iso: d, ora: per.ora, giorni, fine: per.a });
+          cand.push({ tipo: 'ricorrente', iso: d, ora: per.orePerGiorno[weekday(d)] || per.ora, giorni, fine: per.a,
+            oreUniche: new Set(Object.values(per.orePerGiorno)).size <= 1 });
           break;
         }
       }
@@ -173,6 +182,29 @@ function calcolaOccorrenza(parsed, inizioFeat, fineFeat) {
   return best;
 }
 
+function elencoOccorrenze(parsed) {
+  // Tutte le date future (entro l'orizzonte) di un evento con date puntuali o ricorrenti.
+  // Gli eventi "continui" (mostre, rassegne) non hanno date puntuali: restituiscono [] e valgono dataSort..dataFine.
+  const limiteOrizzonte = addDays(OGGI, CONFIG.ORIZZONTE_OCCORRENZE_GG);
+  const trovate = new Map(); // iso -> ora
+
+  for (const d of parsed.date) {
+    if (d.iso && d.iso >= OGGI && d.iso <= limiteOrizzonte && !trovate.has(d.iso)) trovate.set(d.iso, d.ora || '');
+  }
+  for (const per of parsed.periodi) {
+    if (!per.da || !per.a || per.a < OGGI) continue;
+    if (per.giorni.size === 0 || per.giorni.size >= 5) continue; // periodo continuo
+    const ultimo = per.a < limiteOrizzonte ? per.a : limiteOrizzonte;
+    for (let d = per.da > OGGI ? per.da : OGGI; d <= ultimo; d = addDays(d, 1)) {
+      if (per.giorni.has(weekday(d)) && !trovate.has(d)) trovate.set(d, per.orePerGiorno[weekday(d)] || per.ora || '');
+    }
+  }
+  return [...trovate.entries()]
+    .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+    .slice(0, CONFIG.MAX_OCCORRENZE_PER_EVENTO)
+    .map(([d, o]) => ({ d, o }));
+}
+
 function elencoGiorni(giorni) {
   const ordinati = [...giorni].sort((a, b) => (a || 7) - (b || 7)); // lunedì primo
   const nomi = ordinati.map((g) => NOMI_GIORNI[g]);
@@ -180,7 +212,8 @@ function elencoGiorni(giorni) {
 }
 
 function riepilogo(o) {
-  const ora = o.ora ? ` ore ${o.ora}` : '';
+  // Se gli orari cambiano da un giorno all'altro, nel riepilogo di una serie non si indica un'ora sola.
+  const ora = o.ora && !(o.tipo === 'ricorrente' && o.oreUniche === false) ? ` ore ${o.ora}` : '';
   switch (o.tipo) {
     case 'date':
       return o.altre > 0
@@ -295,6 +328,8 @@ function normalizza(f) {
   const slug = urlFF ? urlFF.replace(/\/+$/, '').split('/').pop().slice(0, 80) : hashCorto(nome);
 
   const continuo = occ.tipo === 'continuo';
+  let occorrenze = continuo ? [] : elencoOccorrenze(parsed);
+  if (!continuo && occorrenze.length === 0) occorrenze = [{ d: occ.iso, o: occ.ora || '' }];
   return {
     id: `fi-${slug}`,
     nome,
@@ -309,6 +344,7 @@ function normalizza(f) {
     orario: occ.ora || '',
     dataSort: fmtSort(continuo ? occ.da : occ.iso),
     dataFine: fmtSort(continuo ? occ.a : occ.iso),
+    occorrenze: occorrenze.map((x) => ({ d: fmtSort(x.d), o: x.o })),
     mapsUrl,
     lat: c ? c.lat : null,
     lon: c ? c.lon : null,
