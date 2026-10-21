@@ -473,5 +473,25 @@
   "luogo": "The Square",
   "assente": true,
   "verificato": "2026-10-20"
+ },
+ "ippodromo del visarno|firenze": {
+  "luogo": "Ippodromo del Visarno",
+  "assente": true,
+  "verificato": "2026-10-21"
+ },
+ "museo dell opera del duomo|firenze": {
+  "luogo": "Museo dell'Opera del Duomo",
+  "file": "museo-dell-opera-del-duomo-ghjus6.jpg",
+  "titolo": "Museo dell'Opera del Duomo (Firenze)",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Nuovo_museo_dell'opera_del_duomo%2C_facciatone_arnolfiano_di_santa_maria_del_fiore%2C_000.jpg",
+  "verificato": "2026-10-21"
+ },
+ "il conventino|firenze": {
+  "luogo": "Il Conventino",
+  "assente": true,
+  "verificato": "2026-10-21"
  }
 }
