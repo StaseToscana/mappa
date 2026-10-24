@@ -493,5 +493,85 @@
   "luogo": "Il Conventino",
   "assente": true,
   "verificato": "2026-10-21"
+ },
+ "piazza degli strozzi|firenze": {
+  "luogo": "Piazza degli Strozzi",
+  "file": "piazza-degli-strozzi-1bw7u1z.jpg",
+  "titolo": "Piazza Strozzi",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Piazza_strozzi_01.JPG",
+  "verificato": "2026-10-24"
+ },
+ "piazza poggi|firenze": {
+  "luogo": "Piazza Poggi",
+  "file": "piazza-poggi-1lkig4m.jpg",
+  "titolo": "Piazza Giuseppe Poggi",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Porta_san_niccol%C3%B2_12.JPG",
+  "verificato": "2026-10-24"
+ },
+ "piazza dei ciompi|firenze": {
+  "luogo": "Piazza dei Ciompi",
+  "file": "piazza-dei-ciompi-5hlcty.jpg",
+  "titolo": "Piazza dei Ciompi",
+  "autore": "Manuelarosi",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:PiazzaCiompiRinnovata_01.jpg",
+  "verificato": "2026-10-24"
+ },
+ "chiesa episcopale st james|firenze": {
+  "luogo": "Chiesa Episcopale St. James",
+  "file": "chiesa-episcopale-st-james-123arr2.jpg",
+  "titolo": "Chiesa episcopale americana di Saint James",
+  "autore": "Sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Chiesa_Episcopale_Americana_di_Saint_James.JPG",
+  "verificato": "2026-10-24"
+ },
+ "teatro le laudi|firenze": {
+  "luogo": "Teatro Le Laudi",
+  "file": "teatro-le-laudi-1ub1kkx.jpg",
+  "titolo": "Teatro Le Laudi",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Teatro_le_laudi_1.JPG",
+  "verificato": "2026-10-24"
+ },
+ "piazza santo spirito|firenze": {
+  "luogo": "Piazza Santo Spirito",
+  "file": "piazza-santo-spirito-phhoo1.jpg",
+  "titolo": "Piazza Santo Spirito",
+  "autore": "John Samuel",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Exterior_view_of_Santo_Spirito_(Florence)_03.jpg",
+  "verificato": "2026-10-24"
+ },
+ "piazza della repubblica|firenze": {
+  "luogo": "Piazza della Repubblica",
+  "file": "piazza-della-repubblica-1amhap3.jpg",
+  "titolo": "Piazza della Repubblica (Firenze)",
+  "autore": "Дмитрий Мозжухин",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BB%D0%BE%D1%80%D0%B5%D0%BD%D1%86%D0%B8%D1%8F._-_panoramio_(17).jpg",
+  "verificato": "2026-10-24"
+ },
+ "museo di san marco|firenze": {
+  "luogo": "Museo di San Marco",
+  "file": "museo-di-san-marco-1r09v9d.jpg",
+  "titolo": "Cenacolo di San Marco",
+  "autore": "Domenico Ghirlandaio",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Ghirlandaio%2C_ultima_cena_di_san_marco.jpg",
+  "verificato": "2026-10-24"
  }
 }
