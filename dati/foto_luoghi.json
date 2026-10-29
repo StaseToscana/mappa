@@ -593,5 +593,25 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Teatro_puccini_11.JPG",
   "verificato": "2026-10-27"
+ },
+ "archivio storico del comune di firenze|firenze": {
+  "luogo": "Archivio Storico del Comune di Firenze",
+  "assente": true,
+  "verificato": "2026-10-29"
+ },
+ "parco delle cascine|firenze": {
+  "luogo": "Parco delle Cascine",
+  "assente": true,
+  "verificato": "2026-10-29"
+ },
+ "basilica di santa maria novella|firenze": {
+  "luogo": "Basilica di Santa Maria Novella",
+  "file": "basilica-di-santa-maria-novella-11pacjm.jpg",
+  "titolo": "Basilica di Santa Maria Novella",
+  "autore": "Commonists",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Santa_Maria_Novella_(Florence).jpg",
+  "verificato": "2026-10-29"
  }
 }
