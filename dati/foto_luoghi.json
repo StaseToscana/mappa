@@ -613,5 +613,15 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Santa_Maria_Novella_(Florence).jpg",
   "verificato": "2026-10-29"
+ },
+ "uffizi|firenze": {
+  "luogo": "Uffizi",
+  "assente": true,
+  "verificato": "2026-10-30"
+ },
+ "stazione di santa maria novella|firenze": {
+  "luogo": "Stazione di Santa Maria Novella",
+  "assente": true,
+  "verificato": "2026-10-30"
  }
 }
