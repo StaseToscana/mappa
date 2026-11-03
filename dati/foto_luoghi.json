@@ -623,5 +623,15 @@
   "luogo": "Stazione di Santa Maria Novella",
   "assente": true,
   "verificato": "2026-10-30"
+ },
+ "teatro cantiere florida|firenze": {
+  "luogo": "Teatro Cantiere Florida",
+  "file": "teatro-cantiere-florida-1bh7a9d.jpg",
+  "titolo": "Teatro Cantiere Florida",
+  "autore": "Sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Teatro_cantiere_florida%2C_firenze%2C_via_pisana.JPG",
+  "verificato": "2026-11-03"
  }
 }
