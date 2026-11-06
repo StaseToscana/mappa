@@ -329,17 +329,29 @@ def salva_json(path, dati):
         json.dump(dati, f, ensure_ascii=False, indent=1, sort_keys=True)
 
 
+def fresca(c, lastmod, oggi):
+    """True se la scheda in cache e' ancora buona e non serve riscaricarla."""
+    if not c:
+        return False
+    if lastmod:                                   # la sitemap dice se e' cambiata
+        return c.get("lastmod") == lastmod
+    if not c.get("letta"):
+        return False
+    eta = (oggi - date.fromisoformat(c["letta"])).days
+    passato = date.fromisoformat(c["fine"]) < oggi
+    return eta < (30 if passato else 3)           # senza lastmod: futuri ogni 3 giorni, passati ogni 30
+
+
 def elabora_pagina(url, lastmod, cache):
-    """Restituisce il record in cache (titolo, luogo, periodi...) leggendo la scheda solo se serve."""
+    """Legge la scheda, estrae titolo/date/luogo e calcola i periodi reali."""
     c = cache.get(url)
-    if c and lastmod and c.get("lastmod") == lastmod:
-        return c
+    oggi_iso = date.today().isoformat()
     p = parse_scheda(get(url).text)
     if not p:
         return None
     h = hashlib.sha1((p["titolo"] + p["date_txt"] + p["contesto"]).encode("utf-8")).hexdigest()
     if c and c.get("hash") == h:
-        c["lastmod"] = lastmod
+        c["lastmod"], c["letta"] = lastmod, oggi_iso
         return c
     giorni = (p["fine"] - p["inizio"]).days
     verifica = False
@@ -351,19 +363,27 @@ def elabora_pagina(url, lastmod, cache):
         periodi = periodi_da_llm(p["titolo"], p["inizio"], p["fine"], p["contesto"])
         if not periodi:
             periodi, verifica = [(p["inizio"], p["fine"])], True
-    return {"lastmod": lastmod, "hash": h, "titolo": p["titolo"], "luogo": p["luogo"],
-            "sito": p["sito"], "inizio": p["inizio"].isoformat(), "fine": p["fine"].isoformat(),
+    return {"lastmod": lastmod, "letta": oggi_iso, "hash": h, "titolo": p["titolo"],
+            "luogo": p["luogo"], "sito": p["sito"], "inizio": p["inizio"].isoformat(),
+            "fine": p["fine"].isoformat(),
             "periodi": [[a.isoformat(), b.isoformat()] for a, b in periodi], "verifica": verifica}
 
 
 def main():
+    sys.stdout.reconfigure(line_buffering=True)      # il log compare subito anche in GitHub Actions
+    t0 = time.time()
     ap = argparse.ArgumentParser()
     ap.add_argument("--tutti", action="store_true", help="includi anche eventi che non sono sagre")
     ap.add_argument("--dry-run", action="store_true", help="non scrive nessun file")
-    ap.add_argument("--max", type=int, default=0, help="leggi al massimo N schede (per le prove)")
+    ap.add_argument("--max", type=int, default=0, help="esamina al massimo N schede (per le prove)")
+    ap.add_argument("--max-fetch", type=int, default=int(os.environ.get("MAX_FETCH", 120)),
+                    help="schede nuove o modificate da scaricare per esecuzione (le altre il giorno dopo)")
+    ap.add_argument("--budget-min", type=float, default=float(os.environ.get("BUDGET_MIN", 15)),
+                    help="tempo massimo in minuti: poi salva quello che ha")
     args = ap.parse_args()
-
+    scaduto = lambda: (time.time() - t0) > args.budget_min * 60
     oggi = date.today()
+
     sitemaps = carica_robots()
     urls = []
     for sm in sitemaps:
@@ -372,31 +392,49 @@ def main():
         print("Nessuna scheda dalla sitemap: uso la pagina elenco (solo primo blocco)")
         urls = urls_da_lista()
     urls = list(dict.fromkeys(urls))
-    urls.sort(key=lambda x: x[1], reverse=True)            # prima le modificate di recente
+    cache_pag = {} if args.dry_run else carica_json(F_PAG, {})
+    urls.sort(key=lambda x: x[1], reverse=True)               # prima le modificate di recente
+    urls.sort(key=lambda x: x[0] in cache_pag)                # e prima di tutto le schede mai viste
     if args.max:
         urls = urls[:args.max]
-    print(f"Schede da esaminare: {len(urls)}")
+    print(f"Schede in sitemap: {len(urls)} | gia' in memoria: {sum(1 for u, _ in urls if u in cache_pag)} "
+          f"| tetto per esecuzione: {args.max_fetch} schede, {args.budget_min:g} minuti")
 
-    cache_pag = {} if args.dry_run else carica_json(F_PAG, {})
-    cache_geo = carica_json(F_GEO, {})
-    nuova_cache, errori, eventi, visti = {}, 0, [], set()
-
+    # ---- fase 1: leggere le schede (con tetto e limite di tempo)
+    nuova_cache, errori, scaricate, rimandate = {}, 0, 0, 0
     for url, lastmod in urls:
+        c = cache_pag.get(url)
+        if fresca(c, lastmod, oggi):
+            nuova_cache[url] = c
+            continue
+        if scaricate >= args.max_fetch or scaduto():
+            rimandate += 1
+            if c:
+                nuova_cache[url] = c
+            continue
         if not ROBOTS.can_fetch(UA, url):
             print(f"- vietato da robots.txt: {url}")
             continue
+        scaricate += 1
         try:
             rec = elabora_pagina(url, lastmod, cache_pag)
         except Exception as e:
             errori += 1
             print(f"! errore su {url}: {e}")
-            if url in cache_pag:
-                nuova_cache[url] = cache_pag[url]
+            if c:
+                nuova_cache[url] = c
             continue
-        if not rec:
-            continue
-        nuova_cache[url] = rec
+        if rec:
+            nuova_cache[url] = rec
+            print(f"  scheda {scaricate} ({int(time.time() - t0)}s): {rec['titolo'][:60]} "
+                  f"[{rec['inizio']} > {rec['fine']}]")
+    print(f"Schede lette ora: {scaricate} | rimandate a domani: {rimandate} | errori: {errori} "
+          f"| {int(time.time() - t0)}s")
 
+    # ---- fase 2: costruire gli eventi dalla memoria
+    cache_geo = carica_json(F_GEO, {})
+    eventi, visti, senza_coord = [], set(), 0
+    for url, rec in nuova_cache.items():
         titolo, luogo = rec["titolo"], rec["luogo"]
         cat = categoria(titolo)
         if cat != "Sagra" and not args.tutti:
@@ -406,7 +444,13 @@ def main():
         if not periodi:
             continue
         comune = estrai_comune(titolo, luogo)
-        lat, lon, approx = geocodifica(luogo, comune, cache_geo)
+        if scaduto():
+            lat, lon, approx = None, None, True
+        else:
+            lat, lon, approx = geocodifica(luogo, comune, cache_geo)
+        if lat is None:
+            senza_coord += 1          # non lo pubblico finche' non ha coordinate (riprova al prossimo giro)
+            continue
         nome = nome_pulito(titolo)
         indirizzo = indirizzo_pulito(luogo, comune)
         slug = urlparse(url).path.strip("/").split("/")[-1]
@@ -430,7 +474,7 @@ def main():
             })
 
     eventi.sort(key=lambda e: (e["dataSort"], e["nome"]))
-    print(f"\nEventi pronti: {len(eventi)} | schede con errore: {errori}")
+    print(f"\nEventi pronti: {len(eventi)} | senza coordinate (non pubblicati): {senza_coord}")
     for e in eventi[:8 if args.dry_run else 3]:
         print(f"  {e['riepilogoDate']:<22} {e['nome']} ({e['comune'] or '?'}) "
               f"[{e['lat']}, {e['lon']}]{' ~' if e['coordApprossimate'] else ''}"
@@ -442,14 +486,17 @@ def main():
     # paracadute: se qualcosa e' andato storto non svuoto il file gia' pubblicato
     if not eventi and os.path.exists(F_OUT):
         print("Nessun evento prodotto: lascio invariato il file esistente.")
-        return 2
-    if urls and errori > len(urls) / 2:
-        print("Troppi errori: non aggiorno i file.")
+        salva_json(F_GEO, cache_geo)
+        salva_json(F_PAG, nuova_cache)
+        return 0
+    if scaricate and errori > scaricate / 2:
+        print("Troppi errori: non aggiorno l'elenco eventi.")
         return 2
     salva_json(F_OUT, {"aggiornato": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                        "fonte": "Terre di Pisa (terredipisa.it)", "eventi": eventi})
     salva_json(F_GEO, cache_geo)
     salva_json(F_PAG, nuova_cache)
+    print(f"Salvato {F_OUT} ({int(time.time() - t0)}s totali)")
     return 0
 
 
