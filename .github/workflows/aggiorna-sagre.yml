@@ -42,13 +42,14 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Scraper sagre (solo titolo, date, luogo)
+        timeout-minutes: 25
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            python scripts/scrape_sagre.py --dry-run --max 15
+            python -u scripts/scrape_sagre.py --dry-run --max 15
           else
-            python scripts/scrape_sagre.py
+            python -u scripts/scrape_sagre.py
           fi
 
       - name: Foto dei luoghi (Wikimedia Commons)
