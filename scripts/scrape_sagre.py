@@ -3,14 +3,13 @@
 """
 Stase Toscana - scraper "leggero" per Terre di Pisa (https://www.terredipisa.it/pisa-eventi/)
 
-Copia SOLO: titolo, date, luogo (+ link alla scheda originale e al sito ufficiale
-indicato dall'organizzatore).
-NON copia: descrizioni, immagini, programmi, link di prenotazione, contatti.
+Copia SOLO: titolo, date, luogo.
+NON copia: descrizioni, immagini, programmi, link, contatti.
 
 Uso:
   python scripts/scrape_sagre.py --dry-run --max 15   # prova: stampa, non scrive file
-  python scripts/scrape_sagre.py                      # normale: solo sagre
-  python scripts/scrape_sagre.py --tutti              # anche mostre, teatro, ecc.
+  python scripts/scrape_sagre.py                      # normale: TUTTI gli eventi
+  python scripts/scrape_sagre.py --solo-sagre         # solo le sagre
 
 Variabili d'ambiente (opzionali):
   ANTHROPIC_API_KEY  se presente, un modello legge il testo della scheda per capire le date
@@ -152,7 +151,7 @@ def to_date(g):
 
 
 def parse_scheda(html):
-    """Estrae titolo, intervallo di date, luogo e sito ufficiale. Nient'altro viene tenuto."""
+    """Estrae titolo, intervallo di date e luogo. Nient'altro viene tenuto."""
     soup = BeautifulSoup(html, "html.parser")
     h1 = soup.find("h1")
     if not h1:
@@ -167,14 +166,12 @@ def parse_scheda(html):
     fine = to_date(trovate[1]) if len(trovate) > 1 else inizio
     dopo = intest[intest.index(date_txt) + 1:]
     luogo = next((t for t in dopo if t and not RE_DATA.search(t) and len(t) < 150), "")
-    a = soup.find("a", string=re.compile(r"sito web", re.I))
-    sito = a["href"].strip() if a and a.get("href", "").startswith("http") else ""
     # testo di contesto: serve solo a capire le date e NON viene salvato da nessuna parte
     corpo = soup.get_text("\n", strip=True)
     k = corpo.find(luogo) if luogo else -1
     contesto = corpo[k + len(luogo):][:2500] if k >= 0 else corpo[:2500]
     return {"titolo": titolo, "luogo": luogo, "inizio": inizio, "fine": fine,
-            "sito": sito, "contesto": contesto, "date_txt": date_txt}
+            "contesto": contesto, "date_txt": date_txt}
 
 
 def nome_pulito(titolo):
@@ -333,6 +330,10 @@ def fresca(c, lastmod, oggi):
     """True se la scheda in cache e' ancora buona e non serve riscaricarla."""
     if not c:
         return False
+    if c.get("ko"):                               # scheda non capita: riprova solo se cambia (o dopo 7 giorni)
+        if lastmod:
+            return c.get("lastmod") == lastmod
+        return bool(c.get("letta")) and (oggi - date.fromisoformat(c["letta"])).days < 7
     if lastmod:                                   # la sitemap dice se e' cambiata
         return c.get("lastmod") == lastmod
     if not c.get("letta"):
@@ -342,12 +343,30 @@ def fresca(c, lastmod, oggi):
     return eta < (30 if passato else 3)           # senza lastmod: futuri ogni 3 giorni, passati ogni 30
 
 
+_NON_CAPITE_STAMPATE = [0]
+
+
+def diagnosi(url, html, massimo=25):
+    """Scrive nel log PERCHE' una scheda non e' stata capita (solo le prime, per non riempire il log)."""
+    if _NON_CAPITE_STAMPATE[0] >= massimo:
+        return
+    _NON_CAPITE_STAMPATE[0] += 1
+    soup = BeautifulSoup(html, "html.parser")
+    h1 = soup.find("h1")
+    titolo = h1.get_text(" ", strip=True)[:70] if h1 else "(nessun h1)"
+    intest = [e.get_text(" ", strip=True)[:50] for e in (h1.find_all_next(["h2", "h3"], limit=5) if h1 else [])]
+    date_in_pagina = re.findall(r"\d{1,2}/\d{1,2}/\d{4}|\d{1,2}\s+\w+\s+20\d\d", soup.get_text(" ", strip=True))[:3]
+    print(f"  ? non capita: {url}\n      titolo={titolo!r} | intestazioni={intest} | date nel testo={date_in_pagina}")
+
+
 def elabora_pagina(url, lastmod, cache):
     """Legge la scheda, estrae titolo/date/luogo e calcola i periodi reali."""
     c = cache.get(url)
     oggi_iso = date.today().isoformat()
-    p = parse_scheda(get(url).text)
+    html = get(url).text
+    p = parse_scheda(html)
     if not p:
+        diagnosi(url, html)
         return None
     h = hashlib.sha1((p["titolo"] + p["date_txt"] + p["contesto"]).encode("utf-8")).hexdigest()
     if c and c.get("hash") == h:
@@ -364,7 +383,7 @@ def elabora_pagina(url, lastmod, cache):
         if not periodi:
             periodi, verifica = [(p["inizio"], p["fine"])], True
     return {"lastmod": lastmod, "letta": oggi_iso, "hash": h, "titolo": p["titolo"],
-            "luogo": p["luogo"], "sito": p["sito"], "inizio": p["inizio"].isoformat(),
+            "luogo": p["luogo"], "inizio": p["inizio"].isoformat(),
             "fine": p["fine"].isoformat(),
             "periodi": [[a.isoformat(), b.isoformat()] for a, b in periodi], "verifica": verifica}
 
@@ -373,7 +392,7 @@ def main():
     sys.stdout.reconfigure(line_buffering=True)      # il log compare subito anche in GitHub Actions
     t0 = time.time()
     ap = argparse.ArgumentParser()
-    ap.add_argument("--tutti", action="store_true", help="includi anche eventi che non sono sagre")
+    ap.add_argument("--solo-sagre", action="store_true", help="pubblica solo le sagre (di default: tutti gli eventi)")
     ap.add_argument("--dry-run", action="store_true", help="non scrive nessun file")
     ap.add_argument("--max", type=int, default=0, help="esamina al massimo N schede (per le prove)")
     ap.add_argument("--max-fetch", type=int, default=int(os.environ.get("MAX_FETCH", 120)),
@@ -401,7 +420,7 @@ def main():
           f"| tetto per esecuzione: {args.max_fetch} schede, {args.budget_min:g} minuti")
 
     # ---- fase 1: leggere le schede (con tetto e limite di tempo)
-    nuova_cache, errori, scaricate, rimandate = {}, 0, 0, 0
+    nuova_cache, errori, scaricate, rimandate, non_capite = {}, 0, 0, 0, 0
     for url, lastmod in urls:
         c = cache_pag.get(url)
         if fresca(c, lastmod, oggi):
@@ -428,16 +447,21 @@ def main():
             nuova_cache[url] = rec
             print(f"  scheda {scaricate} ({int(time.time() - t0)}s): {rec['titolo'][:60]} "
                   f"[{rec['inizio']} > {rec['fine']}]")
-    print(f"Schede lette ora: {scaricate} | rimandate a domani: {rimandate} | errori: {errori} "
-          f"| {int(time.time() - t0)}s")
+        else:
+            non_capite += 1
+            nuova_cache[url] = {"ko": True, "lastmod": lastmod, "letta": oggi.isoformat()}
+    print(f"Schede lette ora: {scaricate} | non capite: {non_capite} | rimandate a domani: {rimandate} "
+          f"| errori: {errori} | {int(time.time() - t0)}s")
 
     # ---- fase 2: costruire gli eventi dalla memoria
     cache_geo = carica_json(F_GEO, {})
     eventi, visti, senza_coord = [], set(), 0
     for url, rec in nuova_cache.items():
+        if rec.get("ko"):
+            continue
         titolo, luogo = rec["titolo"], rec["luogo"]
         cat = categoria(titolo)
-        if cat != "Sagra" and not args.tutti:
+        if args.solo_sagre and cat != "Sagra":
             continue
         periodi = [(date.fromisoformat(a), date.fromisoformat(b)) for a, b in rec["periodi"]]
         periodi = [(a, b) for a, b in periodi if b >= oggi]
@@ -469,7 +493,7 @@ def main():
                 "mapsUrl": "https://www.google.com/maps/search/?api=1&query=" + q,
                 "lat": lat, "lon": lon, "coordApprossimate": approx,
                 "instagram": "", "inEvidenza": False,
-                "fonte": "terredipisa", "url": url, "sitoUfficiale": rec["sito"],
+                "fonte": "terredipisa",
                 "dateDaVerificare": rec["verifica"],
             })
 
@@ -493,7 +517,7 @@ def main():
         print("Troppi errori: non aggiorno l'elenco eventi.")
         return 2
     salva_json(F_OUT, {"aggiornato": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                       "fonte": "Terre di Pisa (terredipisa.it)", "eventi": eventi})
+                       "eventi": eventi})
     salva_json(F_GEO, cache_geo)
     salva_json(F_PAG, nuova_cache)
     print(f"Salvato {F_OUT} ({int(time.time() - t0)}s totali)")
