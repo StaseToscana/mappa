@@ -1,1 +1,82 @@
-{}
+{
+ "palazzo blu lungarno gambacorti 9|pisa": {
+  "luogo": "Palazzo Blu, Lungarno Gambacorti, 9",
+  "file": "palazzo-blu-lungarno-gambacorti-9-936m47.jpg",
+  "titolo": "Palazzo Gambacorti",
+  "autore": "MarianOne",
+  "licenza": "CC BY 2.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa-lungarno03.jpg",
+  "verificato": "2026-11-06"
+ },
+ "arsenali medicei lungarno ranieri simonelli 14|pisa": {
+  "luogo": "Arsenali Medicei, Lungarno Ranieri Simonelli, 14",
+  "file": "arsenali-medicei-lungarno-ranieri-simone-1hs6lfu.jpg",
+  "titolo": "Arsenali medicei",
+  "autore": "Jacqueline Poggi",
+  "licenza": "CC BY-SA 2.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Arsenali_Medicei_-_Pisa.jpg",
+  "verificato": "2026-11-06"
+ },
+ "teatro di via verdi via verdi|vicopisano": {
+  "luogo": "Teatro di Via Verdi, Via Verdi",
+  "assente": true,
+  "verificato": "2026-11-06"
+ },
+ "tirrenia piazza belvedere tirrenia|pisa": {
+  "luogo": "Tirrenia, Piazza Belvedere, Tirrenia",
+  "file": "tirrenia-piazza-belvedere-tirrenia-1m8bdt6.jpg",
+  "titolo": "Tirrenia",
+  "autore": "Daniele Napolitano",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Tirrenia_(PI)%2C_vista_aerea.jpg",
+  "verificato": "2026-11-06"
+ },
+ "lari|casciana terme lari": {
+  "luogo": "Lari",
+  "file": "lari-1ujs6uy.jpg",
+  "titolo": "Lari (Casciana Terme Lari)",
+  "autore": "Mauriziotani at Italian Wikipedia",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lari_Panorama_1.jpg",
+  "verificato": "2026-11-06"
+ },
+ "piazza dante|san miniato": {
+  "luogo": "Piazza Dante",
+  "assente": true,
+  "verificato": "2026-11-06"
+ },
+ "scuola superiore sant anna piazza martiri della liberta|pisa": {
+  "luogo": "Scuola Superiore Sant’Anna, Piazza Martiri della Libertà",
+  "file": "scuola-superiore-sant-anna-piazza-martir-16a6vtg.jpg",
+  "titolo": "Piazza Martiri della libertà (Pisa)",
+  "autore": "Luca Aless",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa_-_Piazza_Martiri_della_Libert%C3%A0_01.JPG",
+  "verificato": "2026-11-06"
+ },
+ "piazza martiri della liberta|bientina": {
+  "luogo": "Piazza Martiri della Libertà",
+  "assente": true,
+  "verificato": "2026-11-06"
+ },
+ "cappella sant agata via san paolo 36|pisa": {
+  "luogo": "Cappella Sant’Agata, Via San Paolo, 36",
+  "file": "cappella-sant-agata-via-san-paolo-36-1kvou6o.jpg",
+  "titolo": "Cappella di Sant'Agata",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa%2C_cappella_di_sant'agata_(dopo_i_restauri_del_2022)%2C_esterno_01.jpg",
+  "verificato": "2026-11-06"
+ },
+ "largo cocco griffi|pisa": {
+  "luogo": "Largo Cocco Griffi",
+  "assente": true,
+  "verificato": "2026-11-06"
+ }
+}
