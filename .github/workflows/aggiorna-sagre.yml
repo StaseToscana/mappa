@@ -2,7 +2,7 @@ name: Aggiorna sagre (Terre di Pisa)
 
 on:
   schedule:
-    - cron: '30 4 * * *'        # ogni giorno alle 4:30 UTC, prima del workflow VisitTuscany delle 6:00
+    - cron: '30 4 * * *'        # ogni giorno alle 4:30 UTC, prima di Firenze (5:15) e VisitTuscany (6:00)
   workflow_dispatch:
     inputs:
       dry_run:
@@ -17,21 +17,31 @@ concurrency:
   group: aggiorna-sagre
   cancel-in-progress: false
 
+env:
+  TZ: Europe/Rome
+
 jobs:
   sagre:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Installa dipendenze
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installa dipendenze Python
         run: pip install requests beautifulsoup4
 
-      - name: Esegui lo scraper
+      - name: Scraper sagre (solo titolo, date, luogo)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -41,14 +51,34 @@ jobs:
             python scripts/scrape_sagre.py
           fi
 
-      - name: Salva i file aggiornati
+      - name: Foto dei luoghi (Wikimedia Commons)
+        # Stesso script di Firenze, cache separata. Non blocca mai l'aggiornamento degli eventi.
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p dati foto-luoghi
+          node scripts/foto-luoghi.js eventi_sagre.json dati/foto_luoghi_sagre.json foto-luoghi
+
+      - name: Immagine illustrativa per tema (piano B)
+        # Solo per gli eventi ancora senza immagine. Usa i file nella cartella immagini-sagre/.
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p immagini-sagre
+          node scripts/immagine-tema.js eventi_sagre.json immagini-sagre
+
+      - name: Commit e push
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
-          git config user.name "stase-bot"
-          git config user.email "actions@users.noreply.github.com"
+          mkdir -p dati foto-luoghi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add eventi_sagre.json geocode_cache.json cache_pagine.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Aggiorna sagre $(date -u +%F)"
-            git pull --rebase
-            git push
+          git add -A dati foto-luoghi
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica."
+          else
+            git commit -m "Aggiorna sagre $(date +%F)"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
