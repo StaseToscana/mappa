@@ -1,0 +1,54 @@
+name: Aggiorna sagre (Terre di Pisa)
+
+on:
+  schedule:
+    - cron: '30 4 * * *'        # ogni giorno alle 4:30 UTC, prima del workflow VisitTuscany delle 6:00
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Solo prova (non scrive file, legge 15 schede)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-sagre
+  cancel-in-progress: false
+
+jobs:
+  sagre:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installa dipendenze
+        run: pip install requests beautifulsoup4
+
+      - name: Esegui lo scraper
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python scripts/scrape_sagre.py --dry-run --max 15
+          else
+            python scripts/scrape_sagre.py
+          fi
+
+      - name: Salva i file aggiornati
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "stase-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add eventi_sagre.json geocode_cache.json cache_pagine.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Aggiorna sagre $(date -u +%F)"
+            git pull --rebase
+            git push
+          fi
