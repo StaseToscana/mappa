@@ -283,6 +283,15 @@ def query_geo(luogo, comune):
     return tentativi
 
 
+def indirizzo_pulito(luogo, comune):
+    """'centro storico Chianni, Piazza del Castello, Chianni' -> 'Piazza del Castello, Chianni'."""
+    parti = [p.strip() for p in luogo.split(",") if p.strip()]
+    parti = [p for p in parti
+             if not re.search(r"centro|limitrofi|piazze e luoghi", p, re.I)
+             and p.lower() != comune.lower()]
+    return ", ".join(parti + ([comune] if comune else []))
+
+
 def nominatim(q):
     r = get("https://nominatim.openstreetmap.org/search", params={
         "format": "jsonv2", "limit": 1, "countrycodes": "it", "bounded": 1,
@@ -399,17 +408,18 @@ def main():
         comune = estrai_comune(titolo, luogo)
         lat, lon, approx = geocodifica(luogo, comune, cache_geo)
         nome = nome_pulito(titolo)
+        indirizzo = indirizzo_pulito(luogo, comune)
         slug = urlparse(url).path.strip("/").split("/")[-1]
         for i, (dal, al) in enumerate(periodi):
             chiave = (nome.lower(), dal.isoformat(), comune.lower())
             if chiave in visti:
                 continue
             visti.add(chiave)
-            q = quote(f"{luogo or comune}, {comune}".strip(", "))
+            q = quote(indirizzo or comune)
             eventi.append({
                 "id": f"tdp-{slug}" + (f"-{i + 1}" if len(periodi) > 1 else ""),
                 "nome": nome, "locandina": "", "categoria": cat, "descrizione": "",
-                "provincia": "Pisa", "comune": comune, "indirizzo": luogo,
+                "provincia": "Pisa", "comune": comune, "indirizzo": indirizzo,
                 "riepilogoDate": fmt_periodo(dal, al),
                 "dataSort": dal.isoformat(), "dataFine": al.isoformat(),
                 "mapsUrl": "https://www.google.com/maps/search/?api=1&query=" + q,
