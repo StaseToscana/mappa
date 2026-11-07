@@ -38,6 +38,17 @@
   "titolo": "Antiqua | San Giuliano Terme",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/apertura-invernale-dei-musei-di-santa-maria-a-monte/": {
+  "fine": "2027-03-31",
+  "hash": "17f85eaca22ad6f559267d78df837a04b3b7248e",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "periodi": [],
+  "titolo": "Aperture e visite guidate ai musei a Santa Maria a Monte",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/apertura-straordinaria-della-cappella-di-santagata-pisa/": {
   "fine": "2026-12-26",
   "hash": "1a10536e18f6be439804682752cd1bb9d83589db",
@@ -54,6 +65,38 @@
   "sito": "",
   "titolo": "Apertura straordinaria della Cappella di Sant’Agata | Pisa",
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/benedizione-degli-animali-montopoli-in-valdarno/": {
+  "fine": "2026-01-18",
+  "hash": "b5afa4d317fc0341e732213ec9088bc3d3450165",
+  "inizio": "2026-01-18",
+  "lastmod": "2026-11-05T10:15:59+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-01-18",
+    "2026-01-18"
+   ]
+  ],
+  "titolo": "Benedizione degli animali | Montopoli in Valdarno",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/caccia-ai-tesori-arancioni-montopoli-in-valdarno/": {
+  "fine": "2026-10-04",
+  "hash": "56b7a8a1f4bbecc567d748d708d04fffcd34a6ff",
+  "inizio": "2026-10-04",
+  "lastmod": "2026-11-05T10:23:45+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Centro storico Vicopisano, centro, piazze e luoghi limitrofi, Vicopisano",
+  "periodi": [
+   [
+    "2026-10-04",
+    "2026-10-04"
+   ]
+  ],
+  "titolo": "Caccia ai Tesori Arancioni | Montopoli in Valdarno",
+  "verifica": false
  },
  "https://www.terredipisa.it/events/cantine-aperte-in-vendemmia/": {
   "fine": "2026-11-08",
@@ -91,6 +134,16 @@
   "ko": true,
   "lastmod": "2026-11-06T11:02:31+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/categories/convegni-e-congressi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:11:47+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/categories/escursione/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:45+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/categories/festival/": {
   "ko": true,
@@ -147,6 +200,33 @@
   "lastmod": "2026-11-06T12:20:20+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/charles-doudelet-e-la-rinascita-del-libro-illustrato-il-caso-dei-fioretti-di-sancto-francesco-4-puntata/": {
+  "fine": "2026-11-14",
+  "hash": "82058bcde3519e0c57b33dcc9d1f3476691e42c4",
+  "inizio": "2026-11-14",
+  "lastmod": "2026-11-05T09:09:50+00:00",
+  "letta": "2026-11-07",
+  "luogo": "viale delle cascine, viale delle Cascine, Pisa",
+  "periodi": [
+   [
+    "2026-11-14",
+    "2026-11-14"
+   ]
+  ],
+  "titolo": "Charles Doudelet e la rinascita del libro illustrato: il caso dei Fioretti di Sancto Francesco – 4° Puntata",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cimitero-ebraico-sinagoga-pisa/": {
+  "fine": "2027-03-31",
+  "hash": "e647e2ba8c07cb2eddf5a614b9e11de2911af3d3",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T15:10:59+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Cimitero Ebraico, Via Cammeo, Pisa",
+  "periodi": [],
+  "titolo": "Visite a Cimitero Ebraico e Sinagoga Ebraica di Pisa",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/collezione-pepi-visite-in-villa-crespina/": {
   "fine": "2026-11-28",
   "hash": "f9a1a69cc97b131013cace477f45393e4b44be34",
@@ -162,6 +242,97 @@
   ],
   "sito": "",
   "titolo": "Visite guidate alla Casa Museo Carlo Pepi | Crespina",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/convegno-delle-cattedrali-europee-pisa/": {
+  "fine": "2026-11-13",
+  "hash": "0cba528d750f984cd64871fde4cbd12996735dca",
+  "inizio": "2026-11-12",
+  "lastmod": "2026-11-05T11:11:47+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Piazza Duomo, Pisa",
+  "periodi": [
+   [
+    "2026-11-12",
+    "2026-11-13"
+   ]
+  ],
+  "titolo": "Convegno delle Cattedrali Europee  | Pisa",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/degustiamo-montopoli/": {
+  "fine": "2026-07-28",
+  "hash": "7e2baa54dbbb32d34d2100327625df3dc2c7a236",
+  "inizio": "2026-07-28",
+  "lastmod": "2026-11-05T10:19:06+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-07-28",
+    "2026-07-28"
+   ]
+  ],
+  "titolo": "I Martedì di Montopoli – ogni martedì di luglio",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/disfida-con-larco-montopoli-in-val-darno/": {
+  "fine": "2026-09-13",
+  "hash": "cc8086d545299f38be30652bb5e343fe2d0d868c",
+  "inizio": "2026-09-12",
+  "lastmod": "2026-11-05T10:22:40+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-09-12",
+    "2026-09-13"
+   ]
+  ],
+  "titolo": "Montopoli Medioevo | Disfida con l’arco e cena medievale",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/domenica-a-teatro-cascina/": {
+  "fine": "2027-03-21",
+  "hash": "d5a728adb54f4a57ba4f9c6365823ba4457d4a22",
+  "inizio": "2026-11-08",
+  "lastmod": "2026-11-05T14:57:23+00:00",
+  "letta": "2026-11-07",
+  "luogo": "città del teatro, Via Tosco Romagnola, Cascina",
+  "periodi": [],
+  "titolo": "“Domenica a Teatro” | Cascina",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/eco-eva-festival-san-miniato/": {
+  "fine": "2026-11-25",
+  "hash": "be2a43bd7775f4ded92949ff3ade608bf3a83267",
+  "inizio": "2026-11-11",
+  "lastmod": "2026-11-05T09:52:37+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "periodi": [
+   [
+    "2026-11-11",
+    "2026-11-25"
+   ]
+  ],
+  "titolo": "Degustando l’arte | San Miniato",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/escape-giants-caccia-al-tesoro-nel-triangolo-verde-di-legoli/": {
+  "fine": "2026-12-20",
+  "hash": "5626e69a4ece97243dd290bc75b6997df426daa8",
+  "inizio": "2026-11-15",
+  "lastmod": "2026-11-05T15:09:08+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Legoli, centro storico, Legoli",
+  "periodi": [
+   [
+    "2026-11-15",
+    "2026-12-20"
+   ]
+  ],
+  "titolo": "Caccia al Tesoro tra i Giganti nel Triangolo Verde di Legoli",
   "verifica": true
  },
  "https://www.terredipisa.it/events/escursioni-alta-val-di-cecina/": {
@@ -180,6 +351,22 @@
   "sito": "",
   "titolo": "Giornata Nazionale dell’Albero",
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/estate-a-montopoli-in-valdarno/": {
+  "fine": "2026-09-27",
+  "hash": "27d4548610138af8e7e887f399711671051f2904",
+  "inizio": "2026-09-08",
+  "lastmod": "2026-11-05T10:22:03+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-09-08",
+    "2026-09-27"
+   ]
+  ],
+  "titolo": "Estate a Montopoli in Valdarno",
+  "verifica": true
  },
  "https://www.terredipisa.it/events/eventi-a-casa-concia-san-miniato/": {
   "fine": "2026-11-14",
@@ -209,6 +396,22 @@
   "titolo": "DoMus, domeniche (e non solo) al Museo | Pisa",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/fashion-in-flair-regalo-di-natale-alla-stazione-leopolda-di-pisa/": {
+  "fine": "2026-12-13",
+  "hash": "ebd175f1fb42d99fa864447f7e69bd96f8426d8a",
+  "inizio": "2026-12-12",
+  "lastmod": "2026-11-05T15:21:07+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Stazione Leopolda, Piazza Guerrazzi, Pisa",
+  "periodi": [
+   [
+    "2026-12-12",
+    "2026-12-13"
+   ]
+  ],
+  "titolo": "Fashion in Flair, Regalo di Natale alla Stazione Leopolda di Pisa",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-di-capodanno-a-pisa/": {
   "fine": "2027-03-06",
   "hash": "42122cd27d2037d830ded23e55e173f79fc71459",
@@ -233,6 +436,54 @@
   "titolo": "Festival “P.Arte da Noi”",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/fumetti-e-popcorn-pisa/": {
+  "fine": "2026-11-12",
+  "hash": "9011848b1b2917850a92c7fc68cf94d2839b9124",
+  "inizio": "2026-11-12",
+  "lastmod": "2026-11-05T12:02:35+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Cinema Arsenale, Via San Martino, angolo Via Scaramucci, Pisa",
+  "periodi": [
+   [
+    "2026-11-12",
+    "2026-11-12"
+   ]
+  ],
+  "titolo": "Fumetti e Popcorn  | Pisa",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/giugno-battaglia-san-romano/": {
+  "fine": "2026-09-30",
+  "hash": "07b348123d5a0e72d4091fa76e974cb5585bcafa",
+  "inizio": "2026-09-26",
+  "lastmod": "2026-11-05T09:40:45+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-09-26",
+    "2026-09-30"
+   ]
+  ],
+  "titolo": "Settembre a Montopoli",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/gustopolis-a-montopoli-in-valdarno/": {
+  "fine": "2026-03-29",
+  "hash": "bfc096caacb4e5c51226dcd073c4f62707368543",
+  "inizio": "2026-03-28",
+  "lastmod": "2026-11-05T10:17:00+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-03-28",
+    "2026-03-29"
+   ]
+  ],
+  "titolo": "Gustopolis a Montopoli in Val d’Arno",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/la-nunziatina-pisa/": {
   "fine": "2026-11-21",
   "hash": "247c9a08f5c915ab2e9de97fd5702c87435099b5",
@@ -249,6 +500,11 @@
   "sito": "https://lanunziatina.com/",
   "titolo": "“Universo Corto”, Festival internazionale del cortometraggio",
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/larboratorio/": {
+  "ko": true,
+  "lastmod": "2026-11-05T08:58:21+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/maratona-pisa/": {
   "fine": "2026-12-20",
@@ -313,6 +569,22 @@
   "titolo": "Mercatino del collezionismo, antiquariato e hobbismo | Vicopisano e Lugnano",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mercatino-natale-artigianato-calci/": {
+  "fine": "2026-11-29",
+  "hash": "5715fc482b2daa1eb8d4b73f079113c7bc75b151",
+  "inizio": "2026-11-28",
+  "lastmod": "2026-11-05T11:13:59+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Pieve di Calci, Piazza della Chiesa, Calci",
+  "periodi": [
+   [
+    "2026-11-28",
+    "2026-11-29"
+   ]
+  ],
+  "titolo": "Mercatino di Natale dell’artigianato locale | Calci",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mercato-marina-di-pisa-tirrenia-estate/": {
   "fine": "2026-11-08",
   "hash": "e7e8de9a3d7e0520f3be2cc28c96b549d4f00e6b",
@@ -328,6 +600,22 @@
   ],
   "sito": "",
   "titolo": "Mercatini a Marina di Pisa e Tirrenia",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/montopoli-in-fiore/": {
+  "fine": "2026-04-26",
+  "hash": "6ebcefba3f03c890e5ad6474a0b909f1cf44d0bf",
+  "inizio": "2026-04-26",
+  "lastmod": "2026-11-05T10:17:35+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-04-26",
+    "2026-04-26"
+   ]
+  ],
+  "titolo": "Montopoli in Fiore",
   "verifica": false
  },
  "https://www.terredipisa.it/events/mostra-autunnale-edward-hopper-a-palazzo-blu-pisa/": {
@@ -465,6 +753,22 @@
   "titolo": "Natale e presepi a Montopoli in Valdarno",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-a-vicopisano/": {
+  "fine": "2026-11-22",
+  "hash": "15a4370e6150ba2fa233fbab131cdc5e0090f125",
+  "inizio": "2026-11-22",
+  "lastmod": "2026-11-05T16:08:35+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Centro storico Vicopisano, centro, piazze e luoghi limitrofi, Vicopisano",
+  "periodi": [
+   [
+    "2026-11-22",
+    "2026-11-22"
+   ]
+  ],
+  "titolo": "Natale e Befana a Vicopisano",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-dolce-e-salato-a-casciana-terme-e-lari/": {
   "fine": "2026-11-29",
   "hash": "ce5dddd8e1b5988ee95795b44e8be006818be96d",
@@ -498,6 +802,38 @@
   "sito": "",
   "titolo": "Nessiah: Viaggio nella cultura ebraica | Pisa",
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/palio-del-barroccio-montopoli-in-valdarno/": {
+  "fine": "2026-10-11",
+  "hash": "70f3344c52669df1b7e3f16081b2555a26bef924",
+  "inizio": "2026-10-11",
+  "lastmod": "2026-11-05T10:24:19+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-10-11",
+    "2026-10-11"
+   ]
+  ],
+  "titolo": "Palio del barroccio | Montopoli in Valdarno",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/passeggiate-accompagnate-nel-centro-storico-di-montopoli-in-valdarno/": {
+  "fine": "2026-08-31",
+  "hash": "6621d62ea472e01e024abd3621c251a226b2feb6",
+  "inizio": "2026-08-31",
+  "lastmod": "2026-11-05T10:21:13+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-08-31",
+    "2026-08-31"
+   ]
+  ],
+  "titolo": "Tartufo Nero a tavola a Montopoli in Valdarno",
+  "verifica": false
  },
  "https://www.terredipisa.it/events/peccioli-e-intorno-luniverso-peccioli/": {
   "fine": "2026-11-08",
@@ -566,6 +902,22 @@
   "titolo": "Vicopisano: visite guidate al complesso della Rocca del Brunelleschi",
   "verifica": true
  },
+ "https://www.terredipisa.it/events/rosso-montopoli-in-val-darno/": {
+  "fine": "2026-08-02",
+  "hash": "0b645463f10ddb68afe727d19dc831664b3dc428",
+  "inizio": "2026-08-02",
+  "lastmod": "2026-11-05T10:20:35+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-08-02",
+    "2026-08-02"
+   ]
+  ],
+  "titolo": "Rosso Montopoli – La bistecca sotto la Torre",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-del-cinghiale-chianni/": {
   "fine": "2026-11-15",
   "hash": "ba7cda9a94cffb53a84578a7a28dafc4ec202db6",
@@ -581,6 +933,38 @@
   ],
   "titolo": "Sagra del Cinghiale | Chianni",
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/sagra-del-cinghiale-riparbella/": {
+  "fine": "2026-11-15",
+  "hash": "1d2411d13fa77457b19d104b0adac41a1b6c5567",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T15:10:19+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Riparbella, centro storico, Riparbella",
+  "periodi": [
+   [
+    "2026-11-06",
+    "2026-11-15"
+   ]
+  ],
+  "titolo": "Sagra del Cinghiale | Riparbella",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/silent-reading-book-party-montopoli-in-valdarno/": {
+  "fine": "2026-06-06",
+  "hash": "864d224796c3b089bb47f120e6c441882a34a303",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-11-05T10:20:03+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Torre di San Matteo, Piazza San Matteo, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ]
+  ],
+  "titolo": "Silent Reading Book party | Montopoli in Valdarno",
+  "verifica": false
  },
  "https://www.terredipisa.it/events/stagione-al-ballast-officine-creative-pisa/": {
   "fine": "2027-05-15",
@@ -606,6 +990,33 @@
   "titolo": "Stagione al Teatro Comunale di Capannoli",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/stagione-al-teatro-comunale-di-lari/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:21:39+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/stagione-al-teatro-era-pontedera/": {
+  "fine": "2027-05-27",
+  "hash": "d9f479c693163088f0befd8edfcb780fd24da1e4",
+  "inizio": "2026-11-07",
+  "lastmod": "2026-11-06T08:13:53+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Teatro Era, Via Indipendenza, Pontedera",
+  "periodi": [],
+  "titolo": "Stagione al Teatro Era | Pontedera",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/stagione-alla-citta-del-teatro-cascina/": {
+  "fine": "2027-05-04",
+  "hash": "d57268e7b52914eaf945df5e27362f6a17bf54db",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T14:59:12+00:00",
+  "letta": "2026-11-07",
+  "luogo": "città del teatro, Via Tosco Romagnola, Cascina",
+  "periodi": [],
+  "titolo": "Stagione alla Città del Teatro | Cascina",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/stagione-corse-ippodromo-san-rossore-pisa/": {
   "fine": "2027-04-04",
   "hash": "58ba8267835bc56d2674b2061c456aac786430ba",
@@ -615,6 +1026,49 @@
   "luogo": "Ippodromo San Rossore, Tenuta di San Rossore, Pisa",
   "periodi": [],
   "titolo": "Stagione di corse di galoppo all’Ippodromo di San Rossore",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/stagione-teatro-francesco-di-bartolo-buti/": {
+  "fine": "2027-04-27",
+  "hash": "d55dfafc50f405ef406ba603a212f0a7461ca8b5",
+  "inizio": "2026-11-27",
+  "lastmod": "2026-11-05T14:35:03+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Teatro di Bartolo, Via F.lli Disperati, 4, Buti",
+  "periodi": [],
+  "titolo": "Stagione al Teatro di Buti",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sul-cammino-di-san-michele-tra-pisa-e-la-maremma/": {
+  "fine": "2026-11-19",
+  "hash": "c275aea29bbacdc0c669af5555c3d42f6e3764cc",
+  "inizio": "2026-11-19",
+  "lastmod": "2026-11-05T13:51:44+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Teatro Verdi, Viale Regina Margherita, 11, Casciana Terme",
+  "periodi": [
+   [
+    "2026-11-19",
+    "2026-11-19"
+   ]
+  ],
+  "titolo": "Stagione Sinfonica al Teatro Verdi di Casciana Terme",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sulle-tracce-del-tartufo-bianco-a-montopoli-in-valdarno/": {
+  "fine": "2026-10-04",
+  "hash": "1bc8a6dac230dc08e4941d2e6a032cf41d610e53",
+  "inizio": "2026-10-04",
+  "lastmod": "2026-11-05T10:23:15+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Torre di San Matteo, Piazza San Matteo, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-10-04",
+    "2026-10-04"
+   ]
+  ],
+  "titolo": "Sulle tracce del tartufo bianco a Montopoli in Valdarno",
   "verifica": false
  },
  "https://www.terredipisa.it/events/tags/alluvione-1966/": {
@@ -627,6 +1081,11 @@
   "lastmod": "2026-11-06T09:37:45+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/anniversario/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:09:50+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/antiquariato/": {
   "ko": true,
   "lastmod": "2026-11-06T13:07:19+00:00",
@@ -636,6 +1095,16 @@
   "ko": true,
   "lastmod": "2026-11-06T11:02:31+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/aperitivi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:55:33+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/area-archeologica/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/arno/": {
   "ko": true,
@@ -662,10 +1131,50 @@
   "lastmod": "2026-11-06T12:12:37+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/bambini/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:57:23+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/battaglia-san-romano/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:40:45+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/beata-giuntini/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/bicentenario-collodi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:52:37+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/bientina/": {
   "ko": true,
   "lastmod": "2026-11-06T12:35:39+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/bistecca/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:20:35+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/bruno-bozzetto/": {
+  "ko": true,
+  "lastmod": "2026-11-05T12:02:35+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/buti/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:35:03+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/calci/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:13:59+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/camminamento-mura/": {
   "ko": true,
@@ -682,6 +1191,11 @@
   "lastmod": "2026-11-06T12:20:20+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/casa-carducci/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/casa-concia/": {
   "ko": true,
   "lastmod": "2026-11-06T09:29:11+00:00",
@@ -691,6 +1205,11 @@
   "ko": true,
   "lastmod": "2026-11-06T12:08:36+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/cascina/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:59:12+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/castelnuovo-val-di-cecina/": {
   "ko": true,
@@ -702,20 +1221,50 @@
   "lastmod": "2026-11-06T08:54:07+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/centro-cagianelli/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:09:50+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/chianni/": {
   "ko": true,
   "lastmod": "2026-11-06T08:54:55+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/cimitero-ebraico/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:59+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/cinghiale/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:19+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/ciuchi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:45+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/colline-pisane/": {
   "ko": true,
   "lastmod": "2026-11-06T12:20:20+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/collodi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:52:37+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/corsa/": {
   "ko": true,
   "lastmod": "2026-11-06T08:54:07+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/costa-toscana/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:19+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/crespina/": {
   "ko": true,
@@ -732,6 +1281,16 @@
   "lastmod": "2026-11-06T13:15:15+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/disfida-con-larco/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:22:40+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/domenica/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:57:23+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/domus-mazziniana/": {
   "ko": true,
   "lastmod": "2026-11-06T09:33:14+00:00",
@@ -741,6 +1300,11 @@
   "ko": true,
   "lastmod": "2026-11-06T09:29:11+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/fashion-in-flair/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:21:07+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/festa-capodanno/": {
   "ko": true,
@@ -752,15 +1316,35 @@
   "lastmod": "2026-11-06T12:37:02+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/folklore/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:22:40+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/fondazione-toniolo/": {
   "ko": true,
   "lastmod": "2026-11-06T08:56:16+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/fumetti-e-popcorn/": {
+  "ko": true,
+  "lastmod": "2026-11-05T12:02:35+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/fumetti/": {
+  "ko": true,
+  "lastmod": "2026-11-05T12:02:35+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/geotermia/": {
   "ko": true,
   "lastmod": "2026-11-06T09:26:32+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/giugno/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:40:45+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/giuseppe-mazzini/": {
   "ko": true,
@@ -772,6 +1356,16 @@
   "lastmod": "2026-11-06T09:34:24+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/ingresso-libero/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/inteferometro/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:10:15+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/ippodromo/": {
   "ko": true,
   "lastmod": "2026-11-06T08:54:07+00:00",
@@ -782,10 +1376,30 @@
   "lastmod": "2026-11-06T09:26:32+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/lari/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:21:39+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/letteratura/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:55:33+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/libri/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:55:33+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/litorale-pisano/": {
   "ko": true,
   "lastmod": "2026-11-06T12:14:13+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/lugnano/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:45+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/macchiaioli-2/": {
   "ko": true,
@@ -837,10 +1451,35 @@
   "lastmod": "2026-11-06T12:30:02+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/monte-pisano/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:13:59+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/montecatini-val-di-cecina/": {
+  "ko": true,
+  "lastmod": "2026-11-05T08:23:53+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/monteverdi-marittimo/": {
   "ko": true,
   "lastmod": "2026-11-06T09:36:15+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/montopoli-in-val-darno/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:22:40+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/montopoli-in-valdarno-2/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:24:19+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/montopoli/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:15+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/mostra/": {
   "ko": true,
@@ -852,6 +1491,26 @@
   "lastmod": "2026-11-06T09:34:24+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/musei-pisa/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:43:59+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/musei/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:43:59+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/museo-delle-miniere/": {
+  "ko": true,
+  "lastmod": "2026-11-05T08:23:53+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/museo-piaggio/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:41:50+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/museo-san-matteo/": {
   "ko": true,
   "lastmod": "2026-11-06T11:08:25+00:00",
@@ -862,6 +1521,11 @@
   "lastmod": "2026-11-06T12:09:41+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/natale/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:19:06+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/navi-antiche/": {
   "ko": true,
   "lastmod": "2026-11-06T12:09:41+00:00",
@@ -871,6 +1535,16 @@
   "ko": true,
   "lastmod": "2026-11-06T12:37:02+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/olio-oliva/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:13:59+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/onde-gravitazionali/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:10:15+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/opera-lirica/": {
   "ko": true,
@@ -892,6 +1566,11 @@
   "lastmod": "2026-11-06T09:34:24+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/palio/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:24:19+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/paracadutismo/": {
   "ko": true,
   "lastmod": "2026-11-06T09:31:51+00:00",
@@ -907,10 +1586,20 @@
   "lastmod": "2026-11-06T12:14:13+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/passeggiata/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:13:59+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/peccioli/": {
   "ko": true,
   "lastmod": "2026-11-06T09:25:56+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/pinocchio/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:52:37+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/pisa-marathon/": {
   "ko": true,
@@ -947,15 +1636,50 @@
   "lastmod": "2026-11-06T09:29:11+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/pontedera/": {
+  "ko": true,
+  "lastmod": "2026-11-06T08:13:53+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/premio-nakura/": {
   "ko": true,
   "lastmod": "2026-11-06T12:31:43+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/presentazioni/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:55:33+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/prosa/": {
+  "ko": true,
+  "lastmod": "2026-11-06T08:13:53+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/ragazzi/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:57:23+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/regali-di-natale/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:21:07+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/riparbella/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:19+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/rocca-brunelleschi/": {
   "ko": true,
   "lastmod": "2026-11-06T12:16:07+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/rossoscena/": {
+  "ko": true,
+  "lastmod": "2026-11-05T14:21:39+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/sagra-cinghiale/": {
   "ko": true,
@@ -977,6 +1701,11 @@
   "lastmod": "2026-11-06T12:02:29+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/san-francesco/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:09:50+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/san-giuliano-terme/": {
   "ko": true,
   "lastmod": "2026-11-06T13:07:19+00:00",
@@ -987,10 +1716,25 @@
   "lastmod": "2026-11-06T13:05:18+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/san-romano/": {
+  "ko": true,
+  "lastmod": "2026-11-05T09:40:45+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/san-rossore/": {
   "ko": true,
   "lastmod": "2026-11-06T08:54:07+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/santa-maria-a-monte/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/sinagoga/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:59+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/sogno-magia-mistero/": {
   "ko": true,
@@ -1002,20 +1746,70 @@
   "lastmod": "2026-11-06T12:08:36+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/spettacoli/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:22:40+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/stagione-al-teatro-verdi/": {
   "ko": true,
   "lastmod": "2026-11-06T13:04:18+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/stagione-sinfonica/": {
+  "ko": true,
+  "lastmod": "2026-11-05T13:51:44+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/stagione-teatro/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:06:40+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/stazione-leopolda/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:21:07+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/stelle/": {
   "ko": true,
   "lastmod": "2026-11-06T09:25:56+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/tartufo-bianco/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:15+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/tartufo/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:19:06+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/teatro-amatoriale/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:56:42+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/teatro-era/": {
+  "ko": true,
+  "lastmod": "2026-11-06T08:13:53+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/teatro-goldoni-livorno/": {
+  "ko": true,
+  "lastmod": "2026-11-05T13:51:44+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/teatro-odeon/": {
   "ko": true,
   "lastmod": "2026-11-06T11:02:31+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/teatro-olimpia/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:06:40+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/teatro-verdi/": {
   "ko": true,
@@ -1037,10 +1831,20 @@
   "lastmod": "2026-11-06T12:16:07+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/torre-orologio/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:35:11+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/toscana/": {
   "ko": true,
   "lastmod": "2026-11-06T13:07:19+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/tuono-pettinato/": {
+  "ko": true,
+  "lastmod": "2026-11-05T12:02:35+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/universita-di-pisa/": {
   "ko": true,
@@ -1057,6 +1861,11 @@
   "lastmod": "2026-11-06T09:25:56+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/valdarno/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:23:15+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/valdicecina/": {
   "ko": true,
   "lastmod": "2026-11-06T09:36:15+00:00",
@@ -1067,10 +1876,20 @@
   "lastmod": "2026-11-06T08:56:16+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/vecchiano/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:06:40+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/vendemmia/": {
   "ko": true,
   "lastmod": "2026-11-06T11:53:33+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/tags/vespa/": {
+  "ko": true,
+  "lastmod": "2026-11-05T11:41:50+00:00",
+  "letta": "2026-11-07"
  },
  "https://www.terredipisa.it/events/tags/via-nunziatina/": {
   "ko": true,
@@ -1087,10 +1906,68 @@
   "lastmod": "2026-11-06T11:53:33+00:00",
   "letta": "2026-11-06"
  },
+ "https://www.terredipisa.it/events/tags/virgo/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:10:15+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/visita-guidata/": {
+  "ko": true,
+  "lastmod": "2026-11-05T10:10:15+00:00",
+  "letta": "2026-11-07"
+ },
+ "https://www.terredipisa.it/events/tags/visite-guidate/": {
+  "ko": true,
+  "lastmod": "2026-11-05T15:10:59+00:00",
+  "letta": "2026-11-07"
+ },
  "https://www.terredipisa.it/events/tags/volterra/": {
   "ko": true,
   "lastmod": "2026-11-06T12:02:29+00:00",
   "letta": "2026-11-06"
+ },
+ "https://www.terredipisa.it/events/teatro-al-museo-di-storia-naturale-di-calci/": {
+  "fine": "2026-11-06",
+  "hash": "ed954a2ac8af08eb2dbc8db337667cebe8359c23",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T09:49:18+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Museo Storia Naturale, Via Roma, Calci",
+  "periodi": [
+   [
+    "2026-11-06",
+    "2026-11-06"
+   ]
+  ],
+  "titolo": "Teatro al Museo di Storia Naturale di Calci e alla Città del Teatro di Cascina",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/teatro-in-rocca-santa-maria-monte/": {
+  "fine": "2026-11-15",
+  "hash": "40787ed8018bbdc0f554e8f38cc0b90b436747eb",
+  "inizio": "2026-11-15",
+  "lastmod": "2026-11-05T11:32:02+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "periodi": [
+   [
+    "2026-11-15",
+    "2026-11-15"
+   ]
+  ],
+  "titolo": "Stagione al Teatro Comunale di Santa Maria a Monte",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/teatro-olimpia-vecchiano/": {
+  "fine": "2027-01-09",
+  "hash": "d1f3618d6e05e8dcb8e5de725ebc81f5645e8b78",
+  "inizio": "2026-11-13",
+  "lastmod": "2026-11-05T11:06:40+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Cinema Teatro Olimpia, Via G.B. Barsuglia, 20, Vecchiano",
+  "periodi": [],
+  "titolo": "Festa del Teatro e della Comunità al Cinema Teatro Olimpia di Vecchiano",
+  "verifica": false
  },
  "https://www.terredipisa.it/events/teatro-verdi-stagione-di-opera-pisa/": {
   "fine": "2027-04-18",
@@ -1138,6 +2015,38 @@
   "titolo": "Tra sogno, magia e benessere | Pisa",
   "verifica": true
  },
+ "https://www.terredipisa.it/events/vespa-chi-legge-festival-letterario-al-museo-piaggio/": {
+  "fine": "2026-12-13",
+  "hash": "6e3cdde1eee40ff71d089193b776e316d074c094",
+  "inizio": "2026-11-24",
+  "lastmod": "2026-11-05T09:55:33+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "periodi": [
+   [
+    "2026-11-24",
+    "2026-12-13"
+   ]
+  ],
+  "titolo": "“Vespa chi legge” : Festival letterario al Museo Piaggio",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/vinopoli-a-montopoli-in-valdarno/": {
+  "fine": "2026-05-16",
+  "hash": "1f8f5e70b61098731b98aba596a6e42cbfe05086",
+  "inizio": "2026-05-16",
+  "lastmod": "2026-11-05T10:19:34+00:00",
+  "letta": "2026-11-07",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "periodi": [
+   [
+    "2026-05-16",
+    "2026-05-16"
+   ]
+  ],
+  "titolo": "Vinopoli a Montopoli in Valdarno",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/visita-guidata-al-museo-storico-delle-aviotruppe-pisa/": {
   "fine": "2026-11-30",
   "hash": "6274a157a357ed577b3c6bb937cf01252f74933c",
@@ -1153,6 +2062,17 @@
   ],
   "titolo": "Visite guidate al Museo Storico delle Aviotruppe | Pisa",
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/visita-miniera-rame-montecatini-valdicecina/": {
+  "fine": "2027-03-31",
+  "hash": "5f82307fe7e366f00f59dfae2b0fadadde80983e",
+  "inizio": "2026-11-07",
+  "lastmod": "2026-11-05T08:23:53+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Miniera di Camporciano, Via delle Miniere, Montecatini Val di Cecina",
+  "periodi": [],
+  "titolo": "Visite guidate nella Miniera di Rame | Montecatini Val di Cecina",
+  "verifica": false
  },
  "https://www.terredipisa.it/events/visita-museo-navi-antiche-pisa/": {
   "fine": "2026-11-29",
@@ -1182,6 +2102,54 @@
   "titolo": "Visita al Museo della Geotermia e al Soffione di Larderello",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/visite-guidate-al-giardino-emozionale-della-gualda-vecchia-di-monteverdi-marittimo/": {
+  "fine": "2026-10-31",
+  "hash": "009c23876beffc8d3031cdf5281ece372e9a9469",
+  "inizio": "2026-10-31",
+  "lastmod": "2026-11-05T09:18:43+00:00",
+  "letta": "2026-11-07",
+  "luogo": "La Gualda Vecchia, Via castagnetana, 55, Monteverdi Marittimo",
+  "periodi": [
+   [
+    "2026-10-31",
+    "2026-10-31"
+   ]
+  ],
+  "titolo": "Visite al giardino emozionale “Sentieri di Piume” |  Monteverdi Marittimo",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/visite-guidate-allinterferometro-virgo/": {
+  "fine": "2026-11-14",
+  "hash": "c6106db93a7f4435a19cfe8034833db9797c1d8d",
+  "inizio": "2026-11-14",
+  "lastmod": "2026-11-05T10:10:15+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Interferometro Virgo, Via E. Amaldi, Santo Stefano a Macerata",
+  "periodi": [
+   [
+    "2026-11-14",
+    "2026-11-14"
+   ]
+  ],
+  "titolo": "Visite guidate all’interferometro VIRGO",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/visite-guidate-museo-san-matteo-pisa/": {
+  "fine": "2026-12-06",
+  "hash": "da8c475ef510c3799dadfe2058eb07193f23eca5",
+  "inizio": "2026-12-06",
+  "lastmod": "2026-11-05T11:43:59+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Museo Nazionale San Matteo, Piazza San Matteo in Soarta, Pisa",
+  "periodi": [
+   [
+    "2026-12-06",
+    "2026-12-06"
+   ]
+  ],
+  "titolo": "Domenica al Museo gratis nei Musei Nazionali di Pisa e Calci",
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/visite-guidate-salina-di-volterra/": {
   "fine": "2026-11-29",
   "hash": "7d506c5618c11606aa5e9be0d3e86928ea47e272",
@@ -1197,6 +2165,38 @@
   ],
   "sito": "",
   "titolo": "Viaggio nel mondo del sale: la Salina Locatelli | Saline di Volterra",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/visite-pontedera-museo-piaggio/": {
+  "fine": "2026-11-29",
+  "hash": "14178e5944dd168898712b2b5357d56dbcd9ee2f",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T11:41:50+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "periodi": [
+   [
+    "2026-11-06",
+    "2026-11-29"
+   ]
+  ],
+  "titolo": "Visite libere e guidate al Museo Piaggio | Pontedera",
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/viviteatro-al-teatro-odeon-di-ponsacco/": {
+  "fine": "2026-11-19",
+  "hash": "3963c2532a73d75fff44eb75752d9d9a6439ad13",
+  "inizio": "2026-11-06",
+  "lastmod": "2026-11-05T10:56:42+00:00",
+  "letta": "2026-11-07",
+  "luogo": "Cinema Teatro Odeon, Via dei Mille, Ponsacco",
+  "periodi": [
+   [
+    "2026-11-06",
+    "2026-11-19"
+   ]
+  ],
+  "titolo": "“Viviteatro” al teatro Odeon di Ponsacco",
   "verifica": true
  }
 }

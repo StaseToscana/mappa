@@ -78,5 +78,20 @@
   "luogo": "Largo Cocco Griffi",
   "assente": true,
   "verificato": "2026-11-06"
+ },
+ "piazza duomo|pisa": {
+  "luogo": "Piazza Duomo",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "museo nazionale san matteo piazza san matteo in soarta|pisa": {
+  "luogo": "Museo Nazionale San Matteo, Piazza San Matteo in Soarta",
+  "file": "museo-nazionale-san-matteo-piazza-san-ma-bv84gv.jpg",
+  "titolo": "Chiesa e convento di San Matteo in Soarta",
+  "autore": "Taccolamat",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Museo_San_Matteo_di_Pisa.JPG",
+  "verificato": "2026-11-07"
  }
 }

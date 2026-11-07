@@ -3,6 +3,10 @@
   43.7148583,
   10.3921763
  ],
+ "Calci": [
+  43.725799,
+  10.5152807
+ ],
  "Cappella Sant’Agata, Via San Paolo, Pisa": [
   43.7130076,
   10.3940432
@@ -17,6 +21,7 @@
   43.4613075,
   10.6392538
  ],
+ "Cinema Arsenale, Via San Martino, Pisa": null,
  "Cinema Teatro Odeon, Via dei Mille, Ponsacco": null,
  "Comune di Crespina Lorenzana, Piazza Cesare Battisti, Crespina Lorenzana": null,
  "Crespina Lorenzana": [
@@ -31,6 +36,10 @@
  "Lari, Casciana Terme Lari": [
   43.5660167,
   10.592001
+ ],
+ "Museo Nazionale San Matteo, Piazza San Matteo in Soarta, Pisa": [
+  43.7147201,
+  10.4078619
  ],
  "Museo Piaggio, Via Rinaldo Piaggio, Pontedera": null,
  "Orto e Museo Botanico, Via Ghini, Pisa": null,
@@ -48,11 +57,16 @@
   43.6816679,
   10.8519812
  ],
+ "Piazza Duomo, Pisa": [
+  43.6798629,
+  10.8514486
+ ],
  "Piazza Martiri della Libertà, Bientina": [
   43.7117997,
   10.6200781
  ],
  "Piazza del Castello, Chianni": null,
+ "Pieve di Calci, Piazza della Chiesa, Calci": null,
  "Pisa": [
   43.4714722,
   10.6797912
@@ -65,6 +79,10 @@
   43.6634536,
   10.6354851
  ],
+ "Riparbella": [
+  43.3646248,
+  10.5995286
+ ],
  "San Giuliano Terme": [
   43.7629956,
   10.4410399
@@ -73,11 +91,16 @@
   43.6797502,
   10.8500949
  ],
+ "Santa Maria a Monte": [
+  43.7075159,
+  10.6858074
+ ],
  "Scuola Superiore Sant’Anna, Piazza Martiri della Libertà, Pisa": [
   43.7206078,
   10.4026444
  ],
  "Stazione Leopolda, Piazza Guerrazzi, Pisa": null,
+ "Teatro Verdi, Viale Regina Margherita, Casciana Terme Lari": null,
  "Teatro di Via Verdi, Via Verdi, Vicopisano": [
   43.7000183,
   10.5847196
@@ -99,5 +122,6 @@
   43.400337,
   10.860019
  ],
- "salina locatelli, via delle moie vecchie, Volterra": null
+ "salina locatelli, via delle moie vecchie, Volterra": null,
+ "viale delle cascine, viale delle Cascine, Pisa": null
 }
