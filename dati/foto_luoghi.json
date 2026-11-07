@@ -633,5 +633,20 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Teatro_cantiere_florida%2C_firenze%2C_via_pisana.JPG",
   "verificato": "2026-11-03"
+ },
+ "palazzo strozzi|firenze": {
+  "luogo": "Palazzo Strozzi",
+  "file": "palazzo-strozzi-yju7o2.jpg",
+  "titolo": "Palazzo Strozzi",
+  "autore": "Chabe01",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palais_Strozzi_-_Florence_(IT52)_-_2022-08-31_-_1.jpg",
+  "verificato": "2026-11-07"
+ },
+ "biblioteca ragionieri sesto fiorentino|calenzano": {
+  "luogo": "Biblioteca Ragionieri | Sesto Fiorentino",
+  "assente": true,
+  "verificato": "2026-11-07"
  }
 }
