@@ -928,6 +928,7 @@
   const JSON_URL_FALLBACK = 'https://script.google.com/macros/s/AKfycbwggWJBKj-3zNS7uVvq7_vhVRDa8jAv3xoTv9hH38UKmAp-SzSr5ejScMnqOCbtNiqetw/exec';
   const JSON_URL_VT = 'https://stasetoscana.it/eventi_visittuscany.json';
   const JSON_URL_FI = 'https://stasetoscana.it/eventi_firenze.json';
+  const JSON_URL_SAGRE = 'https://stasetoscana.it/eventi_sagre.json';
 
   const CATEGORIE = {
     'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
@@ -1152,8 +1153,19 @@
     } catch (err) {
       console.warn('Eventi Firenze non disponibili:', err);
     }
-    // Unisci le tre fonti e rimuovi i duplicati
-    var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI]);
+    // 4. Carica le sagre (opzionale, non blocca)
+    var eventiSagre = [];
+    try {
+      var resSG = await fetch(JSON_URL_SAGRE + '?t=' + Date.now());
+      if (resSG.ok) {
+        eventiSagre = normalizzaEventiSagre(await resSG.json());
+        console.log('Sagre caricate:', eventiSagre.length);
+      }
+    } catch (err) {
+      console.warn('Sagre non disponibili:', err);
+    }
+    // Unisci le quattro fonti e rimuovi i duplicati
+    var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI, eventiSagre]);
     if (unici.length === 0) {
       mostraToast('Modalita demo: dati di esempio caricati');
       return DATI_DEMO;
@@ -1375,12 +1387,44 @@
       });
   }
 
+  // ===================== SAGRE (eventi_sagre.json) =====================
+  function normalizzaEventiSagre(data) {
+    var lista = data && Array.isArray(data.eventi) ? data.eventi : [];
+    var urlSicuro = function(u) { return /^https?:\/\//i.test(u || '') ? u : ''; };
+    var dataOk = function(d) { return /^\d{4}-\d{2}-\d{2}$/.test(d || ''); };
+    return lista
+      .filter(function(e) { return e && e.nome && dataOk(e.dataSort); })
+      .map(function(e, i) {
+        return {
+          id: String(e.id || ('sg-' + i)).replace(/[^a-zA-Z0-9_-]/g, '-'),
+          nome: e.nome,
+          locandina: urlSicuro(e.locandina) || null,
+          fotoCrediti: (e.fotoCrediti && urlSicuro(e.fotoCrediti.url)) ? { testo: String(e.fotoCrediti.testo || ''), url: e.fotoCrediti.url } : null,
+          immagineIllustrativa: !!e.immagineIllustrativa,
+          categoria: e.categoria || 'Sagra',
+          descrizione: e.descrizione || '',
+          provincia: e.provincia || 'Pisa',
+          comune: e.comune || '',
+          indirizzo: e.indirizzo || '',
+          riepilogoDate: e.riepilogoDate || '',
+          dataSort: e.dataSort,
+          dataFine: dataOk(e.dataFine) ? e.dataFine : e.dataSort,
+          mapsUrl: urlSicuro(e.mapsUrl),
+          lat: e.lat != null ? parseFloat(e.lat) : null,
+          lon: e.lon != null ? parseFloat(e.lon) : null,
+          instagram: null,
+          inEvidenza: false,
+          fonte: 'terredipisa'
+        };
+      });
+  }
+
   // ===================== DEDUPLICA TRA FONTI =====================
   // Stessa data + stesso comune + titolo uguale (stessa fonte) o simile (fonti diverse).
   // Vince la fonte con priorità più alta (Stase > Firenze > VisitTuscany) e,
   // se manca la locandina, si tiene quella dell'altra scheda.
   var _PAROLE_VUOTE = new Set(['il','lo','la','gli','le','di','del','della','dei','delle','alla','con','per','una','the','of']);
-  var _PRIORITA_FONTE = { stase: 3, firenze: 2, visittuscany: 1 };
+  var _PRIORITA_FONTE = { stase: 3, firenze: 2, terredipisa: 2, visittuscany: 1 };
 
   function _normTesto(s) {
     return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -1813,6 +1857,7 @@
     azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
     if (ev.fonte === 'firenze') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://www.feelflorence.it" target="_blank" rel="noopener">Comune di Firenze – FeelFlorence</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a></div>';
     if (ev.fotoCrediti) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">📷 <a href="' + escapeHtml_(ev.fotoCrediti.url) + '" target="_blank" rel="noopener">' + escapeHtml_(ev.fotoCrediti.testo) + '</a></div>';
+    if (ev.immagineIllustrativa) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">🖼️ Immagine illustrativa</div>';
     document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
 
     aggiornaUrlDettaglio(ev.id);
@@ -2327,7 +2372,7 @@
         }
       };
       if (ev.dataFine) obj.endDate = ev.dataFine;
-      if (ev.locandina) obj.image = [ev.locandina];
+      if (ev.locandina && !ev.immagineIllustrativa) obj.image = [ev.locandina]; // le illustrazioni non vanno nei dati strutturati per Google
       if (ev.descrizione) obj.description = ev.descrizione;
       if (ev.lat != null && ev.lon != null) {
         obj.location.geo = { '@type': 'GeoCoordinates', latitude: ev.lat, longitude: ev.lon };
