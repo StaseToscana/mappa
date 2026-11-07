@@ -60,8 +60,16 @@ jobs:
           mkdir -p dati foto-luoghi
           node scripts/foto-luoghi.js eventi_sagre.json dati/foto_luoghi_sagre.json foto-luoghi
 
+      - name: Foto dei paesi (Wikimedia Commons)
+        # Per gli eventi ancora senza immagine: foto del comune con licenza libera. Non blocca mai l'aggiornamento.
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p dati foto-luoghi
+          node scripts/foto-paesi.js eventi_sagre.json dati/foto_paesi.json foto-luoghi
+
       - name: Immagine illustrativa per tema (piano B)
-        # Solo per gli eventi ancora senza immagine. Usa i file nella cartella immagini-sagre/.
+        # Ultimo ripiego, solo per gli eventi ancora senza immagine: illustrazioni nella cartella immagini-sagre/.
         if: ${{ github.event.inputs.dry_run != 'true' }}
         continue-on-error: true
         run: |
