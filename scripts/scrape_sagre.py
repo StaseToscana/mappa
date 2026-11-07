@@ -42,6 +42,7 @@ MAX_GIORNI = 40    # scarta eventi piu' lunghi (stagioni teatrali, mostre perman
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 MODELLO = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-5-5")
 
+VERSIONE_CACHE = 2   # sale quando cambiano i dati letti da ogni scheda: le schede vecchie vengono riletta
 F_OUT = "eventi_sagre.json"
 F_GEO = "geocode_cache.json"
 F_PAG = "cache_pagine.json"
@@ -169,12 +170,62 @@ def e_scheda_evento(url):
                                 "/events/categoria/", "/events/page/"))
 
 
+RE_EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+")
+RE_TEL = re.compile(r"(?<!\d)(?:\+?39[\s.]*)?(?:0\d{1,3}|3\d{2})[\s./-]*\d{5,8}(?:\s*[\u2013\-/]\s*\d{3,8})?(?!\d)")
+_RE_ETICHETTA_INFO = re.compile(r"^\s*(info(rmazioni)?|contatti)( e prenotazioni)?\s*:?\s*$", re.I)
+_RE_FINE_BLOCCO = re.compile(r"per informazioni|iscriviti|seguici|vuoi aggiornamenti|widget", re.I)
+DOMINI_ESCLUSI = ("terredipisa.it", "tno.camcom.it", "visittuscany.com")
+
+
+def estrai_contatti(soup):
+    """Contatti dell'ORGANIZZATORE dal riquadro "Info" in fondo alla scheda: telefono, e-mail, sito web.
+    Esclude i recapiti dell'ente che ospita il calendario (riquadro "Per informazioni")."""
+    out = {"telefono": "", "email": "", "sito": ""}
+    etichetta = None
+    for nodo in soup.find_all(string=_RE_ETICHETTA_INFO):
+        etichetta = nodo                       # l'ultima occorrenza = il riquadro in fondo
+    if etichetta is None:
+        return out
+    testo, caratteri = [], 0
+    for nodo in etichetta.find_all_next(string=True):
+        t = str(nodo).strip()
+        if not t:
+            continue
+        genitore = nodo.parent
+        if genitore is not None and genitore.name in ("h1", "h2", "h3", "h4", "h5", "h6", "script", "style"):
+            break
+        if _RE_FINE_BLOCCO.search(t):
+            break
+        caratteri += len(t)
+        if caratteri > 600:
+            break
+        if genitore is not None and genitore.name == "a" and genitore.get("href"):
+            href = genitore["href"].strip()
+            m = RE_EMAIL.search(href.replace("mailto:", ""))
+            if m and not out["email"] and not any(d in m.group(0).lower() for d in DOMINI_ESCLUSI):
+                out["email"] = m.group(0)
+            elif (href.lower().startswith(("http://", "https://")) and not out["sito"]
+                  and re.search(r"sito|web", t, re.I)
+                  and not any(d in href.lower() for d in DOMINI_ESCLUSI)):
+                out["sito"] = href
+        else:
+            testo.append(t)
+    m = RE_TEL.search(" ".join(testo))
+    if m:
+        out["telefono"] = re.sub(r"\s+", " ", m.group(0)).strip()
+    if not out["email"]:
+        m = RE_EMAIL.search(" ".join(testo))
+        if m and not any(d in m.group(0).lower() for d in DOMINI_ESCLUSI):
+            out["email"] = m.group(0)
+    return out
+
+
 def to_date(g):
     return date(int(g[2]), int(g[1]), int(g[0]))
 
 
 def parse_scheda(html):
-    """Estrae titolo, intervallo di date e luogo. Nient'altro viene tenuto."""
+    """Estrae titolo, intervallo di date, luogo e contatti dell'organizzatore. Nient'altro viene tenuto."""
     soup = BeautifulSoup(html, "html.parser")
     h1 = soup.find("h1")
     if not h1:
@@ -194,7 +245,7 @@ def parse_scheda(html):
     k = corpo.find(luogo) if luogo else -1
     contesto = corpo[k + len(luogo):][:2500] if k >= 0 else corpo[:2500]
     return {"titolo": titolo, "luogo": luogo, "inizio": inizio, "fine": fine,
-            "contesto": contesto, "date_txt": date_txt}
+            "contesto": contesto, "date_txt": date_txt, "contatti": estrai_contatti(soup)}
 
 
 def nome_pulito(titolo):
@@ -356,6 +407,8 @@ def fresca(c, lastmod, oggi):
     """True se la scheda in cache e' ancora buona e non serve riscaricarla."""
     if not c:
         return False
+    if not c.get("ko") and c.get("v") != VERSIONE_CACHE:
+        return False                              # scheda letta con una versione vecchia dello script
     if c.get("ko"):                               # scheda non capita: riprova solo se cambia (o dopo 7 giorni)
         if lastmod:
             return c.get("lastmod") == lastmod
@@ -396,7 +449,8 @@ def elabora_pagina(url, lastmod, cache):
         return None
     h = hashlib.sha1((p["titolo"] + p["date_txt"] + p["contesto"]).encode("utf-8")).hexdigest()
     if c and c.get("hash") == h:
-        c["lastmod"], c["letta"] = lastmod, oggi_iso
+        c["lastmod"], c["letta"], c["v"] = lastmod, oggi_iso, VERSIONE_CACHE
+        c["telefono"], c["email"], c["sito"] = p["contatti"]["telefono"], p["contatti"]["email"], p["contatti"]["sito"]
         return c
     giorni = (p["fine"] - p["inizio"]).days
     verifica = False
@@ -408,7 +462,8 @@ def elabora_pagina(url, lastmod, cache):
         periodi = periodi_da_llm(p["titolo"], p["inizio"], p["fine"], p["contesto"])
         if not periodi:
             periodi, verifica = [(p["inizio"], p["fine"])], True
-    return {"lastmod": lastmod, "letta": oggi_iso, "hash": h, "titolo": p["titolo"],
+    return {"v": VERSIONE_CACHE, "lastmod": lastmod, "letta": oggi_iso, "hash": h, "titolo": p["titolo"],
+            "telefono": p["contatti"]["telefono"], "email": p["contatti"]["email"], "sito": p["contatti"]["sito"],
             "luogo": p["luogo"], "inizio": p["inizio"].isoformat(),
             "fine": p["fine"].isoformat(),
             "periodi": [[a.isoformat(), b.isoformat()] for a, b in periodi], "verifica": verifica}
@@ -438,8 +493,13 @@ def main():
         urls = urls_da_lista()
     urls = list(dict.fromkeys(urls))
     cache_pag = {} if args.dry_run else carica_json(F_PAG, {})
-    urls.sort(key=lambda x: x[1], reverse=True)               # prima le modificate di recente
-    urls.sort(key=lambda x: x[0] in cache_pag)                # e prima di tutto le schede mai viste
+    def priorita(x):
+        c = cache_pag.get(x[0])
+        if c and not c.get("ko") and c.get("v") != VERSIONE_CACHE and c.get("fine", "") >= oggi.isoformat():
+            return 0                                          # evento futuro gia' noto: va riletto per i contatti
+        return 1 if not c else 2                              # poi le schede mai viste, poi il resto
+    urls.sort(key=lambda x: x[1], reverse=True)               # a parita': prima le modificate di recente
+    urls.sort(key=priorita)
     if args.max:
         urls = urls[:args.max]
     print(f"Schede in sitemap: {len(urls)} | gia' in memoria: {sum(1 for u, _ in urls if u in cache_pag)} "
@@ -520,6 +580,7 @@ def main():
                 "lat": lat, "lon": lon, "coordApprossimate": approx,
                 "instagram": "", "inEvidenza": False,
                 "fonte": "terredipisa",
+                "telefono": rec.get("telefono", ""), "email": rec.get("email", ""), "sitoWeb": rec.get("sito", ""),
                 "dateDaVerificare": rec["verifica"],
             })
 
