@@ -127,7 +127,7 @@ def urls_da_sitemap(url, livello=0):
             out += urls_da_sitemap(u, livello + 1)
     for el in root.findall("s:url", ns):
         loc = (el.findtext("s:loc", default="", namespaces=ns) or "").strip()
-        if urlparse(loc).path.startswith("/events/"):
+        if e_scheda_evento(loc):
             out.append((loc, el.findtext("s:lastmod", default="", namespaces=ns) or ""))
     return out
 
@@ -138,13 +138,22 @@ def urls_da_lista():
     visti, out = set(), []
     for a in soup.select("a[href*='/events/']"):
         u = urljoin(BASE, a["href"]).split("#")[0]
-        if urlparse(u).path.startswith("/events/") and u not in visti:
+        if e_scheda_evento(u) and u not in visti:
             visti.add(u)
             out.append((u, ""))
     return out
 
 
 # ------------------------------------------------------------------------ parsing
+
+def e_scheda_evento(url):
+    """Vero solo per le schede dei singoli eventi (non per gli elenchi per tag/categoria)."""
+    path = urlparse(url).path
+    if not path.startswith("/events/"):
+        return False
+    return not path.startswith(("/events/tags/", "/events/tag/", "/events/category/",
+                                "/events/categoria/", "/events/page/"))
+
 
 def to_date(g):
     return date(int(g[2]), int(g[1]), int(g[0]))
@@ -289,25 +298,32 @@ def indirizzo_pulito(luogo, comune):
     return ", ".join(parti + ([comune] if comune else []))
 
 
-def nominatim(q):
-    r = get("https://nominatim.openstreetmap.org/search", params={
+def nominatim(q, comune_livello=False):
+    params = {
         "format": "jsonv2", "limit": 1, "countrycodes": "it", "bounded": 1,
         "viewbox": "9.6,44.55,12.45,42.2",   # riquadro della Toscana
-        "q": q + ", Toscana, Italia"})
-    j = r.json()
-    return [float(j[0]["lat"]), float(j[0]["lon"])] if j else None
+        "q": q + ", Toscana, Italia"}
+    if comune_livello:
+        params["featureType"] = "settlement"   # citta'/paese/frazione, non confini di provincia
+    j = get("https://nominatim.openstreetmap.org/search", params=params).json()
+    if not j:
+        return None
+    if comune_livello and j[0].get("addresstype") in ("county", "state", "region", "province"):
+        return None                            # ha trovato un confine amministrativo: meglio nessun punto che uno sbagliato
+    return [float(j[0]["lat"]), float(j[0]["lon"])]
 
 
 def geocodifica(luogo, comune, cache):
     for q, approx in query_geo(luogo, comune):
-        if q not in cache:
+        chiave = ("@comune:" + q) if approx else q   # chiave nuova: ignora i vecchi punti sbagliati a livello di comune
+        if chiave not in cache:
             try:
-                cache[q] = nominatim(q)
+                cache[chiave] = nominatim(q, comune_livello=approx)
             except Exception as e:
                 print(f"  ! geocoding fallito per '{q}': {e}")
                 continue                       # errore di rete: non lo metto in cache
-        if cache[q]:
-            return cache[q][0], cache[q][1], approx
+        if cache[chiave]:
+            return cache[chiave][0], cache[chiave][1], approx
     return None, None, True
 
 
