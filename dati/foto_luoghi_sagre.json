@@ -93,5 +93,110 @@
   "licenzaUrl": "",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Museo_San_Matteo_di_Pisa.JPG",
   "verificato": "2026-11-07"
+ },
+ "teatro della compagnia via dante alighieri 14|castelfranco di sotto": {
+  "luogo": "Teatro della Compagnia, Via Dante Alighieri, 14",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "piazza dei priori|volterra": {
+  "luogo": "Piazza dei Priori",
+  "file": "piazza-dei-priori-1ex2bmv.jpg",
+  "titolo": "Piazza dei Priori",
+  "autore": "Jean-Christophe BENOIST",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Volterra-Piazza_del_Priori.jpg",
+  "verificato": "2026-11-07"
+ },
+ "certosa di pisa via roma|calci": {
+  "luogo": "Certosa di Pisa, Via Roma",
+  "file": "certosa-di-pisa-via-roma-27xk5.jpg",
+  "titolo": "Certosa di Pisa",
+  "autore": "Gianni Careddu",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Calci%2C_certosa_di_Pisa_(001).jpg",
+  "verificato": "2026-11-07"
+ },
+ "montecastelli pisano|castelnuovo val di cecina": {
+  "luogo": "Montecastelli Pisano",
+  "file": "montecastelli-pisano-gqsa7f.jpg",
+  "titolo": "Montecastelli Pisano",
+  "autore": "Uffalele",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Montecastelli_31.jpg",
+  "verificato": "2026-11-07"
+ },
+ "corso remo bertoncini|castelfranco di sotto": {
+  "luogo": "Corso Remo Bertoncini",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "via rinaldo piaggio|pontedera": {
+  "luogo": "Via Rinaldo Piaggio",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "biblioteca comunale piazza xx settembre 7|castelfranco di sotto": {
+  "luogo": "Biblioteca Comunale, Piazza XX Settembre, 7",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "orto botanico di pisa via luca ghini 5|pisa": {
+  "luogo": "Orto Botanico di Pisa, Via Luca Ghini, 5",
+  "file": "orto-botanico-di-pisa-via-luca-ghini-5-1njfbtx.jpg",
+  "titolo": "Orto botanico di Pisa",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa%2C_orto_botanico%2C_zona_antica%2C_della_scuola_botanica_21.jpg",
+  "verificato": "2026-11-07"
+ },
+ "piazza fantozzi marti|montopoli in val d arno": {
+  "luogo": "Piazza Fantozzi, Marti",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "corso matteotti|cascina": {
+  "luogo": "Corso Matteotti",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "san miniato basso via tosco romagnola san miniato basso|san miniato": {
+  "luogo": "San MIniato Basso, Via Tosco Romagnola, San MIniato Basso",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "piazza garibaldi casciana terme|casciana terme lari": {
+  "luogo": "Piazza Garibaldi, Casciana Terme",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "corte aquisana casciana terme|casciana terme lari": {
+  "luogo": "Corte Aquisana, Casciana Terme",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "molina di quosa|san giuliano terme": {
+  "luogo": "Molina di Quosa",
+  "file": "molina-di-quosa-jpukyk.jpg",
+  "titolo": "Molina di Quosa",
+  "autore": "Lorenzo Benotto",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Molina_di_Quosa_-_veduta_aerea_del_centro_abitato_-_maggio_2020.jpg",
+  "verificato": "2026-11-07"
+ },
+ "via roma|peccioli": {
+  "luogo": "Via Roma",
+  "assente": true,
+  "verificato": "2026-11-07"
+ },
+ "terre di pisa|pisa": {
+  "luogo": "Terre di Pisa",
+  "assente": true,
+  "verificato": "2026-11-07"
  }
 }

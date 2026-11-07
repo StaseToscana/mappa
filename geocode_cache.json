@@ -1,7 +1,89 @@
 {
+ "@comune:Buti": [
+  43.7273019,
+  10.5877174
+ ],
+ "@comune:Calci": [
+  43.725799,
+  10.5152807
+ ],
+ "@comune:Casciana Terme Lari": [
+  43.5521588,
+  10.5942065
+ ],
+ "@comune:Chianni": [
+  43.4613075,
+  10.6392538
+ ],
+ "@comune:Crespina Lorenzana": [
+  43.587912,
+  10.5546526
+ ],
+ "@comune:Fauglia": [
+  43.5674662,
+  10.5066841
+ ],
+ "@comune:Montopoli in Val d'Arno": [
+  43.6702986,
+  10.7608316
+ ],
+ "@comune:Peccioli": [
+  43.5480274,
+  10.7208485
+ ],
+ "@comune:Pisa": null,
+ "@comune:Pomarance": [
+  43.2992367,
+  10.8724009
+ ],
+ "@comune:Ponsacco": [
+  43.6207132,
+  10.6308287
+ ],
+ "@comune:Pontedera": [
+  43.6634536,
+  10.6354851
+ ],
+ "@comune:Riparbella": [
+  43.3646248,
+  10.5995286
+ ],
+ "@comune:San Giuliano Terme": [
+  43.7629956,
+  10.4410399
+ ],
+ "@comune:San Miniato": [
+  43.6797502,
+  10.8500949
+ ],
+ "@comune:Santa Croce sull'Arno": [
+  43.7101077,
+  10.7819415
+ ],
+ "@comune:Santa Maria a Monte": [
+  43.7075159,
+  10.6858074
+ ],
+ "@comune:Terricciola": [
+  43.524738,
+  10.680114
+ ],
+ "@comune:Vicopisano": [
+  43.6998317,
+  10.5846946
+ ],
+ "@comune:Volterra": [
+  43.400337,
+  10.860019
+ ],
  "Arsenali Medicei, Lungarno Ranieri Simonelli, Pisa": [
   43.7148583,
   10.3921763
+ ],
+ "Arsenali Repubblicani, Via Bonanno, Pisa": null,
+ "Biblioteca Comunale, Piazza XX Settembre, Castelfranco di Sotto": [
+  43.6988121,
+  10.7442637
  ],
  "Calci": [
   43.725799,
@@ -17,13 +99,31 @@
   10.5942065
  ],
  "Caserma Gamerra, Via di Gello 138, Pisa": null,
+ "Castel Tonini, Via Marianini, Buti": null,
+ "Certosa di Pisa, Via Roma, Calci": [
+  43.7220444,
+  10.5228002
+ ],
  "Chianni": [
   43.4613075,
   10.6392538
  ],
  "Cinema Arsenale, Via San Martino, Pisa": null,
  "Cinema Teatro Odeon, Via dei Mille, Ponsacco": null,
+ "Comune di Calci, Piazza Garibaldi, Calci": null,
  "Comune di Crespina Lorenzana, Piazza Cesare Battisti, Crespina Lorenzana": null,
+ "Corso Matteotti, Cascina": [
+  43.6763179,
+  10.5499966
+ ],
+ "Corso Remo Bertoncini, Castelfranco di Sotto": [
+  43.7000862,
+  10.7462033
+ ],
+ "Corte Aquisana, Casciana Terme, Casciana Terme Lari": [
+  43.5243265,
+  10.6145731
+ ],
  "Crespina Lorenzana": [
   43.587912,
   10.5546526
@@ -37,18 +137,35 @@
   43.5660167,
   10.592001
  ],
+ "Molina di Quosa, San Giuliano Terme": [
+  43.7951371,
+  10.42285
+ ],
+ "Montecastelli Pisano, Castelnuovo Val di Cecina": [
+  43.2657137,
+  10.9575816
+ ],
+ "Museo Kienerk, Piazza Trento e Trieste, Fauglia": null,
  "Museo Nazionale San Matteo, Piazza San Matteo in Soarta, Pisa": [
   43.7147201,
   10.4078619
  ],
  "Museo Piaggio, Via Rinaldo Piaggio, Pontedera": null,
+ "Museo degli Strumenti di Fisica-Ludoteca Scientifica, Largo Padre Renzo Spadoni, Pisa": null,
+ "Officina Culturale San Miniato, Via Augusto Conti, San Miniato": null,
+ "Orto Botanico di Pisa, Via Luca Ghini, Pisa": [
+  43.7198464,
+  10.3971804
+ ],
  "Orto e Museo Botanico, Via Ghini, Pisa": null,
  "Palazzo Blu, Lungarno Gambacorti, Pisa": [
   43.7156502,
   10.3997452
  ],
  "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, Pisa": null,
+ "Palazzo Senza Tempo, Via Carraia, Peccioli": null,
  "Palazzo Toniolo, Piazza Toniolo, Pisa": null,
+ "Parco della Cittadella, Via Nicola Pisano, Pisa": null,
  "Peccioli": [
   43.5480274,
   10.7208485
@@ -61,9 +178,22 @@
   43.6798629,
   10.8514486
  ],
+ "Piazza Fantozzi, Marti, Montopoli in Val d'Arno": [
+  43.6493657,
+  10.7442676
+ ],
+ "Piazza Garibaldi, Calci": null,
+ "Piazza Garibaldi, Casciana Terme, Casciana Terme Lari": [
+  43.5274541,
+  10.6176107
+ ],
  "Piazza Martiri della Libertà, Bientina": [
   43.7117997,
   10.6200781
+ ],
+ "Piazza dei Priori, Volterra": [
+  43.4020813,
+  10.8595601
  ],
  "Piazza del Castello, Chianni": null,
  "Pieve di Calci, Piazza della Chiesa, Calci": null,
@@ -87,6 +217,10 @@
   43.7629956,
   10.4410399
  ],
+ "San MIniato Basso, Via Tosco Romagnola, San Miniato": [
+  43.6929587,
+  10.8499527
+ ],
  "San Miniato": [
   43.6797502,
   10.8500949
@@ -95,17 +229,28 @@
   43.7075159,
   10.6858074
  ],
+ "Santuario Madre dei Bimbi, Via di Cigoli, San Miniato": null,
  "Scuola Superiore Sant’Anna, Piazza Martiri della Libertà, Pisa": [
   43.7206078,
   10.4026444
  ],
+ "Sistema Museale Ateneo, Via Bonanno Pisano, Pisa": null,
  "Stazione Leopolda, Piazza Guerrazzi, Pisa": null,
+ "Teatro Verdi, Via Verdi, Santa Croce sull'Arno": null,
  "Teatro Verdi, Viale Regina Margherita, Casciana Terme Lari": null,
+ "Teatro della Compagnia, Via Dante Alighieri, Castelfranco di Sotto": [
+  43.6988933,
+  10.7448215
+ ],
  "Teatro di Via Verdi, Via Verdi, Vicopisano": [
   43.7000183,
   10.5847196
  ],
  "Terme di Casciana, Piazza Garibaldi, Casciana Terme Lari": null,
+ "Terre di Pisa, Pisa": [
+  43.1708392,
+  10.7841921
+ ],
  "Terricciola": [
   43.524738,
   10.680114
@@ -113,6 +258,14 @@
  "Tirrenia, Piazza Belvedere, Pisa": [
   43.6270659,
   10.2913613
+ ],
+ "Via Rinaldo Piaggio, Pontedera": [
+  43.6609852,
+  10.6331838
+ ],
+ "Via Roma, Peccioli": [
+  43.5484461,
+  10.7209707
  ],
  "Vicopisano": [
   43.6998317,
@@ -123,5 +276,6 @@
   10.860019
  ],
  "salina locatelli, via delle moie vecchie, Volterra": null,
+ "santuario di Maria Madre della Divina Grazia, Piazza Santa Chiara, Montopoli in Val d'Arno": null,
  "viale delle cascine, viale delle Cascine, Pisa": null
 }
