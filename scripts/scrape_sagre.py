@@ -25,6 +25,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
 from urllib.parse import quote, urljoin, urlparse
@@ -72,11 +73,24 @@ _RE_COMUNI = re.compile(
 )
 
 RE_DATA = re.compile(r"(\d{2})/(\d{2})/(\d{4})")
-RE_SAGRA = re.compile(
-    r"\b(sagr[ae]|festa d\w+|mostra[- ]mercato|cantine aperte|degusta\w*|tartufo|"
-    r"castagn\w*|cinghiale|polenta|vendemmia|olio nuovo|frantoi aperti)\b",
-    re.I,
-)
+# Categorie del sito, in ordine di priorita': vince la prima regola che combacia col titolo.
+_CIBO = r"castagn|tartuf|polenta|\bvino\b|\bolio\b|fung|cinghial|pesce|fritt|tortell|bistecc|salsicc|formagg|miele|zucca|marron"
+REGOLE_CATEGORIA = [
+    ("Rievocazione storica/Palio", r"\bpalio|rievocazion|medioev|medieval|giostra|calcio storico|disfida|corteo storico|gioco del ponte"),
+    ("Evento sportivo", r"maratona|\bcorsa\b|\btrail\b|trekking|camminata|cicloturis|ciclostoric|\bbike\b|torneo|\bgara\b|campionato|regata|triathlon|pedalata|podistic"),
+    ("Sagra", r"\bsagr[ae]\b|\b(festa|fiera|mostra[- ]mercato)\b.*(" + _CIBO + ")"),
+    ("Mercato", r"\bmercat|antiquari|\bantiqua\b|hobbismo|collezionismo|brocante"),
+    ("Fiera", r"\bfiere?\b|\bsalone\b|\bexpo\b"),
+    ("Evento gastronomico", r"cantin|degusta|\bvini\b|\bvino\b|enogastron|\bgusto\b|\bcena\b|\bpranzo\b|aperitivo|street food|assaggi|gastronom|" + _CIBO),
+    ("Concerto", r"concert|sinfonic|orchestra|\bcoro\b|\bmusica\b|\bmusic\b|\bjazz\b|\bblues\b|\brock\b|recital|cantautor|\bband\b"),
+    ("Festival", r"festival"),
+    ("Spettacolo teatrale", r"teatr|\bprosa\b|commedia|spettacol|\bdanza\b|balletto|opera lirica|musical|cinema|cortometraggi|\bfilm\b|cabaret"),
+    ("Mostra/Esposizione", r"\bmostr|esposizion|\bmuse[oi]\b|galleria|pinacoteca"),
+    ("Serata/Discoteca", r"discotec|\bdj\b|\bparty\b|\bserata\b"),
+    ("Festa paesana", r"\bfest[ae]\b|natale|presepi|befana|carnevale|halloween|capodanno"),
+]
+_REGOLE_COMPILATE = [(c, re.compile(r)) for c, r in REGOLE_CATEGORIA]
+
 
 # ----------------------------------------------------------------------------- rete
 
@@ -202,15 +216,11 @@ def estrai_comune(titolo, luogo):
 
 
 def categoria(titolo):
-    t = titolo.lower()
-    if RE_SAGRA.search(t):
-        return "Sagra"
-    if re.search(r"\bmostra|esposizione", t):
-        return "Mostra/Esposizione"
-    if re.search(r"teatro|stagione|spettacolo", t):
-        return "Spettacolo teatrale"
-    if re.search(r"concerto|musica|festival", t):
-        return "Festival" if "festival" in t else "Concerto"
+    """Assegna una delle categorie del sito in base alle parole del titolo."""
+    t = "".join(c for c in unicodedata.normalize("NFD", titolo.lower()) if unicodedata.category(c) != "Mn")
+    for nome, regola in _REGOLE_COMPILATE:
+        if regola.search(t):
+            return nome
     return "Altro"
 
 
