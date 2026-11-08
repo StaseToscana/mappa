@@ -648,5 +648,15 @@
   "luogo": "Biblioteca Ragionieri | Sesto Fiorentino",
   "assente": true,
   "verificato": "2026-11-07"
+ },
+ "casa delle donne|firenze": {
+  "luogo": "Casa delle Donne",
+  "assente": true,
+  "verificato": "2026-11-08"
+ },
+ "hotel albani|firenze": {
+  "luogo": "Hotel Albani",
+  "assente": true,
+  "verificato": "2026-11-08"
  }
 }
