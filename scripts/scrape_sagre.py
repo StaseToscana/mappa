@@ -11,11 +11,17 @@ Uso:
   python scripts/scrape_sagre.py                      # normale: TUTTI gli eventi
   python scripts/scrape_sagre.py --solo-sagre         # solo le sagre
 
-Variabili d'ambiente (opzionali):
-  ANTHROPIC_API_KEY  se presente, un modello legge il testo della scheda per capire le date
-                     reali (es. "5-8 e 12-15 novembre" quando il calendario dice 6-15).
-                     Senza chiave si usa l'intervallo del calendario e l'evento e'
-                     marcato "dateDaVerificare": true.
+Date reali degli eventi (Terre di Pisa riporta solo l'intervallo generico), in quest'ordine:
+  1. regole scritte a mano (gratis, senza account): riconoscono "5-8 e 12-15 novembre",
+     "venerdi 6, 13 e 20 novembre", "ogni sabato dal 7 al 28 novembre", "tutti i giorni", ecc.;
+  2. se le regole non bastano: Gemini (livello gratuito di Google) oppure, in alternativa, Anthropic;
+  3. se nessuno dei due e' disponibile o non trova giorni precisi: intervallo del calendario,
+     segnato "date indicative".
+
+Variabili d'ambiente (tutte opzionali):
+  GEMINI_API_KEY     chiave gratuita di Google AI Studio
+  GEMINI_MODEL       default: gemini-2.5-flash-lite
+  ANTHROPIC_API_KEY  alternativa a pagamento
   ANTHROPIC_MODEL    default: claude-haiku-5-5
 """
 import argparse
@@ -42,8 +48,11 @@ MAX_GIORNI = 40    # scarta eventi piu' lunghi (stagioni teatrali, mostre perman
 MAX_OCCORRENZE = 8  # oltre questo numero di date separate: una sola scheda con l'intervallo, segnata "date indicative"
 API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 MODELLO = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-5-5")
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
+PAUSA_MODELLO = 2.0   # secondi tra due chiamate a un modello (rispetta i limiti del livello gratuito)
 
-VERSIONE_CACHE = 3   # sale quando cambia cio' che si legge/calcola da ogni scheda: le schede vecchie vengono rilette
+VERSIONE_CACHE = 4   # sale quando cambia cio' che si legge/calcola da ogni scheda: le schede vecchie vengono rilette
 F_OUT = "eventi_sagre.json"
 F_GEO = "geocode_cache.json"
 F_PAG = "cache_pagine.json"
@@ -324,11 +333,201 @@ def valida_periodi(periodi, inizio, fine):
     return sorted(ok) or None
 
 
-def periodi_da_llm(titolo, inizio, fine, contesto):
+# ------------------------------------------------------------ date: 1) regole scritte a mano
+
+MESI_NUM = {"gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4, "maggio": 5, "giugno": 6, "luglio": 7,
+            "agosto": 8, "settembre": 9, "ottobre": 10, "novembre": 11, "dicembre": 12}
+_MESI = "|".join(MESI_NUM)
+_GIORNO_SETT = {"lunedi": 0, "martedi": 1, "mercoledi": 2, "giovedi": 3, "venerdi": 4,
+                "sabato": 5, "sabati": 5, "domenica": 6, "domeniche": 6}
+_WD = "lunedi|martedi|mercoledi|giovedi|venerdi|sabato|sabati|domenica|domeniche"
+_NOME_GIORNO = r"(?:(?:" + _WD + r")\s+)?"
+_ELEMENTO = _NOME_GIORNO + r"(?:dal\s+)?\d{1,2}(?:\s*(?:all'|al|-)\s*\d{1,2})?"
+_SEPARATORE = r"\s*(?:,|;|\be\b|\bed\b|\+|&)\s*"
+RE_INTERVALLO_MESI = re.compile(
+    r"(?:dal\s+)?(?P<g1>\d{1,2})\s+(?P<m1>" + _MESI + r")\s*(?:all'|al|-)\s*(?P<g2>\d{1,2})\s+(?P<m2>" + _MESI
+    + r")(?:\s+(?P<anno>20\d\d))?\b")
+RE_LISTA_GIORNI = re.compile(
+    r"(?P<lista>" + _ELEMENTO + r"(?:" + _SEPARATORE + _ELEMENTO + r")*)\s+(?P<mese>" + _MESI
+    + r")(?:\s+(?P<anno>20\d\d))?\b")
+RE_ELEMENTO = re.compile(_NOME_GIORNO + r"(?:dal\s+)?(?P<d1>\d{1,2})(?:\s*(?:all'|al|-)\s*(?P<d2>\d{1,2}))?")
+RE_RICORRENZA = re.compile(
+    r"\b(?:ogni|tutti i|tutte le)\s+(?P<g>(?:" + _WD + r")(?:\s*(?:,|e|ed|/)\s*(?:(?:le|i|il|la|gli)\s+)?(?:" + _WD + r"))*)\b")
+RE_WEEKEND = re.compile(r"\b(?:ogni|tutti i|tutte le)\s+(?:weekend|fine settimana|week-end)\b")
+RE_TUTTI_I_GIORNI = re.compile(r"\b(?:tutti i giorni|ogni giorno|quotidianamente)\b")
+_RE_PRIMA_STRADA = re.compile(r"(?:via|viale|piazza|piazzale|corso|largo|vicolo|lungarno)\s+(?:(?:del|della|dei|dello)\s+)?$")
+_RE_PRIMA_SCADENZA = re.compile(r"(?:entro|iscrizion\w*|scadenz\w*|scade)\W+(?:\w+\W+){0,3}$")
+
+
+def _normalizza_testo(t):
+    t = "".join(c for c in unicodedata.normalize("NFD", t.lower()) if unicodedata.category(c) != "Mn")
+    t = t.replace("\u2019", "'").replace("`", "'")
+    t = re.sub(r"[\u2013\u2014\u2212]", "-", t)
+    t = re.sub(r"(?<=\d)\u00b0|(?<=\d)\u00ba", "", t)
+    return re.sub(r"\s+", " ", t)
+
+
+def _data_piu_vicina(giorno, mese, inizio, fine, anno=None):
+    """Sceglie l'anno giusto (es. 'gennaio' in un evento che a dicembre arriva fino a gennaio)."""
+    anni = [anno] if anno else [inizio.year - 1, inizio.year, inizio.year + 1]
+    candidati = []
+    for a in anni:
+        try:
+            candidati.append(date(a, mese, giorno))
+        except ValueError:
+            pass
+    if not candidati:
+        return None
+    centro = inizio + (fine - inizio) / 2
+    return min(candidati, key=lambda d: abs((d - centro).days))
+
+
+def _in_periodi(giorni):
+    """[date, date, ...] -> [(dal, al), ...] raggruppando i giorni consecutivi."""
+    out = []
+    for d in sorted(set(giorni)):
+        if out and (d - out[-1][1]).days == 1:
+            out[-1] = (out[-1][0], d)
+        else:
+            out.append((d, d))
+    return out
+
+
+def date_da_regole(testo, inizio, fine):
+    """Legge le date scritte nel testo con regole fisse.
+    Restituisce ("date_specifiche", periodi), ("continuo", [(inizio, fine)]) oppure None se non e' sicuro.
+    E' prudente: i giorni trovati devono coprire quasi tutto l'intervallo del calendario."""
+    t = _normalizza_testo(testo)
+    anni_ok = {inizio.year, fine.year}
+    giorni, lavoro = set(), t
+
+    def contesto_valido(m):
+        prima = lavoro[max(0, m.start() - 40):m.start()]
+        return not (_RE_PRIMA_STRADA.search(prima) or _RE_PRIMA_SCADENZA.search(prima))
+
+    # a) intervalli a cavallo di due mesi: "dal 28 ottobre al 3 novembre"
+    for m in list(RE_INTERVALLO_MESI.finditer(lavoro)):
+        if not contesto_valido(m) or (m.group("anno") and int(m.group("anno")) not in anni_ok):
+            continue
+        a1 = _data_piu_vicina(int(m.group("g1")), MESI_NUM[m.group("m1")], inizio, fine,
+                              int(m.group("anno")) if m.group("anno") else None)
+        a2 = _data_piu_vicina(int(m.group("g2")), MESI_NUM[m.group("m2")], inizio, fine,
+                              int(m.group("anno")) if m.group("anno") else None)
+        if a1 and a2 and 0 <= (a2 - a1).days <= 62:
+            giorni.update(a1 + timedelta(days=i) for i in range((a2 - a1).days + 1))
+    lavoro = RE_INTERVALLO_MESI.sub(lambda m: " " * len(m.group(0)), lavoro)
+
+    # b) elenchi con un solo mese: "5-8 e 12-15 novembre", "venerdi 6, 13 e 20 novembre"
+    for m in list(RE_LISTA_GIORNI.finditer(lavoro)):
+        if not contesto_valido(m) or (m.group("anno") and int(m.group("anno")) not in anni_ok):
+            continue
+        mese = MESI_NUM[m.group("mese")]
+        anno = int(m.group("anno")) if m.group("anno") else None
+        for e in RE_ELEMENTO.finditer(m.group("lista")):
+            d1 = int(e.group("d1"))
+            d2 = int(e.group("d2")) if e.group("d2") else d1
+            if not (1 <= d1 <= 31 and 1 <= d2 <= 31 and d1 <= d2):
+                continue
+            a1, a2 = _data_piu_vicina(d1, mese, inizio, fine, anno), _data_piu_vicina(d2, mese, inizio, fine, anno)
+            if a1 and a2 and 0 <= (a2 - a1).days <= 31:
+                giorni.update(a1 + timedelta(days=i) for i in range((a2 - a1).days + 1))
+
+    # c) ricorrenze: "ogni venerdi", "tutti i sabati e le domeniche", "tutti i weekend"
+    settimana = set()
+    for m in RE_RICORRENZA.finditer(t):
+        settimana.update(_GIORNO_SETT[w] for w in re.findall(_WD, m.group("g")))
+    if RE_WEEKEND.search(t):
+        settimana.update({5, 6})
+    if settimana:
+        da, a = inizio, fine
+        if giorni:                                  # "ogni venerdi dal 6 al 20 novembre": vale la finestra scritta
+            da, a = max(inizio - timedelta(days=7), min(giorni)), min(fine + timedelta(days=7), max(giorni))
+        ricorrenti = [da + timedelta(days=i) for i in range((a - da).days + 1) if (da + timedelta(days=i)).weekday() in settimana]
+        if ricorrenti:
+            periodi = _in_periodi(ricorrenti)
+            return "date_specifiche", periodi
+
+    if len(giorni) >= 2:
+        if (min(giorni) < inizio - timedelta(days=7) or max(giorni) > fine + timedelta(days=7)
+                or min(giorni) > inizio + timedelta(days=3) or max(giorni) < fine - timedelta(days=3)):
+            return None                             # non coprono l'intervallo: potrebbe essere un'altra data nel testo
+        return "date_specifiche", _in_periodi(giorni)
+
+    if RE_TUTTI_I_GIORNI.search(t):
+        return "continuo", [(inizio, fine)]
+    return None
+
+
+# ------------------------------------------------- date: 2) modello (Gemini gratuito, poi Anthropic)
+
+_gemini_spento = [False]
+_ultima_chiamata = [0.0]
+STAT_DATE = {"regole": 0, "modello": 0, "indicative": 0, "mostre": 0}
+
+
+def _attendi_modello():
+    attesa = PAUSA_MODELLO - (time.time() - _ultima_chiamata[0])
+    if attesa > 0:
+        time.sleep(attesa)
+    _ultima_chiamata[0] = time.time()
+
+
+def _chiama_gemini(prompt):
+    _attendi_modello()
+    r = requests.post(
+        f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent",
+        headers={"x-goog-api-key": GEMINI_KEY, "Content-Type": "application/json"},
+        json={"contents": [{"parts": [{"text": prompt}]}],
+              "generationConfig": {"temperature": 0, "maxOutputTokens": 1000,
+                                   "responseMimeType": "application/json"}},
+        timeout=60,
+    )
+    if r.status_code == 429:
+        _gemini_spento[0] = True
+        raise RuntimeError("limite del livello gratuito raggiunto: per questo giro non lo uso piu'")
+    if r.status_code in (400, 401, 403, 404):
+        _gemini_spento[0] = True
+        raise RuntimeError(f"HTTP {r.status_code}: controlla la chiave GEMINI_API_KEY e il nome del modello {GEMINI_MODEL}")
+    r.raise_for_status()
+    candidati = r.json().get("candidates") or []
+    if not candidati:
+        raise RuntimeError("nessuna risposta (contenuto bloccato o vuoto)")
+    parti = (candidati[0].get("content") or {}).get("parts") or []
+    return "".join(p.get("text", "") for p in parti)
+
+
+def _chiama_anthropic(prompt):
+    _attendi_modello()
+    r = requests.post(
+        "https://api.anthropic.com/v1/messages",
+        headers={"x-api-key": API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json"},
+        json={"model": MODELLO, "max_tokens": 500, "temperature": 0,
+              "messages": [{"role": "user", "content": prompt}]},
+        timeout=60,
+    )
+    r.raise_for_status()
+    return "".join(b.get("text", "") for b in r.json().get("content", []) if b.get("type") == "text")
+
+
+def chiama_modello(prompt):
+    """Prova Gemini (gratuito); se non c'e' o fallisce, Anthropic (se c'e' la chiave). Testo oppure None."""
+    if GEMINI_KEY and not _gemini_spento[0]:
+        try:
+            return _chiama_gemini(prompt)
+        except Exception as e:
+            print(f"  ! Gemini: {e}")
+    if API_KEY:
+        try:
+            return _chiama_anthropic(prompt)
+        except Exception as e:
+            print(f"  ! Anthropic: {e}")
+    return None
+
+
+def periodi_da_modello(titolo, inizio, fine, contesto):
     """Chiede al modello cosa dice DAVVERO il testo sulle date. Restituisce (tipo, periodi) oppure None.
-    tipo: "continuo" (si svolge ogni giorno), "date_specifiche" (giorni elencati nel testo),
-    "non_chiaro" (serie di appuntamenti senza giorni indicati). L'output viene validato."""
-    if not API_KEY:
+    tipo: "continuo", "date_specifiche" (giorni elencati nel testo) o "non_chiaro". L'output viene validato."""
+    if not (GEMINI_KEY and not _gemini_spento[0]) and not API_KEY:
         return None
     prompt = (
         "Devi capire quando si svolge un evento. Rispondi SOLO con JSON, senza altro testo.\n\n"
@@ -353,17 +552,10 @@ def periodi_da_llm(titolo, inizio, fine, contesto):
         'Formato: {"tipo":"continuo|date_specifiche|non_chiaro","periodi":[{"dal":"AAAA-MM-GG","al":"AAAA-MM-GG"}]}\n\n'
         "TESTO:\n" + contesto
     )
+    txt = chiama_modello(prompt)
+    if txt is None:
+        return None
     try:
-        r = requests.post(
-            "https://api.anthropic.com/v1/messages",
-            headers={"x-api-key": API_KEY, "anthropic-version": "2023-06-01",
-                     "content-type": "application/json"},
-            json={"model": MODELLO, "max_tokens": 500, "temperature": 0,
-                  "messages": [{"role": "user", "content": prompt}]},
-            timeout=60,
-        )
-        r.raise_for_status()
-        txt = "".join(b.get("text", "") for b in r.json().get("content", []) if b.get("type") == "text")
         trovato = re.search(r"\{.*\}", txt, re.S)
         if not trovato:
             raise ValueError("la risposta del modello non e' in formato JSON")
@@ -379,24 +571,40 @@ def periodi_da_llm(titolo, inizio, fine, contesto):
             raise ValueError("periodi non validi")
         return tipo, sorted(set(periodi))
     except Exception as e:
-        print(f"  ! estrazione date non riuscita ({e}); uso l'intervallo del calendario")
+        print(f"  ! risposta del modello non utilizzabile ({e}); uso l'intervallo del calendario")
         return None
 
 
 def analizza_date(titolo, inizio, fine, contesto):
     """Restituisce (periodi, verifica). verifica=True significa "date indicative": si conosce solo l'intervallo."""
-    esito = periodi_da_llm(titolo, inizio, fine, contesto)
+    def da_elenco(periodi):
+        if len(periodi) > MAX_OCCORRENZE:          # troppe date: una sola scheda con l'intervallo
+            return [(periodi[0][0], periodi[-1][1])], True
+        return periodi, False
+
+    # 1) regole scritte a mano: gratis e senza limiti
+    esito = date_da_regole(contesto, inizio, fine)
+    if esito:
+        STAT_DATE["regole"] += 1
+        tipo, periodi = esito
+        return ([(inizio, fine)], False) if tipo == "continuo" else da_elenco(periodi)
+    # 2) una mostra e' continua
+    if categoria(titolo) == "Mostra/Esposizione":
+        STAT_DATE["mostre"] += 1
+        return [(inizio, fine)], False
+    # 3) modello (Gemini gratuito, poi Anthropic se configurato)
+    esito = periodi_da_modello(titolo, inizio, fine, contesto)
     if esito is None:
-        # senza modello (o se fallisce): una mostra e' continua, il resto non si puo' sapere
-        return [(inizio, fine)], categoria(titolo) != "Mostra/Esposizione"
+        STAT_DATE["indicative"] += 1
+        return [(inizio, fine)], True
+    STAT_DATE["modello"] += 1
     tipo, periodi = esito
     if tipo == "continuo":
         return [(inizio, fine)], False
     if tipo == "non_chiaro":
+        STAT_DATE["indicative"] += 1
         return [(inizio, fine)], True
-    if len(periodi) > MAX_OCCORRENZE:              # troppe date: una sola scheda con l'intervallo
-        return [(periodi[0][0], periodi[-1][1])], True
-    return periodi, False
+    return da_elenco(periodi)
 
 
 # ---------------------------------------------------------------------- geocoding
@@ -603,6 +811,9 @@ def main():
             nuova_cache[url] = {"ko": True, "lastmod": lastmod, "letta": oggi.isoformat()}
     print(f"Schede lette ora: {scaricate} | non capite: {non_capite} | rimandate a domani: {rimandate} "
           f"| errori: {errori} | {int(time.time() - t0)}s")
+    if any(STAT_DATE.values()):
+        print(f"Date: lette con le regole {STAT_DATE['regole']} | mostre {STAT_DATE['mostre']} | "
+              f"con il modello {STAT_DATE['modello']} | indicative {STAT_DATE['indicative']}")
 
     # ---- fase 2: costruire gli eventi dalla memoria
     cache_geo = carica_json(F_GEO, {})
