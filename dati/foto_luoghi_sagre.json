@@ -203,5 +203,15 @@
   "luogo": "Piazza Garibaldi",
   "assente": true,
   "verificato": "2026-11-08"
+ },
+ "piazza dei cavalieri|pisa": {
+  "luogo": "Piazza dei Cavalieri",
+  "file": "piazza-dei-cavalieri-1v8d4bp.jpg",
+  "titolo": "Piazza dei Cavalieri",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa%2C_palazzo_della_carovana_00_piazza_dei_cavalieri.jpg",
+  "verificato": "2026-11-09"
  }
 }
