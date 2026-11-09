@@ -265,21 +265,39 @@
     #toggle-vista button:active { transform: scale(0.95); }
 
     #view-esplora { display: flex; flex: 1; min-height: 0; }
-    #pannello-lista { width: 480px; min-width: 480px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--crema); border-right: 1px solid var(--bordo); }
+    /* padding-bottom: su mobile la barra è fissa, quindi l'ultima card deve
+       poter scorrere sopra i 62px della barra. Su desktop --nav-h è 0. */
+    #pannello-lista { width: 480px; min-width: 480px; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--crema); border-right: 1px solid var(--bordo); padding-bottom: var(--nav-h); }
     #map-wrap { flex: 1; position: relative; z-index: 0; }
     #map { width: 100%; height: 100%; }
 
-    #contatore-lista { padding: 12px 16px 4px; font-size: 0.8rem; font-weight: 700; color: var(--grigio-testo); letter-spacing: 0.3px; text-transform: uppercase; }
+    #contatore-lista {
+      padding: 10px 16px 4px; font-size: 0.8rem; font-weight: 700; color: var(--grigio-testo);
+      letter-spacing: 0.3px; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    /* Il link alle pagine provincia vive nella riga del contatore: è una riga
+       che c'era già, così non costa altezza e non scorre via insieme ai giorni. */
+    .link-province {
+      display: inline-flex; align-items: center; gap: 4px;
+      min-height: 32px; padding: 6px 12px; border-radius: 20px;
+      background: var(--crema-card); border: 1.5px solid var(--bordo);
+      color: var(--rosso-scuro); text-decoration: none; font-family: inherit; cursor: pointer;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0; text-transform: none;
+      white-space: nowrap;
+    }
+    .link-province:hover { border-color: var(--rosso); }
+    .link-province:active { transform: scale(0.96); }
 
     .gruppo-data {
       padding: 0 8px;
-      margin-top: 8px;
+      margin-top: 4px;
     }
     .gruppo-data-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 4px 4px;
+      padding: 6px 4px 3px;
       font-size: 0.78rem;
       font-weight: 700;
       color: var(--grigio-testo);
@@ -296,8 +314,8 @@
     .gruppo-evidenza {
       background: linear-gradient(180deg, rgba(232,163,61,0.09), rgba(232,163,61,0) 70px);
       border-radius: 14px;
-      padding-bottom: 6px;
-      margin-bottom: 6px;
+      padding-bottom: 2px;
+      margin-bottom: 0;
     }
     .gruppo-evidenza .gruppo-data-header .giorno-nome { color: #C4801A; }
     .etichetta-sponsorizzato {
@@ -364,11 +382,23 @@
       font-weight: 700; font-size: 0.86rem; line-height: 1.25; margin-bottom: 4px;
       overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
     }
-    .card-cat { display: inline-block; font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 5px; }
+    .card-cat { display: inline-block; align-self: flex-start; font-size: 0.64rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-bottom: 5px; }
     .card-data { font-size: 0.72rem; color: #555; font-weight: 600; display: block; margin-bottom: 2px; }
     .card-luogo { font-size: 0.7rem; color: var(--grigio-testo); display: block; }
 
     #stato-vuoto { grid-column: 1 / -1; padding: 40px 24px; text-align: center; color: var(--grigio-testo); font-size: 0.9rem; display: none; }
+
+    /* Pulsante della lista progressiva: la lista disegna 60 eventi alla volta. */
+    #btn-carica-altri {
+      margin: 16px 4px 24px;
+      width: calc(100% - 8px);
+      background: var(--crema-card); color: var(--rosso-scuro);
+      border: 1.5px solid var(--rosso); border-radius: 20px;
+      padding: 14px; font-size: 0.88rem; font-weight: 800; cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    #btn-carica-altri:hover { background: var(--rosso-tenue); }
+    #btn-carica-altri:active { transform: scale(0.98); }
 
     .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 220px; max-width: 260px; font-family: 'League Spartan', sans-serif; }
     .leaflet-popup-close-button {
@@ -389,7 +419,7 @@
     .popup-btn { display: inline-block; padding: 5px 12px; border-radius: 20px; color: white !important; text-decoration: none !important; font-weight: 700; font-size: 0.74rem; margin-top: 6px; margin-right: 6px; cursor: pointer; border: none; transition: transform 0.1s; }
     .popup-btn:active { transform: scale(0.95); }
 
-    #view-aggiungi { display: none; flex: 1; min-height: 0; overflow-y: auto; max-width: 640px; margin: 0 auto; padding: 28px 20px 60px; width: 100%; }
+    #view-aggiungi { display: none; flex: 1; min-height: 0; overflow-y: auto; max-width: 640px; margin: 0 auto; padding: 28px 20px calc(60px + var(--nav-h)); width: 100%; }
     .aggiungi-hero {
       background: linear-gradient(135deg, #FF3131, #CC0000);
       border-radius: 16px;
@@ -483,6 +513,57 @@
     #btn-mostra-risultati:active { transform: scale(0.98); }
     @media (prefers-reduced-motion: reduce) {
       #filtri-sheet { transition: none; }
+    }
+
+    /* ===== Pannello "Province" — vive dentro la home, non è una pagina ===== */
+    #province-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 1200;
+      background: rgba(20,10,8,0.55);
+      align-items: flex-end; justify-content: center;
+    }
+    #province-backdrop.aperto { display: flex; }
+    #province-sheet {
+      width: 100%; max-width: 480px; max-height: 82vh;
+      display: flex; flex-direction: column; overflow: hidden;
+      background: var(--crema-card); border-radius: 18px 18px 0 0;
+      box-shadow: 0 -8px 30px rgba(0,0,0,0.18);
+      margin-bottom: var(--nav-h);
+      animation: provinceSu 0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes provinceSu { from { transform: translateY(26px); opacity: 0.5; } to { transform: none; opacity: 1; } }
+    #province-sheet-header {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px 12px; border-bottom: 1px solid var(--bordo);
+    }
+    #province-titolo { flex: 1; font-size: 1.02rem; font-weight: 800; }
+    #btn-chiudi-province {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: var(--crema); color: var(--inchiostro); font-size: 0.9rem; cursor: pointer;
+    }
+    #province-sheet-body {
+      overflow-y: auto; padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    #province-sheet-body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+    .province-nota { font-size: 0.78rem; line-height: 1.45; color: var(--grigio-testo); margin-bottom: 12px; }
+    #province-griglia { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .prov-tessera {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      min-height: 48px; padding: 10px 14px; border-radius: 12px;
+      border: 1.5px solid var(--bordo); background: var(--crema);
+      font-family: inherit; font-size: 0.88rem; font-weight: 700; color: var(--inchiostro);
+      text-align: left; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .prov-tessera:active { transform: scale(0.97); }
+    .prov-tessera.attiva { border-color: var(--rosso-scuro); background: var(--rosso-tenue); color: var(--rosso-scuro); }
+    .prov-conteggio {
+      flex-shrink: 0; font-size: 0.72rem; font-weight: 800; color: var(--grigio-testo);
+      background: rgba(0,0,0,0.05); border-radius: 20px; padding: 2px 8px;
+    }
+    .prov-tessera.attiva .prov-conteggio { color: var(--rosso-scuro); background: rgba(204,0,0,0.1); }
+    @media (min-width: 761px) {
+      #province-backdrop { align-items: center; }
+      #province-sheet { border-radius: 18px; margin-bottom: 0; max-height: 72vh; }
     }
     #dettaglio-panel {
       position: fixed; top: 0; right: 0; bottom: 0; width: 460px; max-width: 100%;
@@ -608,7 +689,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     #toast-container {
-      position: fixed; bottom: calc(var(--banner-h, 68px) + 28px + 16px); left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: calc(var(--nav-h) + 44px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%);
       z-index: 3000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;
     }
     .toast {
@@ -629,45 +710,195 @@
       #toggle-vista { display: flex; }
       #pannello-lista { width: 100%; min-width: 0; }
       #pannello-lista.nascosto, #map-wrap.nascosto { display: none; }
-      header { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; padding: 10px 12px 6px; transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
-      header img.logo { height: 48px; width: auto; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
+      /* min-height:0 toglie i 100px ereditati dall'header desktop: su un telefono
+         erano un quarto dello schermo speso male. */
+      /* Su mobile in header resta solo il logo: centrarlo nello schermo. */
+      header { min-height: 0; display: flex; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 8px; padding: 8px 12px 6px; transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+      header img.logo { height: 44px; width: auto; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
       #tab-nav { display: flex; gap: 4px; padding: 0; flex-shrink: 1; min-width: 0; }
-      .tab-btn { padding: 9px 16px; font-size: 0.85rem; white-space: nowrap; flex-shrink: 0; }
-      #tab-esplora .testo-lunga, #tab-aggiungi .testo-lunga { display: none; }
+      /* 44px è la dimensione minima di un bersaglio tattile: i tab erano alti 27px. */
+      .tab-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; font-size: 0.84rem; white-space: nowrap; flex-shrink: 0; }
+      .tab-btn .testo-lunga { display: none; }
       .tab-btn .testo-corta { display: inline; }
       #dettaglio-panel { width: 100%; }
-      #input-ricerca { padding: 11px 18px; font-size: 0.9rem; }
-      #btn-filtri-toggle { padding: 11px 18px; font-size: 0.9rem; }
+      /* 16px: sotto questa soglia iOS ingrandisce la pagina quando tocchi il campo. */
+      #input-ricerca { padding: 11px 18px; font-size: 16px; }
+      #btn-filtri-toggle { min-height: 44px; padding: 10px 18px; font-size: 0.95rem; }
+      #toggle-vista button { min-height: 44px; }
+      /* background-attachment:fixed su mobile è mal gestito da iOS e costa repaint a ogni scroll. */
+      #top-bar { background-attachment: scroll; }
+      #province-prompt { padding: 7px 14px; font-size: 0.8rem; }
       #top-bar { transition: all 0.3s ease; }
       #top-bar.compact header img.logo { height: 32px; }
       #top-bar.compact header { padding: 6px 12px 2px; }
       #top-bar.compact .tab-btn { padding: 5px 10px; font-size: 0.7rem; }
       #top-bar.compact { padding-bottom: 0; }
+
+      /* Su mobile la navigazione vive in basso: i tab in alto spariscono,
+         il toggle Lista/Mappa diventa ridondante (lo fa la barra) e il prompt
+         province diventa una pillola dentro la striscia dei giorni. */
+      /* html body: la regola base --nav-h: 0px sta più avanti nel foglio e con
+         la stessa specificità vinceva anche qui, lasciando toast e FAB sotto la barra. */
+      html body { --nav-h: 62px; }
+      #tab-nav, #toggle-vista, #province-prompt { display: none; }
+      body #bottom-nav { display: grid; }
+      #cookie-banner { bottom: var(--nav-h); }
+
+      /* Scrollbar nascosta ma scorrimento attivo: su telefono sono già overlay,
+         su Chromium da desktop restavano una barra grigia sul bordo. */
+      #pannello-lista, #view-salvati, #view-aggiungi, #filtri-sheet {
+        scrollbar-width: none; -ms-overflow-style: none;
+      }
+      #pannello-lista::-webkit-scrollbar,
+      #view-salvati::-webkit-scrollbar,
+      #view-aggiungi::-webkit-scrollbar,
+      #filtri-sheet::-webkit-scrollbar { width: 0; height: 0; display: none; }
     }
 
     @media (max-width: 400px) {
       header { padding: 8px 10px 5px; gap: 6px; }
-      header img.logo { height: 38px; }
+      header img.logo { height: 36px; }
       #tab-nav { gap: 3px; }
-      .tab-btn { padding: 7px 11px; font-size: 0.76rem; }
+      .tab-btn { padding: 6px 9px; font-size: 0.74rem; }
     }
 
     @media (max-width: 640px) {
       #lista-eventi { padding: 12px; }
-      .eventi-grid { grid-template-columns: 1fr; gap: 10px; }
+      .eventi-grid { grid-template-columns: 1fr; gap: 8px; }
       .card-evento { flex-direction: row; border-radius: 12px; }
       .card-img { width: 92px; height: 92px; aspect-ratio: unset; flex-shrink: 0; border-radius: 12px 0 0 12px; }
-      .card-body { padding: 10px 12px; display: flex; flex-direction: column; justify-content: center; }
+      .card-body { padding: 10px 44px 10px 12px; display: flex; flex-direction: column; justify-content: center; }
       .card-nome { font-size: 0.9rem; -webkit-line-clamp: 2; }
       .card-cat { font-size: 0.68rem; padding: 3px 9px; }
       .card-data { font-size: 0.76rem; }
       .card-luogo { font-size: 0.72rem; }
-      .gruppo-data-header { font-size: 0.82rem; padding: 10px 4px 6px; }
+      .gruppo-data-header { font-size: 0.82rem; padding: 6px 4px 3px; }
       #contatore-lista { padding: 14px 16px 6px; font-size: 0.85rem; }
+
+      /* I badge erano in alto a destra, sopra la miniatura da 92px: coprivano
+         il titolo. Ora stanno sopra la foto, in basso a sinistra. */
+      .badge-evidenza { font-size: 0.55rem; padding: 2px 6px; top: 4px; left: 4px; }
+      .badge-vt {
+        top: auto; bottom: 4px; right: auto; left: 4px;
+        max-width: 84px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        font-size: 0.55rem; padding: 2px 6px;
+      }
+
+      /* "In evidenza": su mobile 6 card in colonna occupavano più di uno schermo
+         e spingevano la lista vera fuori vista. Diventano un carosello orizzontale. */
+      .gruppo-evidenza .eventi-grid {
+        display: flex; gap: 8px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px; scrollbar-width: none;
+      }
+      .gruppo-evidenza .eventi-grid::-webkit-scrollbar { display: none; }
+      /* 100%: la card in evidenza deve avere la stessa larghezza delle altre,
+         prima era al 76% e risultava più stretta e disallineata. */
+      .gruppo-evidenza .card-evento { flex: 0 0 100%; scroll-snap-align: start; flex-direction: column; }
+      .gruppo-evidenza .card-img {
+        width: 100%; height: auto; aspect-ratio: 16 / 10;
+        border-radius: 12px 12px 0 0;
+      }
+      .gruppo-evidenza .badge-evidenza { top: 6px; left: 6px; }
+      .gruppo-evidenza .badge-vt { top: 6px; right: 44px; left: auto; bottom: auto; }
+
+      /* Banner cookie più compatto: copriva 135px di contenuto. */
+      #cookie-banner { padding: 12px 14px; gap: 10px; }
+      #cookie-banner p { font-size: 0.78rem; }
     }
   
+    /* ===== Barra di navigazione mobile (solo ≤760px) ===== */
+    body { --nav-h: 0px; }
+    #bottom-nav {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--crema-card);
+      border-top: 1px solid var(--bordo);
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+      padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+      z-index: 30;
+    }
+    .nav-btn {
+      position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px; min-height: 52px; padding: 6px 4px; border: none; border-radius: 12px;
+      background: none; color: var(--grigio-testo); font-size: 0.66rem; font-weight: 700;
+      cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-btn .nav-icona { font-size: 1.2rem; line-height: 1; }
+    .nav-btn.attivo { color: var(--rosso-scuro); background: var(--rosso-tenue); }
+    .nav-btn.nav-cta { background: #FF3131; color: white; box-shadow: 0 3px 12px rgba(255,49,49,0.35); }
+    .nav-btn.nav-cta.attivo { background: #CC0000; color: white; }
+    .nav-badge {
+      position: absolute; top: 3px; left: 50%; margin-left: 6px;
+      background: var(--rosso-scuro); color: white; font-size: 0.58rem; font-weight: 800;
+      min-width: 16px; height: 16px; border-radius: 9px;
+      display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
+    }
+
+    /* ===== Striscia dei giorni ===== */
+    #striscia-date {
+      display: flex; gap: 6px; align-items: stretch;
+      overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px; scrollbar-width: none;
+    }
+    #striscia-date::-webkit-scrollbar { display: none; }
+    .chip-giorno {
+      flex: 0 0 auto; scroll-snap-align: start;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+      min-width: 54px; padding: 5px 8px; border-radius: 14px;
+      border: 1.5px solid var(--rosso-scuro); background: var(--crema);
+      color: var(--grigio-testo); font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .chip-giorno strong { font-size: 0.98rem; font-weight: 800; color: var(--inchiostro); line-height: 1.1; }
+    .chip-giorno.attivo { background: var(--rosso-scuro); border-color: var(--rosso-scuro); color: white; }
+    .chip-giorno.attivo strong { color: white; }
+    .chip-giorno:active { transform: scale(0.95); }
+    .chip-province {
+      flex: 0 0 auto; scroll-snap-align: start;
+      display: flex; align-items: center; gap: 5px;
+      padding: 0 12px; border-radius: 14px; background: var(--crema-card);
+      border: 1.5px dashed var(--bordo); color: var(--rosso-scuro);
+      font-size: 0.68rem; font-weight: 800; text-decoration: none; white-space: nowrap;
+    }
+
+    /* ===== Cuore "salva evento" sulle card ===== */
+    .card-salva {
+      position: absolute; top: 6px; right: 6px; z-index: 3;
+      width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.94); color: var(--rosso-scuro);
+      font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    }
+    .card-salva.attivo { background: var(--rosso-scuro); color: white; }
+    .card-salva:active { transform: scale(0.9); }
+    /* Dove il badge VisitTuscany è in alto a destra, lo si sposta per non
+       finire sotto al cuore. */
+    @media (min-width: 641px) { #lista-eventi .badge-vt { right: 44px; } }
+    @media (max-width: 640px) { .gruppo-evidenza .card-evento .badge-vt { right: 44px; } }
+
+    /* ===== Banner sponsor dentro la lista ===== */
+    #banner-pubblicitario.in-feed {
+      grid-column: 1 / -1;
+      height: auto; min-height: 0; margin: 4px 0 10px;
+      border: 1px solid var(--bordo); border-radius: 12px;
+      box-shadow: none; padding: 10px 12px;
+    }
+    #banner-pubblicitario.in-feed img { max-height: 70px; }
+
+    /* ===== Vista Salvati ===== */
+    #view-salvati { display: none; flex: 1; min-height: 0; overflow-y: auto; padding: 16px 12px calc(28px + var(--nav-h)); background: var(--crema); }
+    #salvati-header { padding: 0 4px 12px; }
+    #salvati-header h1 { font-size: 1.15rem; font-weight: 900; letter-spacing: -0.01em; }
+    #salvati-header p { font-size: 0.8rem; color: var(--grigio-testo); margin-top: 4px; }
+    #salvati-vuoto { padding: 32px 16px; text-align: center; color: var(--grigio-testo); font-size: 0.88rem; line-height: 1.5; }
+
     /* === Riga link province === */
     #province-prompt {
+      display: none; /* sostituito dal link "Province" nella riga del contatore */
       background: var(--rosso-tenue);
       text-align: center;
       padding: 10px 20px;
@@ -691,7 +922,7 @@
     #fab-installa {
       position: fixed;
       right: 16px;
-      bottom: calc(var(--banner-h, 76px) + 16px + env(safe-area-inset-bottom, 0px));
+      bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom, 0px));
       z-index: 500;
       display: flex;
       flex-direction: column;
@@ -801,8 +1032,8 @@
     <img class="logo" src="logo-stase.png" alt="Stase Toscana" />
     <div id="tab-nav">
       <button class="tab-btn attivo" id="tab-esplora" onclick="mostraTab('esplora')">Esplora<span class="testo-lunga"> eventi</span></button>
-      <a class="tab-btn" id="tab-provincia" href="/eventi-in-toscana.html">...per provincia</a>
-      <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica evento</span><span class="testo-lunga">Aggiungi evento</span></button>
+      <a class="tab-btn" id="tab-provincia" href="/eventi-in-toscana.html" onclick="event.preventDefault(); apriProvince();"><span class="testo-lunga">...per provincia</span><span class="testo-corta">Province</span></a>
+      <button class="tab-btn tab-cta" id="tab-aggiungi" onclick="mostraTab('aggiungi')">+ <span class="testo-corta">Pubblica</span><span class="testo-lunga">Aggiungi evento</span></button>
     </div>
   </header>
 </div>
@@ -813,6 +1044,7 @@
     <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
     <button id="btn-filtri-toggle" onclick="apriFiltriSheet()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
   </div>
+  <div id="striscia-date" aria-label="Scegli il giorno"></div>
   <div id="toggle-vista">
     <button class="attivo" id="btn-vista-lista" onclick="mostraVista('lista')">Lista</button>
     <button id="btn-vista-mappa" onclick="mostraVista('mappa')">Mappa</button>
@@ -821,7 +1053,10 @@
 
 <div id="view-esplora">
   <div id="pannello-lista">
-    <div id="contatore-lista"></div>
+    <div id="contatore-lista">
+      <span id="contatore-testo"></span>
+      <a class="link-province" href="/eventi-in-toscana.html" onclick="event.preventDefault(); apriProvince();">🏛 Province ›</a>
+    </div>
     <div id="lista-eventi"></div>
     <div id="stato-vuoto">Nessun evento trovato con questi filtri.<br>Prova ad allargare la ricerca.</div>
   </div>
@@ -840,6 +1075,30 @@
     <iframe id="tally-form" data-tally-src="https://tally.so/embed/pb5GDE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" height="700" title="Invia il tuo evento"></iframe>
   </div>
 </div>
+
+<div id="view-salvati">
+  <div id="salvati-header">
+    <h1>I tuoi eventi salvati</h1>
+    <p>Restano su questo dispositivo, senza bisogno di un account.</p>
+  </div>
+  <div id="lista-salvati"></div>
+</div>
+
+<nav id="bottom-nav" aria-label="Navigazione principale">
+  <button type="button" class="nav-btn attivo" id="nav-esplora" onclick="mostraVistaNav('lista')">
+    <span class="nav-icona">🔎</span><span class="nav-etichetta">Esplora</span>
+  </button>
+  <button type="button" class="nav-btn" id="nav-mappa" onclick="mostraVistaNav('mappa')">
+    <span class="nav-icona">🗺️</span><span class="nav-etichetta">Mappa</span>
+  </button>
+  <button type="button" class="nav-btn nav-cta" id="nav-pubblica" onclick="mostraTab('aggiungi')">
+    <span class="nav-icona">＋</span><span class="nav-etichetta">Pubblica</span>
+  </button>
+  <button type="button" class="nav-btn" id="nav-salvati" onclick="mostraSalvati()">
+    <span class="nav-icona">♡</span><span class="nav-etichetta">Salvati</span>
+    <span class="nav-badge" id="badge-salvati" style="display:none;">0</span>
+  </button>
+</nav>
 
 <div id="filtri-backdrop" onclick="chiudiFiltriSeCliccatoFuori(event)">
   <div id="filtri-sheet">
@@ -869,6 +1128,19 @@
     </div>
     <div id="filtri-sheet-footer">
       <button id="btn-mostra-risultati" onclick="chiudiFiltriSheet()">Mostra risultati</button>
+    </div>
+  </div>
+</div>
+
+<div id="province-backdrop" onclick="chiudiProvinceSeCliccatoFuori(event)">
+  <div id="province-sheet" role="dialog" aria-modal="true" aria-labelledby="province-titolo">
+    <div id="province-sheet-header">
+      <span id="province-titolo">Eventi per provincia</span>
+      <button type="button" id="btn-chiudi-province" onclick="chiudiProvince()" aria-label="Chiudi">&#10005;</button>
+    </div>
+    <div id="province-sheet-body">
+      <p class="province-nota">Scegli una provincia per vedere solo i suoi eventi, restando nella home. Con “Tutta la Toscana” torni a tutto.</p>
+      <div id="province-griglia"></div>
     </div>
   </div>
 </div>
@@ -960,6 +1232,13 @@
       .replace(/'/g, '&#39;');
   }
 
+  // Accetta solo link http(s): impedisce che un campo del form (Instagram, Maps,
+  // locandina...) contenga uno schema pericoloso come javascript: dentro un href.
+  function urlSicuro_(u) {
+    u = String(u == null ? '' : u).trim();
+    return /^https?:\/\//i.test(u) ? u : '';
+  }
+
   // ===================== MICRO-MOLLA (spring) =====================
   // Piccolo motore di animazione a molla, senza librerie esterne.
   // Traduce i due parametri "alla Apple" (damping = rimbalzo, response = velocità)
@@ -1028,12 +1307,14 @@
   ];
 
   function mostraTab(tab, aggiornaUrlTab) {
+    document.getElementById('view-salvati').style.display = 'none';
     document.getElementById('view-esplora').style.display = tab === 'esplora' ? 'flex' : 'none';
     document.getElementById('controlli').style.display = tab === 'esplora' ? 'flex' : 'none';
     document.getElementById('view-aggiungi').style.display = tab === 'aggiungi' ? 'block' : 'none';
     document.getElementById('tab-esplora').classList.toggle('attivo', tab === 'esplora');
     document.getElementById('tab-aggiungi').classList.toggle('attivo', tab === 'aggiungi');
     if (tab === 'esplora') setTimeout(function() { map.invalidateSize(); }, 100);
+    aggiornaNavAttiva();
     // Rende il tab bookmarkable/condivisibile senza mai ricaricare la pagina,
     // riusando lo stesso pattern di query-string gia' usato per filtri e dettaglio evento.
     if (aggiornaUrlTab !== false) {
@@ -1081,6 +1362,14 @@
   });
   map.addLayer(clusterGroup);
 
+  // Il bottone "Scheda completa" del popup non usa piu' onclick con l'id scritto nel
+  // markup: il collegamento si fa qui, a ogni apertura del popup.
+  map.on('popupopen', function(e) {
+    var el = e.popup && e.popup.getElement ? e.popup.getElement() : null;
+    var b = el ? el.querySelector('[data-apri-id]') : null;
+    if (b) b.onclick = function() { apriDettaglioDaId(b.getAttribute('data-apri-id')); };
+  });
+
   function creaIcona(cat, hover, isEvidenza) {
     var c = getCat(cat);
     var attivo = hover || isEvidenza;
@@ -1098,7 +1387,13 @@
     });
   }
 
+  // true solo se TUTTE le fonti sono state lette senza errori: solo allora e'
+  // sicuro togliere dai preferiti gli eventi che non esistono piu'.
+  var caricamentoCompleto = false;
+
   async function leggiEventi() {
+    caricamentoCompleto = false;
+    var tuttoOk = true;
     // Se aperto da file://, il fetch fallira per CORS. Salta direttamente ai dati demo.
     if (window.location.protocol === 'file:') {
       console.log('Aperto da file://, uso dati demo');
@@ -1113,6 +1408,7 @@
       var data = await res.json();
       eventiStase = normalizzaEventi(data);
     } catch (err) {
+      tuttoOk = false;
       console.warn('File statico non disponibile, provo il Web App...', err);
       try {
         var res = await fetch(JSON_URL_FALLBACK + '?t=' + Date.now());
@@ -1125,8 +1421,8 @@
           var data = await fetchJsonp(JSON_URL_FALLBACK + '?callback=cb&t=' + Date.now());
           eventiStase = normalizzaEventi(data);
         } catch (err3) {
-          console.warn('JSONP fallito, uso dati demo per Stase...', err3);
-          eventiStase = DATI_DEMO;
+          console.warn('JSONP fallito: eventi Stase non disponibili', err3);
+          eventiStase = [];
         }
       }
     }
@@ -1137,9 +1433,10 @@
         var dataVT = await resVT.json();
         eventiVT = normalizzaEventiVT(dataVT);
         console.log('Eventi VisitTuscany caricati:', eventiVT.length);
-      console.log('Eventi VT futuri:', eventiVT.filter(function(e){return isFuturo(e);}).length);
-      }
+        console.log('Eventi VT futuri:', eventiVT.filter(function(e){return isFuturo(e);}).length);
+      } else { tuttoOk = false; }
     } catch (err) {
+      tuttoOk = false;
       console.warn('VisitTuscany non disponibile (forse il robot non ha ancora scaricato):', err);
     }
         // 3. Carica eventi Firenze / FeelFlorence (opzionale, non blocca)
@@ -1149,8 +1446,9 @@
       if (resFI.ok) {
         eventiFI = normalizzaEventiFirenze(await resFI.json());
         console.log('Eventi Firenze caricati:', eventiFI.length);
-      }
+      } else { tuttoOk = false; }
     } catch (err) {
+      tuttoOk = false;
       console.warn('Eventi Firenze non disponibili:', err);
     }
     // 4. Carica le sagre (opzionale, non blocca)
@@ -1160,16 +1458,18 @@
       if (resSG.ok) {
         eventiSagre = normalizzaEventiSagre(await resSG.json());
         console.log('Sagre caricate:', eventiSagre.length);
-      }
+      } else { tuttoOk = false; }
     } catch (err) {
+      tuttoOk = false;
       console.warn('Sagre non disponibili:', err);
     }
     // Unisci le quattro fonti e rimuovi i duplicati
     var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI, eventiSagre]);
     if (unici.length === 0) {
-      mostraToast('Modalita demo: dati di esempio caricati');
-      return DATI_DEMO;
+      mostraToast('Nessun evento disponibile al momento. Riprova tra poco.');
+      return [];
     }
+    caricamentoCompleto = tuttoOk;
     return unici;
   }
 
@@ -1191,7 +1491,7 @@
       return {
         id: e.id || ('json_' + i),
         nome: e.nome,
-        locandina: e.locandina || null,
+        locandina: urlSicuro_(e.locandina) || null,
         categoria: e.categoria || 'Altro',
         descrizione: e.descrizione || '',
         provincia: e.provincia,
@@ -1200,10 +1500,10 @@
         riepilogoDate: e.riepilogo_date,
         dataSort: e.data_sort,
         dataFine: e.data_fine,
-        mapsUrl: e.maps_url,
+        mapsUrl: urlSicuro_(e.maps_url),
         lat: e.lat ? parseFloat(e.lat) : null,
         lon: e.lon ? parseFloat(e.lon) : null,
-        instagram: e.instagram || null,
+        instagram: urlSicuro_(e.instagram) || null,
         inEvidenza: !!e.in_evidenza,
         fonte: 'stase',
       };
@@ -1216,6 +1516,24 @@
     'LU': 'Lucca', 'MS': 'Massa-Carrara', 'PI': 'Pisa', 'PT': 'Pistoia',
     'PO': 'Prato', 'SI': 'Siena'
   };
+
+  // Ricava la provincia da un indirizzo VisitTuscany. Gli indirizzi reali hanno la
+  // sigla in fondo o dopo la città (es. "53034 Colle di Val d'Elsa SI",
+  // "56035 Lari PI, Italia"), non per forza tra due virgole. Se manca la sigla,
+  // cerca il nome della provincia come voce a sé ("Asciano, Siena, Italia").
+  function provinciaDaIndirizzo_(indirizzo) {
+    if (!indirizzo) return null;
+    var sigle = String(indirizzo).match(/\b[A-Z]{2}\b(?=\s*(?:,|$))/g) || [];
+    for (var i = sigle.length - 1; i >= 0; i--) {
+      if (PROVINCE_MAP[sigle[i]]) return sigle[i];
+    }
+    var voci = String(indirizzo).split(',').map(function(v) { return v.trim().toLowerCase().replace(/\s+/g, '-'); });
+    var nomi = Object.keys(PROVINCE_MAP).map(function(k) { return PROVINCE_MAP[k]; });
+    for (var j = 0; j < nomi.length; j++) {
+      if (voci.indexOf(nomi[j].toLowerCase()) !== -1) return nomi[j];
+    }
+    return null;
+  }
 
   function normalizzaEventiVT(data) {
     // Gestisce la struttura response.data.doc di VisitTuscany
@@ -1232,7 +1550,7 @@
     return data.map(function(e, i) {
       // Campi base
       var nome = e.title || e.name || 'Evento VisitTuscany';
-      var url = e.url || null;
+      var url = urlSicuro_(e.url) || null;
       var descrizione = e.subtitle || '';
 
       // Categoria (typology VT → categorie Stase)
@@ -1301,8 +1619,7 @@
         provincia = e.location.locality[0].province || null;
       }
       if (!provincia && indirizzo) {
-        var m = indirizzo.match(/,\s*([A-Z]{2})\s*,/);
-        if (m) provincia = m[1];
+        provincia = provinciaDaIndirizzo_(indirizzo);
       }
       // Normalizza sigla VT → nome provincia (per unificare con eventi Stase)
       if (provincia && PROVINCE_MAP[provincia]) {
@@ -1311,7 +1628,7 @@
 
       // Immagine
       var locandina = null;
-      if (e.image && e.image.url) locandina = e.image.url;
+      if (e.image && e.image.url) locandina = urlSicuro_(e.image.url) || null;
 
       // Link a Google Maps: va costruito da coordinate/indirizzo, NON deve essere
       // il link alla pagina VisitTuscany (quello resta solo nel campo "url",
@@ -1511,6 +1828,7 @@
 
   var tuttiEventi = [];
   var periodoCorrente = 'tutti';
+  var giornoFiltro = null;
   var categorieSelezionate = new Set();
   var provinceSelezionate = new Set();
   var markersById = {};
@@ -1518,6 +1836,10 @@
 
   function setPeriodo(p, btn) {
     periodoCorrente = p;
+    // Scegliere un periodo dal cassetto equivale a "tutti i giorni":
+    // la striscia dei giorni si riallinea (evidenzia Oggi solo per "oggi").
+    giornoFiltro = null;
+    aggiornaChipGiorni();
     document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) { b.classList.remove('attivo'); });
     btn.classList.add('attivo');
     aggiornaUrl();
@@ -1618,7 +1940,7 @@
   }
 
   function aggiornaBadgeFiltri() {
-    var count = (periodoCorrente !== 'tutti' ? 1 : 0) + categorieSelezionate.size + provinceSelezionate.size;
+    var count = (periodoCorrente !== 'tutti' ? 1 : 0) + (giornoFiltro ? 1 : 0) + categorieSelezionate.size + provinceSelezionate.size;
     var badge = document.getElementById('filtri-badge');
     var btnAzzera = document.getElementById('btn-azzera-filtri');
     if (count > 0) { badge.style.display = 'inline-block'; badge.textContent = count; btnAzzera.style.display = 'inline-block'; }
@@ -1629,6 +1951,7 @@
     var testo = document.getElementById('input-ricerca').value.trim().toLowerCase();
     aggiornaBadgeFiltri();
     var filtrati = tuttiEventi.filter(function(ev) {
+      if (giornoFiltro && !eventoInGiorno(ev, giornoFiltro)) return false;
       if (!inPeriodo(ev, periodoCorrente)) return false;
       if (categorieSelezionate.size > 0 && !categorieSelezionate.has(ev.categoria)) return false;
       if (provinceSelezionate.size > 0 && !provinceSelezionate.has(ev.provincia)) return false;
@@ -1678,13 +2001,22 @@
     var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ ' + testoBadgeEvidenza + '</span>' : '';
     var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
     var badgeFIHtml = ev.fonte === 'firenze' ? '<span class="badge-vt" style="background:#8B1E3F">FeelFlorence</span>' : '';
-    card.innerHTML = badgeEvidenzaHtml + badgeVTHtml + badgeFIHtml + imgHtml +
+    var salvaHtml = '<button type="button" class="card-salva' + (isSalvato(ev.id) ? ' attivo' : '') + '" data-id="' + escapeHtml_(ev.id) + '" aria-label="Salva evento" title="Salva evento" aria-pressed="' + (isSalvato(ev.id) ? 'true' : 'false') + '">' + (isSalvato(ev.id) ? '♥' : '♡') + '</button>';
+    card.dataset.id = ev.id;
+    card.innerHTML = salvaHtml + badgeEvidenzaHtml + badgeVTHtml + badgeFIHtml + imgHtml +
       '<div class="card-body">' +
       '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
       '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
       '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
       '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
       '</div>';
+    var btnSalva = card.querySelector('.card-salva');
+    if (btnSalva) {
+      btnSalva.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSalvato(ev.id);
+      });
+    }
     card.addEventListener('click', function() { apriDettaglio(ev); });
     if (!opts.senzaHoverMappa) {
       card.addEventListener('mouseenter', function() { evidenziaMarker(ev.id, true); });
@@ -1695,10 +2027,15 @@
 
   function renderLista(eventi) {
     var cont = document.getElementById('lista-eventi');
+    // Il banner sponsor ora vive dentro la lista (dopo il primo gruppo):
+    // va preso prima di svuotare il contenitore, altrimenti si perde.
+    var bannerEl = document.getElementById('banner-pubblicitario');
     var contatore = document.getElementById('contatore-lista');
     var vuoto = document.getElementById('stato-vuoto');
     cont.innerHTML = '';
-    contatore.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
+    var contatoreTesto = document.getElementById('contatore-testo');
+    if (contatoreTesto) contatoreTesto.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
+    else contatore.textContent = eventi.length + (eventi.length === 1 ? ' evento trovato' : ' eventi trovati');
     vuoto.style.display = eventi.length === 0 ? 'block' : 'none';
     Object.keys(cardsById).forEach(function(k) { delete cardsById[k]; });
 
@@ -1746,26 +2083,328 @@
     });
 
     var chiavi = Object.keys(gruppi).sort();
-    chiavi.forEach(function(chiave) {
-      var evs = gruppi[chiave];
+    var listaGruppi = chiavi.map(function(chiave) {
+      return { chiave: chiave, eventi: gruppi[chiave] };
+    });
+    if (statoLista.osservatore) statoLista.osservatore.disconnect();
+    statoLista = { gruppi: listaGruppi, indice: 0, osservatore: null };
+    disegnaAltriGruppi();
+    posizionaBannerInLista(bannerEl);
+  }
+
+  // ===== Lista progressiva =====
+  // Con 250+ eventi costruire tutte le card in un colpo significava ~35.000px di
+  // DOM e centinaia di immagini da gestire già al primo avvio: su mobile il primo
+  // scroll scattava. Ora si disegnano 60 eventi alla volta; il resto arriva con
+  // "Carica altri" oppure da solo quando si arriva in fondo.
+  var LIMITE_LISTA = 60;
+  var statoLista = { gruppi: [], indice: 0, osservatore: null };
+
+  function disegnaAltriGruppi() {
+    var cont = document.getElementById('lista-eventi');
+    if (!cont) return;
+    var vecchioBtn = document.getElementById('btn-carica-altri');
+    if (vecchioBtn) vecchioBtn.remove();
+
+    var disegnati = 0;
+    while (statoLista.indice < statoLista.gruppi.length && (disegnati === 0 || disegnati < LIMITE_LISTA)) {
+      var gruppo = statoLista.gruppi[statoLista.indice++];
       var gruppoDiv = document.createElement('div');
       gruppoDiv.className = 'gruppo-data';
       var header = document.createElement('div');
       header.className = 'gruppo-data-header';
-      header.innerHTML = '<span class="giorno-nome">' + formattaGiorno(chiave) + '</span> <span>' + evs.length + (evs.length === 1 ? ' evento' : ' eventi') + '</span>';
+      header.innerHTML = '<span class="giorno-nome">' + formattaGiorno(gruppo.chiave) + '</span> <span>' + gruppo.eventi.length + (gruppo.eventi.length === 1 ? ' evento' : ' eventi') + '</span>';
       gruppoDiv.appendChild(header);
 
       var grid = document.createElement('div');
       grid.className = 'eventi-grid';
-
-      evs.forEach(function(ev) {
+      gruppo.eventi.forEach(function(ev) {
         var card = creaCardEvento(ev);
         grid.appendChild(card);
         cardsById[ev.id] = card;
       });
       gruppoDiv.appendChild(grid);
       cont.appendChild(gruppoDiv);
+      disegnati += gruppo.eventi.length;
+    }
+
+    var rimasti = 0;
+    for (var i = statoLista.indice; i < statoLista.gruppi.length; i++) rimasti += statoLista.gruppi[i].eventi.length;
+    if (rimasti === 0) return;
+
+    var btn = document.createElement('button');
+    btn.id = 'btn-carica-altri';
+    btn.type = 'button';
+    btn.textContent = 'Carica altri ' + Math.min(rimasti, LIMITE_LISTA) + ' eventi (ne restano ' + rimasti + ')';
+    btn.addEventListener('click', disegnaAltriGruppi);
+    cont.appendChild(btn);
+
+    // Caricamento automatico appena il pulsante si avvicina alla vista.
+    if ('IntersectionObserver' in window) {
+      if (statoLista.osservatore) statoLista.osservatore.disconnect();
+      statoLista.osservatore = new IntersectionObserver(function(entries) {
+        if (!entries[0].isIntersecting) return;
+        statoLista.osservatore.disconnect();
+        disegnaAltriGruppi();
+      }, { root: document.getElementById('pannello-lista'), rootMargin: '600px 0px' });
+      statoLista.osservatore.observe(btn);
+    }
+  }
+
+  // ===================== Striscia dei giorni =====================
+  var GIORNI_STRISCIA = 14;
+  var NOMI_GIORNI_BREVI = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+
+  function isoDaData(d) {
+    var m = d.getMonth() + 1, g = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (g < 10 ? '0' : '') + g;
+  }
+
+  function eventoInGiorno(ev, iso) {
+    var giorno = parseData(iso);
+    var inizio = parseData(ev.dataSort);
+    if (!giorno || !inizio) return false;
+    var fine = ev.dataFine ? parseData(ev.dataFine) : inizio;
+    if (!fine) fine = inizio;
+    return inizio <= giorno && fine >= giorno;
+  }
+
+  function costruisciStrisciaDate() {
+    var strip = document.getElementById('striscia-date');
+    if (!strip || strip.querySelector('.chip-giorno')) return;
+    var oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+    var html = '';
+    for (var i = 0; i < GIORNI_STRISCIA; i++) {
+      var d = new Date(oggi); d.setDate(oggi.getDate() + i);
+      var iso = isoDaData(d);
+      var etichetta = i === 0 ? 'Oggi' : (i === 1 ? 'Domani' : NOMI_GIORNI_BREVI[d.getDay()]);
+      html += '<button type="button" class="chip-giorno" data-giorno="' + iso + '" aria-pressed="false">' +
+        '<strong>' + d.getDate() + '</strong><span>' + etichetta + '</span></button>';
+    }
+    strip.insertAdjacentHTML('beforeend', html);
+    strip.addEventListener('click', function(e) {
+      var chip = e.target.closest('.chip-giorno');
+      if (chip) selezionaGiorno(chip.dataset.giorno);
     });
+    aggiornaChipGiorni();
+  }
+
+  function aggiornaChipGiorni() {
+    document.querySelectorAll('#striscia-date .chip-giorno').forEach(function(c) {
+      var attivo = c.dataset.giorno === giornoFiltro;
+      c.classList.toggle('attivo', attivo);
+      c.setAttribute('aria-pressed', attivo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) {
+      b.classList.toggle('attivo', b.dataset.periodo === periodoCorrente && !giornoFiltro);
+    });
+  }
+
+  function selezionaGiorno(iso) {
+    giornoFiltro = (giornoFiltro === iso) ? null : iso;
+    // Un giorno preciso e i filtri periodo (Oggi/Weekend/...) rispondono alla
+    // stessa domanda: sceglierne uno azzera l'altro.
+    if (giornoFiltro) periodoCorrente = 'tutti';
+    aggiornaChipGiorni();
+    applicaFiltri();
+    var lista = document.getElementById('pannello-lista');
+    if (lista) lista.scrollTop = 0;
+    if (window.innerWidth <= 760) mostraVistaNav('lista');
+  }
+
+  // ===================== Banner sponsor dentro la lista =====================
+  function posizionaBannerInLista(bannerEl) {
+    if (!bannerEl) return;
+    var cont = document.getElementById('lista-eventi');
+    if (!cont) return;
+    bannerEl.classList.add('in-feed');
+    // Dopo la 4ª card del primo gruppo con eventi: il gruppo "OGGI" può
+    // contenere decine di card, quindi appenderlo dopo il gruppo intero lo
+    // spingerebbe a migliaia di pixel di distanza (di fatto invisibile).
+    var grid = cont.querySelector('.gruppo-data:not(.gruppo-evidenza) .eventi-grid');
+    if (!grid) { cont.insertBefore(bannerEl, cont.firstChild); return; }
+    var cards = grid.querySelectorAll('.card-evento');
+    var riferimento = cards.length > 4 ? cards[3] : null;
+    if (riferimento && riferimento.nextSibling) grid.insertBefore(bannerEl, riferimento.nextSibling);
+    else grid.appendChild(bannerEl);
+  }
+
+  // ===================== Salvati (solo su questo dispositivo) =====================
+  var CHIAVE_SALVATI = 'stase_salvati_v1';
+  var salvati = (function() {
+    try {
+      var v = JSON.parse(localStorage.getItem(CHIAVE_SALVATI) || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  })();
+
+  function isSalvato(id) { return salvati.indexOf(id) !== -1; }
+
+  function salvaSuDispositivo() {
+    try { localStorage.setItem(CHIAVE_SALVATI, JSON.stringify(salvati)); } catch (e) {}
+  }
+
+  function aggiornaBadgeSalvati() {
+    var badge = document.getElementById('badge-salvati');
+    if (!badge) return;
+    // Conta solo i salvati che esistono ancora (gli scaduti non compaiono in lista).
+    var presenti = salvati.filter(function(id) {
+      return tuttiEventi.some(function(e) { return e.id === id; });
+    }).length;
+    if (presenti > 0) { badge.style.display = 'inline-flex'; badge.textContent = presenti; }
+    else { badge.style.display = 'none'; }
+  }
+
+  function toggleSalvato(id) {
+    var i = salvati.indexOf(id);
+    if (i === -1) salvati.push(id); else salvati.splice(i, 1);
+    salvaSuDispositivo();
+    aggiornaBadgeSalvati();
+    document.querySelectorAll('.card-salva').forEach(function(b) {
+      if (b.dataset.id !== id) return;
+      var attivo = isSalvato(id);
+      b.classList.toggle('attivo', attivo);
+      b.textContent = attivo ? '♥' : '♡';
+      b.setAttribute('aria-pressed', attivo ? 'true' : 'false');
+    });
+    if (document.getElementById('view-salvati').style.display === 'block') renderSalvati();
+    mostraToast(isSalvato(id) ? 'Evento salvato nei preferiti' : 'Evento rimosso dai preferiti');
+  }
+
+  function renderSalvati() {
+    var cont = document.getElementById('lista-salvati');
+    if (!cont) return;
+    cont.innerHTML = '';
+    var eventi = salvati.map(function(id) {
+      return tuttiEventi.find(function(e) { return e.id === id; });
+    }).filter(Boolean);
+    if (eventi.length === 0) {
+      cont.innerHTML = '<div id="salvati-vuoto">Non hai ancora salvato nessun evento.<br>Tocca il cuore ♡ su una card per ritrovarla qui.</div>';
+      return;
+    }
+    var grid = document.createElement('div');
+    grid.className = 'eventi-grid';
+    eventi.forEach(function(ev) { grid.appendChild(creaCardEvento(ev, { senzaHoverMappa: true })); });
+    cont.appendChild(grid);
+  }
+
+  function mostraSalvati() {
+    document.getElementById('view-esplora').style.display = 'none';
+    document.getElementById('controlli').style.display = 'none';
+    document.getElementById('view-aggiungi').style.display = 'none';
+    document.getElementById('view-salvati').style.display = 'block';
+    document.getElementById('tab-esplora').classList.remove('attivo');
+    document.getElementById('tab-aggiungi').classList.remove('attivo');
+    renderSalvati();
+    aggiornaNavAttiva();
+    var params = new URLSearchParams(window.location.search);
+    params.delete('tab');
+    history.replaceState(null, '', params.toString() ? '?' + params.toString() : window.location.pathname);
+  }
+
+  function aggiornaNavAttiva() {
+    var nav = document.getElementById('bottom-nav');
+    if (!nav) return;
+    var salvatiAperta = document.getElementById('view-salvati').style.display === 'block';
+    var aggiungiAperta = document.getElementById('view-aggiungi').style.display === 'block';
+    var mappaAttiva = !document.getElementById('map-wrap').classList.contains('nascosto');
+    var attivo = salvatiAperta ? 'nav-salvati' : (aggiungiAperta ? 'nav-pubblica' : (mappaAttiva ? 'nav-mappa' : 'nav-esplora'));
+    ['nav-esplora', 'nav-mappa', 'nav-pubblica', 'nav-salvati'].forEach(function(id) {
+      var b = document.getElementById(id);
+      if (b) b.classList.toggle('attivo', id === attivo);
+    });
+  }
+
+  function mostraVistaNav(vista) {
+    var salvatiBox = document.getElementById('view-salvati');
+    if (salvatiBox.style.display === 'block') {
+      salvatiBox.style.display = 'none';
+      document.getElementById('view-esplora').style.display = 'flex';
+      document.getElementById('controlli').style.display = 'flex';
+    }
+    if (document.getElementById('view-aggiungi').style.display === 'block') mostraTab('esplora');
+    mostraVista(vista);
+    aggiornaNavAttiva();
+  }
+
+  // ===================== Esporta l'evento nel calendario (.ics) =====================
+  // Le righe iCalendar non devono superare 75 ottetti: le piu' lunghe vanno "piegate"
+  // (a capo + spazio). Senza, alcuni calendari scartano o tagliano titolo e descrizione.
+  function piegaRigaIcs_(riga) {
+    var enc = new TextEncoder(), out = '', cur = '', n = 0;
+    Array.from(riga).forEach(function(ch) {
+      var b = enc.encode(ch).length;
+      if (n + b > 75) { out += cur + '\r\n '; cur = ''; n = 1; }
+      cur += ch; n += b;
+    });
+    return out + cur;
+  }
+
+  function scaricaICS(id) {
+    var ev = tuttiEventi.find(function(e) { return e.id === id; });
+    if (!ev || !ev.dataSort) { mostraToast('Questo evento non ha una data valida.'); return; }
+    var dInizio = parseData(ev.dataSort);
+    var dFine = parseData(ev.dataFine || ev.dataSort) || parseData(ev.dataSort);
+    if (!dInizio || !dFine) { mostraToast('Questo evento non ha una data valida.'); return; }
+    function due(n) { return (n < 10 ? '0' : '') + n; }
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,')
+        .replace(/\r?\n/g, '\\n');
+    }
+    function stampaLocale(d) {
+      return d.getFullYear() + due(d.getMonth() + 1) + due(d.getDate()) + 'T' + due(d.getHours()) + due(d.getMinutes()) + '00';
+    }
+
+    // Evento di un solo giorno con orario nel riepilogo (es. "13/11/2026 · 19:00"):
+    // lo esporto con l'ora. Per gli eventi su piu' giorni resta "tutto il giorno",
+    // perche' dal riepilogo non si capisce se si svolgono ogni giorno.
+    var unGiorno = isoDaData(dInizio) === isoDaData(dFine);
+    var orari = unGiorno ? (String(ev.riepilogoDate || '').match(/\b(?:[01]?\d|2[0-3]):[0-5]\d\b/g) || []) : [];
+    var righeData;
+    if (orari.length > 0) {
+      var p1 = orari[0].split(':');
+      var inizioD = new Date(dInizio); inizioD.setHours(parseInt(p1[0], 10), parseInt(p1[1], 10), 0, 0);
+      var fineD;
+      if (orari.length > 1) {
+        var p2 = orari[1].split(':');
+        fineD = new Date(dInizio); fineD.setHours(parseInt(p2[0], 10), parseInt(p2[1], 10), 0, 0);
+        if (fineD <= inizioD) fineD.setDate(fineD.getDate() + 1);
+      } else {
+        fineD = new Date(inizioD.getTime() + 2 * 60 * 60 * 1000);
+      }
+      righeData = ['DTSTART:' + stampaLocale(inizioD), 'DTEND:' + stampaLocale(fineD)];
+    } else {
+      var fineEsclusiva = new Date(dFine);
+      fineEsclusiva.setDate(fineEsclusiva.getDate() + 1); // DTEND in iCalendar e' esclusivo
+      righeData = [
+        'DTSTART;VALUE=DATE:' + isoDaData(dInizio).replace(/-/g, ''),
+        'DTEND;VALUE=DATE:' + isoDaData(fineEsclusiva).replace(/-/g, '')
+      ];
+    }
+
+    var righe = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Stase Toscana//Eventi//IT', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + esc(ev.id) + '@stasetoscana.it',
+      'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+    ].concat(righeData, [
+      'SUMMARY:' + esc(ev.nome),
+      'LOCATION:' + esc(ev.indirizzo || [ev.comune, ev.provincia].filter(Boolean).join(', ')),
+      'DESCRIPTION:' + esc((ev.descrizione || '') + ' — ' + (ev.riepilogoDate || '')),
+      // URL e' di tipo URI, non testo: va scritto cosi' com'e', senza escape.
+      'URL:' + (urlSicuro_(ev.url) || 'https://stasetoscana.it'),
+      'END:VEVENT', 'END:VCALENDAR'
+    ]).map(piegaRigaIcs_);
+    var blob = new Blob([righe.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (ev.nome || 'evento').replace(/[^a-z0-9]+/gi, '-').toLowerCase().slice(0, 60) + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function() { URL.revokeObjectURL(a.href); }, 2000);
+    mostraToast('File calendario scaricato');
   }
 
   function renderMappa(eventi) {
@@ -1782,7 +2421,7 @@
         '<div class="popup-body">' +
         '<div class="popup-quando">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
         '<div>&#128205; ' + escapeHtml_([ev.comune, ev.provincia].filter(Boolean).join(', ')) + '</div>' +
-        '<button class="popup-btn" style="background:' + cat.bg + '" onclick="apriDettaglioDaId(\'' + ev.id + '\')">Scheda completa</button>' +
+        '<button class="popup-btn" style="background:' + cat.bg + '" data-apri-id="' + escapeHtml_(ev.id) + '">Scheda completa</button>' +
         mapsBtn +
         '</div>';
       var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false, ev.inEvidenza) }).bindPopup(popupHtml, {
@@ -1817,6 +2456,13 @@
   }
   function evidenziaCard(id) {
     var card = cardsById[id];
+    // La lista è progressiva: se l'evento è oltre il blocco già disegnato,
+    // disegna i blocchi successivi finché la card non esiste (il ciclo termina
+    // perché ogni chiamata consuma almeno un gruppo).
+    while (!card && statoLista.indice < statoLista.gruppi.length) {
+      disegnaAltriGruppi();
+      card = cardsById[id];
+    }
     if (!card) return;
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     card.classList.add('hover-marker');
@@ -1855,10 +2501,10 @@
       if (ev.url) azioniHtml += '<a class="btn-azione" style="background:#8B1E3F" href="' + escapeHtml_(ev.url) + '" target="_blank" rel="noopener">🏙️ Vedi su FeelFlorence</a>';
       if (ev.sitoUfficiale) azioniHtml += '<a class="btn-azione" style="background:#444" href="' + escapeHtml_(ev.sitoUfficiale) + '" target="_blank" rel="noopener">Sito ufficiale</a>';
     }
-    if (ev.fonte === 'visittuscany' && ev.url) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.url) + '\" target=\"_blank\">🏛️ Vedi su VisitTuscany</a>';
-    if (ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:' + cat.bg + '\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\">Google Maps</a>';
-    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank">Instagram</a>';
-    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
+    if (ev.fonte === 'visittuscany' && ev.url) azioniHtml += '<a class=\"btn-azione\" style=\"background:#0066CC\" href=\"' + escapeHtml_(ev.url) + '\" target=\"_blank\" rel=\"noopener\">🏛️ Vedi su VisitTuscany</a>';
+    if (ev.mapsUrl) azioniHtml += '<a class=\"btn-azione\" style=\"background:' + cat.bg + '\" href=\"' + escapeHtml_(ev.mapsUrl) + '\" target=\"_blank\" rel=\"noopener\">Google Maps</a>';
+    if (ev.instagram) azioniHtml += '<a class="btn-azione" style="background:#c026d3" href="' + escapeHtml_(ev.instagram) + '" target="_blank" rel="noopener">Instagram</a>';
+    if (ev.comune) azioniHtml += '<a class="btn-azione" style="background:#FF5533" href="https://www.getyourguide.it/s/?q=' + encodeURIComponent(ev.comune + ' Toscana') + '&partner_id=HTT15F7&utm_medium=affiliate" target="_blank" rel="noopener">🌐 Altre attività a ' + escapeHtml_(ev.comune) + '</a>';
     // Contatti dell'organizzatore, se presenti (telefono, e-mail, sito)
     if (ev.sitoWeb) azioniHtml += '<a class="btn-azione" style="background:#0f766e" href="' + escapeHtml_(ev.sitoWeb) + '" target="_blank" rel="noopener">🌐 Sito web</a>';
     if (ev.telefono) {
@@ -1866,12 +2512,18 @@
       if (primoNumero.length >= 6) azioniHtml += '<a class="btn-azione" style="background:#0f766e" href="tel:' + primoNumero + '">📞 ' + escapeHtml_(ev.telefono) + '</a>';
     }
     if (ev.email) azioniHtml += '<a class="btn-azione" style="background:#0f766e" href="mailto:' + escapeHtml_(ev.email) + '">✉️ E-mail</a>';
-    azioniHtml += '<button class="btn-azione" style="background:#555;" onclick="condividiEvento(\'' + ev.id + '\')">Condividi</button>';
+    if (ev.dataSort) azioniHtml += '<button class="btn-azione" style="background:#0f766e;" data-azione="ics">📅 Aggiungi al calendario</button>';
+    azioniHtml += '<button class="btn-azione" style="background:#555;" data-azione="condividi">Condividi</button>';
     if (ev.fonte === 'firenze') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://www.feelflorence.it" target="_blank" rel="noopener">Comune di Firenze – FeelFlorence</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a></div>';
     if (ev.fotoCrediti) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">📷 <a href="' + escapeHtml_(ev.fotoCrediti.url) + '" target="_blank" rel="noopener">' + escapeHtml_(ev.fotoCrediti.testo) + '</a></div>';
     if (ev.dateIndicative) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">ℹ️ Date indicative: verifica il programma presso l\'organizzatore.</div>';
     if (ev.immagineIllustrativa) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">🖼️ Immagine illustrativa</div>';
-    document.getElementById('dettaglio-azioni').innerHTML = azioniHtml;
+    var boxAzioni = document.getElementById('dettaglio-azioni');
+    boxAzioni.innerHTML = azioniHtml;
+    var bIcs = boxAzioni.querySelector('[data-azione="ics"]');
+    if (bIcs) bIcs.addEventListener('click', function() { scaricaICS(ev.id); });
+    var bCondividi = boxAzioni.querySelector('[data-azione="condividi"]');
+    if (bCondividi) bCondividi.addEventListener('click', function() { condividiEvento(ev.id); });
 
     aggiornaUrlDettaglio(ev.id);
     apriPannelloDettaglio();
@@ -2034,6 +2686,71 @@
   }
   function chiudiFiltriConEsc(e) { if (e.key === 'Escape') chiudiFiltriSheet(); }
 
+  // ===== Pannello "Province": shortcut ai filtri, senza lasciare la home =====
+  var PROVINCE_TOSCANA = ['Arezzo','Firenze','Grosseto','Livorno','Lucca','Massa-Carrara','Pisa','Pistoia','Prato','Siena'];
+
+  function costruisciProvince() {
+    var griglia = document.getElementById('province-griglia');
+    if (!griglia) return;
+    var conteggi = {};
+    tuttiEventi.forEach(function(ev) { if (ev.provincia) conteggi[ev.provincia] = (conteggi[ev.provincia] || 0) + 1; });
+    var attuale = provinceSelezionate.size === 1 ? Array.from(provinceSelezionate)[0] : '';
+    var voci = PROVINCE_TOSCANA.map(function(p) { return { nome: p, n: conteggi[p] || 0 }; });
+    Object.keys(conteggi).forEach(function(p) {
+      if (PROVINCE_TOSCANA.indexOf(p) === -1) voci.push({ nome: p, n: conteggi[p] });
+    });
+    var html = '<button type="button" class="prov-tessera' + (attuale === '' ? ' attiva' : '') + '" data-prov="">' +
+      '<span>Tutta la Toscana</span><span class="prov-conteggio">' + tuttiEventi.length + '</span></button>';
+    voci.forEach(function(v) {
+      html += '<button type="button" class="prov-tessera' + (attuale === v.nome ? ' attiva' : '') + '" data-prov="' + escapeHtml_(v.nome) + '">' +
+        '<span>' + escapeHtml_(v.nome) + '</span><span class="prov-conteggio">' + v.n + '</span></button>';
+    });
+    griglia.innerHTML = html;
+  }
+
+  function apriProvince() {
+    costruisciProvince();
+    document.getElementById('province-backdrop').classList.add('aperto');
+    document.addEventListener('keydown', chiudiProvinceConEsc);
+  }
+
+  function chiudiProvince() {
+    document.getElementById('province-backdrop').classList.remove('aperto');
+    document.removeEventListener('keydown', chiudiProvinceConEsc);
+  }
+
+  function chiudiProvinceConEsc(e) { if (e.key === 'Escape') chiudiProvince(); }
+
+  function chiudiProvinceSeCliccatoFuori(e) { if (e.target === e.currentTarget) chiudiProvince(); }
+
+  function scegliProvincia(prov) {
+    provinceSelezionate.clear();
+    if (prov) provinceSelezionate.add(prov);
+    // Riallinea il menu del cassetto Filtri: altrimenti mostrerebbe una selezione vecchia.
+    var provSet = new Set();
+    tuttiEventi.forEach(function(ev) { if (ev.provincia) provSet.add(ev.provincia); });
+    costruisciMultiselect('provincia', Array.from(provSet).sort(), provinceSelezionate);
+    aggiornaBadgeMultiselect('provincia', provinceSelezionate);
+    // La provincia scelta da qui sostituisce l'eventuale filtro per giorno.
+    giornoFiltro = null;
+    aggiornaChipGiorni();
+    var salvatiBox = document.getElementById('view-salvati');
+    if (salvatiBox && salvatiBox.style.display === 'block') mostraVistaNav('lista');
+    applicaFiltri();
+    aggiornaUrl();
+    chiudiProvince();
+    mostraToast(prov ? 'Solo eventi in provincia di ' + prov : 'Tutti gli eventi della Toscana');
+  }
+
+  (function collegaProvince() {
+    var griglia = document.getElementById('province-griglia');
+    if (!griglia) return;
+    griglia.addEventListener('click', function(e) {
+      var b = e.target.closest('.prov-tessera');
+      if (b) scegliProvincia(b.dataset.prov || '');
+    });
+  })();
+
   (function initDragSheetFiltri() {
     var handle = document.getElementById('filtri-drag-handle');
     if (!handle) return;
@@ -2172,9 +2889,23 @@
       btnMappa.classList.add('attivo'); btnLista.classList.remove('attivo');
       setTimeout(function() { map.invalidateSize(); }, 100);
     }
+    aggiornaNavAttiva();
   }
   function adattaLayoutIniziale() {
-    if (window.innerWidth > 760) { document.getElementById('map-wrap').classList.remove('nascosto'); setTimeout(function() { map.invalidateSize(); }, 100); }
+    if (window.innerWidth > 760) {
+      // Sopra il breakpoint la barra in basso non esiste: la vista Salvati si
+      // raggiunge solo da mobile, quindi se era aperta si torna a Esplora.
+      // Altrimenti ruotando il telefono o allargando la finestra si resterebbe
+      // con lista e controlli nascosti e nessun modo di uscirne.
+      var salvatiBox = document.getElementById('view-salvati');
+      if (salvatiBox && salvatiBox.style.display === 'block') {
+        salvatiBox.style.display = 'none';
+        document.getElementById('view-esplora').style.display = 'flex';
+        document.getElementById('controlli').style.display = 'flex';
+      }
+      document.getElementById('map-wrap').classList.remove('nascosto');
+      setTimeout(function() { map.invalidateSize(); }, 100);
+    }
   }
     if (window.innerWidth <= 760) {
   mostraVista('mappa');
@@ -2182,6 +2913,15 @@
   adattaLayoutIniziale();
 }
   window.addEventListener('resize', adattaLayoutIniziale);
+  // Più affidabile del solo resize quando cambia il breakpoint (rotazione del
+  // telefono, split screen, finestra riagganciata): il matchMedia scatta
+  // esattamente quando si attraversano i 760px.
+  (function osservaBreakpoint() {
+    var mq = window.matchMedia('(min-width: 761px)');
+    var gestisci = function() { adattaLayoutIniziale(); };
+    if (mq.addEventListener) mq.addEventListener('change', gestisci);
+    else if (mq.addListener) mq.addListener(gestisci);
+  })();
 
   var markerUtente = null;
   function geolocate() {
@@ -2295,15 +3035,12 @@
     var lastScroll = 0;
 
     function checkScroll() {
-      var y;
-      if (window.innerWidth > 760) {
-        // Desktop: check scroll of the lista panel
-        var lista = document.getElementById('pannello-lista');
-        y = lista ? lista.scrollTop : 0;
-      } else {
-        // Mobile: check window scroll
-        y = window.scrollY || document.documentElement.scrollTop;
-      }
+      // La pagina non scorre mai a livello di window (body a 100dvh, overflow:hidden):
+      // lo scorrimento avviene sempre dentro #pannello-lista, sia su desktop sia su
+      // mobile. Su mobile si leggeva window.scrollY, che resta sempre 0: l'header non
+      // si compattava mai e restava ingombrante per tutta la navigazione.
+      var lista = document.getElementById('pannello-lista');
+      var y = (lista ? lista.scrollTop : 0) || window.scrollY || document.documentElement.scrollTop || 0;
       if (y > scrollThreshold) {
         topBar.classList.add('compact');
       } else {
@@ -2404,11 +3141,20 @@
     try {
       var eventi = await leggiEventi();
       tuttiEventi = eventi.filter(isFuturo);
+      if (caricamentoCompleto) {
+        var idPresenti = new Set(tuttiEventi.map(function(e) { return e.id; }));
+        var prima = salvati.length;
+        salvati = salvati.filter(function(id) { return idPresenti.has(id); });
+        if (salvati.length !== prima) salvaSuDispositivo();
+      }
       console.log('Totale eventi:', tuttiEventi.length, '- VT:', tuttiEventi.filter(function(e){return e.fonte==='visittuscany';}).length, '- Stase:', tuttiEventi.filter(function(e){return e.fonte==='stase';}).length);
       popolaFiltriOpzioni();
       caricaFiltriDaUrl();
       applicaFiltri();
       adattaLayoutIniziale();
+      costruisciStrisciaDate();
+      aggiornaBadgeSalvati();
+      aggiornaNavAttiva();
       // *** Il banner NON è "await": si carica in sottofondo, senza bloccare
       // lo spinner. L'endpoint Apps Script del banner ha una latenza di
       // "risveglio" incostante (a volte 1s, a volte 10-20s) — se lo aspettassimo
@@ -2424,7 +3170,7 @@
       }
     } catch (err) {
       console.error('Errore init:', err);
-      mostraToast('Errore di caricamento. Dati demo attivi.');
+      mostraToast('Errore di caricamento. Riprova tra poco.');
     } finally {
       document.getElementById('loading').style.display = 'none';
     }

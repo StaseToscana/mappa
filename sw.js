@@ -13,7 +13,7 @@
 // precedente sui dispositivi che hanno già installato l'app.
 // ============================================================================
 
-const CACHE_NAME = 'stase-toscana-v1';
+const CACHE_NAME = 'stase-toscana-v2';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -46,11 +46,19 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return; // solo il nostro dominio
 
+  // I file JSON degli eventi vengono richiesti con ?t=<timestamp> (ogni volta un URL
+  // diverso): salvarli in cache riempirebbe il dispositivo di copie mai riutilizzate.
+  // Passano direttamente alla rete.
+  if (url.pathname.endsWith('.json') && url.pathname !== '/manifest.json') return;
+
   event.respondWith(
     fetch(request)
       .then((response) => {
-        const copia = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, copia));
+        // Si salvano solo risposte valide (niente 404/500 in cache)
+        if (response && response.ok) {
+          const copia = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copia));
+        }
         return response;
       })
       .catch(() =>
