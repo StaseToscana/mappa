@@ -924,25 +924,24 @@
     }
 
     /* ===== Tasto X: torna agli eventi senza una data precisa ===== */
-    #striscia-date { padding-left: 0; padding-right: 20px; scroll-snap-type: none; }
-    #striscia-date::after { content: ''; flex: 0 0 4px; }
+    /* La X sta accanto alla striscia (non dentro): scorrendo i giorni non puo' coprirli. */
+    #riga-date { display: flex; gap: 6px; align-items: stretch; min-width: 0; }
+    #riga-date #striscia-date { flex: 1 1 auto; min-width: 0; }
     .chip-reset {
-      flex: 0 0 auto; position: sticky; left: 0; z-index: 2;
-      display: none; align-items: center; justify-content: center; gap: 4px;
+      flex: 0 0 auto; display: none; align-items: center; justify-content: center; gap: 4px;
       min-width: 44px; padding: 0 12px; border-radius: 14px;
       border: 1.5px solid var(--rosso-scuro); background: var(--crema-card);
-      color: var(--rosso-scuro); font-size: 0.72rem; font-weight: 800; cursor: pointer;
-      box-shadow: 6px 0 8px -4px rgba(255,255,255,0.95);
+      color: var(--rosso-scuro); font-family: inherit; font-size: 0.72rem; font-weight: 800; cursor: pointer;
       -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    #striscia-date.ha-giorno .chip-reset { display: flex; }
+    #riga-date.ha-giorno .chip-reset { display: flex; }
     .chip-reset:active { transform: scale(0.94); background: var(--rosso-tenue); }
     .chip-reset .x { font-size: 1.1rem; line-height: 1; }
 
     /* ===== Striscia dei giorni ===== */
     #striscia-date {
       display: flex; gap: 6px; align-items: stretch;
-      overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
       padding-bottom: 2px; scrollbar-width: none;
     }
     #striscia-date::-webkit-scrollbar { display: none; }
@@ -1098,8 +1097,8 @@
 
     /* ===== Pin evidenza sulla mappa: pulsare morbido, disattivato con reduced-motion ===== */
     @keyframes pinEvidenzaPulse {
-      0%, 100% { box-shadow: 0 0 0 5px rgba(255,200,0,0.65), 0 0 18px 6px rgba(255,190,0,0.85), 0 2px 10px rgba(0,0,0,0.3); }
-      50% { box-shadow: 0 0 0 10px rgba(255,200,0,0.28), 0 0 30px 14px rgba(255,190,0,1), 0 2px 10px rgba(0,0,0,0.3); }
+      0%, 100% { box-shadow: 0 0 0 4px rgba(255,200,0,0.6), 0 0 12px 4px rgba(255,190,0,0.8), 0 2px 8px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 0 7px rgba(255,200,0,0.3), 0 0 20px 8px rgba(255,190,0,0.95), 0 2px 8px rgba(0,0,0,0.3); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1493,7 +1492,8 @@
     if (b) b.onclick = function() { apriDettaglioDaId(b.getAttribute('data-apri-id')); };
   });
 
-  function creaIcona(cat, hover, isEvidenza) {
+  function creaIcona(cat, hover, isEvidenza, dx) {
+    dx = dx || 0;
     var c = getCat(cat);
     var attivo = hover || isEvidenza;
     var size = isEvidenza ? 50 : (attivo ? 46 : 36);
@@ -1501,15 +1501,55 @@
     var animazione = (isEvidenza && !motionRidotto()) ? 'animation:pinEvidenzaPulse 1.8s ease-in-out infinite;' : '';
     var glow = attivo
       ? (isEvidenza
-          ? 'box-shadow:0 0 0 5px rgba(255,200,0,0.65), 0 0 18px 6px rgba(255,190,0,0.85), 0 2px 10px rgba(0,0,0,0.3);filter:saturate(1.3) brightness(1.06);'
+          ? 'box-shadow:0 0 0 4px rgba(255,200,0,0.6), 0 0 12px 4px rgba(255,190,0,0.8), 0 2px 8px rgba(0,0,0,0.3);filter:saturate(1.3) brightness(1.06);'
           : 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);')
       : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
     return L.divIcon({
       className: '',
       html: '<div style="background:' + sfondo + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
-      iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
+      iconSize: [size, size], iconAnchor: [size/2 - dx, size], popupAnchor: [dx, -size+2]
     });
   }
+
+  // Pin "in evidenza": se nello stesso punto c'e' un altro pin o un cerchio con il numero,
+  // il pin dorato si sposta di lato (la punta resta vicina al luogo) cosi' non copre nulla.
+  // Si ricalcola a ogni zoom/spostamento, perche' i cerchi cambiano con lo zoom.
+  var DX_EVIDENZA = 54, SOGLIA_EVIDENZA = 46, timerEvidenza_ = null;
+  function riposizionaEvidenza_() {
+    clearTimeout(timerEvidenza_);
+    timerEvidenza_ = setTimeout(function() {
+      var cont = map.getContainer();
+      if (!cont || cont.clientWidth === 0) return;
+      var haEvidenza = false;
+      evidenzaGroup.eachLayer(function() { haEvidenza = true; });
+      if (!haEvidenza) return;
+      var punti = [], visti = [];
+      clusterGroup.eachLayer(function(m) {
+        var v = clusterGroup.getVisibleParent(m);
+        if (!v || visti.indexOf(v) !== -1) return;
+        visti.push(v);
+        punti.push(map.latLngToContainerPoint(v.getLatLng()));
+      });
+      evidenzaGroup.eachLayer(function(mk) {
+        var ev = mk._evInfo; if (!ev) return;
+        var p = map.latLngToContainerPoint(mk.getLatLng());
+        var vicino = null, dmin = Infinity;
+        punti.forEach(function(q) { var d = p.distanceTo(q); if (d < dmin) { dmin = d; vicino = q; } });
+        var dx = 0;
+        if (vicino && dmin < SOGLIA_EVIDENZA) {
+          dx = vicino.x <= p.x ? DX_EVIDENZA : -DX_EVIDENZA;
+          // Mai fuori dallo schermo: se non c'e' spazio da un lato, si va dall'altro.
+          if (p.x + dx > cont.clientWidth - 30 || p.x + dx < 30) dx = -dx;
+        }
+        if ((mk._dxEv || 0) !== dx) {
+          mk._dxEv = dx;
+          mk.setIcon(creaIcona(ev.categoria, false, true, dx));
+        }
+      });
+    }, 60);
+  }
+  map.on('zoomend moveend', riposizionaEvidenza_);
+  clusterGroup.on('animationend', riposizionaEvidenza_);
 
   // true solo se TUTTE le fonti sono state lette senza errori: solo allora e'
   // sicuro togliere dai preferiti gli eventi che non esistono piu'.
@@ -2300,7 +2340,23 @@
     var strip = document.getElementById('striscia-date');
     if (!strip || strip.querySelector('.chip-giorno')) return;
     var oggi = new Date(); oggi.setHours(0, 0, 0, 0);
-    var html = '<button type="button" class="chip-reset" id="chip-reset-giorno" aria-label="Rimuovi il filtro per data: mostra tutti gli eventi" title="Tutti gli eventi"><span class="x" aria-hidden="true">✕</span><span>Tutti</span></button>';
+    var riga = document.getElementById('riga-date');
+    if (!riga) {
+      riga = document.createElement('div');
+      riga.id = 'riga-date';
+      strip.parentNode.insertBefore(riga, strip);
+      var btnReset = document.createElement('button');
+      btnReset.type = 'button';
+      btnReset.className = 'chip-reset';
+      btnReset.id = 'chip-reset-giorno';
+      btnReset.setAttribute('aria-label', 'Rimuovi il filtro per data: mostra tutti gli eventi');
+      btnReset.title = 'Tutti gli eventi';
+      btnReset.innerHTML = '<span class="x" aria-hidden="true">✕</span><span>Tutti</span>';
+      btnReset.addEventListener('click', cancellaGiorno);
+      riga.appendChild(btnReset);
+      riga.appendChild(strip);
+    }
+    var html = '';
     for (var i = 0; i < GIORNI_STRISCIA; i++) {
       var d = new Date(oggi); d.setDate(oggi.getDate() + i);
       var iso = isoDaData(d);
@@ -2310,7 +2366,6 @@
     }
     strip.insertAdjacentHTML('beforeend', html);
     strip.addEventListener('click', function(e) {
-      if (e.target.closest('.chip-reset')) { cancellaGiorno(); return; }
       var chip = e.target.closest('.chip-giorno');
       if (chip) selezionaGiorno(chip.dataset.giorno);
     });
@@ -2318,8 +2373,8 @@
   }
 
   function aggiornaChipGiorni() {
-    var stripEl = document.getElementById('striscia-date');
-    if (stripEl) stripEl.classList.toggle('ha-giorno', !!giornoFiltro);
+    var rigaEl = document.getElementById('riga-date');
+    if (rigaEl) rigaEl.classList.toggle('ha-giorno', !!giornoFiltro);
     document.querySelectorAll('#striscia-date .chip-giorno').forEach(function(c) {
       var attivo = c.dataset.giorno === giornoFiltro;
       c.classList.toggle('attivo', attivo);
@@ -2592,10 +2647,12 @@
         // refresh esplicito evita che l'utente debba muovere la mappa per vederlo di nuovo.
         if (!ev.inEvidenza && clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
       });
+      marker._evInfo = ev;
       if (ev.inEvidenza) evidenzaGroup.addLayer(marker); else nuoviMarker.push(marker);
       markersById[ev.id] = marker;
     });
     clusterGroup.addLayers(nuoviMarker);
+    riposizionaEvidenza_();
   }
 
   function evidenziaMarker(id, on) {
@@ -2604,7 +2661,7 @@
     var marker = markersById[id];
     if (marker) {
       var ev = tuttiEventi.find(function(e) { return e.id === id; });
-      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza));
+      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza, marker._dxEv || 0));
     }
   }
   function evidenziaCard(id) {
@@ -3040,7 +3097,7 @@
     } else {
       lista.classList.add('nascosto'); mapWrap.classList.remove('nascosto');
       btnMappa.classList.add('attivo'); btnLista.classList.remove('attivo');
-      setTimeout(function() { map.invalidateSize(); }, 100);
+      setTimeout(function() { map.invalidateSize(); riposizionaEvidenza_(); }, 100);
     }
     aggiornaNavAttiva();
   }
