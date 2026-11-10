@@ -421,6 +421,17 @@
     .popup-quando { font-weight: 600; margin-bottom: 2px; color: #444; }
     .popup-btn { display: inline-block; padding: 5px 12px; border-radius: 20px; color: white !important; text-decoration: none !important; font-weight: 700; font-size: 0.74rem; margin-top: 6px; margin-right: 6px; cursor: pointer; border: none; transition: transform 0.1s; }
     .popup-btn:active { transform: scale(0.95); }
+    /* Cuore "salva" in alto a sinistra del popup (la X di chiusura sta a destra). */
+    .popup-cuore {
+      position: absolute; top: 8px; left: 8px; z-index: 5;
+      width: 32px; height: 32px; border-radius: 50%; border: none; padding: 0;
+      background: rgba(255,255,255,0.94); color: var(--rosso-scuro);
+      font-size: 1.05rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    .popup-cuore.attivo { background: var(--rosso-scuro); color: #fff; }
+    .popup-cuore:active { transform: scale(0.9); }
 
     #view-aggiungi { display: none; flex: 1; min-height: 0; overflow-y: auto; max-width: 640px; margin: 0 auto; padding: 28px 20px calc(60px + var(--nav-h)); width: 100%; }
     .aggiungi-hero {
@@ -591,13 +602,20 @@
       }
       #dettaglio-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
     }
-    #btn-chiudi-dettaglio {
-      position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; z-index: 2;
-      background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%;
-      width: 34px; height: 34px; font-size: 1.1rem; cursor: pointer; line-height: 1;
-      transition: background 0.15s;
+    #btn-chiudi-dettaglio, #btn-salva-dettaglio {
+      position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); z-index: 2;
+      background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; padding: 0;
+      width: 38px; height: 38px; cursor: pointer; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
-    #btn-chiudi-dettaglio:hover { background: rgba(0,0,0,0.7); }
+    #btn-chiudi-dettaglio { left: 14px; }
+    #btn-salva-dettaglio { right: 14px; font-size: 1.3rem; }
+    #btn-chiudi-dettaglio:hover, #btn-salva-dettaglio:hover { background: rgba(0,0,0,0.7); }
+    #btn-salva-dettaglio.attivo { background: var(--rosso-scuro); }
+    #btn-chiudi-dettaglio:active, #btn-salva-dettaglio:active { transform: scale(0.92); }
+    /* Il gesto "indietro" con lo swipe orizzontale e' gestito da JS: il browser tiene solo lo scroll verticale. */
+    #dettaglio-panel { touch-action: pan-y; }
     #dettaglio-img-wrap { position: relative; cursor: zoom-in; }
     #dettaglio-img { width: 100%; max-height: 380px; object-fit: contain; background: var(--inchiostro); display: block; }
     #dettaglio-zoom-hint {
@@ -1250,7 +1268,8 @@
 <div id="dettaglio-backdrop" onclick="chiudiDettaglioSeCliccatoFuori(event)">
   <div id="dettaglio-panel">
     <div id="dettaglio-drag-handle" aria-hidden="true"></div>
-    <button id="btn-chiudi-dettaglio" onclick="chiudiDettaglio()">&#10005;</button>
+    <button id="btn-chiudi-dettaglio" type="button" onclick="chiudiDettaglio()" aria-label="Indietro" title="Indietro"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button id="btn-salva-dettaglio" type="button" onclick="toggleSalvato(this.dataset.id)" aria-label="Salva evento" title="Salva evento" aria-pressed="false">♡</button>
     <div id="dettaglio-img-wrap" onclick="apriLightbox()">
       <img id="dettaglio-img" src="" alt="" onerror="this.parentElement.style.display='none'" />
       <span id="dettaglio-zoom-hint">Zoom</span>
@@ -1493,7 +1512,29 @@
     var el = e.popup && e.popup.getElement ? e.popup.getElement() : null;
     var b = el ? el.querySelector('[data-apri-id]') : null;
     if (b) b.onclick = function() { apriDettaglioDaId(b.getAttribute('data-apri-id')); };
+    var bs = el ? el.querySelector('[data-salva-id]') : null;
+    if (bs) bs.onclick = function() { toggleSalvato(bs.getAttribute('data-salva-id')); };
+    aggiornaBottoniSalvaPopup_();
   });
+  // Allinea il cuore dei popup della mappa allo stato dei preferiti.
+  function aggiornaBottoniSalvaPopup_() {
+    document.querySelectorAll('.popup-cuore').forEach(function(b) {
+      var att = isSalvato(b.getAttribute('data-salva-id'));
+      b.classList.toggle('attivo', att);
+      b.textContent = att ? '♥' : '♡';
+      b.setAttribute('aria-pressed', att ? 'true' : 'false');
+    });
+    aggiornaCuoreDettaglio_();
+  }
+  // Cuore dentro la scheda evento (in alto a destra).
+  function aggiornaCuoreDettaglio_() {
+    var b = document.getElementById('btn-salva-dettaglio');
+    if (!b || !b.dataset.id) return;
+    var att = isSalvato(b.dataset.id);
+    b.classList.toggle('attivo', att);
+    b.textContent = att ? '♥' : '♡';
+    b.setAttribute('aria-pressed', att ? 'true' : 'false');
+  }
 
   function creaIcona(cat, hover, isEvidenza) {
     var c = getCat(cat);
@@ -2436,6 +2477,7 @@
       b.textContent = attivo ? '♥' : '♡';
       b.setAttribute('aria-pressed', attivo ? 'true' : 'false');
     });
+    aggiornaBottoniSalvaPopup_();
     if (document.getElementById('view-salvati').style.display === 'block') renderSalvati();
     mostraToast(isSalvato(id) ? 'Evento salvato nei preferiti' : 'Evento rimosso dai preferiti');
   }
@@ -2585,7 +2627,7 @@
       var cat = getCat(ev.categoria);
       var imgHtml = ev.locandina ? '<img src="' + escapeHtml_(ev.locandina) + '" class="popup-img" alt="' + escapeHtml_(ev.nome) + '" loading="lazy" onerror="this.style.display=\'none\'" />' : '';
       var mapsBtn = ev.mapsUrl ? '<a href="' + escapeHtml_(ev.mapsUrl) + '" target="_blank" class="popup-btn" style="background:#333;">Maps</a>' : '';
-      var popupHtml = imgHtml +
+      var popupHtml = '<button type="button" class="popup-cuore" data-salva-id="' + escapeHtml_(ev.id) + '" aria-label="Salva evento" title="Salva evento" aria-pressed="false">♡</button>' + imgHtml +
         '<div class="popup-header" style="background:' + cat.bg + '">' + escapeHtml_(ev.nome) + '</div>' +
         '<div class="popup-body">' +
         '<div class="popup-quando">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
@@ -2652,6 +2694,8 @@
     else { imgWrap.style.display = 'none'; }
 
     document.getElementById('dettaglio-nome').textContent = ev.nome || 'Evento senza nome';
+    var bCuoreDett = document.getElementById('btn-salva-dettaglio');
+    if (bCuoreDett) { bCuoreDett.dataset.id = ev.id; aggiornaCuoreDettaglio_(); }
     var badge = document.getElementById('dettaglio-badge');
     badge.textContent = cat.emoji + ' ' + (ev.categoria || 'Altro');
     badge.style.background = cat.bg + '20';
@@ -2667,6 +2711,12 @@
     else { descBox.style.display = 'none'; }
 
     var azioniHtml = '';
+    // Solo per questa fonte (che non fornisce descrizioni): scorciatoia per cercare l'evento su Google.
+    if (ev.fonte === 'terredipisa' && ev.nome) {
+      var annoEv = ev.dataSort ? String(ev.dataSort).slice(0, 4) : '';
+      var qGoogle = [ev.nome, ev.comune, annoEv].filter(Boolean).join(' ');
+      azioniHtml += '<a class="btn-azione" style="background:#1a73e8" href="https://www.google.com/search?q=' + encodeURIComponent(qGoogle) + '" target="_blank" rel="noopener">🔎 Clicca qui per maggiori informazioni</a>';
+    }
     if (ev.fonte === 'firenze') {
       if (ev.url) azioniHtml += '<a class="btn-azione" style="background:#8B1E3F" href="' + escapeHtml_(ev.url) + '" target="_blank" rel="noopener">🏙️ Vedi su FeelFlorence</a>';
       if (ev.sitoUfficiale) azioniHtml += '<a class="btn-azione" style="background:#444" href="' + escapeHtml_(ev.sitoUfficiale) + '" target="_blank" rel="noopener">Sito ufficiale</a>';
@@ -2799,6 +2849,61 @@
     }
     handle.addEventListener('pointerup', fineTrascinamento);
     handle.addEventListener('pointercancel', fineTrascinamento);
+  })();
+
+  // Swipe verso destra su tutta la scheda per tornare indietro (touch): il pannello segue il dito,
+  // poi chiude o si riapre in base a velocita' e distanza, come il trascinamento dalla maniglia.
+  (function initSwipeIndietroDettaglio() {
+    var panel = document.getElementById('dettaglio-panel');
+    if (!panel) return;
+    var start = null, attivo = false, storico = [], startPanelX = 0;
+
+    panel.addEventListener('pointerdown', function(e) {
+      if (e.pointerType === 'mouse') return;
+      if (e.target.closest && e.target.closest('#dettaglio-drag-handle')) return; // ha gia' il suo gesto
+      start = { x: e.clientX, y: e.clientY, id: e.pointerId };
+      attivo = false;
+    });
+    panel.addEventListener('pointermove', function(e) {
+      if (!start || e.pointerId !== start.id) return;
+      var dx = e.clientX - start.x, dy = e.clientY - start.y;
+      if (!attivo) {
+        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+        // Solo gesto chiaramente orizzontale verso destra; altrimenti e' scroll verticale.
+        if (dx > 0 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          attivo = true;
+          if (dettPannello.molla) dettPannello.molla.cancel();
+          dettPannello.trascinando = true;
+          startPanelX = dettPannello.x;
+          start.x = e.clientX; // il movimento parte da qui, senza scatti
+          storico = [{ x: e.clientX, t: performance.now() }];
+          try { panel.setPointerCapture(e.pointerId); } catch (err) {}
+        } else { start = null; return; }
+      }
+      var nuovaX = startPanelX + (e.clientX - start.x);
+      if (nuovaX < 0) nuovaX = nuovaX * 0.25;
+      impostaXPannello(nuovaX);
+      storico.push({ x: e.clientX, t: performance.now() });
+      if (storico.length > 5) storico.shift();
+    });
+    function fine(e) {
+      if (!start || (e && e.pointerId !== start.id)) return;
+      var eraAttivo = attivo;
+      start = null; attivo = false;
+      if (!eraAttivo) return;
+      dettPannello.trascinando = false;
+      var v = 0;
+      if (storico.length >= 2) {
+        var a = storico[0], b = storico[storico.length - 1];
+        var dt = (b.t - a.t) / 1000;
+        if (dt > 0) v = (b.x - a.x) / dt;
+      }
+      var soglia = larghezzaPannelloDettaglio() * 0.3;
+      if (dettPannello.x > soglia || v > 500) chiudiDettaglio(v);
+      else animaPannelloA(0, v);
+    }
+    panel.addEventListener('pointerup', fine);
+    panel.addEventListener('pointercancel', fine);
   })();
 
   // ===== Bottom sheet filtri (stessa fisica a molla del pannello di dettaglio,
