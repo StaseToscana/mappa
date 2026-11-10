@@ -9,7 +9,7 @@
 
   <!-- ===== PWA: installabilità come app ===== -->
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#FF3131" />
+  <meta name="theme-color" content="#FAEFDB" />
   <link rel="icon" href="/icon-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,10 +63,10 @@
     button { font-family: inherit; }
 
     #top-bar {
+      background-color: #FAEFDB;
       background-image: url('sfondo-header.jpg');
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-position: center top;
       position: relative;
       flex-shrink: 0;
       /* Il banner passa sotto orario, rete e batteria; logo e pulsanti restano
@@ -897,6 +897,48 @@
     html.vp-corto #bottom-nav { padding-bottom: 2px; }
     html.vp-corto.cookie-aperto { background: #5a5856; }
 
+    /* ===== iPhone: banner dietro l'orario, barra in basso, tocchi ===== */
+    /* Fuori dalla pagina (sopra l'orario, overscroll, fascia sotto la barra) si vede il
+       colore di html: in alto lo stesso crema del banner, in basso il bianco della barra. */
+    html { background-color: #FAEFDB; }
+    #top-bar::before {
+      content: ''; position: fixed; top: 0; left: 0; right: 0; z-index: 25;
+      height: env(safe-area-inset-top, 0px); pointer-events: none;
+      background-color: #FAEFDB; background-image: url('sfondo-header.jpg');
+      background-size: cover; background-position: center top;
+    }
+    .nav-btn, .chip-giorno, .tab-btn, .card-salva, .link-province { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 760px) {
+      html { background-color: var(--crema-card); }
+      body { background: var(--crema); }
+      #top-bar { margin-top: 0; }
+      #controlli { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+      #bottom-nav {
+        padding-left: max(8px, env(safe-area-inset-left, 0px));
+        padding-right: max(8px, env(safe-area-inset-right, 0px));
+        background: rgba(255,255,255,0.96);
+        -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      }
+      .nav-btn { min-height: 54px; touch-action: manipulation; }
+      .nav-btn:active { transform: scale(0.96); }
+    }
+
+    /* ===== Tasto X: torna agli eventi senza una data precisa ===== */
+    #striscia-date { padding-left: 0; padding-right: 20px; scroll-padding-left: 8px; }
+    #striscia-date::after { content: ''; flex: 0 0 4px; }
+    .chip-reset {
+      flex: 0 0 auto; position: sticky; left: 0; z-index: 2;
+      display: none; align-items: center; justify-content: center; gap: 4px;
+      min-width: 44px; padding: 0 12px; border-radius: 14px;
+      border: 1.5px solid var(--rosso-scuro); background: var(--crema-card);
+      color: var(--rosso-scuro); font-size: 0.72rem; font-weight: 800; cursor: pointer;
+      box-shadow: 6px 0 8px -4px rgba(255,255,255,0.95);
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    }
+    #striscia-date.ha-giorno .chip-reset { display: flex; }
+    .chip-reset:active { transform: scale(0.94); background: var(--rosso-tenue); }
+    .chip-reset .x { font-size: 1.1rem; line-height: 1; }
+
     /* ===== Striscia dei giorni ===== */
     #striscia-date {
       display: flex; gap: 6px; align-items: stretch;
@@ -1100,7 +1142,7 @@
 <div id="province-prompt">Non sai da dove iniziare? Sfoglia tutti gli eventi <a href="/eventi-in-toscana.html">qui</a></div>
 <div id="controlli">
   <div id="barra-ricerca">
-    <input id="input-ricerca" type="text" placeholder="Cerca un evento, comune o provincia..." oninput="applicaFiltri()" />
+    <input id="input-ricerca" type="text" placeholder="Cerca evento o comune" oninput="applicaFiltri()" />
     <button id="btn-filtri-toggle" onclick="apriFiltriSheet()">Filtri <span class="ms-badge" id="filtri-badge" style="display:none;"></span></button>
   </div>
   <div id="striscia-date" aria-label="Scegli il giorno"></div>
@@ -2150,9 +2192,12 @@
       var dStart = parseData(ev.dataSort);
       var dFine = parseData(ev.dataFine || ev.dataSort);
 
-      // Se l'evento è in corso (iniziato prima di oggi, finisce oggi o dopo),
-      // mostralo nel gruppo "OGGI" invece che nel gruppo della data di inizio
-      if (dStart && dFine && dStart < oggiDate && dFine >= oggiDate) {
+      if (giornoFiltro) {
+        // Giorno scelto dalla striscia: la lista e' tutta di quel giorno, un solo gruppo.
+        chiave = giornoFiltro;
+      } else if (dStart && dFine && dStart < oggiDate && dFine >= oggiDate) {
+        // Evento in corso (iniziato prima di oggi, finisce oggi o dopo):
+        // mostralo nel gruppo "OGGI" invece che nel gruppo della data di inizio
         chiave = oggiISO;
       }
 
@@ -2251,7 +2296,7 @@
     var strip = document.getElementById('striscia-date');
     if (!strip || strip.querySelector('.chip-giorno')) return;
     var oggi = new Date(); oggi.setHours(0, 0, 0, 0);
-    var html = '';
+    var html = '<button type="button" class="chip-reset" id="chip-reset-giorno" aria-label="Rimuovi il filtro per data: mostra tutti gli eventi" title="Tutti gli eventi"><span class="x" aria-hidden="true">✕</span><span>Tutti</span></button>';
     for (var i = 0; i < GIORNI_STRISCIA; i++) {
       var d = new Date(oggi); d.setDate(oggi.getDate() + i);
       var iso = isoDaData(d);
@@ -2261,6 +2306,7 @@
     }
     strip.insertAdjacentHTML('beforeend', html);
     strip.addEventListener('click', function(e) {
+      if (e.target.closest('.chip-reset')) { cancellaGiorno(); return; }
       var chip = e.target.closest('.chip-giorno');
       if (chip) selezionaGiorno(chip.dataset.giorno);
     });
@@ -2268,6 +2314,8 @@
   }
 
   function aggiornaChipGiorni() {
+    var stripEl = document.getElementById('striscia-date');
+    if (stripEl) stripEl.classList.toggle('ha-giorno', !!giornoFiltro);
     document.querySelectorAll('#striscia-date .chip-giorno').forEach(function(c) {
       var attivo = c.dataset.giorno === giornoFiltro;
       c.classList.toggle('attivo', attivo);
@@ -2276,6 +2324,19 @@
     document.querySelectorAll('.btn-filtro[data-periodo]').forEach(function(b) {
       b.classList.toggle('attivo', b.dataset.periodo === periodoCorrente && !giornoFiltro);
     });
+  }
+
+  // Torna alla vista "tutti gli eventi", senza una data specifica.
+  function cancellaGiorno() {
+    giornoFiltro = null;
+    periodoCorrente = 'tutti';
+    aggiornaChipGiorni();
+    applicaFiltri();
+    aggiornaUrl();
+    var lista = document.getElementById('pannello-lista');
+    if (lista) lista.scrollTop = 0;
+    var strip = document.getElementById('striscia-date');
+    if (strip) strip.scrollLeft = 0;
   }
 
   function selezionaGiorno(iso) {
@@ -3179,7 +3240,7 @@
     sonda.remove();
     var gap = Math.round(Math.max(window.screen.height, window.screen.width) - window.innerHeight);
     // Valori fuori scala (tastiera aperta, ecc.): si tiene l'ultimo valido.
-    if (gap < 0 || gap > insetAlto + 6) return;
+    if (gap < 0 || gap > insetAlto + 40) return;
     root.style.setProperty('--vp-gap', gap + 'px');
     root.classList.toggle('vp-corto', gap > 4);
   }
