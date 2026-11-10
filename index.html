@@ -924,7 +924,7 @@
     }
 
     /* ===== Tasto X: torna agli eventi senza una data precisa ===== */
-    #striscia-date { padding-left: 0; padding-right: 20px; scroll-padding-left: 8px; }
+    #striscia-date { padding-left: 0; padding-right: 20px; scroll-snap-type: none; }
     #striscia-date::after { content: ''; flex: 0 0 4px; }
     .chip-reset {
       flex: 0 0 auto; position: sticky; left: 0; z-index: 2;
@@ -1098,8 +1098,8 @@
 
     /* ===== Pin evidenza sulla mappa: pulsare morbido, disattivato con reduced-motion ===== */
     @keyframes pinEvidenzaPulse {
-      0%, 100% { box-shadow: 0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3); }
-      50% { box-shadow: 0 0 0 11px rgba(232,163,61,0.14), 0 2px 10px rgba(0,0,0,0.3); }
+      0%, 100% { box-shadow: 0 0 0 5px rgba(255,200,0,0.65), 0 0 18px 6px rgba(255,190,0,0.85), 0 2px 10px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 0 10px rgba(255,200,0,0.28), 0 0 30px 14px rgba(255,190,0,1), 0 2px 10px rgba(0,0,0,0.3); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1481,6 +1481,9 @@
     }
   });
   map.addLayer(clusterGroup);
+  // Gli eventi "in evidenza" stanno in un livello a parte: il loro pin resta sempre
+  // visibile da solo, non entra nei cerchi con i numeri e sta sopra agli altri.
+  const evidenzaGroup = L.layerGroup().addTo(map);
 
   // Il bottone "Scheda completa" del popup non usa piu' onclick con l'id scritto nel
   // markup: il collegamento si fa qui, a ogni apertura del popup.
@@ -1493,16 +1496,17 @@
   function creaIcona(cat, hover, isEvidenza) {
     var c = getCat(cat);
     var attivo = hover || isEvidenza;
-    var size = attivo ? 46 : 36;
+    var size = isEvidenza ? 50 : (attivo ? 46 : 36);
+    var sfondo = isEvidenza ? 'linear-gradient(135deg,#FFE45C,#FFAA00)' : c.bg;
     var animazione = (isEvidenza && !motionRidotto()) ? 'animation:pinEvidenzaPulse 1.8s ease-in-out infinite;' : '';
     var glow = attivo
       ? (isEvidenza
-          ? 'box-shadow:0 0 0 6px rgba(232,163,61,0.35), 0 2px 10px rgba(0,0,0,0.3);'
+          ? 'box-shadow:0 0 0 5px rgba(255,200,0,0.65), 0 0 18px 6px rgba(255,190,0,0.85), 0 2px 10px rgba(0,0,0,0.3);filter:saturate(1.3) brightness(1.06);'
           : 'box-shadow:0 0 0 6px rgba(255,68,56,0.25), 0 2px 8px rgba(0,0,0,0.3);')
       : 'box-shadow:0 2px 8px rgba(0,0,0,0.25);';
     return L.divIcon({
       className: '',
-      html: '<div style="background:' + c.bg + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
+      html: '<div style="background:' + sfondo + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
       iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
     });
   }
@@ -2348,7 +2352,16 @@
     applicaFiltri();
     var lista = document.getElementById('pannello-lista');
     if (lista) lista.scrollTop = 0;
-    if (window.innerWidth <= 760) mostraVistaNav('lista');
+    // Si resta nella vista in cui si e' (mappa o lista). Si cambia solo se si arriva
+    // da "Salvati" o "Aggiungi": li' si torna a Esplora, nella vista che era attiva.
+    if (window.innerWidth <= 760) {
+      var daAltraSezione = document.getElementById('view-salvati').style.display === 'block' ||
+                           document.getElementById('view-aggiungi').style.display === 'block';
+      if (daAltraSezione) {
+        var inMappa = !document.getElementById('map-wrap').classList.contains('nascosto');
+        mostraVistaNav(inMappa ? 'mappa' : 'lista');
+      }
+    }
   }
 
   // ===================== Banner sponsor dentro la lista =====================
@@ -2548,6 +2561,7 @@
 
   function renderMappa(eventi) {
     clusterGroup.clearLayers();
+    evidenzaGroup.clearLayers();
     Object.keys(markersById).forEach(function(k) { delete markersById[k]; });
     var nuoviMarker = [];
     eventi.forEach(function(ev) {
@@ -2563,7 +2577,7 @@
         '<button class="popup-btn" style="background:' + cat.bg + '" data-apri-id="' + escapeHtml_(ev.id) + '">Scheda completa</button>' +
         mapsBtn +
         '</div>';
-      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false, ev.inEvidenza) }).bindPopup(popupHtml, {
+      var marker = L.marker([ev.lat, ev.lon], { icon: creaIcona(ev.categoria, false, ev.inEvidenza), zIndexOffset: ev.inEvidenza ? 1000 : 0 }).bindPopup(popupHtml, {
         maxWidth: 260,
         closeButton: true,
         autoClose: false,
@@ -2576,9 +2590,9 @@
         // Forza il ridisegno del marker nel cluster: su mobile, dopo il tap, a volte
         // il marker sparisce visivamente finche' non si muove la mappa. Questo
         // refresh esplicito evita che l'utente debba muovere la mappa per vederlo di nuovo.
-        if (clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
+        if (!ev.inEvidenza && clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
       });
-      nuoviMarker.push(marker);
+      if (ev.inEvidenza) evidenzaGroup.addLayer(marker); else nuoviMarker.push(marker);
       markersById[ev.id] = marker;
     });
     clusterGroup.addLayers(nuoviMarker);
