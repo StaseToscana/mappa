@@ -213,5 +213,20 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa%2C_palazzo_della_carovana_00_piazza_dei_cavalieri.jpg",
   "verificato": "2026-11-09"
+ },
+ "biblioteca comunale viale rinaldo piaggio 9 f|pontedera": {
+  "luogo": "Biblioteca Comunale, Viale Rinaldo Piaggio, 9/F",
+  "assente": true,
+  "verificato": "2026-11-10"
+ },
+ "teatro del silenzio|lajatico": {
+  "luogo": "Teatro del Silenzio",
+  "file": "teatro-del-silenzio-1wb527d.jpg",
+  "titolo": "Teatro del Silenzio",
+  "autore": "Nuada",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lajatico_teatro_del_silenzio.jpg",
+  "verificato": "2026-11-10"
  }
 }

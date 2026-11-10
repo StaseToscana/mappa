@@ -1,4 +1,8 @@
 {
+ "@comune:Bientina": [
+  43.7101845,
+  10.6203207
+ ],
  "@comune:Buti": [
   43.7273019,
   10.5877174
@@ -22,6 +26,10 @@
  "@comune:Fauglia": [
   43.5674662,
   10.5066841
+ ],
+ "@comune:Montescudaio": [
+  43.3262785,
+  10.6269946
  ],
  "@comune:Montopoli in Val d'Arno": [
   43.6702986,
@@ -84,6 +92,10 @@
  "Biblioteca Comunale, Piazza XX Settembre, Castelfranco di Sotto": [
   43.6988121,
   10.7442637
+ ],
+ "Biblioteca Comunale, Viale Rinaldo Piaggio, Pontedera": [
+  43.6606772,
+  10.631811
  ],
  "Calci": [
   43.725799,
@@ -166,6 +178,7 @@
  "Palazzo Senza Tempo, Via Carraia, Peccioli": null,
  "Palazzo Toniolo, Piazza Toniolo, Pisa": null,
  "Parco della Cittadella, Via Nicola Pisano, Pisa": null,
+ "Parco delle Sughere, Quattro Strade, Bientina": null,
  "Peccioli": [
   43.5480274,
   10.7208485
@@ -248,6 +261,10 @@
  "Teatro Verdi, Via Palestro, Pisa": null,
  "Teatro Verdi, Via Verdi, Santa Croce sull'Arno": null,
  "Teatro Verdi, Viale Regina Margherita, Casciana Terme Lari": null,
+ "Teatro del Silenzio, Lajatico": [
+  43.4688507,
+  10.7384856
+ ],
  "Teatro della Compagnia, Via Dante Alighieri, Castelfranco di Sotto": [
   43.6988933,
   10.7448215
