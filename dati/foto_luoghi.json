@@ -658,5 +658,25 @@
   "luogo": "Hotel Albani",
   "assente": true,
   "verificato": "2026-11-08"
+ },
+ "chiesa dei sette santi|firenze": {
+  "luogo": "Chiesa dei Sette Santi",
+  "file": "chiesa-dei-sette-santi-3izjaw.jpg",
+  "titolo": "Chiesa dei Sette Santi Fondatori (Firenze)",
+  "autore": "Sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Chiesa_dei_sette_santi%2C_fi%2C_ext._01.JPG",
+  "verificato": "2026-11-10"
+ },
+ "tenax|firenze": {
+  "luogo": "Tenax",
+  "assente": true,
+  "verificato": "2026-11-10"
+ },
+ "il trillo scuola di musica e arte|firenze": {
+  "luogo": "Il Trillo Scuola di Musica e Arte",
+  "assente": true,
+  "verificato": "2026-11-10"
  }
 }
