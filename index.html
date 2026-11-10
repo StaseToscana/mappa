@@ -794,7 +794,7 @@
          province diventa una pillola dentro la striscia dei giorni. */
       /* html body: la regola base --nav-h: 0px sta più avanti nel foglio e con
          la stessa specificità vinceva anche qui, lasciando toast e FAB sotto la barra. */
-      html body { --nav-h: calc(66px + env(safe-area-inset-bottom, 0px)); }
+      html body { --nav-h: calc(66px + max(0px, env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px))); }
       #tab-nav, #toggle-vista, #province-prompt { display: none; }
       body #bottom-nav { display: grid; }
 
@@ -869,7 +869,9 @@
       background: var(--crema-card);
       border-top: 1px solid var(--bordo);
       box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
-      padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
+      /* --vp-gap: di quanto la pagina e' piu' corta dello schermo (vedi calibraAltezzaVista_).
+         Quella fascia fa gia' da margine sotto la barra, quindi si toglie dall'inset. */
+      padding: 6px 8px calc(6px + max(0px, env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px)));
       z-index: 30;
     }
     .nav-btn {
@@ -888,6 +890,12 @@
       min-width: 16px; height: 16px; border-radius: 9px;
       display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
     }
+
+    /* Fascia sotto la pagina (solo app installata su iPhone): prende il colore della
+       barra, cosi' sembra parte di essa invece di un buco. */
+    html.vp-corto { background: var(--crema-card); }
+    html.vp-corto #bottom-nav { padding-bottom: 2px; }
+    html.vp-corto.cookie-aperto { background: #5a5856; }
 
     /* ===== Striscia dei giorni ===== */
     #striscia-date {
@@ -3148,6 +3156,34 @@
     gtag('config', GA_ID);
   }
 
+  // ===================== Altezza della pagina su iPhone (app installata) =====================
+  // Nell'app installata su iPhone, con la pagina disegnata sotto l'orario
+  // (viewport-fit=cover), l'altezza utile risulta piu' corta dello schermo della
+  // misura dell'orario: la barra in basso si ferma li' e sotto resta una fascia
+  // vuota. Qui si misura quella differenza (--vp-gap) e il CSS ne tiene conto.
+  // Nel normale Safari, su Android e su desktop il valore resta 0: nessun effetto.
+  function calibraAltezzaVista_() {
+    var root = document.documentElement;
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var installata = window.navigator.standalone === true;
+    var verticale = window.innerHeight > window.innerWidth;
+    if (!ios || !installata || !verticale) {
+      root.style.setProperty('--vp-gap', '0px');
+      root.classList.remove('vp-corto');
+      return;
+    }
+    var sonda = document.createElement('div');
+    sonda.style.cssText = 'position:fixed;top:0;left:0;visibility:hidden;pointer-events:none;padding-top:env(safe-area-inset-top,0px)';
+    document.body.appendChild(sonda);
+    var insetAlto = sonda.offsetHeight;
+    sonda.remove();
+    var gap = Math.round(Math.max(window.screen.height, window.screen.width) - window.innerHeight);
+    // Valori fuori scala (tastiera aperta, ecc.): si tiene l'ultimo valido.
+    if (gap < 0 || gap > insetAlto + 6) return;
+    root.style.setProperty('--vp-gap', gap + 'px');
+    root.classList.toggle('vp-corto', gap > 4);
+  }
+
   // ===================== Consenso cookie =====================
   var ultimoFocusCookie_ = null;
 
@@ -3184,6 +3220,7 @@
     ultimoFocusCookie_ = document.activeElement;
     box.classList.add('visibile');
     document.body.classList.add('cookie-aperto');
+    document.documentElement.classList.add('cookie-aperto');
     document.addEventListener('keydown', tastiPannelloCookie_);
     var pannello = document.getElementById('cookie-pannello');
     if (pannello) pannello.focus();
@@ -3193,6 +3230,7 @@
     var box = document.getElementById('cookie-banner');
     if (box) box.classList.remove('visibile');
     document.body.classList.remove('cookie-aperto');
+    document.documentElement.classList.remove('cookie-aperto');
     document.removeEventListener('keydown', tastiPannelloCookie_);
     if (ultimoFocusCookie_ && ultimoFocusCookie_.focus) { try { ultimoFocusCookie_.focus(); } catch (e) {} }
   }
@@ -3433,6 +3471,10 @@
   })();
 
   init();
+  calibraAltezzaVista_();
+  window.addEventListener('resize', calibraAltezzaVista_);
+  window.addEventListener('orientationchange', function() { setTimeout(calibraAltezzaVista_, 300); });
+  window.addEventListener('pageshow', calibraAltezzaVista_);
   inizializzaCookieBanner();
 </script>
 </body>
