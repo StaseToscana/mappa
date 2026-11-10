@@ -3,7 +3,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Eventi in Toscana – Stase Toscana</title>
   <meta name="description" content="Scopri sagre, concerti, fiere e feste in tutta la Toscana. Mappa e lista aggiornate in tempo reale." />
 
@@ -69,6 +69,9 @@
       background-attachment: fixed;
       position: relative;
       flex-shrink: 0;
+      /* Il banner passa sotto orario, rete e batteria; logo e pulsanti restano
+         sotto di essi. Su desktop e Safari normale l'inset e' 0: nessun cambio. */
+      padding-top: env(safe-area-inset-top, 0px);
     }
 
     header {
@@ -541,7 +544,7 @@
       background: var(--crema); color: var(--inchiostro); font-size: 0.9rem; cursor: pointer;
     }
     #province-sheet-body {
-      overflow-y: auto; padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+      overflow-y: auto; padding: 14px 16px 18px;
       scrollbar-width: none; -ms-overflow-style: none;
     }
     #province-sheet-body::-webkit-scrollbar { width: 0; height: 0; display: none; }
@@ -579,6 +582,7 @@
       display: none;
     }
     @media (max-width: 760px) {
+      #dettaglio-panel { padding-top: env(safe-area-inset-top, 0px); }
       #dettaglio-drag-handle {
         display: block; position: sticky; top: 0; z-index: 3;
         width: 40px; height: 5px; margin: 10px auto 2px;
@@ -588,7 +592,7 @@
       #dettaglio-drag-handle:active { cursor: grabbing; background: rgba(0,0,0,0.25); }
     }
     #btn-chiudi-dettaglio {
-      position: absolute; top: 14px; right: 14px; z-index: 2;
+      position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; z-index: 2;
       background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%;
       width: 34px; height: 34px; font-size: 1.1rem; cursor: pointer; line-height: 1;
       transition: background 0.15s;
@@ -617,7 +621,7 @@
       #lightbox img { transition: none; transform: none !important; }
     }
     #lightbox-chiudi {
-      position: absolute; top: 18px; right: 18px; background: rgba(255,255,255,0.15); color: white;
+      position: absolute; top: calc(18px + env(safe-area-inset-top, 0px)); right: 18px; background: rgba(255,255,255,0.15); color: white;
       border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.2rem; cursor: pointer;
     }
     #dettaglio-body { padding: 22px; }
@@ -704,8 +708,9 @@
       .cookie-pannello {
         max-width: none; height: 100%; max-height: none; border-radius: 0;
         display: flex; flex-direction: column; justify-content: center;
-        padding: 64px 22px 28px;
+        padding: calc(64px + env(safe-area-inset-top, 0px)) 22px calc(28px + env(safe-area-inset-bottom, 0px));
       }
+      .cookie-chiudi { top: calc(10px + env(safe-area-inset-top, 0px)); }
     }
     /* Link "Gestisci cookie" in fondo a lista e pagina Pubblica */
     .piede-cookie { text-align: center; padding: 18px 12px 24px; }
@@ -739,7 +744,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     #toast-container {
-      position: fixed; bottom: calc(var(--nav-h) + 44px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: calc(var(--nav-h) + 44px); left: 50%; transform: translateX(-50%);
       z-index: 3000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;
     }
     .toast {
@@ -789,7 +794,7 @@
          province diventa una pillola dentro la striscia dei giorni. */
       /* html body: la regola base --nav-h: 0px sta più avanti nel foglio e con
          la stessa specificità vinceva anche qui, lasciando toast e FAB sotto la barra. */
-      html body { --nav-h: 62px; }
+      html body { --nav-h: calc(66px + env(safe-area-inset-bottom, 0px)); }
       #tab-nav, #toggle-vista, #province-prompt { display: none; }
       body #bottom-nav { display: grid; }
 
@@ -968,7 +973,7 @@
     #fab-installa {
       position: fixed;
       right: 16px;
-      bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom, 0px));
+      bottom: calc(var(--nav-h) + 16px);
       z-index: 500;
       display: flex;
       flex-direction: column;
