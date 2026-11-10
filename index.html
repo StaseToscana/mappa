@@ -644,26 +644,76 @@
     }
     #banner-cta-content a { color: var(--rosso-scuro); text-decoration: underline; font-weight: 700; }
     #banner-cta-content a:hover { text-decoration: none; }
+    /* ===== Pannello cookie: a tutta altezza, centrato =====
+       "Accetta" e "Rifiuta" hanno lo STESSO aspetto (stessa classe, stessa
+       dimensione, stessi colori): e' quello che il Garante richiede perche' il
+       consenso sia valido. La X in alto equivale a rifiutare. */
     #cookie-banner {
       display: none;
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 4000;
-      background: var(--inchiostro); color: white;
-      padding: 16px 20px;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
+      position: fixed; inset: 0; z-index: 5000;
+      height: 100vh; height: 100dvh;
+      align-items: center; justify-content: center;
+      padding: 20px;
+      background: rgba(27,27,27,0.72);
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      overflow-y: auto;
     }
     #cookie-banner.visibile { display: flex; }
-    #cookie-banner p { font-size: 0.82rem; line-height: 1.5; max-width: 520px; margin: 0; color: rgba(255,255,255,0.9); }
-    #cookie-banner p a { color: white; text-decoration: underline; }
-    #cookie-banner .cookie-azioni { display: flex; gap: 8px; flex-shrink: 0; }
-    #cookie-banner button {
-      border: none; border-radius: 20px; padding: 9px 18px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    body.cookie-aperto { overflow: hidden; }
+    .cookie-pannello {
+      position: relative;
+      width: 100%; max-width: 520px; max-height: 100%;
+      overflow-y: auto;
+      background: var(--crema-card); color: var(--inchiostro);
+      border-radius: 20px; padding: 40px 28px 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      outline: none;
+      animation: cookieEntra 0.22s ease-out;
     }
-    #btn-cookie-accetta { background: var(--rosso-scuro); color: white; }
-    #btn-cookie-rifiuta { background: rgba(255,255,255,0.15); color: white; }
+    @keyframes cookieEntra { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .cookie-pannello { animation: none; } }
+    .cookie-chiudi {
+      position: absolute; top: 10px; right: 10px;
+      width: 44px; height: 44px; border: none; border-radius: 50%;
+      background: transparent; color: var(--grigio-testo);
+      font-size: 1.6rem; line-height: 1; cursor: pointer;
+    }
+    .cookie-chiudi:hover { background: var(--crema); color: var(--inchiostro); }
+    #cookie-titolo { font-size: 1.4rem; font-weight: 800; margin: 0 0 12px; line-height: 1.2; }
+    .cookie-pannello p { font-size: 0.92rem; line-height: 1.55; margin: 0 0 12px; color: var(--inchiostro); }
+    .cookie-dettagli { margin: 0 0 18px; font-size: 0.85rem; color: var(--grigio-testo); }
+    .cookie-dettagli summary { cursor: pointer; font-weight: 700; color: var(--rosso-scuro); padding: 4px 0; }
+    .cookie-dettagli ul { margin: 8px 0 0 18px; padding: 0; line-height: 1.5; }
+    .cookie-dettagli li { margin-bottom: 6px; }
+    .cookie-azioni { display: flex; gap: 12px; margin-top: 6px; }
+    .cookie-btn {
+      flex: 1 1 0; min-height: 48px; padding: 10px 16px;
+      border: 2px solid var(--inchiostro); border-radius: 24px;
+      background: var(--inchiostro); color: white;
+      font: inherit; font-size: 0.95rem; font-weight: 800; cursor: pointer;
+    }
+    .cookie-btn:hover { background: #000; border-color: #000; }
+    .cookie-btn:focus-visible, .cookie-chiudi:focus-visible, .cookie-dettagli summary:focus-visible, .link-cookie:focus-visible {
+      outline: 3px solid var(--rosso); outline-offset: 2px;
+    }
+    #cookie-stato { font-size: 0.8rem; font-weight: 700; color: var(--grigio-testo) !important; margin: 0 0 10px !important; }
+    #cookie-stato:empty { display: none; }
+    .cookie-nota { font-size: 0.78rem !important; color: var(--grigio-testo) !important; margin: 14px 0 0 !important; text-align: center; }
+    @media (max-width: 600px) {
+      #cookie-banner { padding: 0; }
+      .cookie-pannello {
+        max-width: none; height: 100%; max-height: none; border-radius: 0;
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 64px 22px 28px;
+      }
+    }
+    /* Link "Gestisci cookie" in fondo a lista e pagina Pubblica */
+    .piede-cookie { text-align: center; padding: 18px 12px 24px; }
+    .link-cookie {
+      background: none; border: none; padding: 6px 10px; cursor: pointer;
+      font: inherit; font-size: 0.78rem; color: var(--grigio-testo); text-decoration: underline;
+    }
+    .link-cookie:hover { color: var(--inchiostro); }
 
     #banner-pubblicitario {
       position: relative; flex-shrink: 0;
@@ -742,7 +792,6 @@
       html body { --nav-h: 62px; }
       #tab-nav, #toggle-vista, #province-prompt { display: none; }
       body #bottom-nav { display: grid; }
-      #cookie-banner { bottom: var(--nav-h); }
 
       /* Scrollbar nascosta ma scorrimento attivo: su telefono sono già overlay,
          su Chromium da desktop restavano una barra grigia sul bordo. */
@@ -803,9 +852,6 @@
       .gruppo-evidenza .badge-evidenza { top: 6px; left: 6px; }
       .gruppo-evidenza .badge-vt { top: 6px; right: 44px; left: auto; bottom: auto; }
 
-      /* Banner cookie più compatto: copriva 135px di contenuto. */
-      #cookie-banner { padding: 12px 14px; gap: 10px; }
-      #cookie-banner p { font-size: 0.78rem; }
     }
   
     /* ===== Barra di navigazione mobile (solo ≤760px) ===== */
@@ -1059,6 +1105,7 @@
     </div>
     <div id="lista-eventi"></div>
     <div id="stato-vuoto">Nessun evento trovato con questi filtri.<br>Prova ad allargare la ricerca.</div>
+    <div class="piede-cookie"><button type="button" class="link-cookie" onclick="apriPreferenzeCookie()">Gestisci cookie</button></div>
   </div>
   <div id="map-wrap" class="nascosto">
     <div id="map"></div>
@@ -1082,6 +1129,7 @@
     <p>Restano su questo dispositivo, senza bisogno di un account.</p>
   </div>
   <div id="lista-salvati"></div>
+  <div class="piede-cookie"><button type="button" class="link-cookie" onclick="apriPreferenzeCookie()">Gestisci cookie</button></div>
 </div>
 
 <nav id="bottom-nav" aria-label="Navigazione principale">
@@ -1181,11 +1229,28 @@
   </div>
 </div>
 
-<div id="cookie-banner">
-  <p>Usiamo cookie statistici (Google Analytics) per capire come viene usato il sito. Nessun dato personale viene venduto o condiviso con terzi a scopo pubblicitario. <a href="#" onclick="return false;">Maggiori info</a></p>
-  <div class="cookie-azioni">
-    <button id="btn-cookie-rifiuta" onclick="rifiutaCookie()">Rifiuta</button>
-    <button id="btn-cookie-accetta" onclick="accettaCookie()">Accetta</button>
+<div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-titolo" aria-describedby="cookie-testo">
+  <div class="cookie-pannello" id="cookie-pannello" tabindex="-1">
+    <button type="button" class="cookie-chiudi" aria-label="Chiudi e continua senza accettare" onclick="chiudiPannelloCookie_()">&times;</button>
+    <h2 id="cookie-titolo">Cookie e statistiche</h2>
+    <p id="cookie-stato"></p>
+    <p id="cookie-testo">Usiamo Google Analytics, un cookie statistico, solo se ci dai il consenso, per capire come viene usato il sito. Puoi accettare o rifiutare: il sito funziona allo stesso modo. Nessun dato personale viene venduto o condiviso con terzi a scopo pubblicitario.</p>
+    <details class="cookie-dettagli">
+      <summary>Maggiori informazioni</summary>
+      <ul>
+        <li><strong>Chi li usa:</strong> Stase Toscana (stasetoscana.it). Contatto: <a href="mailto:stasetoscana@gmail.com">stasetoscana@gmail.com</a>.</li>
+        <li><strong>A cosa servono:</strong> Google Analytics 4 (Google Ireland Limited) misura come viene usato il sito, per esempio le pagine viste e i clic sui banner, per migliorarlo.</li>
+        <li><strong>Quali cookie:</strong> <code>_ga</code> e <code>_ga_…</code>, di norma con durata massima di 2 anni.</li>
+        <li><strong>Se rifiuti:</strong> Google Analytics non viene caricato.</li>
+        <li><strong>Sul tuo dispositivo:</strong> la scelta fatta qui e gli eventi che salvi restano sul tuo dispositivo e non servono a tracciarti.</li>
+        <li><strong>Cambiare idea:</strong> in ogni momento da &laquo;Gestisci cookie&raquo;, in fondo alla lista eventi.</li>
+      </ul>
+    </details>
+    <div class="cookie-azioni">
+      <button type="button" class="cookie-btn" id="btn-cookie-rifiuta" onclick="rifiutaCookie()">Rifiuta</button>
+      <button type="button" class="cookie-btn" id="btn-cookie-accetta" onclick="accettaCookie()">Accetta</button>
+    </div>
+    <p class="cookie-nota">Puoi cambiare scelta in qualsiasi momento da &laquo;Gestisci cookie&raquo;.</p>
   </div>
 </div>
 
@@ -3078,25 +3143,98 @@
     gtag('config', GA_ID);
   }
 
+  // ===================== Consenso cookie =====================
+  var ultimoFocusCookie_ = null;
+
+  function leggiSceltaCookie_() {
+    try { return localStorage.getItem('cookie_consent'); } catch (e) { return null; }
+  }
+  function salvaSceltaCookie_(valore) {
+    try {
+      localStorage.setItem('cookie_consent', valore);
+      localStorage.setItem('cookie_consent_data', new Date().toISOString());
+    } catch (e) {}
+  }
+
+  // Se l'utente rifiuta dopo aver accettato, i cookie di Google Analytics gia'
+  // scritti vengono cancellati e gtag smette di inviare dati.
+  function cancellaCookieGA_() {
+    var nomi = ['_ga', '_ga_' + String(GA_ID).replace(/^G-/, ''), '_gid', '_gat'];
+    var host = location.hostname;
+    var padre = '.' + host.split('.').slice(-2).join('.');
+    var domini = ['', host, '.' + host, padre];
+    nomi.forEach(function(n) {
+      domini.forEach(function(d) {
+        document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+      });
+    });
+  }
+
+  function mostraPannelloCookie_(riaperto) {
+    var box = document.getElementById('cookie-banner');
+    if (!box) return;
+    var stato = document.getElementById('cookie-stato');
+    var scelta = leggiSceltaCookie_();
+    if (stato) stato.textContent = (riaperto && scelta) ? 'Scelta attuale: cookie ' + (scelta === 'accettato' ? 'accettati' : 'rifiutati') : '';
+    ultimoFocusCookie_ = document.activeElement;
+    box.classList.add('visibile');
+    document.body.classList.add('cookie-aperto');
+    document.addEventListener('keydown', tastiPannelloCookie_);
+    var pannello = document.getElementById('cookie-pannello');
+    if (pannello) pannello.focus();
+  }
+
+  function nascondiPannelloCookie_() {
+    var box = document.getElementById('cookie-banner');
+    if (box) box.classList.remove('visibile');
+    document.body.classList.remove('cookie-aperto');
+    document.removeEventListener('keydown', tastiPannelloCookie_);
+    if (ultimoFocusCookie_ && ultimoFocusCookie_.focus) { try { ultimoFocusCookie_.focus(); } catch (e) {} }
+  }
+
+  // X ed Esc: alla prima visita equivalgono a rifiutare (si prosegue senza
+  // consenso); a pannello riaperto da "Gestisci cookie" chiudono e basta.
+  function chiudiPannelloCookie_() {
+    if (leggiSceltaCookie_()) nascondiPannelloCookie_();
+    else rifiutaCookie();
+  }
+
+  function tastiPannelloCookie_(e) {
+    if (e.key === 'Escape') { chiudiPannelloCookie_(); return; }
+    if (e.key !== 'Tab') return;
+    var box = document.getElementById('cookie-pannello');
+    if (!box) return;
+    var el = Array.prototype.slice.call(box.querySelectorAll('button, summary, a[href]'));
+    if (!el.length) return;
+    var primo = el[0], ultimo = el[el.length - 1];
+    if (e.shiftKey && (document.activeElement === primo || document.activeElement === box)) { e.preventDefault(); ultimo.focus(); }
+    else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primo.focus(); }
+  }
+
   function accettaCookie() {
-    localStorage.setItem('cookie_consent', 'accettato');
-    document.getElementById('cookie-banner').classList.remove('visibile');
+    salvaSceltaCookie_('accettato');
+    window['ga-disable-' + GA_ID] = false;
+    nascondiPannelloCookie_();
     caricaGA();
   }
 
   function rifiutaCookie() {
-    localStorage.setItem('cookie_consent', 'rifiutato');
-    document.getElementById('cookie-banner').classList.remove('visibile');
+    salvaSceltaCookie_('rifiutato');
+    window['ga-disable-' + GA_ID] = true;
+    cancellaCookieGA_();
+    nascondiPannelloCookie_();
   }
 
+  function apriPreferenzeCookie() { mostraPannelloCookie_(true); }
+
   function inizializzaCookieBanner() {
-    var scelta = localStorage.getItem('cookie_consent');
+    var scelta = leggiSceltaCookie_();
     if (scelta === 'accettato') {
       caricaGA();
     } else if (scelta === 'rifiutato') {
-      // nessuna azione, l'utente ha già scelto di non essere tracciato
+      window['ga-disable-' + GA_ID] = true;
     } else {
-      document.getElementById('cookie-banner').classList.add('visibile');
+      mostraPannelloCookie_(false);
     }
   }
 
