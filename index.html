@@ -1472,17 +1472,20 @@
     iconCreateFunction: function(cluster) {
       var count = cluster.getChildCount();
       var size = count < 10 ? 40 : count < 50 ? 48 : 56;
+      // Se nel gruppo c'e' almeno un evento "in evidenza", il cerchio diventa dorato.
+      var conEvidenza = cluster.getAllChildMarkers().some(function(m) { return m._evInfo && m._evInfo.inEvidenza; });
+      var sfondoC = conEvidenza ? 'linear-gradient(135deg,#FFE45C,#FFAA00)' : 'linear-gradient(135deg,#FF3131,#CC0000)';
+      var coloreC = conEvidenza ? '#3d2600' : 'white';
+      var ombraC = conEvidenza ? 'box-shadow:0 0 0 4px rgba(255,200,0,0.55),0 0 14px 5px rgba(255,190,0,0.85);filter:saturate(1.3) brightness(1.06);' : 'box-shadow:0 4px 16px rgba(255,68,56,0.4);';
+      var animC = (conEvidenza && !motionRidotto()) ? 'animation:pinEvidenzaPulse 1.8s ease-in-out infinite;' : '';
       return L.divIcon({
-        html: '<div style="background:linear-gradient(135deg,#FF3131,#CC0000);width:' + size + 'px;height:' + size + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:' + (size*0.35) + 'px;box-shadow:0 4px 16px rgba(255,68,56,0.4);border:3px solid white;">' + count + '</div>',
+        html: '<div style="background:' + sfondoC + ';width:' + size + 'px;height:' + size + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:' + coloreC + ';font-weight:800;font-size:' + (size*0.35) + 'px;' + ombraC + animC + 'border:3px solid white;">' + count + '</div>',
         className: 'marker-cluster-custom',
         iconSize: [size, size]
       });
     }
   });
   map.addLayer(clusterGroup);
-  // Gli eventi "in evidenza" stanno in un livello a parte: il loro pin resta sempre
-  // visibile da solo, non entra nei cerchi con i numeri e sta sopra agli altri.
-  const evidenzaGroup = L.layerGroup().addTo(map);
 
   // Il bottone "Scheda completa" del popup non usa piu' onclick con l'id scritto nel
   // markup: il collegamento si fa qui, a ogni apertura del popup.
@@ -1492,8 +1495,7 @@
     if (b) b.onclick = function() { apriDettaglioDaId(b.getAttribute('data-apri-id')); };
   });
 
-  function creaIcona(cat, hover, isEvidenza, dx) {
-    dx = dx || 0;
+  function creaIcona(cat, hover, isEvidenza) {
     var c = getCat(cat);
     var attivo = hover || isEvidenza;
     var size = isEvidenza ? 50 : (attivo ? 46 : 36);
@@ -1507,49 +1509,9 @@
     return L.divIcon({
       className: '',
       html: '<div style="background:' + sfondo + ';width:' + size + 'px;height:' + size + 'px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid white;' + glow + animazione + 'display:flex;align-items:center;justify-content:center;transition:all 0.15s;"><span style="transform:rotate(45deg);font-size:' + (size*0.44) + 'px;display:block;line-height:1">' + c.emoji + '</span></div>',
-      iconSize: [size, size], iconAnchor: [size/2 - dx, size], popupAnchor: [dx, -size+2]
+      iconSize: [size, size], iconAnchor: [size/2, size], popupAnchor: [0, -size+2]
     });
   }
-
-  // Pin "in evidenza": se nello stesso punto c'e' un altro pin o un cerchio con il numero,
-  // il pin dorato si sposta di lato (la punta resta vicina al luogo) cosi' non copre nulla.
-  // Si ricalcola a ogni zoom/spostamento, perche' i cerchi cambiano con lo zoom.
-  var DX_EVIDENZA = 54, SOGLIA_EVIDENZA = 46, timerEvidenza_ = null;
-  function riposizionaEvidenza_() {
-    clearTimeout(timerEvidenza_);
-    timerEvidenza_ = setTimeout(function() {
-      var cont = map.getContainer();
-      if (!cont || cont.clientWidth === 0) return;
-      var haEvidenza = false;
-      evidenzaGroup.eachLayer(function() { haEvidenza = true; });
-      if (!haEvidenza) return;
-      var punti = [], visti = [];
-      clusterGroup.eachLayer(function(m) {
-        var v = clusterGroup.getVisibleParent(m);
-        if (!v || visti.indexOf(v) !== -1) return;
-        visti.push(v);
-        punti.push(map.latLngToContainerPoint(v.getLatLng()));
-      });
-      evidenzaGroup.eachLayer(function(mk) {
-        var ev = mk._evInfo; if (!ev) return;
-        var p = map.latLngToContainerPoint(mk.getLatLng());
-        var vicino = null, dmin = Infinity;
-        punti.forEach(function(q) { var d = p.distanceTo(q); if (d < dmin) { dmin = d; vicino = q; } });
-        var dx = 0;
-        if (vicino && dmin < SOGLIA_EVIDENZA) {
-          dx = vicino.x <= p.x ? DX_EVIDENZA : -DX_EVIDENZA;
-          // Mai fuori dallo schermo: se non c'e' spazio da un lato, si va dall'altro.
-          if (p.x + dx > cont.clientWidth - 30 || p.x + dx < 30) dx = -dx;
-        }
-        if ((mk._dxEv || 0) !== dx) {
-          mk._dxEv = dx;
-          mk.setIcon(creaIcona(ev.categoria, false, true, dx));
-        }
-      });
-    }, 60);
-  }
-  map.on('zoomend moveend', riposizionaEvidenza_);
-  clusterGroup.on('animationend', riposizionaEvidenza_);
 
   // true solo se TUTTE le fonti sono state lette senza errori: solo allora e'
   // sicuro togliere dai preferiti gli eventi che non esistono piu'.
@@ -2616,7 +2578,6 @@
 
   function renderMappa(eventi) {
     clusterGroup.clearLayers();
-    evidenzaGroup.clearLayers();
     Object.keys(markersById).forEach(function(k) { delete markersById[k]; });
     var nuoviMarker = [];
     eventi.forEach(function(ev) {
@@ -2645,14 +2606,13 @@
         // Forza il ridisegno del marker nel cluster: su mobile, dopo il tap, a volte
         // il marker sparisce visivamente finche' non si muove la mappa. Questo
         // refresh esplicito evita che l'utente debba muovere la mappa per vederlo di nuovo.
-        if (!ev.inEvidenza && clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
+        if (clusterGroup.refreshClusters) clusterGroup.refreshClusters(marker);
       });
       marker._evInfo = ev;
-      if (ev.inEvidenza) evidenzaGroup.addLayer(marker); else nuoviMarker.push(marker);
+      nuoviMarker.push(marker);
       markersById[ev.id] = marker;
     });
     clusterGroup.addLayers(nuoviMarker);
-    riposizionaEvidenza_();
   }
 
   function evidenziaMarker(id, on) {
@@ -2661,7 +2621,7 @@
     var marker = markersById[id];
     if (marker) {
       var ev = tuttiEventi.find(function(e) { return e.id === id; });
-      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza, marker._dxEv || 0));
+      if (ev) marker.setIcon(creaIcona(ev.categoria, on, ev.inEvidenza));
     }
   }
   function evidenziaCard(id) {
@@ -3097,7 +3057,7 @@
     } else {
       lista.classList.add('nascosto'); mapWrap.classList.remove('nascosto');
       btnMappa.classList.add('attivo'); btnLista.classList.remove('attivo');
-      setTimeout(function() { map.invalidateSize(); riposizionaEvidenza_(); }, 100);
+      setTimeout(function() { map.invalidateSize(); }, 100);
     }
     aggiornaNavAttiva();
   }
@@ -3611,4 +3571,3 @@
 </script>
 </body>
 </html>
-
