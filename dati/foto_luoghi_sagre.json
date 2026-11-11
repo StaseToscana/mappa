@@ -228,5 +228,20 @@
   "licenzaUrl": "",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lajatico_teatro_del_silenzio.jpg",
   "verificato": "2026-11-10"
+ },
+ "piazza garibaldi|santa croce sull arno": {
+  "luogo": "Piazza Garibaldi",
+  "assente": true,
+  "verificato": "2026-11-11"
+ },
+ "piazza dei miracoli|pisa": {
+  "luogo": "Piazza dei Miracoli",
+  "file": "piazza-dei-miracoli-1rlp6h4.jpg",
+  "titolo": "Piazza dei Miracoli",
+  "autore": "Arne Müseler",
+  "licenza": "CC BY-SA 3.0 de",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower_of_Pisa.jpg",
+  "verificato": "2026-11-11"
  }
 }

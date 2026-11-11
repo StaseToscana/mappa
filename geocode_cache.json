@@ -170,6 +170,7 @@
   10.3971804
  ],
  "Orto e Museo Botanico, Via Ghini, Pisa": null,
+ "Padule di Bientina, Bosco Tanali, Bientina": null,
  "Palazzo Blu, Lungarno Gambacorti, Pisa": [
   43.7156502,
   10.3997452
@@ -204,6 +205,10 @@
   43.5274541,
   10.6176107
  ],
+ "Piazza Garibaldi, Santa Croce sull'Arno": [
+  43.7098866,
+  10.7811294
+ ],
  "Piazza Martiri della Libertà, Bientina": [
   43.7117997,
   10.6200781
@@ -211,6 +216,10 @@
  "Piazza dei Cavalieri, Pisa": [
   43.7194618,
   10.4000909
+ ],
+ "Piazza dei Miracoli, Pisa": [
+  43.7230859,
+  10.395321
  ],
  "Piazza dei Priori, Volterra": [
   43.4020813,
@@ -302,6 +311,7 @@
   43.400337,
   10.860019
  ],
+ "campo sportivo Bientina, Via Leonardo da Vinci, Bientina": null,
  "salina locatelli, via delle moie vecchie, Volterra": null,
  "santuario di Maria Madre della Divina Grazia, Piazza Santa Chiara, Montopoli in Val d'Arno": null,
  "viale delle cascine, viale delle Cascine, Pisa": null
