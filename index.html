@@ -879,9 +879,10 @@
       .gruppo-evidenza .badge-vt { top: 6px; right: 44px; left: auto; bottom: auto; }
 
       .evid-carosello { position: relative; }
+      .evid-blocco + .evid-blocco { margin-top: 10px; }
       .evid-contatore {
-        display: inline-block; margin-left: auto; font-size: 0.72rem; font-weight: 800; letter-spacing: 0;
-        color: #8a5a00; background: rgba(232,163,61,0.22); padding: 2px 9px; border-radius: 10px;
+        display: inline-block; margin-left: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0;
+        color: #8a5a00; background: rgba(232,163,61,0.22); padding: 2px 9px; border-radius: 10px; white-space: nowrap;
       }
       .evid-freccia {
         display: flex; align-items: center; justify-content: center;
@@ -2238,29 +2239,55 @@
     // cronologico e chiaramente etichettata come contenuto sponsorizzato.
     // Gli stessi eventi restano ANCHE nella loro posizione cronologica
     // sotto, cosi' chi cerca per data li trova comunque al posto giusto. =====
-    var MAX_EVIDENZA_LISTA = 6;
-    var eventiEvidenza = eventi.filter(function(e) { return e.inEvidenza; }).slice(0, MAX_EVIDENZA_LISTA);
-    if (eventiEvidenza.length > 0) {
+    var MAX_EVIDENZA_LISTA = 6;   // eventi diversi mostrati
+    var MAX_DATE_EVIDENZA = 10;   // date mostrate per ogni evento
+    // Stesso evento (titolo + comune) con piu' date = un solo carosello con le sue date.
+    // Eventi diversi = uno sotto l'altro, in ordine cronologico, come la lista normale.
+    var blocchiEv = [], blocchiPerChiave = {};
+    eventi.forEach(function(e) {
+      if (!e.inEvidenza) return;
+      var chiaveEv = String(e.nome || '').toLowerCase().replace(/\s+/g, ' ').trim() + '|' + String(e.comune || '').toLowerCase().trim();
+      var bl = blocchiPerChiave[chiaveEv];
+      if (!bl) { bl = blocchiPerChiave[chiaveEv] = []; blocchiEv.push(bl); }
+      if (bl.length < MAX_DATE_EVIDENZA) bl.push(e);
+    });
+    blocchiEv.forEach(function(bl) {
+      bl.sort(function(x, y) { return (parseData(x.dataSort) || 0) - (parseData(y.dataSort) || 0); });
+    });
+    blocchiEv.sort(function(x, y) { return (parseData(x[0].dataSort) || 0) - (parseData(y[0].dataSort) || 0); });
+    blocchiEv = blocchiEv.slice(0, MAX_EVIDENZA_LISTA);
+    timersEvid_.forEach(function(t) { clearInterval(t); });
+    timersEvid_ = [];
+    if (blocchiEv.length > 0) {
       var sezioneEvidenza = document.createElement('div');
       sezioneEvidenza.className = 'gruppo-data gruppo-evidenza';
       var headerEv = document.createElement('div');
       headerEv.className = 'gruppo-data-header';
       headerEv.innerHTML = '<span class="giorno-nome">⭐ In evidenza</span> <span class="etichetta-sponsorizzato">Contenuto sponsorizzato</span>';
       sezioneEvidenza.appendChild(headerEv);
-      var gridEv = document.createElement('div');
-      gridEv.className = 'eventi-grid';
-      eventiEvidenza.forEach(function(ev) {
-        gridEv.appendChild(creaCardEvento(ev, { etichettaSponsor: true, senzaHoverMappa: true }));
+      var primoCarosello = true;
+      blocchiEv.forEach(function(bl) {
+        var gridEv = document.createElement('div');
+        gridEv.className = 'eventi-grid';
+        bl.forEach(function(ev) {
+          gridEv.appendChild(creaCardEvento(ev, { etichettaSponsor: true, senzaHoverMappa: true }));
+        });
+        var blocco = document.createElement('div');
+        blocco.className = 'evid-blocco';
+        if (bl.length > 1) {
+          var carosello = document.createElement('div');
+          carosello.className = 'evid-carosello';
+          carosello.appendChild(gridEv);
+          blocco.appendChild(carosello);
+          sezioneEvidenza.appendChild(blocco);
+          // Scorrimento automatico solo sul primo carosello: piu' carosello insieme sarebbero troppo movimento.
+          costruisciControlliEvidenza_(carosello, gridEv, primoCarosello);
+          primoCarosello = false;
+        } else {
+          blocco.appendChild(gridEv);
+          sezioneEvidenza.appendChild(blocco);
+        }
       });
-      if (eventiEvidenza.length > 1) {
-        var carosello = document.createElement('div');
-        carosello.className = 'evid-carosello';
-        carosello.appendChild(gridEv);
-        sezioneEvidenza.appendChild(carosello);
-        costruisciControlliEvidenza_(headerEv, carosello, gridEv);
-      } else {
-        sezioneEvidenza.appendChild(gridEv);
-      }
       cont.appendChild(sezioneEvidenza);
     }
 
@@ -2298,19 +2325,14 @@
     posizionaBannerInLista(bannerEl);
   }
 
-  // ===== Carosello "In evidenza" (mobile): contatore, frecce, puntini e avanzamento automatico =====
-  // Lo swipe da solo non si scopre: qui si vede subito che ce ne sono altri (1 / 3), si puo'
-  // toccare freccia o puntino, e finche' non si tocca nulla scorre da solo ogni 6 secondi.
-  var timerEvid_ = null;
-  function costruisciControlliEvidenza_(header, carosello, grid) {
-    clearInterval(timerEvid_);
+  // ===== Carosello delle date di UN evento in evidenza (mobile): frecce, puntini, contatore =====
+  // Lo swipe da solo non si scopre: qui si vede subito che ci sono altre date (1 / 3 date), si puo'
+  // toccare freccia o puntino e, sul primo carosello, scorre da solo ogni 6 secondi finche' non si tocca nulla.
+  var timersEvid_ = [];
+  function costruisciControlliEvidenza_(carosello, grid, autoplay) {
     var cards = Array.prototype.slice.call(grid.children);
     var n = cards.length;
     if (n < 2) return;
-
-    var contatore = document.createElement('span');
-    contatore.className = 'evid-contatore';
-    header.appendChild(contatore);
 
     function freccia(classe, etichetta, path) {
       var b = document.createElement('button');
@@ -2320,8 +2342,8 @@
       b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="' + path + '" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       return b;
     }
-    var prev = freccia('evid-prev', 'Evento in evidenza precedente', 'M15 5l-7 7 7 7');
-    var next = freccia('evid-next', 'Evento in evidenza successivo', 'M9 5l7 7-7 7');
+    var prev = freccia('evid-prev', 'Data precedente', 'M15 5l-7 7 7 7');
+    var next = freccia('evid-next', 'Data successiva', 'M9 5l7 7-7 7');
     carosello.appendChild(prev);
     carosello.appendChild(next);
 
@@ -2331,11 +2353,14 @@
       var d = document.createElement('button');
       d.type = 'button';
       d.className = 'evid-dot';
-      d.setAttribute('aria-label', 'Vai all\'evento in evidenza ' + (i + 1) + ' di ' + n);
+      d.setAttribute('aria-label', 'Vai alla data ' + (i + 1) + ' di ' + n);
       d.addEventListener('click', function() { vai(i); });
       dots.appendChild(d);
       return d;
     });
+    var contatore = document.createElement('span');
+    contatore.className = 'evid-contatore';
+    dots.appendChild(contatore);
     carosello.appendChild(dots);
 
     function indiceCorrente() {
@@ -2348,7 +2373,7 @@
     }
     function aggiorna() {
       var i = indiceCorrente();
-      contatore.textContent = (i + 1) + ' / ' + n;
+      contatore.textContent = (i + 1) + ' / ' + n + ' date';
       puntini.forEach(function(d, k) { d.classList.toggle('attivo', k === i); });
       prev.disabled = i === 0;
       next.disabled = i === n - 1;
@@ -2363,13 +2388,8 @@
     grid.addEventListener('scroll', aggiorna, { passive: true });
     aggiorna();
 
-    // Avanzamento automatico: si ferma per sempre appena l'utente tocca il carosello.
-    if (motionRidotto()) return;
-    function ferma() { clearInterval(timerEvid_); }
-    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function(ev) {
-      carosello.addEventListener(ev, ferma, { passive: true });
-    });
-    timerEvid_ = setInterval(function() {
+    if (!autoplay || motionRidotto()) return;
+    var timer = setInterval(function() {
       if (!document.body.contains(grid)) { ferma(); return; }
       if (document.visibilityState !== 'visible' || grid.offsetParent === null) return;
       var r = grid.getBoundingClientRect();
@@ -2377,6 +2397,11 @@
       if (getComputedStyle(grid).overflowX === 'visible') return; // layout desktop: nessun carosello
       vai(indiceCorrente() === n - 1 ? 0 : indiceCorrente() + 1);
     }, 6000);
+    timersEvid_.push(timer);
+    function ferma() { clearInterval(timer); }
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function(evn) {
+      carosello.addEventListener(evn, ferma, { passive: true });
+    });
   }
 
   // ===== Lista progressiva =====
