@@ -693,5 +693,20 @@
   "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "paginaUrl": "https://commons.wikimedia.org/wiki/File:Piazza_della_signoria%2C_palazzo_vecchio%2C_veduta_01.jpg",
   "verificato": "2026-11-11"
+ },
+ "cattedrale di santa maria del fiore|firenze": {
+  "luogo": "Cattedrale di Santa Maria del Fiore",
+  "assente": true,
+  "verificato": "2026-11-12"
+ },
+ "the social hub|firenze": {
+  "luogo": "The Social Hub",
+  "assente": true,
+  "verificato": "2026-11-12"
+ },
+ "teatro affratellamento|firenze": {
+  "luogo": "Teatro Affratellamento",
+  "assente": true,
+  "verificato": "2026-11-12"
  }
 }
