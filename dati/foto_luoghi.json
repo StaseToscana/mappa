@@ -412,7 +412,7 @@
  "mad murate art district|firenze": {
   "luogo": "MAD Murate Art District",
   "assente": true,
-  "verificato": "2026-10-14"
+  "verificato": "2026-11-13"
  },
  "piazza del duomo|firenze": {
   "luogo": "Piazza del Duomo",
@@ -708,5 +708,20 @@
   "luogo": "Teatro Affratellamento",
   "assente": true,
   "verificato": "2026-11-12"
+ },
+ "tum spazio fluido artigiano|firenze": {
+  "luogo": "TUM - spazio fluido artigiano",
+  "assente": true,
+  "verificato": "2026-11-13"
+ },
+ "palagio di parte guelfa|firenze": {
+  "luogo": "Palagio di Parte Guelfa",
+  "file": "palagio-di-parte-guelfa-zpr2vk.jpg",
+  "titolo": "Piazza di Parte Guelfa",
+  "autore": "Swedish National Heritage Board from Sweden",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palazzo_dei_Capitani_di_Parte_Guelfa%2C_Florence%2C_Italy_(7751562754).jpg",
+  "verificato": "2026-11-13"
  }
 }
