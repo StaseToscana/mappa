@@ -11,9 +11,17 @@
   43.725799,
   10.5152807
  ],
+ "@comune:Capannoli": [
+  43.5867314,
+  10.6744566
+ ],
  "@comune:Casciana Terme Lari": [
   43.5521588,
   10.5942065
+ ],
+ "@comune:Cascina": [
+  43.6766738,
+  10.5492244
  ],
  "@comune:Chianni": [
   43.4613075,
@@ -161,6 +169,8 @@
   43.2657137,
   10.9575816
  ],
+ "Montione Badia, Via Tosco Romagnola, Cascina": null,
+ "Musei Villa Baciocchi, Via del Castello, Capannoli": null,
  "Museo Kienerk, Piazza Trento e Trieste, Fauglia": null,
  "Museo Nazionale San Matteo, Piazza San Matteo in Soarta, Pisa": [
   43.7147201,

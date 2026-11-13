@@ -203,5 +203,15 @@
   "comune": "Montescudaio",
   "assente": true,
   "verificato": "2026-11-10"
+ },
+ "capannoli": {
+  "comune": "Capannoli",
+  "file": "paese-capannoli-hh00bh.jpg",
+  "titolo": "Capannoli",
+  "autore": "Mongolo1984",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Veduta_di_Capannoli_01.jpg",
+  "verificato": "2026-11-13"
  }
 }
