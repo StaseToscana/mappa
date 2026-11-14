@@ -92,6 +92,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/29-giugno-villa-di-corliano-san-giuliano-terme/": {
+  "email": "info@corliano.it",
+  "fine": "2026-06-29",
+  "hash": "9a9b989d0e045904c4dfc291dd4de763f0736115",
+  "inizio": "2026-06-29",
+  "lastmod": "2026-01-26T15:54:49+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Villa di Corliano, via Statale Abetone 110, Rigoli, San Giuliano Terme",
+  "orario": "18:00–23:00",
+  "periodi": [
+   [
+    "2026-06-29",
+    "2026-06-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3496811415",
+  "titolo": "Festa di SS Pietro e Paolo alla Villa di Corliano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/40esima-sagra-della-castagna/": {
   "email": "",
   "fine": "2026-10-18",
@@ -111,6 +132,27 @@
   "telefono": "",
   "titolo": "Sagra della Castagna | Calci",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/52762/": {
+  "email": "comunicazione@comune.vicopisano.pi.it",
+  "fine": "2026-02-14",
+  "hash": "5afe50abb3af8707955034103485de54e29559f6",
+  "inizio": "2026-02-14",
+  "lastmod": "2026-02-12T12:38:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Cavalca, Vicopisano",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-02-14",
+    "2026-02-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "“San Valentino, la via dell’amore” a Vicopisano",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/56033-festival-musical-teatrale-a-capannoli/": {
@@ -721,6 +763,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/aria-di-natale-castelfranco-di-sotto/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "6b0a97870397fa95040118402eaba3ea5b082a1b",
+  "inizio": "2026-01-06",
+  "lastmod": "2025-12-29T20:28:36+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Castelfranco di Sotto, Corso Remo Bertoncini, Castelfranco di Sotto",
+  "orario": "16:00–18:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale e presepe vivente a Castelfranco di Sotto",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/art-natura-teatro-fra-naturale-e-artificiale/": {
   "email": "",
   "fine": "2026-10-25",
@@ -1064,6 +1127,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/beeriver-pisa/": {
+  "email": "",
+  "fine": "2025-09-28",
+  "hash": "ae661563b1a2e6c76639defcb76ddfe6d7c410ef",
+  "inizio": "2025-09-26",
+  "lastmod": "2025-09-19T19:09:43+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Stazione Leopolda, Piazza Guerrazzi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-09-26",
+    "2025-09-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "331.4663757",
+  "titolo": "Leopolda in Birra | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/beeriver-primavera-pisa/": {
   "email": "info@leopolda.it",
   "fine": "2026-06-13",
@@ -1085,6 +1169,69 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/befana-a-ripafratta/": {
+  "email": "",
+  "fine": "2026-01-05",
+  "hash": "7759c32755fcc2cba7ae1940f2d33a55c47a5eac",
+  "inizio": "2026-01-05",
+  "lastmod": "2025-12-03T10:03:36+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Villa Danielli Stefanini, Via Statale Abetone, 344, Ripafratta",
+  "orario": "17:00–19:00",
+  "periodi": [
+   [
+    "2026-01-05",
+    "2026-01-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Befana a Ripafratta",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/befana-a-treggiaia-e-pontedera/": {
+  "email": "info@visitvaldera.eu",
+  "fine": "2026-01-05",
+  "hash": "c802a6b8897b174e26aba56650375f04c4cb6cc8",
+  "inizio": "2026-01-05",
+  "lastmod": "2025-12-30T07:27:34+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Monti, Treggiaia",
+  "orario": "17:00–23:45",
+  "periodi": [
+   [
+    "2026-01-05",
+    "2026-01-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Le Befane a Pontedera e Treggiaia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/benedizione-degli-animali-al-parco-di-san-rossore/": {
+  "email": "",
+  "fine": "2026-01-25",
+  "hash": "095c1f9b34568b63ca95e141d025e65600099f71",
+  "inizio": "2026-01-25",
+  "lastmod": "2026-01-26T07:30:59+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Tenuta di San Rossore, Località Cascine Vecchie, Pisa",
+  "orario": "09:30–13:00",
+  "periodi": [
+   [
+    "2026-01-25",
+    "2026-01-25"
+   ]
+  ],
+  "sito": "",
+  "telefono": "338-3662431",
+  "titolo": "Benedizione degli animali al Parco di San Rossore",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/benedizione-degli-animali-montopoli-in-valdarno/": {
   "fine": "2026-01-18",
   "hash": "b5afa4d317fc0341e732213ec9088bc3d3450165",
@@ -1099,6 +1246,27 @@
    ]
   ],
   "titolo": "Benedizione degli animali | Montopoli in Valdarno",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/benedizione-degli-animali-per-s-antonio-abate-san-miniato/": {
+  "email": "ufficio.turismo@sanminiatopromozione.it",
+  "fine": "2026-01-18",
+  "hash": "b29d7daed96786acda91d0209d573cb8d3acc0de",
+  "inizio": "2026-01-18",
+  "lastmod": "2025-12-31T09:06:59+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "10:30–13:30",
+  "periodi": [
+   [
+    "2026-01-18",
+    "2026-01-18"
+   ]
+  ],
+  "sito": "https://sanminiatopromozione.it/evento/benedizione-degli-animali-2/",
+  "telefono": "057142745",
+  "titolo": "Benedizione degli animali per S. Antonio Abate | San Miniato",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/bicentenario-di-pinocchio-a-pontedera/": {
@@ -1122,6 +1290,27 @@
   "v": 4,
   "verifica": true
  },
+ "https://www.terredipisa.it/events/biennale-di-architettura-di-pisa/": {
+  "email": "",
+  "fine": "2025-11-16",
+  "hash": "05f2ffbb184c24bec72d238d5ea0bb22238106eb",
+  "inizio": "2025-11-03",
+  "lastmod": "2025-11-02T17:28:39+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Cittadella Galileiana, Via Bonanno Pisano, 2, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-11-03",
+    "2025-11-16"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 541830",
+  "titolo": "Biennale di architettura di Pisa",
+  "v": 4,
+  "verifica": true
+ },
  "https://www.terredipisa.it/events/bioblitz-monte-pisano/": {
   "email": "",
   "fine": "2026-05-23",
@@ -1140,6 +1329,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "BIoblitz Monte Pisano: settimana della biodiversità",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/birra-casciana-terme/": {
+  "email": "",
+  "fine": "2026-07-05",
+  "hash": "ff9d62cbec57112ef2024dd5917855885e22a8a5",
+  "inizio": "2026-07-03",
+  "lastmod": "2026-02-24T11:08:12+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Garibaldi, Casciana Terme",
+  "orario": "18:00–00:30",
+  "periodi": [
+   [
+    "2026-07-03",
+    "2026-07-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.687511",
+  "titolo": "Festa della Birra – Beer Week | Casciana Terme",
   "v": 4,
   "verifica": false
  },
@@ -1590,6 +1800,174 @@
   "titolo": "Halloween a Cascina",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/carnevale-a-casciana-terme-e-perignano/": {
+  "email": "",
+  "fine": "2026-02-01",
+  "hash": "87c68a6eabaef42b160c2f4ef29b2269503e98ce",
+  "inizio": "2026-02-01",
+  "lastmod": "2026-01-21T08:24:07+00:00",
+  "letta": "2026-11-14",
+  "luogo": "",
+  "orario": "14:30–17:30",
+  "periodi": [
+   [
+    "2026-02-01",
+    "2026-02-01"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.646258",
+  "titolo": "Carnevale a Perignano",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-al-sistema-museale-di-ateneo-delluniversita-di-pisa/": {
+  "email": "",
+  "fine": "2026-02-15",
+  "hash": "e961b1006844da78f75d98d3be4dd3e573271068",
+  "inizio": "2026-02-14",
+  "lastmod": "2026-02-09T10:09:45+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Sistema Museale di Ateneo, Pisa, varie location, Pisa",
+  "orario": "15:30–16:30",
+  "periodi": [
+   [
+    "2026-02-14",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale al Sistema Museale di Ateneo dell’Università di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-bambini-cascina/": {
+  "email": "prolococascina@gmail.com",
+  "fine": "2026-02-17",
+  "hash": "60c25105715db3f88cc73a8b46c29487e54a4cef",
+  "inizio": "2026-02-17",
+  "lastmod": "2026-02-17T09:45:20+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico, Corso Matteotti, Cascina",
+  "orario": "15:00–18:00",
+  "periodi": [
+   [
+    "2026-02-17",
+    "2026-02-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale dei Bambini | Cascina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-bambini-di-san-miniato-basso/": {
+  "email": "carnevalebambinismb@gmail.com",
+  "fine": "2026-02-15",
+  "hash": "482edcb7e1f42277c62c7b038ba83aca94e34dd2",
+  "inizio": "2026-02-15",
+  "lastmod": "2026-02-09T10:13:08+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Via Tosco Romagnola, San Miniato Basso",
+  "orario": "15:00–18:00",
+  "periodi": [
+   [
+    "2026-02-15",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale dei bambini | San Miniato Basso",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-bientinese-bientina/": {
+  "email": "info@carnevalebientinese.it",
+  "fine": "2026-02-17",
+  "hash": "82ae93817b72d01a7693ecc621d1f1526d42d61b",
+  "inizio": "2026-02-17",
+  "lastmod": "2026-02-16T14:13:31+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Bientina, Piazza Martiri della Libertà, Bientina",
+  "orario": "15:00–18:00",
+  "periodi": [
+   [
+    "2026-02-17",
+    "2026-02-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "333.6996091",
+  "titolo": "Carnevale Bientinese | Bientina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-calci/": {
+  "email": "comitatocarnevalecalci@gmail.com",
+  "fine": "2026-02-15",
+  "hash": "7e651a9bcd5a1efdeabf25375d110fa84db86c98",
+  "inizio": "2026-02-15",
+  "lastmod": "2026-01-02T11:59:37+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Calci, Piazza Garibaldi, Calci",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2026-02-15",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale di Calci",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-dei-bambini-orentano/": {
+  "email": "carnevaleorentano@gmail.com",
+  "fine": "2026-02-17",
+  "hash": "ba158127d748c564f4f74a20c25b4301c184d073",
+  "inizio": "2026-02-17",
+  "lastmod": "2026-02-16T14:11:46+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Orentano, Orentano",
+  "orario": "14:30–20:00",
+  "periodi": [
+   [
+    "2026-02-17",
+    "2026-02-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0583.23462",
+  "titolo": "Carnevale dei Bambini di Orentano | Castelfranco di Sotto",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-del-litorale-pisa/": {
+  "email": "",
+  "fine": "2026-02-22",
+  "hash": "bedb49f447bfc5954fb2a8435d24403f72872c84",
+  "inizio": "2026-02-22",
+  "lastmod": "2026-02-23T12:51:20+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Marina di Pisa, Piazza Sardegna, Marina di Pisa",
+  "orario": "15:00–18:30",
+  "periodi": [
+   [
+    "2026-02-22",
+    "2026-02-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale Invernale del Litorale | Marina di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/carnevale-di-buti/": {
   "email": "prolocobuti@gmail.com",
   "fine": "2026-02-17",
@@ -1608,6 +1986,69 @@
   "sito": "",
   "telefono": "",
   "titolo": "Carnevale di Buti",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-di-vicopisano/": {
+  "email": "",
+  "fine": "2026-02-22",
+  "hash": "beffcc7ffd8f929d9e4066d2623733a16bcd4060",
+  "inizio": "2026-02-17",
+  "lastmod": "2026-02-16T14:12:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Cavalca, Vicopisano",
+  "orario": "14:30–17:30",
+  "periodi": [
+   [
+    "2026-02-17",
+    "2026-02-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale di Vicopisano",
+  "v": 4,
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/carnevale-pontedera/": {
+  "email": "",
+  "fine": "2026-02-17",
+  "hash": "3e67a4439ba790f4f20450af4d463fa7adc092d3",
+  "inizio": "2026-02-17",
+  "lastmod": "2026-02-17T09:46:18+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico, Viale Italia, Pontedera",
+  "orario": "15:00–19:00",
+  "periodi": [
+   [
+    "2026-02-17",
+    "2026-02-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale dei bambini a Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/carnevale-sanromanese-montopoli-in-val-darno/": {
+  "email": "carnevalesanromanese@alice.it",
+  "fine": "2026-02-15",
+  "hash": "3d5446f517bcf6b41fc1decc541f8159e5df2d1b",
+  "inizio": "2026-02-15",
+  "lastmod": "2026-02-09T10:10:07+00:00",
+  "letta": "2026-11-14",
+  "luogo": "San Romano, Via Tosco Romagnola, San Romano",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-02-15",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Carnevale Sanromanese | Montopoli Val d’Arno",
   "v": 4,
   "verifica": false
  },
@@ -1632,6 +2073,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/carnevale-vecchianese-vecchiano/": {
+  "email": "",
+  "fine": "2026-02-15",
+  "hash": "8700c03852c1197be839dc2d0314ea643c0142eb",
+  "inizio": "2026-02-15",
+  "lastmod": "2026-02-09T10:12:23+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Vecchiano, centro, piazze e luoghi limitrofi, Vecchiano",
+  "orario": "15:00–19:00",
+  "periodi": [
+   [
+    "2026-02-15",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.859611",
+  "titolo": "Carnevale Vecchianese | Vecchiano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/caseifici-aperti/": {
   "email": "comunicazione@caseificiobusti.it",
   "fine": "2026-05-30",
@@ -1650,6 +2112,27 @@
   "sito": "",
   "telefono": "349 6057457",
   "titolo": "Caseifici aperti | Terre di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/caseifici-open-day-terre-di-pisa/": {
+  "email": "",
+  "fine": "2025-09-28",
+  "hash": "19ae490cbc2b69699779007550a8dfb38524bdf6",
+  "inizio": "2025-09-27",
+  "lastmod": "2025-09-03T20:19:14+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Fattoria Lischeto, SP Monte Volterrano, Volterra",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-09-27",
+    "2025-09-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588.30403",
+  "titolo": "Caseifici Open Day | Terre di Pisa",
   "v": 4,
   "verifica": false
  },
@@ -2137,6 +2620,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/chrismam-wine-santa-maria-a-monte/": {
+  "email": "",
+  "fine": "2025-10-26",
+  "hash": "3d90d5b5f853efb5a3348949ca97b543f328923f",
+  "inizio": "2025-10-26",
+  "lastmod": "2025-11-02T17:50:37+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-10-26",
+    "2025-10-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "339.1693322",
+  "titolo": "Calici e cioccolato | Santa Maria a Monte",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/cimitero-ebraico-sinagoga-pisa/": {
   "email": "sinagoga.pisa@coopculture.it",
   "fine": "2027-03-31",
@@ -2150,6 +2654,27 @@
   "sito": "https://www.coopculture.it/it/poi/sinagoga-e-cimitero-ebraico-di-pisa/",
   "telefono": "06.39967138",
   "titolo": "Visite a Cimitero Ebraico e Sinagoga Ebraica di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cioccolove-festival-del-cioccolato-pisa/": {
+  "email": "",
+  "fine": "2026-02-22",
+  "hash": "5469a3a2e8150f86b13977e0c4d1f193d084b221",
+  "inizio": "2026-02-20",
+  "lastmod": "2026-02-20T07:44:46+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Logge di Banchi, Corso Italia, Pisa",
+  "orario": "09:00–20:00",
+  "periodi": [
+   [
+    "2026-02-20",
+    "2026-02-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3333405845",
+  "titolo": "Ciocco Love, Festival del cioccolato | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -2334,6 +2859,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Concerto di Capodanno al Teatro Verdi di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/concerto-di-natale-a-peccioli/": {
+  "email": "info@fondarte.peccioli.net",
+  "fine": "2026-03-31",
+  "hash": "1323900ba1f209ff6488347776415c5c66c8abe8",
+  "inizio": "2026-03-31",
+  "lastmod": "2026-02-17T09:06:30+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Galleria dei Giganti, Via cavour, 3, Peccioli",
+  "orario": "21:00–22:30",
+  "periodi": [
+   [
+    "2026-03-31",
+    "2026-03-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 672158",
+  "titolo": "Concerti alla Galleria dei Giganti di Peccioli",
   "v": 4,
   "verifica": false
  },
@@ -2913,6 +3459,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/effetto-trippa-volterra/": {
+  "email": "arcisgiusto@gmail.com",
+  "fine": "2026-05-01",
+  "hash": "334f8105c3f31c3815c70b7d29f799f3cc10e34c",
+  "inizio": "2026-05-01",
+  "lastmod": "2025-11-24T10:20:45+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "08:00–20:00",
+  "periodi": [
+   [
+    "2026-05-01",
+    "2026-05-01"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588 324315",
+  "titolo": "Primo Maggio: Effetto trippa a Volterra",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/el-dia-de-los-muertos-halloween-a-terricciola/": {
   "email": "",
   "fine": "2026-10-31",
@@ -2933,6 +3500,27 @@
   "titolo": "El dia de los Muertos – Halloween a Terricciola",
   "v": 3,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/equilibrium-signorini-pisa/": {
+  "email": "",
+  "fine": "2025-08-31",
+  "hash": "0643baa4cb9187c7c1e94666dc30af2b4349bed8",
+  "inizio": "2025-08-20",
+  "lastmod": "2025-08-20T05:18:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza dei Miracoli, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-08-20",
+    "2025-08-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Equilibrium: le opere di Signorini in Piazza dei Miracoli",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/escape-giants-caccia-al-tesoro-nel-triangolo-verde-di-legoli/": {
   "email": "prenotazioni@belvedere.peccioli.net",
@@ -3840,6 +4428,27 @@
   "v": 3,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/eurocarnevale-a-pisa/": {
+  "email": "",
+  "fine": "2026-01-23",
+  "hash": "53c8c0bd432862f273c3c4ab3f235f2986523589",
+  "inizio": "2026-01-23",
+  "lastmod": "2026-01-18T12:09:30+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza dei Cavalieri, Pisa",
+  "orario": "14:00–18:00",
+  "periodi": [
+   [
+    "2026-01-23",
+    "2026-01-23"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Eurocarnevale a Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/eventi-a-casa-concia-san-miniato/": {
   "email": "info@pellealvegetale.it",
   "fine": "2026-11-14",
@@ -4197,6 +4806,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festa-dei-camminanti-vicopisano/": {
+  "email": "",
+  "fine": "2026-03-29",
+  "hash": "81f3a6c6dc6fe630a0f2e114add2b138ee362c97",
+  "inizio": "2026-03-27",
+  "lastmod": "2026-03-02T07:39:19+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Vicopisano, centro, piazze e luoghi limitrofi, Vicopisano",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-03-27",
+    "2026-03-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa dei camminanti sul Monte Pisano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-dei-commercianti-bientina/": {
   "email": "ilovebientina@gmail.com",
   "fine": "2026-06-19",
@@ -4299,6 +4929,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Festa del Castellare a San Giovanni alla Vena | Vicopisano",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festa-del-cioccolato-cascina/": {
+  "email": "",
+  "fine": "2026-03-15",
+  "hash": "0c24c58f711dcaff085ac86a86118eb08fab044f",
+  "inizio": "2026-03-15",
+  "lastmod": "2026-03-15T00:00:36+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Cascina, Corso Matteotti, Cascina",
+  "orario": "09:00–19:00",
+  "periodi": [
+   [
+    "2026-03-15",
+    "2026-03-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa del cioccolato e delle dolci delizie | Cascina",
   "v": 4,
   "verifica": false
  },
@@ -5065,6 +5716,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festa-san-ranieri-pisa/": {
+  "email": "",
+  "fine": "2026-06-17",
+  "hash": "dba666b5460373f45f37044975ed96d5bf8e5f22",
+  "inizio": "2026-06-17",
+  "lastmod": "2026-01-12T08:55:52+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza dei Miracoli, Pisa",
+  "orario": "08:00–20:00",
+  "periodi": [
+   [
+    "2026-06-17",
+    "2026-06-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.565522",
+  "titolo": "Celebrazioni di San Ranieri | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-santo-pietro-belvedere/": {
   "email": "paliodelruzzolo@gmail.com",
   "fine": "2026-09-07",
@@ -5354,6 +6026,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festival-ecofor-fiabe-pontedera/": {
+  "email": "",
+  "fine": "2026-02-08",
+  "hash": "698313028b24687a36d75e9f789fb1365d7c1ffb",
+  "inizio": "2026-02-04",
+  "lastmod": "2026-02-04T09:23:18+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro Pontedera, Corso Matteotti, Pontedera",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-28",
+    "2026-02-08"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festival “Ecofor Fiabe” – Pontedera",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festival-estate-san-martino/": {
   "fine": "2026-11-01",
   "hash": "265280e6b1ccbd0d6a02231113d64ac4b08b15cd",
@@ -5451,6 +6144,27 @@
   "sito": "",
   "telefono": "347.8509620 – 347",
   "titolo": "Festival Musicale Internazionale “Fanny Mendelssohn”",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festival-lets-castelfranco-di-sotto/": {
+  "email": "ass.ediati@gmail.com",
+  "fine": "2026-07-11",
+  "hash": "1dce7d04038eb67259218a613e1013a1dfc124a6",
+  "inizio": "2026-07-10",
+  "lastmod": "2026-03-06T07:51:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Castelfranco di Sotto, Corso Remo Bertoncini, Castelfranco di Sotto",
+  "orario": "19:00–23:59",
+  "periodi": [
+   [
+    "2026-07-10",
+    "2026-07-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3382119882",
+  "titolo": "Let’s Festival | Castelfranco di Sotto",
   "v": 4,
   "verifica": false
  },
@@ -6000,6 +6714,27 @@
   "v": 3,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/food-fest-festival-pisa/": {
+  "email": "",
+  "fine": "2025-09-07",
+  "hash": "bf1db8ae0d632bed3539e46dff2c8be6e6fc5d33",
+  "inizio": "2025-09-05",
+  "lastmod": "2025-08-17T12:01:46+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Viale delle Piagge, Pisa",
+  "orario": "12:00–23:30",
+  "periodi": [
+   [
+    "2025-09-05",
+    "2025-09-07"
+   ]
+  ],
+  "sito": "https://www.alteregofiere.com/fest-food-festival/",
+  "telefono": "3334317972",
+  "titolo": "Fest Food Festival | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/fumetti-e-popcorn-pisa/": {
   "email": "",
   "fine": "2026-11-12",
@@ -6081,6 +6816,27 @@
   "sito": "",
   "telefono": "3270681432",
   "titolo": "Lajatico Trophy 2026",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/gamicon-videogames-festival-pisa/": {
+  "email": "",
+  "fine": "2026-04-26",
+  "hash": "5bd89fb19eda4dcf934f8f7543a73518f8912a80",
+  "inizio": "2026-04-25",
+  "lastmod": "2026-03-03T14:06:07+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Stazione Leopolda, Piazza Guerrazzi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-04-25",
+    "2026-04-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Gamicon Videogames Festival | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -6683,6 +7439,27 @@
   "v": 3,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/giubileo-san-miniato/": {
+  "email": "diocesi@diocesisanminiato.it",
+  "fine": "2025-12-28",
+  "hash": "bb393cfe5c861a386bcd8cd9e2cad454e1bac4a4",
+  "inizio": "2025-12-28",
+  "lastmod": "2025-12-26T12:07:22+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-12-28",
+    "2025-12-28"
+   ]
+  ],
+  "sito": "http://sanminiato.chiesacattolica.it/la-diocesi-di-san-miniato/anno-giubilare-nel-iv-centenario-della-diocesi/",
+  "telefono": "0571 418071",
+  "titolo": "Anno Santo della Diocesi di San Miniato",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/giugno-battaglia-san-romano/": {
   "fine": "2026-09-30",
   "hash": "07b348123d5a0e72d4091fa76e974cb5585bcafa",
@@ -6739,6 +7516,27 @@
   "telefono": "",
   "titolo": "Goal Festival | Pisa",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/gospel-in-certosa-calci/": {
+  "email": "",
+  "fine": "2025-12-14",
+  "hash": "0d9364a7871e5f84498cd0790476e70b00f4ec65",
+  "inizio": "2025-12-14",
+  "lastmod": "2025-12-11T13:48:50+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Certosa di Pisa, Via Roma, Calci",
+  "orario": "15:30–19:00",
+  "periodi": [
+   [
+    "2025-12-14",
+    "2025-12-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale e concerto Gospel alla Certosa di Calci",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/gran-gala-lirica-casciana-terme/": {
@@ -6822,6 +7620,27 @@
   "sito": "",
   "telefono": "3291866459",
   "titolo": "Cascina Street Food",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/gusto-locale-pisa/": {
+  "email": "",
+  "fine": "2024-11-29",
+  "hash": "a1cb686c049524e96f101754669bb6ac26530ae0",
+  "inizio": "2024-11-15",
+  "lastmod": "2025-11-07T09:20:59+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Perignano, centro, piazze e luoghi limitrofi, Casciana Terme",
+  "orario": "20:00–22:30",
+  "periodi": [
+   [
+    "2024-11-15",
+    "2024-11-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Gusto Locale | Perignano",
   "v": 4,
   "verifica": false
  },
@@ -7125,6 +7944,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/il-natale-e-nellaria-a-castelnuovo-val-di-cecina/": {
+  "email": "utc@comune.castelnuovo.pi.it",
+  "fine": "2026-01-06",
+  "hash": "0266d7f406ebb88ea5df3a30d7c232173a927a4f",
+  "inizio": "2026-01-01",
+  "lastmod": "2025-12-31T09:23:28+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Sala Polifunzionale La Pista, Via Antonio Gramsci, 4, Castelnuovo Val di Cecina",
+  "orario": "21:15–22:45",
+  "periodi": [
+   [
+    "2026-01-01",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588 20775",
+  "titolo": "Natale a Castelnuovo Val di Cecina",
+  "v": 4,
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/il-presepio-che-cresce-di-nicosia-calci/": {
+  "email": "brunabattaglini@gmail.com",
+  "fine": "2026-01-06",
+  "hash": "b549c6c1e50b4c2a9c607079ef9acf28159cdb8d",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-05T19:37:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Convento di Nicosia, Nicosia, Calci",
+  "orario": "15:00–18:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "340.7316041",
+  "titolo": "Il presepe che cresce | Calci, Convento di Nicosia",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/imago-in-villa-castelnuovo-val-di-cecina/": {
   "email": "",
   "fine": "2026-08-19",
@@ -7229,6 +8090,27 @@
   "titolo": "Internet Festival | Pisa",
   "v": 3,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/invito-palazzo/": {
+  "email": "cultura@abi.it",
+  "fine": "2025-10-17",
+  "hash": "997073c6c6af87c61c4cd08ee69710cf1537af39",
+  "inizio": "2025-10-13",
+  "lastmod": "2025-10-07T13:36:58+00:00",
+  "letta": "2026-11-14",
+  "luogo": "",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-10-13",
+    "2025-10-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Invito a Palazzo | Terre di Pisa",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/io-vado-a-orciano-pisano/": {
   "email": "",
@@ -7661,6 +8543,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/le-giornate-di-galileo-pisa/": {
+  "email": "",
+  "fine": "2026-02-16",
+  "hash": "97ebfddd5cc2cc6b7d0e02afe3ae36c28b5e1c58",
+  "inizio": "2026-02-16",
+  "lastmod": "2026-02-16T13:48:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-02-16",
+    "2026-02-16"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Le Giornate di Galileo | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/le-notti-dellarcheologia-2026-pisa-citta-della-scienza-e-lorigine-del-cosmo/": {
   "ko": true,
   "lastmod": "2026-07-13T11:44:42+00:00",
@@ -7721,6 +8624,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "“Libri in libertà – Dentro le storie” a Cascina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/libri-lungo-le-mura-cascina/": {
+  "email": "",
+  "fine": "2025-12-06",
+  "hash": "fb9be0d5bbb58be8b0bf9e05c016064c7abca023",
+  "inizio": "2025-12-06",
+  "lastmod": "2025-11-28T09:17:25+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Cascina, Corso Matteotti, Cascina",
+  "orario": "18:30–20:00",
+  "periodi": [
+   [
+    "2025-12-06",
+    "2025-12-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.719111",
+  "titolo": "Libri lungo le Mura – Festival della Lettura | Cascina",
   "v": 4,
   "verifica": false
  },
@@ -7805,6 +8729,27 @@
   "sito": "https://visitcascianatermelari.it/",
   "telefono": "0587.646258",
   "titolo": "Estate a Casciana Terme e Lari",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/luminara-assunta-santa-maria-a-monte/": {
+  "email": "",
+  "fine": "2026-08-14",
+  "hash": "13a497f9166bb925fe2d179f116425bb982a9cf0",
+  "inizio": "2026-08-14",
+  "lastmod": "2026-02-03T13:59:48+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-08-14",
+    "2026-08-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Processione e Luminara dell’Assunta | Santa Maria a Monte",
   "v": 4,
   "verifica": false
  },
@@ -8291,6 +9236,69 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mercatino-di-natale-a-montecatini-val-di-cecina/": {
+  "email": "prolocomontecatinivc@gmail.com",
+  "fine": "2025-12-31",
+  "hash": "515d4d59793dbe58527e5dadd6fcd61739705512",
+  "inizio": "2025-12-31",
+  "lastmod": "2025-12-24T10:45:54+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Castello Ginori di Querceto, Via del Borgo, Ponteginori",
+  "orario": "19:00–23:45",
+  "periodi": [
+   [
+    "2025-12-31",
+    "2025-12-31"
+   ]
+  ],
+  "sito": "https://volterratur.it/evento/?idevent=94478",
+  "telefono": "366 3378359",
+  "titolo": "Natale a Montecatini Val di Cecina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mercatino-di-natale-nel-parco-di-san-rossore/": {
+  "email": "",
+  "fine": "2025-12-07",
+  "hash": "e430b02a0fb6415fd809658f25b96cb4f4a50839",
+  "inizio": "2025-12-07",
+  "lastmod": "2025-12-07T11:10:10+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Tenuta di San Rossore, Località Cascine Vecchie, Pisa",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2025-12-07",
+    "2025-12-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.530101",
+  "titolo": "Mercatino di Natale nel Parco di San Rossore",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mercatino-di-pasquetta-a-calci/": {
+  "email": "",
+  "fine": "2026-04-06",
+  "hash": "2873545950cf9028324a8df102ba14fa40bdd9da",
+  "inizio": "2026-04-06",
+  "lastmod": "2026-02-03T10:40:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Certosa di Pisa, Via Roma, Calci",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2026-04-06",
+    "2026-04-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mercatino di Pasquetta  | Calci",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mercatino-natale-artigianato-calci/": {
   "email": "",
   "fine": "2026-11-29",
@@ -8330,6 +9338,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Mercato Europeo a Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mercato-europeo-a-pontedera/": {
+  "email": "",
+  "fine": "2025-10-12",
+  "hash": "e4f075555f21c70d52990fa61153a662393dc5f7",
+  "inizio": "2025-10-09",
+  "lastmod": "2025-10-03T19:55:40+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Garibaldi, Pontedera",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-10-09",
+    "2025-10-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mercato Europeo a Pontedera",
   "v": 4,
   "verifica": false
  },
@@ -8568,6 +9597,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-alla-torre-guelfa-il-novecento-di-catarsini/": {
+  "email": "info@fondazionecatarsini.com",
+  "fine": "2025-09-26",
+  "hash": "5f5dba835e674e7c59b9ac21b88cc470408a1263",
+  "inizio": "2025-09-14",
+  "lastmod": "2025-09-13T14:12:00+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Parco della Cittadella, Via Nicola Pisano, 8, Pisa",
+  "orario": "09:00–19:00",
+  "periodi": [
+   [
+    "2025-09-14",
+    "2025-09-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "342 1684031",
+  "titolo": "Mostra alla Torre Guelfa: Il Novecento di Catarsini",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-autunnale-edward-hopper-a-palazzo-blu-pisa/": {
   "email": "info@palazzoblu.it",
   "fine": "2027-03-07",
@@ -8684,6 +9734,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-di-presepi-al-museo-delle-attivita-agricole-usigliano-di-lari/": {
+  "email": "",
+  "fine": "2026-01-22",
+  "hash": "9c062a0294083554869c359e4c2cc84c9bf76083",
+  "inizio": "2026-01-22",
+  "lastmod": "2026-01-18T11:45:13+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Usigliano di Lari, Via della Cella, 4B, Usigliano di Lari",
+  "orario": "21:15–22:30",
+  "periodi": [
+   [
+    "2026-01-22",
+    "2026-01-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "335 5920686",
+  "titolo": "Visite guidate e in notturna al Museo del Presepe delle Attività Agricole | Usigliano di Lari",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-dietro-i-simboli-bandiere-dallislam-e-storie-dal-mare-nella-toscana-medicea-pisa/": {
+  "email": "",
+  "fine": "2025-09-21",
+  "hash": "08b149d4d758992730642ae5d0e915db5881edc8",
+  "inizio": "2025-09-14",
+  "lastmod": "2025-09-16T15:17:02+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Duomo, Pisa",
+  "orario": "09:00–20:00",
+  "periodi": [
+   [
+    "2025-09-14",
+    "2025-09-21"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Dietro i simboli: bandiere dall’Islam e storie dal mare nella Toscana medicea” | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-dinosauri-al-museo-di-storia-naturale-di-calci/": {
   "email": "info@msn.unipi.it",
   "fine": "2026-08-31",
@@ -8705,6 +9797,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-disco-pisa/": {
+  "email": "ganzoeventiculturali@gmail.com",
+  "fine": "2026-01-18",
+  "hash": "0930801f63319ee13192579b15916813b910fbd0",
+  "inizio": "2026-01-17",
+  "lastmod": "2026-01-07T07:56:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Hotel Galilei, Via darsena, 1, Pisa",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2026-01-17",
+    "2026-01-18"
+   ]
+  ],
+  "sito": "https://www.ganzoeventiculturali.it/eventi/",
+  "telefono": "327.4521785",
+  "titolo": "Mostra del Disco 33/45/Mix, CD e Dvd usato e da collezione | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-fashion-sport-tourism-al-museo-della-grafica-di-pisa/": {
+  "email": "museodellagrafica@adm.unipi.it",
+  "fine": "2024-01-28",
+  "hash": "1a65543c1050832461a3649381a1b9a3b20a86ce",
+  "inizio": "2024-01-16",
+  "lastmod": "2026-01-09T09:55:58+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, 9, Pisa",
+  "orario": "10:00–20:00",
+  "periodi": [
+   [
+    "2024-01-16",
+    "2024-01-28"
+   ]
+  ],
+  "sito": "https://museodellagrafica.sma.unipi.it",
+  "telefono": "050 2216060",
+  "titolo": "Mostra Fashion, Sport, Tourism al Museo della Grafica di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-fratello-sole-sorella-luna-costumi-per-un-capolavoro-al-museo-della-grafica-pisa/": {
   "email": "",
   "fine": "2026-05-03",
@@ -8723,6 +9857,48 @@
   "sito": "",
   "telefono": "",
   "titolo": "Mostra “Fratello sole, sorella luna. Costumi per un capolavoro” al Museo della Grafica | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-giovanni-pisano-memoria-di-uno-scultore/": {
+  "email": "info@opapisa.it",
+  "fine": "2026-03-08",
+  "hash": "153d81ad1e27d67f2c0a427d846c3b06a412442d",
+  "inizio": "2026-03-08",
+  "lastmod": "2026-03-08T01:46:39+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Duomo, Pisa",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2026-03-08",
+    "2026-03-08"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Giovanni Pisano: memoria di uno scultore”",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-giovanni-pisano-visite-guidate-gratuite-per-residenti-della-provincia-e-studenti-nel-gennaio-2026/": {
+  "email": "info@opapisa.it",
+  "fine": "2026-02-27",
+  "hash": "ef101786b620b13cc220267baa28a787e54f0551",
+  "inizio": "2026-02-27",
+  "lastmod": "2026-02-23T12:32:08+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza Duomo, Pisa",
+  "orario": "19:00–22:00",
+  "periodi": [
+   [
+    "2026-02-27",
+    "2026-02-27"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Giovanni Pisano”: Visite Guidate Gratuite per Residenti in provincia di Pisa e Studenti",
   "v": 4,
   "verifica": false
  },
@@ -8873,6 +10049,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-ludoteca-scientifica-pisa/": {
+  "email": "ludotecascientifica@gmail.com",
+  "fine": "2025-05-31",
+  "hash": "fcaa213a6561cb6d43c5bc02179f5d1e850f9d0d",
+  "inizio": "2025-05-31",
+  "lastmod": "2025-08-01T18:08:44+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Cittadella Galileiana, Via Bonanno Pisano, 2, Pisa",
+  "orario": "20:00–22:00",
+  "periodi": [
+   [
+    "2025-05-31",
+    "2025-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "320.0403946",
+  "titolo": "Alla Ludoteca Scientifica le Serate astronomiche | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-mazzini-domus-mazziniana-pisa/": {
   "email": "info@domusmazziniana.it",
   "fine": "2026-11-30",
@@ -8934,6 +10131,27 @@
   "telefono": "",
   "titolo": "Mostra mercato del tartufo di Forcoli",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-mercato-del-tartufo-marzuolo-cigoli-san-miniato/": {
+  "email": "",
+  "fine": "2026-03-22",
+  "hash": "36c1dedf9e7800cb07d3a23b2a2487216faa64b0",
+  "inizio": "2026-03-21",
+  "lastmod": "2026-03-15T18:12:51+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Santuario Madre dei Bimbi, Via di Cigoli, Cigoli",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-03-21",
+    "2026-03-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3334565544",
+  "titolo": "Mostra mercato del tartufo marzuolo| Cigoli, San Miniato",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/mostra-mercato-nazionale-del-tartufo-bianco-san-miniato/": {
@@ -9020,6 +10238,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-oggi-sono-il-mare-in-vacanza-con-la-vespa-al-museo-piaggio-pontedera/": {
+  "email": "museo@museopiaggio.it",
+  "fine": "2025-11-09",
+  "hash": "592f6952e663ef30eee9e15461a0c7a39bb22485",
+  "inizio": "2025-11-04",
+  "lastmod": "2025-11-02T17:12:49+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2025-11-04",
+    "2025-11-09"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 27171",
+  "titolo": "Mostra “Oggi sono il mare. In vacanza con la Vespa” al Museo Piaggio | Pontedera",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-oltre-7-000-metri-di-storia-le-mura-etrusche-di-volterra/": {
   "email": "animadivolterra@operalaboratori.com",
   "fine": "2026-09-30",
@@ -9083,6 +10322,69 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-palazzo-grifoni-san-miniatonminiato/": {
+  "email": "segreteria@fondazionecrsm.it",
+  "fine": "2025-11-30",
+  "hash": "c0e52b0b552817a464b00a320cd4359f63ab10e8",
+  "inizio": "2025-11-28",
+  "lastmod": "2025-11-24T12:45:33+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Grifoni, Piazza Grifoni, 12, San Miniato",
+  "orario": "15:00–19:00",
+  "periodi": [
+   [
+    "2025-11-28",
+    "2025-11-30"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571 546790",
+  "titolo": "Mostra Macchiaioli a Palazzo Grifoni | San Miniato",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-palazzo-priori-volterra/": {
+  "email": "info@volterratur.it",
+  "fine": "2025-10-15",
+  "hash": "0e9ebb9343af8d2628e10e7730768aa6ee9401de",
+  "inizio": "2025-10-09",
+  "lastmod": "2025-10-05T19:46:15+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo dei Priori, Piazza dei Priori, Volterra",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2025-10-09",
+    "2025-10-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588.86099",
+  "titolo": "Mostra “Mino Trafeli” a Palazzo dei Priori | Volterra",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-passa-il-giro-immagini-e-storie-di-biciclette-al-museo-di-grafica-pisa/": {
+  "email": "",
+  "fine": "2025-09-30",
+  "hash": "b88c4396ee2409fe5a9e6c212bfdaae852e58c9d",
+  "inizio": "2025-09-13",
+  "lastmod": "2025-09-13T14:08:12+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, 9, Pisa",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2025-09-13",
+    "2025-09-30"
+   ]
+  ],
+  "sito": "https://museodellagrafica.sma.unipi.it/",
+  "telefono": "050 2216060",
+  "titolo": "Mostra “Passa il Giro. Immagini e storie di biciclette” al Museo di Grafica | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-pietro-bacola-paesaggi-di-vita-a-palazzo-blu-pisa/": {
   "email": "info@palazzoblu.it",
   "fine": "2026-11-08",
@@ -9102,6 +10404,27 @@
   "telefono": "050 916950",
   "titolo": "Mostra “Pietro Macola: paesaggi di vita” a Palazzo Blu | Pisa",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-pinocchio-e-i-carabinieri-al-palp-di-pontedera/": {
+  "email": "info.fondazionepontedera@gmail.com",
+  "fine": "2026-03-15",
+  "hash": "538ad0222f79f4bd44e8c7745f44a7146b39fe10",
+  "inizio": "2026-03-13",
+  "lastmod": "2026-03-13T07:44:53+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Pretorio, Piazza Curtatone, 1, Pontedera",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2026-03-13",
+    "2026-03-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Pinocchio e i Carabinieri” al PALP di Pontedera",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/mostra-prigionieri-a-palazzo-toniolo-pisa/": {
@@ -9278,6 +10601,48 @@
   "titolo": "Mostra ” Tra le pagine: una passeggiata tra i libri di Beatrice Alemagna” al PALP di Pontedera",
   "verifica": true
  },
+ "https://www.terredipisa.it/events/mostra-tuono-pettinato-al-bastione-del-parlascio-pisa/": {
+  "email": "",
+  "fine": "2026-01-18",
+  "hash": "efbd6a8af3171439d74c094b5972bde8ce7d9380",
+  "inizio": "2026-01-14",
+  "lastmod": "2026-01-13T15:55:13+00:00",
+  "letta": "2026-11-14",
+  "luogo": "via della Chiesa, Parlascio, Parlascio",
+  "orario": "10:00–17:00",
+  "periodi": [
+   [
+    "2026-01-14",
+    "2026-01-18"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Tuono Pettinato” al Bastione del Parlascio | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-viaggi-dipinti-di-marina-romiti-al-museo-piaggio/": {
+  "email": "museo@museopiaggio.it",
+  "fine": "2026-03-22",
+  "hash": "6fa1d4d89d6fb210122047ce6a4bac3d2653d490",
+  "inizio": "2026-03-18",
+  "lastmod": "2026-03-15T09:25:06+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2026-03-18",
+    "2026-03-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 27171",
+  "titolo": "Mostra “Viaggi Dipinti” di Marina Romiti al Museo Piaggio",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra/": {
   "email": "lbarletta@comune.cascina.pi.it",
   "fine": "2026-03-30",
@@ -9296,6 +10661,27 @@
   "sito": "",
   "telefono": "050. 179252",
   "titolo": "Arte dentro e fuori le Mura | Cascina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostre-al-museo-della-grafica-sergej-tchoban-tower-pisa/": {
+  "email": "museodellagrafica@adm.unipi.it",
+  "fine": "2025-09-07",
+  "hash": "95a28353a0c09c14611b207638537c16d45234ea",
+  "inizio": "2025-09-07",
+  "lastmod": "2025-09-03T12:25:20+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, 9, Pisa",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2025-09-07",
+    "2025-09-07"
+   ]
+  ],
+  "sito": "http://museodellagrafica.sma.unipi.it",
+  "telefono": "",
+  "titolo": "Raccolti e racconti: Museo della Grafica | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -9378,6 +10764,22 @@
   "v": 3,
   "verifica": true
  },
+ "https://www.terredipisa.it/events/mostre-vicopisano/": {
+  "email": "",
+  "fine": "2022-08-18",
+  "hash": "721227adada1a822c8d7d3977ac883c5d48b4488",
+  "inizio": "2022-06-24",
+  "lastmod": "2026-02-06T18:07:39+00:00",
+  "letta": "2026-11-14",
+  "luogo": "",
+  "orario": "21:00",
+  "periodi": [],
+  "sito": "",
+  "telefono": "338.9984304",
+  "titolo": "Mostra “Septem cellae secretae,” nelle Carceri di Palazzo Pretorio | Vicopisano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostre-villa-pacchiani-santa-croce-sull-arno/": {
   "email": "s.bucci@comune.santacroce.pi",
   "fine": "2026-10-18",
@@ -9441,6 +10843,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mura-in-art-arte-e-intelligenza-artificiale-pisa/": {
+  "email": "",
+  "fine": "2025-08-17",
+  "hash": "8a149936bddc375c48a5e712132967161f277abb",
+  "inizio": "2025-08-14",
+  "lastmod": "2025-08-13T17:18:28+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Mura di Pisa, Piazza dei Miracoli, , Pisa",
+  "orario": "10:00–17:00",
+  "periodi": [
+   [
+    "2025-08-14",
+    "2025-08-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.0987480",
+  "titolo": "Mostre di arte al Bastione del Parlascio | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mura-vino-a-pisa/": {
   "email": "",
   "fine": "2026-05-16",
@@ -9501,6 +10924,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Coi nonni al Museo delle Navi Antiche",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/musei-santa-maria-a-monte/": {
+  "email": "musei@comune.santamariaamonte.pi.it",
+  "fine": "2026-01-06",
+  "hash": "72a77ba9a7bbaba69652509bfcc8cea380ddb236",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-04T06:30:46+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "15:00–19:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "http://www.valdarnomusei.it",
+  "telefono": "333.3495168",
+  "titolo": "Natale e Befana a Santa Maria a Monte",
   "v": 4,
   "verifica": false
  },
@@ -9666,6 +11110,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-a-bientina/": {
+  "email": "info@prolocobientina.it",
+  "fine": "2027-01-06",
+  "hash": "87232582feef1856ca2494808f199ddd089db9bd",
+  "inizio": "2026-12-08",
+  "lastmod": "2026-11-13T13:00:27+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Bientina, Piazza Martiri della Libertà, Bientina",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-12-08",
+    "2027-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "329.4785357",
+  "titolo": "Alla ricerca di presepi: Natale a Bientina",
+  "v": 4,
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/natale-a-buti/": {
+  "email": "",
+  "fine": "2026-01-05",
+  "hash": "da22f4c6b22baff0ad7f3e4ec47c5b4938f380e7",
+  "inizio": "2026-01-05",
+  "lastmod": "2026-01-04T06:34:20+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Buti, Piazza Garibaldi, Buti",
+  "orario": "17:30–21:00",
+  "periodi": [
+   [
+    "2026-01-05",
+    "2026-01-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale e Befana a Buti",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-a-capannoli/": {
   "email": "",
   "fine": "2026-12-13",
@@ -9684,6 +11170,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Natale a Capannoli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-a-cascina/": {
+  "email": "",
+  "fine": "2026-01-11",
+  "hash": "07ef001646399a11d7d91bc97c159628a39f283a",
+  "inizio": "2026-01-11",
+  "lastmod": "2026-01-07T08:00:10+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Cascina, centro storico Cascina, Cascina",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-11",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale e Befana a Cascina",
   "v": 4,
   "verifica": false
  },
@@ -9707,6 +11214,48 @@
   "titolo": "Natale a Crespina e Lorenzana",
   "v": 4,
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/natale-a-lajatico/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "defcfeb58cc85279c89055cd7af4dc04ed0fd25e",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-05T19:35:39+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Lajatico, Piazza Vittorio Veneto, Lajatico",
+  "orario": "15:30–19:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Lajatico",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-a-monteverdi-e-canneto/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "106039064f97b19d7a3e9fa3285c959060ca5255",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-05T19:52:33+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Canneto, Via De Larderel, Monteverdi Marittimo",
+  "orario": "19:30–22:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "http://www.comunemonteverdimarittimo.net/",
+  "telefono": "0565.785132",
+  "titolo": "Natale a Canneto",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/natale-a-montopoli-in-valdarno/": {
   "email": "IAT@COMUNE.MONTOPOLI.PI.IT",
@@ -9783,6 +11332,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-a-ponsacco/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "0660afe4524fbeb15d4327ff4dec93d09b63fbc5",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-05T19:43:13+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Piazza della Repubblica, Ponsacco",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Ponsacco",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-a-santa-croce-sullarno/": {
   "email": "info@prolocosantacroce.it",
   "fine": "2026-11-24",
@@ -9825,6 +11395,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-casale-marittimo/": {
+  "email": "",
+  "fine": "2025-12-14",
+  "hash": "b39b1b6ed45c19883eb777a114773582384f1e28",
+  "inizio": "2025-12-14",
+  "lastmod": "2025-12-13T18:10:44+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Montescudaio, centro storico, Montescudaio",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-12-14",
+    "2025-12-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale in Collina: Casale Marittimo, Guardistallo e Montescudaio",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-dolce-e-salato-a-casciana-terme-e-lari/": {
   "email": "",
   "fine": "2026-11-29",
@@ -9843,6 +11434,69 @@
   "sito": "https://visitcascianatermelari.it",
   "telefono": "0587.687511",
   "titolo": "Scopri Lari e Casciana Terme a Natale",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-e-befana-a-fauglia/": {
+  "email": "",
+  "fine": "2025-12-14",
+  "hash": "7e7f02ce059dd74015cb9e1df7817305ae7a917a",
+  "inizio": "2025-12-14",
+  "lastmod": "2025-11-21T09:00:26+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Teatro Comunale di Fauglia, Piazza Trento e Trieste, 1, Fauglia",
+  "orario": "15:00–18:30",
+  "periodi": [
+   [
+    "2025-12-14",
+    "2025-12-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Fauglia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-e-capodanno-a-volterra/": {
+  "email": "",
+  "fine": "2026-01-11",
+  "hash": "50d1d52aa0e06db3ed4c9070a27c151ff2184c74",
+  "inizio": "2026-01-11",
+  "lastmod": "2026-01-07T08:07:37+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "12:00–19:00",
+  "periodi": [
+   [
+    "2026-01-11",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Volterra",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-gospel-a-chianni/": {
+  "email": "prolocochianni@gmail.com",
+  "fine": "2025-12-13",
+  "hash": "fbbfa5ec7b90e4cd4779396a416f646b5edde994",
+  "inizio": "2025-12-13",
+  "lastmod": "2025-11-22T15:07:02+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Chianni, Piazza del Castello, Chianni",
+  "orario": "21:30–23:00",
+  "periodi": [
+   [
+    "2025-12-13",
+    "2025-12-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale Gospel a Chianni",
   "v": 4,
   "verifica": false
  },
@@ -9867,6 +11521,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-palaia/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "8114cd0e917239af0af6ba6310ac61de6a45c36c",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-08T16:01:50+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Palaia, centro storico, Palaia",
+  "orario": "14:30–18:30",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 621437",
+  "titolo": "Natale e presepi a Palaia",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-pontedera/": {
   "email": "",
   "fine": "2027-01-10",
@@ -9880,6 +11555,90 @@
   "sito": "",
   "telefono": "",
   "titolo": "Natale in Opera a Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-ripabella/": {
+  "email": "proloco.riparbella@gmail.com",
+  "fine": "2027-01-10",
+  "hash": "48c1456f5d63e79b1c8ef79fe3c5e568cbf4bd3f",
+  "inizio": "2026-12-26",
+  "lastmod": "2026-02-23T15:39:42+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Riparbella, centro storico, Riparbella",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-12-26",
+    "2027-01-10"
+   ]
+  ],
+  "sito": "http://prolocoriparbella.it/",
+  "telefono": "339 4797179",
+  "titolo": "Natale e Arte dei presepi a Riparbella",
+  "v": 4,
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/natale-san-miniato-basso/": {
+  "email": "",
+  "fine": "2025-12-31",
+  "hash": "5adee4ec51671d2da5fc510a1a823026a591e37b",
+  "inizio": "2025-12-31",
+  "lastmod": "2025-12-25T20:00:29+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Via Tosco Romagnola, San Miniato Basso",
+  "orario": "22:30–23:45",
+  "periodi": [
+   [
+    "2025-12-31",
+    "2025-12-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571.42745",
+  "titolo": "Natale a San Miniato",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-teatro-guardistallo/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "c35f28351d4720c03163e3f73783010d5e807152",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-04T06:51:06+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Guardistallo, Piazza del Castello, Guardistallo",
+  "orario": "10:00–21:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0586.651511",
+  "titolo": "Presepiando a Guardistallo",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/nativity-tuscany-a-san-miniato/": {
+  "email": "",
+  "fine": "2026-01-18",
+  "hash": "f920dba86bca694c9d68db45eaed152438eaa20f",
+  "inizio": "2026-01-17",
+  "lastmod": "2026-01-13T15:47:57+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2026-01-17",
+    "2026-01-18"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571.42745",
+  "titolo": "Nativity Tuscany: il presepe toscano a San Miniato",
   "v": 4,
   "verifica": false
  },
@@ -10709,6 +12468,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/pasqualando-la-pasqua-pedalando-ponte-a-egola/": {
+  "email": "",
+  "fine": "2026-04-05",
+  "hash": "9effae2648d68de086a7662c86ba1a641185892d",
+  "inizio": "2026-04-04",
+  "lastmod": "2026-02-16T16:15:27+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Ponte a Egola, Piazza Guido Rossa, Ponte a Egola",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-04-04",
+    "2026-04-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pasqualando … la Pasqua pedalando | Ponte a Egola",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/passeggiate-accompagnate-nel-centro-storico-di-montopoli-in-valdarno/": {
   "fine": "2026-08-31",
   "hash": "6621d62ea472e01e024abd3621c251a226b2feb6",
@@ -10914,6 +12694,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/percorso-di-halloween-ai-musei-del-sistema-museale-di-ateneo-pisa/": {
+  "email": "info@sma.unipi.it",
+  "fine": "2026-01-05",
+  "hash": "6aaba5c356c06d0f4d037f3051c3a704a66186eb",
+  "inizio": "2026-01-05",
+  "lastmod": "2026-01-02T11:22:26+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "15:00–17:00",
+  "periodi": [
+   [
+    "2026-01-05",
+    "2026-01-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale ai Musei del Sistema Museale di Ateneo | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/pianeta-ripa/": {
   "email": "proloco.riparbella@gmail.com",
   "fine": "2026-04-26",
@@ -10932,6 +12733,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Pianeta Ripa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/pinocchio-ciok-san-miniato-basso/": {
+  "email": "",
+  "fine": "2026-03-22",
+  "hash": "e6cfcd70ee8f9985a074942a0e8c38c67b8b8010",
+  "inizio": "2026-03-22",
+  "lastmod": "2026-03-05T09:33:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Circolo ARCI, Via Tosco Romagnola, San Miniato Basso",
+  "orario": "10:00–20:00",
+  "periodi": [
+   [
+    "2026-03-22",
+    "2026-03-22"
+   ]
+  ],
+  "sito": "http://www.sanminiatopromozione.it",
+  "telefono": "0571.42745",
+  "titolo": "Pinocchio Ciock | San Miniato Basso",
   "v": 4,
   "verifica": false
  },
@@ -11147,6 +12969,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Pisa Folk Festival",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/pisa-gospel-festival/": {
+  "email": "",
+  "fine": "2025-12-18",
+  "hash": "e0ff848403c95c4b0916af84f8f0da324a90bf31",
+  "inizio": "2025-12-18",
+  "lastmod": "2025-12-17T10:28:21+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Teatro di Pisa, Via Palestro, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2025-12-18",
+    "2025-12-18"
+   ]
+  ],
+  "sito": "http://www.voicesofheaven.it/events/",
+  "telefono": "344 1674920",
+  "titolo": "Pisa Gospel Festival",
   "v": 4,
   "verifica": false
  },
@@ -11501,6 +13344,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/presepe-animato-riparbella/": {
+  "email": "",
+  "fine": "2026-02-02",
+  "hash": "756cc004b46ad8bce460255f7a466e41fb5aae17",
+  "inizio": "2026-01-31",
+  "lastmod": "2026-01-28T11:47:35+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Riparbella, centro storico, Riparbella",
+  "orario": "09:00–20:00",
+  "periodi": [
+   [
+    "2026-01-31",
+    "2026-02-02"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Presepe animato di Riparbella",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/presepe-artistico-di-cigoli-san-miniato/": {
   "email": "andrea@ferreri3.it",
   "fine": "2027-01-10",
@@ -11519,6 +13383,27 @@
   "sito": "",
   "telefono": "347 2634642",
   "titolo": "Presepe artistico di Cigoli | San Miniato",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepe-artistico-di-ponte-a-egola-san-miniato/": {
+  "email": "",
+  "fine": "2026-01-11",
+  "hash": "5484bd1e6ff9c7e0b6d82895b1b12037c3b03329",
+  "inizio": "2026-01-08",
+  "lastmod": "2026-01-08T10:06:17+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Ponte a Egola, Piazza Guido Rossa, Ponte a Egola",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-08",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571.42745",
+  "titolo": "Presepe monumentale in cuoio nel bottale a Ponte a Egola | San Miniato",
   "v": 4,
   "verifica": false
  },
@@ -11572,6 +13457,69 @@
   "sito": "",
   "telefono": "",
   "titolo": "I Presepi dell’Angelo | San Giovanni alla Vena",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepe-di-calcinaia/": {
+  "email": "alessio.calcinaia1@gmail.com",
+  "fine": "2026-01-11",
+  "hash": "3ab055641c057324c3c5764b678ad55e72dd2d50",
+  "inizio": "2026-01-11",
+  "lastmod": "2026-01-07T08:03:26+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Calcinaia, Via Vittorio Emanuele, Calcinaia",
+  "orario": "10:30–19:30",
+  "periodi": [
+   [
+    "2026-01-11",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "333 5791517",
+  "titolo": "Presepe artistico di San Michele a Calcinaia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepe-di-legoli/": {
+  "email": "",
+  "fine": "2026-01-04",
+  "hash": "fd9067dd61ca3a99a9ecad8a3af8f497ae19d55f",
+  "inizio": "2026-01-04",
+  "lastmod": "2025-12-30T11:05:01+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Legoli, centro storico, Legoli",
+  "orario": "15:30–18:30",
+  "periodi": [
+   [
+    "2026-01-04",
+    "2026-01-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Presepe Vivente di Legoli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepe-di-massimo-brini-a-forcoli/": {
+  "email": "",
+  "fine": "2026-01-11",
+  "hash": "3173aee21d0110f433c59554ae83d6561d272741",
+  "inizio": "2026-01-09",
+  "lastmod": "2026-01-07T07:59:07+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Forcoli, Piazza Sant'Antonio, Forcoli",
+  "orario": "15:30–19:30",
+  "periodi": [
+   [
+    "2026-01-09",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Presepe di Massimo Brini a Forcoli",
   "v": 4,
   "verifica": false
  },
@@ -11659,6 +13607,48 @@
   "v": 3,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/presepe-vivente-nella-basilica-di-san-piero-a-grado-pisa/": {
+  "email": "",
+  "fine": "2025-12-27",
+  "hash": "9277de3244c4b44729d8cebbd5e3fdb8b11d33ea",
+  "inizio": "2025-12-26",
+  "lastmod": "2025-12-24T16:02:43+00:00",
+  "letta": "2026-11-14",
+  "luogo": "San Piero a Grado, Via Deodato Orlandi, Pisa",
+  "orario": "17:30–19:30",
+  "periodi": [
+   [
+    "2025-12-26",
+    "2025-12-27"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Presepe vivente nella Basilica di San Piero a Grado | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepi-sulla-via-angelica-san-miniato/": {
+  "email": "",
+  "fine": "2026-01-06",
+  "hash": "7780cb38d8193776c96b040b1032ab5621b21d61",
+  "inizio": "2026-01-04",
+  "lastmod": "2026-01-04T06:46:15+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-04",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "La Via dei Presepi a San Miniato",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/presepi-sulla-via-marti-montopoli-in-valdarno/": {
   "email": "assmartinfiera@gmail.com",
   "fine": "2026-11-29",
@@ -11677,6 +13667,27 @@
   "sito": "",
   "telefono": "338 3173798",
   "titolo": "Natale a Marti | Montopoli in Val d’Arno",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/presepiando-presepi-in-strada-pomarance/": {
+  "email": "atp.montegemoli@libero.it",
+  "fine": "2026-01-06",
+  "hash": "688b99106c5901866e4d9dfb70eb8aea4b4be083",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-05T19:34:13+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Montegemoli, Via di Montegemoli, Montegemoli",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "328 9364553",
+  "titolo": "Presepiando a Montegemoli | Pomarance",
   "v": 4,
   "verifica": false
  },
@@ -11780,6 +13791,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/profumi-ciliegia-lari/": {
+  "email": "",
+  "fine": "2026-04-12",
+  "hash": "ff46df3d71065fd8fbe47369b6895ed5fa9d40eb",
+  "inizio": "2026-04-12",
+  "lastmod": "2026-03-11T15:22:31+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Lari, centro, piazze e luoghi limitrofi, Lari",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-04-12",
+    "2026-04-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Profumi di Lari",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/programma-eventi-sistema-museale-montopoli-valdarno/": {
   "fine": "2026-10-31",
   "hash": "d4d5840bf6265f13e35b293725ed026dcd0d3123",
@@ -11794,6 +13826,27 @@
    ]
   ],
   "titolo": "Halloween al Museo Civico Guicciardini di Montopoli in Valdarno",
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/punto-arte-festival-volterra/": {
+  "email": "jeannette@puntoarte.nl",
+  "fine": "2026-07-09",
+  "hash": "e050a179d0edcd5d8e6f489738d6b36a28a5364b",
+  "inizio": "2026-07-06",
+  "lastmod": "2026-01-26T15:57:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-07-06",
+    "2026-07-09"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Punto Arte Festival | Volterra",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/quattro-passi-in-valdarno/": {
@@ -11856,6 +13909,27 @@
   "sito": "https://www.visitvaldera.eu/?fbclid=IwAR14WDsGiFddQDPFUI1voKbUKFS6QiI6Ac5ns-fijt43JfykOUjriigAQNM",
   "telefono": "388 7583081",
   "titolo": "Shopping sotto le stelle martedì e giovedì | Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/raccolta-turistica-delle-olive-al-podere-del-pari/": {
+  "email": "info@poderedelpari.it",
+  "fine": "2025-11-03",
+  "hash": "0f778d88cc9ea66115e8cf5e2189616ae1a6c050",
+  "inizio": "2025-11-03",
+  "lastmod": "2025-10-21T14:23:41+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Frantoio del Monte Pisano, Via Provinciale Vicarese, 28, Caprona",
+  "orario": "09:00–13:00",
+  "periodi": [
+   [
+    "2025-11-03",
+    "2025-11-03"
+   ]
+  ],
+  "sito": "",
+  "telefono": "+39 050 788079",
+  "titolo": "Raccolta turistica delle olive al Podere del Pari",
   "v": 4,
   "verifica": false
  },
@@ -11956,6 +14030,27 @@
   "sito": "http://www.randonneemtbdellavaldera.it",
   "telefono": "",
   "titolo": "Randonnée MTB della Valdera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/rassegna-del-benessere-a-terricciola/": {
+  "email": "",
+  "fine": "2026-04-18",
+  "hash": "6769ae6b0181fe527909a1bcc5aff18a1025b5f2",
+  "inizio": "2026-04-18",
+  "lastmod": "2026-03-15T00:02:13+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Terricciola, centro, piazze e luoghi limitrofi, Terricciola",
+  "orario": "15:30–17:30",
+  "periodi": [
+   [
+    "2026-04-18",
+    "2026-04-18"
+   ]
+  ],
+  "sito": "https://www.comune.terricciola.pi.it/novita/rassegna-del-benessere-primavera-estate-2025",
+  "telefono": "3473680974",
+  "titolo": "Rassegna del BenEssere a Terricciola",
   "v": 4,
   "verifica": false
  },
@@ -12224,6 +14319,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Riparbella Fiorita",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/riparbella-wine/": {
+  "email": "proloco.riparbella@gmail.com",
+  "fine": "2026-07-12",
+  "hash": "f490feb68118311600a450291b663c5e1ee2c779",
+  "inizio": "2026-07-10",
+  "lastmod": "2026-02-23T15:32:37+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Riparbella, centro storico, Riparbella",
+  "orario": "18:00–23:00",
+  "periodi": [
+   [
+    "2026-07-10",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Riparbella Wine",
   "v": 4,
   "verifica": false
  },
@@ -12530,6 +14646,69 @@
   "telefono": "",
   "titolo": "Fiera mercato del tartufo bianco di Corazzano",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagra-del-tartufo-marzuolo-castelfranco-di-sotto/": {
+  "email": "",
+  "fine": "2026-03-22",
+  "hash": "efb2a63ac720850762b9de11a9a8e76f817e3fb0",
+  "inizio": "2026-03-21",
+  "lastmod": "2026-03-15T18:19:09+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Via Fratelli Rosselli, 6, Castelfranco di Sotto",
+  "orario": "12:00–22:00",
+  "periodi": [
+   [
+    "2026-03-21",
+    "2026-03-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra del tartufo marzuolo e della cinta senese | Castelfranco di Sotto",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagra-del-tartufo-marzuolo-la-serra-di-san-miniato/": {
+  "email": "",
+  "fine": "2026-03-29",
+  "hash": "98d83fdb5015be3b9b286a5abb9eedaddb4fdab2",
+  "inizio": "2026-03-28",
+  "lastmod": "2026-02-16T16:01:28+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Circolo ARCI La Serra, Via XXIV maggio, 15, San Miniato",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-03-28",
+    "2026-03-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3391639542",
+  "titolo": "Sagra del tartufo marzuolo | La Serra di San Miniato",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagra-del-tartufo-marzuolo-ponte-a-egola/": {
+  "email": "",
+  "fine": "2026-04-12",
+  "hash": "43d3e0fba5d8b1a7b74080e954c114bc894ed68e",
+  "inizio": "2026-04-10",
+  "lastmod": "2026-03-10T15:50:14+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Circolo La Ruga, Via 1 Maggio, 200, Ponte a Egola",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-04-10",
+    "2026-04-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3514106312",
+  "titolo": "Sagra del tartufo marzuolo |Ponte a Egola",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/sagra-del-tartufo-ponte-a-egola/": {
@@ -12909,6 +15088,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/sagra-dellolio-novo-a-casciana-alta/": {
+  "email": "luca.francalacci1995@hotmail.it",
+  "fine": "2024-12-15",
+  "hash": "97e12ff57267ef6d5273c4c7a13bfc5fa287fed0",
+  "inizio": "2024-12-13",
+  "lastmod": "2025-10-04T16:12:14+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Frantoio Fratelli Caprai, Via Nazario Sauro, 11, Casciana Alta",
+  "orario": "",
+  "periodi": [
+   [
+    "2024-12-13",
+    "2024-12-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "348 3228759",
+  "titolo": "Sagra dell’olio novo a Casciana Alta",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-dellolio-novo-peccioli/": {
   "email": "",
   "fine": "2026-05-24",
@@ -13169,6 +15369,48 @@
   "v": 3,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/san-valentino-a-casciana-terme/": {
+  "email": "",
+  "fine": "2026-02-15",
+  "hash": "99220b9caeec164003edca2025dcab41fc89d649",
+  "inizio": "2026-02-14",
+  "lastmod": "2026-02-09T12:00:02+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Terme di Casciana, Piazza Garibaldi, Casciana Terme",
+  "orario": "15:30–19:30",
+  "periodi": [
+   [
+    "2026-02-14",
+    "2026-02-15"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "San Valentino a Casciana Terme",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/san-valentino-ai-musei-di-volterra/": {
+  "email": "info@volterratur.it",
+  "fine": "2026-02-14",
+  "hash": "0ea05ff1bc2fb4b44f65746d0098e97b7e7d9183",
+  "inizio": "2026-02-14",
+  "lastmod": "2026-02-10T09:15:11+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "10:00–18:30",
+  "periodi": [
+   [
+    "2026-02-14",
+    "2026-02-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588.86099",
+  "titolo": "San Valentino ai Musei e alle aree archeologiche di Volterra",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/san-valentino-al-museo-nazionale-di-palazzo-reale-pisa/": {
   "email": "",
   "fine": "2026-10-04",
@@ -13232,6 +15474,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/santermo-in-fiore-casciana-terme-lari/": {
+  "email": "",
+  "fine": "2026-06-20",
+  "hash": "958eccbc9f9cd286c1fea1bdc80e5108c30ffafb",
+  "inizio": "2026-06-20",
+  "lastmod": "2026-02-24T10:53:32+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Sant’Ermo, Via Sant'Ermete, Sant'Ermo",
+  "orario": "18:00–23:00",
+  "periodi": [
+   [
+    "2026-06-20",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sant’Ermo in fiore | Casciana Terme Lari",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sapori-di-autunno-in-borgo-pisa/": {
   "email": "",
   "fine": "2026-11-14",
@@ -13273,6 +15536,27 @@
   "titolo": "Sagra del baccello e del carciofo fritto | San Miniato",
   "v": 4,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/sara-colaone-storia-e-storie-del-900-a-fumetti-pisa-palazzo-blu/": {
+  "email": "",
+  "fine": "2025-11-09",
+  "hash": "3d1a045b1d70e445f570fb406952a7a25179bb05",
+  "inizio": "2025-10-28",
+  "lastmod": "2025-10-27T13:06:49+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Blu, Lungarno Gambacorti, 9, Pisa",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2025-10-28",
+    "2025-11-09"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 916950",
+  "titolo": "Sara Colaone. Storia e storie del ’900 a fumetti | Pisa, Palazzo Blu",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/sara-coniglio-casciana-terme/": {
   "email": "",
@@ -13769,6 +16053,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/stagione-al-teatro-fauglia/": {
+  "email": "info@teatrodifauglia.it",
+  "fine": "2026-04-18",
+  "hash": "d245c834d4aff44f40829476a6c9f4d5b7e069d6",
+  "inizio": "2026-04-18",
+  "lastmod": "2026-03-15T00:08:40+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Teatro Comunale di Fauglia, Piazza Trento e Trieste, 1, Fauglia",
+  "orario": "20:30–22:15",
+  "periodi": [
+   [
+    "2026-04-18",
+    "2026-04-18"
+   ]
+  ],
+  "sito": "",
+  "telefono": "375 5615955",
+  "titolo": "Stagione al Teatro Comunale di Fauglia",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/stagione-al-teatro-nuovo-pisa/": {
   "email": "biglietteria.teatronuovopisa@gmail.com",
   "fine": "2027-05-29",
@@ -13920,6 +16225,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Strapazzata Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/stravino-pisa/": {
+  "email": "info@stra-vino.it",
+  "fine": "2025-05-25",
+  "hash": "d71d648458225bd293ff040271f1ed65fc6a71fd",
+  "inizio": "2025-05-24",
+  "lastmod": "2026-01-12T08:44:40+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Stazione Leopolda, Piazza Guerrazzi, Pisa",
+  "orario": "10:00–20:00",
+  "periodi": [
+   [
+    "2025-05-24",
+    "2025-05-25"
+   ]
+  ],
+  "sito": "",
+  "telefono": "334 9972297",
+  "titolo": "Stravino | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -14357,6 +16683,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/torneo-juniores-tennis-sabatini-santa-croce-sullarno-2/": {
+  "email": "info@tcsantacroce.com",
+  "fine": "2026-05-16",
+  "hash": "22e06d4d3c14beb972e97f245ed0519d10181b2d",
+  "inizio": "2026-05-11",
+  "lastmod": "2026-02-02T12:09:11+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Tennis Club Santa Croce sull’Arno, Via Poggio Adorno, 22, Santa Croce sull'Arno",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-11",
+    "2026-05-16"
+   ]
+  ],
+  "sito": "http://www.tcsantacroce.com/",
+  "telefono": "0571-297421",
+  "titolo": "Torneo Tennis Internazionale Juniores Sabatini | Santa Croce sull’Arno",
+  "v": 4,
+  "verifica": true
+ },
  "https://www.terredipisa.it/events/toscana-arcobaleno-destate/": {
   "email": "",
   "fine": "2026-06-07",
@@ -14412,6 +16759,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Tour guidato gratuito di Chianni ogni lunedì in estate",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/tra-oriente-e-occidente-un-viaggio-nel-tempo-alla-scoperta-dei-bacini-ceramici-islamici-al-museo-san-matteo-pisa/": {
+  "email": "",
+  "fine": "2025-10-18",
+  "hash": "dbf0f57ac13e94654f6bc5e649a07f5fb9d7e8a2",
+  "inizio": "2025-10-18",
+  "lastmod": "2025-10-17T08:53:22+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Museo Nazionale di San Matteo, Piazza San Matteo In Soarta, 1, Pisa",
+  "orario": "18:00–20:00",
+  "periodi": [
+   [
+    "2025-10-18",
+    "2025-10-18"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Tra Oriente e Occidente: Un Viaggio nel Tempo alla Scoperta dei Bacini Ceramici Islamici al Museo San Matteo Pisa",
   "v": 4,
   "verifica": false
  },
@@ -14604,6 +16972,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/tuffo-di-befana-a-marina-di-pisa/": {
+  "email": "pisa.comunale@avis.it",
+  "fine": "2026-01-06",
+  "hash": "fe8f2f6ff2139d5553a64187dc6c7fab36ebc57c",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-03T11:45:16+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Marina di Pisa, Piazza Sardegna, Marina di Pisa",
+  "orario": "11:00–13:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.41076",
+  "titolo": "Tuffo di Befana a Marina di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/tutti-al-centro-santa-croce-sullarno/": {
   "email": "info@prolocosantacroce.it",
   "fine": "2026-09-11",
@@ -14622,6 +17011,48 @@
   "sito": "",
   "telefono": "0571.31011",
   "titolo": "Santa Croce in Piazza | Santa Croce sull’Arno",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/un-fantastico-altrove-mostra-di-lorenzo-mattotti-al-palazzo-senza-tempo/": {
+  "email": "",
+  "fine": "2025-09-19",
+  "hash": "934ed868242946a2885ad50ce2f333e16a6ddf86",
+  "inizio": "2025-09-04",
+  "lastmod": "2025-10-01T15:23:25+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Senza Tempo, Via Carraia, 13, Peccioli",
+  "orario": "09:00–20:00",
+  "periodi": [
+   [
+    "2025-09-04",
+    "2025-09-19"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Un Fantastico Altrove – Mostra di Lorenzo Mattotti al  Palazzo Senza Tempo",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/un-giorno-da-presepe-al-museo-della-civilta-contadina-montefoscoli/": {
+  "email": "comitatopromozionemontefoscoli@gmail.com",
+  "fine": "2026-01-06",
+  "hash": "0374ead3e093a9b0acddff186609e2d0067deb0e",
+  "inizio": "2026-01-06",
+  "lastmod": "2026-01-02T11:28:47+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Museo della Civiltà Contadina, Via Andrea Vaccà, 49, Montefoscoli",
+  "orario": "15:00–18:00",
+  "periodi": [
+   [
+    "2026-01-06",
+    "2026-01-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Quadri viventi di presepe a Montefoscoli | Palaia",
   "v": 4,
   "verifica": false
  },
@@ -14846,6 +17277,27 @@
   "titolo": "Halloween a Vicopisano e Uliveto Terme",
   "verifica": false
  },
+ "https://www.terredipisa.it/events/vico-vitri-arte-calcinaia/": {
+  "email": "",
+  "fine": "2026-01-11",
+  "hash": "1916a1fdc20f8e7796ef7ee7b22d035dbcc859af",
+  "inizio": "2026-01-11",
+  "lastmod": "2026-01-07T08:01:03+00:00",
+  "letta": "2026-11-14",
+  "luogo": "centro storico Calcinaia, Via Vittorio Emanuele, Calcinaia",
+  "orario": "09:00–17:00",
+  "periodi": [
+   [
+    "2026-01-11",
+    "2026-01-11"
+   ]
+  ],
+  "sito": "https://www.comune.calcinaia.pi.it/una8099arte-che-unisce/7747?fbclid=IwAR0Zk8XOGglyoOHkI7L9C2xJmzZJMdQT5fAkSSfWEinKd0btV30opms8oto",
+  "telefono": "0587 265425",
+  "titolo": "Natale e presepe a Calcinaia",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/vicoli-del-terrore-halloween-lorenzana/": {
   "fine": "2026-10-31",
   "hash": "e949604998586120e8f7ccb1b58c12ac0cb2db2f",
@@ -14882,6 +17334,27 @@
   "titolo": "Vie dei Presepi | Casciana Terme",
   "v": 4,
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/vim-spa-campionati-italiani-open-di-endurance-2022-san-rossore/": {
+  "email": "",
+  "fine": "2022-06-05",
+  "hash": "d36027afe75a8ddb45e07e0e0882bc7091c4c2b2",
+  "inizio": "2022-06-04",
+  "lastmod": "2026-02-06T18:08:02+00:00",
+  "letta": "2026-11-14",
+  "luogo": "",
+  "orario": "",
+  "periodi": [
+   [
+    "2022-06-04",
+    "2022-06-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "VIM Spa Campionati Italiani Open di Endurance 2022 | San Rossore",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/vin-vinile-vino-vintage-e-vinile-a-volterra/": {
   "email": "",
@@ -15311,6 +17784,27 @@
   "telefono": "",
   "titolo": "Mostra “Scolpire l’invisibile” al Museo della Società Operaia di Cascina",
   "v": 3,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/visite-guidate-al-museo-delle-tradizioni-storiche-di-pisa/": {
+  "email": "",
+  "fine": "2026-01-13",
+  "hash": "bfc0e4d07ebf7313a654cd157df8734714802fd3",
+  "inizio": "2026-01-13",
+  "lastmod": "2026-01-12T12:32:45+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Palazzo Gambacorti, Piazza XX Settembre, Pisa",
+  "orario": "12:00–12:45",
+  "periodi": [
+   [
+    "2026-01-13",
+    "2026-01-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Visite guidate al Museo delle tradizioni storiche di Pisa",
+  "v": 4,
   "verifica": false
  },
  "https://www.terredipisa.it/events/visite-guidate-al-museo-di-storia-naturale-di-calci/": {
@@ -16133,6 +18627,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Mostra “Andy Warhol: Icons” al PALP di Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/wine-fashion-nelle-terre-pisa/": {
+  "email": "",
+  "fine": "2025-12-28",
+  "hash": "78b9c1b322c7f5e89c3a8d773a559eba53c17292",
+  "inizio": "2025-12-28",
+  "lastmod": "2025-12-22T06:56:33+00:00",
+  "letta": "2026-11-14",
+  "luogo": "Centro storico Terricciola, centro, piazze e luoghi limitrofi, Terricciola",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-12-28",
+    "2025-12-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Terricciola",
   "v": 4,
   "verifica": false
  },
