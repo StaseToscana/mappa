@@ -1,14 +1,6 @@
 name: Aggiorna eventi Portale Eventi
 
-on:
-  schedule:
-    - cron: '0 4 * * *'         # ogni giorno alle 4:00 UTC, prima di Terre di Pisa (4:30)
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Solo prova (non scrive file, legge 15 schede)'
-        type: boolean
-        default: true
+
 
 permissions:
   contents: write
