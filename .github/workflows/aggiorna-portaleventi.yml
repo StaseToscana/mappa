@@ -1,0 +1,89 @@
+name: Aggiorna eventi Portale Eventi
+
+on:
+  schedule:
+    - cron: '0 4 * * *'         # ogni giorno alle 4:00 UTC, prima di Terre di Pisa (4:30)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Solo prova (non scrive file, legge 15 schede)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-portaleventi
+  cancel-in-progress: false
+
+env:
+  TZ: Europe/Rome
+
+jobs:
+  portaleventi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installa dipendenze Python
+        run: pip install requests beautifulsoup4
+
+      - name: Scraper Portale Eventi (solo titolo, date, luogo)
+        timeout-minutes: 25
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python -u scripts/scrape_portaleventi.py --dry-run --max 15
+          else
+            python -u scripts/scrape_portaleventi.py
+          fi
+
+      - name: Foto dei luoghi (Wikimedia Commons)
+        # Stesso script di Firenze/sagre, cache separata. Non blocca mai l'aggiornamento.
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p dati foto-luoghi
+          node scripts/foto-luoghi.js eventi_portaleventi.json dati/foto_luoghi_portaleventi.json foto-luoghi
+
+      - name: Foto dei paesi (Wikimedia Commons)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p dati foto-luoghi
+          node scripts/foto-paesi.js eventi_portaleventi.json dati/foto_paesi_portaleventi.json foto-luoghi
+
+      - name: Immagine illustrativa per tema (piano B)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        continue-on-error: true
+        run: |
+          mkdir -p immagini-sagre
+          node scripts/immagine-tema.js eventi_portaleventi.json immagini-sagre
+
+      - name: Commit e push
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          mkdir -p dati foto-luoghi immagini-sagre
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eventi_portaleventi.json cache_portaleventi.json geocode_cache_portaleventi.json
+          git add -A dati foto-luoghi immagini-sagre
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica."
+          else
+            git commit -m "Aggiorna eventi Portale Eventi $(date +%F)"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
