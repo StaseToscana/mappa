@@ -1,0 +1,10 @@
+# Chiavi API locali: restano sulla tua macchina, mai nel repository
+.pexels-key
+.pixabay-key
+.unsplash-key
+.env
+.env.local
+
+# Roba di sistema
+Thumbs.db
+.DS_Store
