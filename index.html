@@ -1368,6 +1368,7 @@
   const JSON_URL_VT = 'https://stasetoscana.it/eventi_visittuscany.json';
   const JSON_URL_FI = 'https://stasetoscana.it/eventi_firenze.json';
   const JSON_URL_SAGRE = 'https://stasetoscana.it/eventi_sagre.json';
+  const JSON_URL_SA = 'https://stasetoscana.it/eventi_sagreautentiche.json';
 
   const CATEGORIE = {
     'Concerto':                   { bg: '#6366f1', emoji: '\u{1F3A4}' },
@@ -1659,8 +1660,20 @@
       tuttoOk = false;
       console.warn('Sagre non disponibili:', err);
     }
-    // Unisci le quattro fonti e rimuovi i duplicati
-    var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI, eventiSagre]);
+    // 5. Carica Sagre Autentiche (opzionale, non blocca)
+    var eventiSagreAutentiche = [];
+    try {
+      var resSA = await fetch(JSON_URL_SA + '?t=' + Date.now());
+      if (resSA.ok) {
+        eventiSagreAutentiche = normalizzaEventiSagreAutentiche(await resSA.json());
+        console.log('Sagre Autentiche caricate:', eventiSagreAutentiche.length);
+      } else { tuttoOk = false; }
+    } catch (err) {
+      tuttoOk = false;
+      console.warn('Sagre Autentiche non disponibili:', err);
+    }
+    // Unisci le cinque fonti e rimuovi i duplicati
+    var unici = unisciEDeduplica([eventiStase, eventiVT, eventiFI, eventiSagre, eventiSagreAutentiche]);
     if (unici.length === 0) {
       mostraToast('Nessun evento disponibile al momento. Riprova tra poco.');
       return [];
@@ -1936,12 +1949,48 @@
       });
   }
 
+  // ===================== SAGRE AUTENTICHE (eventi_sagreautentiche.json) =====================
+  // Solo titolo, date e luogo: ogni scheda rimanda all'evento originale con
+  // "Vedi su Sagre Autentiche" + attribuzione nel dettaglio.
+  function normalizzaEventiSagreAutentiche(data) {
+    var lista = data && Array.isArray(data.eventi) ? data.eventi : [];
+    var urlSicuro = function(u) { return /^https?:\/\//i.test(u || '') ? u : ''; };
+    var dataOk = function(d) { return /^\d{4}-\d{2}-\d{2}$/.test(d || ''); };
+    return lista
+      .filter(function(e) { return e && e.nome && dataOk(e.dataSort); })
+      .map(function(e, i) {
+        return {
+          id: String(e.id || ('sa-' + i)).replace(/[^a-zA-Z0-9_-]/g, '-'),
+          nome: e.nome,
+          locandina: urlSicuro(e.locandina) || null,
+          fotoCrediti: (e.fotoCrediti && urlSicuro(e.fotoCrediti.url)) ? { testo: String(e.fotoCrediti.testo || ''), url: e.fotoCrediti.url } : null,
+          immagineIllustrativa: !!e.immagineIllustrativa,
+          categoria: e.categoria || 'Sagra',
+          descrizione: '',
+          provincia: e.provincia || '',
+          comune: e.comune || '',
+          indirizzo: e.indirizzo || '',
+          riepilogoDate: e.riepilogoDate || '',
+          dataSort: e.dataSort,
+          dataFine: dataOk(e.dataFine) ? e.dataFine : e.dataSort,
+          mapsUrl: urlSicuro(e.mapsUrl),
+          url: urlSicuro(e.url),
+          lat: e.lat != null ? parseFloat(e.lat) : null,
+          lon: e.lon != null ? parseFloat(e.lon) : null,
+          instagram: null,
+          inEvidenza: false,
+          dateIndicative: !!e.dateDaVerificare,
+          fonte: 'sagreautentiche'
+        };
+      });
+  }
+
   // ===================== DEDUPLICA TRA FONTI =====================
   // Stessa data + stesso comune + titolo uguale (stessa fonte) o simile (fonti diverse).
   // Vince la fonte con priorità più alta (Stase > Firenze > VisitTuscany) e,
   // se manca la locandina, si tiene quella dell'altra scheda.
   var _PAROLE_VUOTE = new Set(['il','lo','la','gli','le','di','del','della','dei','delle','alla','con','per','una','the','of']);
-  var _PRIORITA_FONTE = { stase: 3, firenze: 2, terredipisa: 2, visittuscany: 1 };
+  var _PRIORITA_FONTE = { stase: 3, firenze: 2, terredipisa: 2, visittuscany: 1, sagreautentiche: 0 };
 
   function _normTesto(s) {
     return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -2197,13 +2246,14 @@
     var badgeEvidenzaHtml = ev.inEvidenza ? '<span class="badge-evidenza">⭐ ' + testoBadgeEvidenza + '</span>' : '';
     var badgeVTHtml = ev.fonte === 'visittuscany' ? '<span class="badge-vt">VisitTuscany</span>' : '';
     var badgeFIHtml = ev.fonte === 'firenze' ? '<span class="badge-vt" style="background:#8B1E3F">FeelFlorence</span>' : '';
+    var badgeSAHtml = ev.fonte === 'sagreautentiche' ? '<span class="badge-vt" style="background:#166534">Sagre Autentiche</span>' : '';
     var salvaHtml = '<button type="button" class="card-salva' + (isSalvato(ev.id) ? ' attivo' : '') + '" data-id="' + escapeHtml_(ev.id) + '" aria-label="Salva evento" title="Salva evento" aria-pressed="' + (isSalvato(ev.id) ? 'true' : 'false') + '">' + (isSalvato(ev.id) ? '♥' : '♡') + '</button>';
     card.dataset.id = ev.id;
-    card.innerHTML = salvaHtml + badgeEvidenzaHtml + badgeVTHtml + badgeFIHtml + imgHtml +
+    card.innerHTML = salvaHtml + badgeEvidenzaHtml + badgeVTHtml + badgeFIHtml + badgeSAHtml + imgHtml +
       '<div class="card-body">' +
       '<div class="card-nome">' + escapeHtml_(ev.nome || 'Evento senza nome') + '</div>' +
       '<span class="card-cat" style="background:' + cat.bg + '20;color:' + cat.bg + '">' + cat.emoji + ' ' + escapeHtml_(ev.categoria) + '</span>' +
-      '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + '</div>' +
+      '<div class="card-data">&#128197; ' + escapeHtml_(ev.riepilogoDate || '') + (ev.dateIndicative ? ' <span style="font-size:0.72rem;opacity:0.75;" title="Date da confermare: verifica presso l\'organizzatore">· date indicative</span>' : '') + '</div>' +
       '<div class="card-luogo">&#128205; ' + escapeHtml_([ev.comune, ev.provincia ? '(' + ev.provincia + ')' : ''].filter(Boolean).join(' ')) + '</div>' +
       '</div>';
     var btnSalva = card.querySelector('.card-salva');
@@ -2859,6 +2909,7 @@
       var qGoogle = [ev.nome, ev.comune, annoEv].filter(Boolean).join(' ');
       azioniHtml += '<a class="btn-azione" style="background:#1a73e8" href="https://www.google.com/search?q=' + encodeURIComponent(qGoogle) + '" target="_blank" rel="noopener">🔎 Clicca qui per maggiori informazioni</a>';
     }
+    if (ev.fonte === 'sagreautentiche' && ev.url) azioniHtml += '<a class="btn-azione" style="background:#166534" href="' + escapeHtml_(ev.url) + '" target="_blank" rel="noopener">🌿 Vedi su Sagre Autentiche</a>';
     if (ev.fonte === 'firenze') {
       if (ev.url) azioniHtml += '<a class="btn-azione" style="background:#8B1E3F" href="' + escapeHtml_(ev.url) + '" target="_blank" rel="noopener">🏙️ Vedi su FeelFlorence</a>';
       if (ev.sitoUfficiale) azioniHtml += '<a class="btn-azione" style="background:#444" href="' + escapeHtml_(ev.sitoUfficiale) + '" target="_blank" rel="noopener">Sito ufficiale</a>';
@@ -2877,6 +2928,7 @@
     if (ev.dataSort) azioniHtml += '<button class="btn-azione" style="background:#0f766e;" data-azione="ics">📅 Aggiungi al calendario</button>';
     azioniHtml += '<button class="btn-azione" style="background:#555;" data-azione="condividi">Condividi</button>';
     if (ev.fonte === 'firenze') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://www.feelflorence.it" target="_blank" rel="noopener">Comune di Firenze – FeelFlorence</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a></div>';
+    if (ev.fonte === 'sagreautentiche') azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);margin-top:6px;">Dati: <a href="https://sagreautentiche.it" target="_blank" rel="noopener">Sagre Autentiche</a> — titolo, date e luogo; programma e dettagli sulla scheda originale.</div>';
     if (ev.fotoCrediti) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">📷 <a href="' + escapeHtml_(ev.fotoCrediti.url) + '" target="_blank" rel="noopener">' + escapeHtml_(ev.fotoCrediti.testo) + '</a></div>';
     if (ev.dateIndicative) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">ℹ️ Date indicative: verifica il programma presso l\'organizzatore.</div>';
     if (ev.immagineIllustrativa) azioniHtml += '<div style="width:100%;font-size:0.72rem;color:var(--grigio-testo);">🖼️ Immagine illustrativa</div>';
