@@ -1,0 +1,377 @@
+{
+ "chianni pi|chianni": {
+  "luogo": "Chianni, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "riparbella pi|riparbella": {
+  "luogo": "Riparbella, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "loro ciuffenna ar|loro ciuffenna": {
+  "luogo": "Loro Ciuffenna, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "san miniato pi|san miniato": {
+  "luogo": "San Miniato, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "impruneta fi|impruneta": {
+  "luogo": "Impruneta, FI",
+  "file": "impruneta-fi-6hx0mk.jpg",
+  "titolo": "Impruneta",
+  "autore": "Vignaccia76",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Basilica_di_Impruneta.jpg",
+  "verificato": "2026-11-15"
+ },
+ "camaiore lu|camaiore": {
+  "luogo": "Camaiore, LU",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "seggiano gr|seggiano": {
+  "luogo": "Seggiano, GR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "carda ar|carda": {
+  "luogo": "Carda, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "suvereto li|suvereto": {
+  "luogo": "Suvereto, LI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "san quirico d orcia si|san quirico d orcia": {
+  "luogo": "San Quirico d'Orcia, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "quercia ms|quercia": {
+  "luogo": "Quercia, MS",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "montepulciano si|montepulciano": {
+  "luogo": "Montepulciano, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "vernio po|vernio": {
+  "luogo": "Vernio, PO",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "san quirico pt|san quirico": {
+  "luogo": "San Quirico, PT",
+  "file": "san-quirico-pt-1e5rdqc.jpg",
+  "titolo": "San Quirico (Pescia)",
+  "autore": "Bukkia",
+  "licenza": "CC0",
+  "licenzaUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:San_Quirico_(Pescia)_panorama_01.JPG",
+  "verificato": "2026-11-15"
+ },
+ "torrita di siena si|torrita di siena": {
+  "luogo": "Torrita di Siena, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "montespertoli fi|montespertoli": {
+  "luogo": "Montespertoli, FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "montefioralle fi|montefioralle": {
+  "luogo": "Montefioralle, FI",
+  "file": "montefioralle-fi-12atp1c.jpg",
+  "titolo": "Montefioralle",
+  "autore": "Hagai Agmon-Snir حچاي اچمون-سنير חגי אגמון-שניר",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:MontefioralleDec102023_08.jpg",
+  "verificato": "2026-11-15"
+ },
+ "ponte a egola pi|ponte a egola": {
+  "luogo": "Ponte a Egola, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "san martino sul fiora gr|san martino sul fiora": {
+  "luogo": "San Martino Sul Fiora, GR",
+  "file": "san-martino-sul-fiora-gr-jmvnja.jpg",
+  "titolo": "San Martino sul Fiora",
+  "autore": "Alienautic",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Veduta_di_San_Martino_sul_Fiora.JPG",
+  "verificato": "2026-11-15"
+ },
+ "rigomagno si|rigomagno": {
+  "luogo": "Rigomagno, SI",
+  "file": "rigomagno-si-p951yv.jpg",
+  "titolo": "Rigomagno",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:RigomagnoPanorama1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "chiusure asciano si|chiusure": {
+  "luogo": "Chiusure, Asciano SI",
+  "file": "chiusure-asciano-si-154ycor.jpg",
+  "titolo": "Chiusure (Asciano)",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:ChiusureAscianoPanorama2.jpg",
+  "verificato": "2026-11-15"
+ },
+ "alberese gr|alberese": {
+  "luogo": "Alberese, GR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "penna ar|penna": {
+  "luogo": "Penna, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "volterra pi|volterra": {
+  "luogo": "Volterra, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "vicchio fi|vicchio": {
+  "luogo": "Vicchio, FI",
+  "file": "vicchio-fi-zil771.jpg",
+  "titolo": "Vicchio",
+  "autore": "Mongolo1984",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Piazza_Giotto_(Vicchio).jpg",
+  "verificato": "2026-11-15"
+ },
+ "chiocchio fi|chiocchio": {
+  "luogo": "Chiocchio, FI",
+  "file": "chiocchio-fi-1lf7pur.jpg",
+  "titolo": "Chiocchio",
+  "autore": "Vignaccia76",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Sandonatoamugnana.jpg",
+  "verificato": "2026-11-15"
+ },
+ "palaia pi|palaia": {
+  "luogo": "Palaia, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "treschietto ms|treschietto": {
+  "luogo": "Treschietto, MS",
+  "file": "treschietto-ms-trklcf.jpg",
+  "titolo": "Treschietto",
+  "autore": "Davide Papalini",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Treschietto_(Bagnone)-panorama_1_(2014).jpg",
+  "verificato": "2026-11-15"
+ },
+ "livorno li|livorno": {
+  "luogo": "Livorno, LI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "seravezza lu|seravezza": {
+  "luogo": "Seravezza, LU",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "terricciola pi|terricciola": {
+  "luogo": "Terricciola, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "lucignano ar|lucignano": {
+  "luogo": "Lucignano, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "indicatore ar|indicatore": {
+  "luogo": "Indicatore, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "morrona pi|morrona": {
+  "luogo": "Morrona, PI",
+  "file": "morrona-pi-1tz29r7.jpg",
+  "titolo": "Morrona",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:MorronaTerricciolaPanorama1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "cetona si|cetona": {
+  "luogo": "Cetona, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "celle sul rigo si|celle sul rigo": {
+  "luogo": "Celle Sul Rigo, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "battifolle ar|battifolle": {
+  "luogo": "Battifolle, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bientina pi|bientina": {
+  "luogo": "Bientina, PI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "marsiliana manciano gr|marsiliana": {
+  "luogo": "Marsiliana, Manciano GR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "brozzi firenze fi|firenze": {
+  "luogo": "Brozzi, Firenze, FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "lari pi|lari": {
+  "luogo": "Lari, PI",
+  "file": "lari-pi-1ujs6uy.jpg",
+  "titolo": "Lari (Casciana Terme Lari)",
+  "autore": "Mauriziotani at Italian Wikipedia",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lari_Panorama_1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "segromigno in monte lu|segromigno in monte": {
+  "luogo": "Segromigno in Monte, LU",
+  "file": "segromigno-in-monte-lu-rl2gtf.jpg",
+  "titolo": "Segromigno in Monte",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:SegromignoInMonteCapannoriPanorama1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "bacchereto po|bacchereto": {
+  "luogo": "Bacchereto, PO",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "capolona ar|capolona": {
+  "luogo": "Capolona, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "colle di val d elsa si|colle di val d elsa": {
+  "luogo": "Colle di Val d'Elsa, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "chianciano terme si|chianciano terme": {
+  "luogo": "Chianciano Terme, SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "massarosa lu|massarosa": {
+  "luogo": "Massarosa, LU",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "iesa si|lama": {
+  "luogo": "Iesa, SI",
+  "file": "iesa-si-1jivvwx.jpg",
+  "titolo": "Iesa",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:IesaLamaMonticianoPanorama.jpg",
+  "verificato": "2026-11-15"
+ },
+ "quattro strade pi|quattro strade": {
+  "luogo": "Quattro Strade, PI",
+  "file": "quattro-strade-pi-py1sj8.jpg",
+  "titolo": "Quattro Strade (Bientina)",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:BientinaQuattroStradeScorcio1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "spicchio spicchio sovigliana vinci fi|spicchio sovigliana": {
+  "luogo": "Spicchio, Spicchio-Sovigliana, Vinci FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "altopascio lu|altopascio": {
+  "luogo": "Altopascio, LU",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "barberino tavarnelle fi|barberino tavarnelle": {
+  "luogo": "Barberino Tavarnelle, FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bibbiena ar|bibbiena": {
+  "luogo": "Bibbiena, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "londa fi|londa": {
+  "luogo": "Londa, FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bassa cerreto guidi fi|bassa": {
+  "luogo": "Bassa, Cerreto Guidi FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "piazze cetona si|piazze": {
+  "luogo": "Piazze, Cetona SI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "monterotondo marittimo gr|monterotondo marittimo": {
+  "luogo": "Monterotondo Marittimo, GR",
+  "file": "monterotondo-marittimo-gr-1q6nv0s.jpg",
+  "titolo": "Mura di Monterotondo Marittimo",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:MonterotondoMarittimoPortaAllaTorreOutside1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "capannori lu|capannori": {
+  "luogo": "Capannori, LU",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "sestino ar|sestino": {
+  "luogo": "Sestino, AR",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "san pancrazio san casciano in val di pesa fi|san pancrazio": {
+  "luogo": "San Pancrazio, San Casciano in Val di Pesa FI",
+  "assente": true,
+  "verificato": "2026-11-15"
+ }
+}

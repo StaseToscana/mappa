@@ -1,0 +1,467 @@
+{
+ "chianni": {
+  "comune": "Chianni",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "riparbella": {
+  "comune": "Riparbella",
+  "file": "paese-riparbella-2srac.jpg",
+  "titolo": "Riparbella",
+  "autore": "Tyrrhenus",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palazzo_Comune_Riparbella_Pisa.jpg",
+  "verificato": "2026-11-15"
+ },
+ "loro ciuffenna": {
+  "comune": "Loro Ciuffenna",
+  "file": "paese-loro-ciuffenna-1qdfnia.jpg",
+  "titolo": "Loro Ciuffenna",
+  "autore": "Grzegorz Gołębiowski",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Loro_Ciuffenna_panorama1_2013.JPG",
+  "verificato": "2026-11-15"
+ },
+ "san miniato": {
+  "comune": "San Miniato",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "camaiore": {
+  "comune": "Camaiore",
+  "file": "paese-camaiore-nto8e0.jpg",
+  "titolo": "Camaiore",
+  "autore": "Davide Papalini",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Camaiore-badia_san_pietro-complesso_esterno1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "seggiano": {
+  "comune": "Seggiano",
+  "file": "paese-seggiano-171rwib.jpg",
+  "titolo": "Seggiano",
+  "autore": "Autore non indicato",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Comune_di_Seggiano.JPG",
+  "verificato": "2026-11-15"
+ },
+ "carda": {
+  "comune": "Carda",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "suvereto": {
+  "comune": "Suvereto",
+  "file": "paese-suvereto-9x7a5s.jpg",
+  "titolo": "Suvereto",
+  "autore": "Luca Aless",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Suvereto_-_Palazzo_comunale.jpg",
+  "verificato": "2026-11-15"
+ },
+ "san quirico d orcia": {
+  "comune": "San Quirico d'Orcia",
+  "file": "paese-san-quirico-d-orcia-j5xwtv.jpg",
+  "titolo": "San Quirico d'Orcia",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:SanQuiricodOrciaPanorama.JPG",
+  "verificato": "2026-11-15"
+ },
+ "quercia": {
+  "comune": "Quercia",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "montepulciano": {
+  "comune": "Montepulciano",
+  "file": "paese-montepulciano-h4353o.jpg",
+  "titolo": "Montepulciano",
+  "autore": "Autore non indicato",
+  "licenza": "CC BY-SA 2.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Montepulciano02.jpg",
+  "verificato": "2026-11-15"
+ },
+ "vernio": {
+  "comune": "Vernio",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "torrita di siena": {
+  "comune": "Torrita di Siena",
+  "file": "paese-torrita-di-siena-1kdkpg.jpg",
+  "titolo": "Torrita di Siena",
+  "autore": "Edisonblus",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Torrita_di_Siena.jpg",
+  "verificato": "2026-11-15"
+ },
+ "montespertoli": {
+  "comune": "Montespertoli",
+  "file": "paese-montespertoli-1ytem16.jpg",
+  "titolo": "Montespertoli",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:MontespertoliPanorama2.jpg",
+  "verificato": "2026-11-15"
+ },
+ "ponte a egola": {
+  "comune": "Ponte a Egola",
+  "file": "paese-ponte-a-egola-tq75fi.jpg",
+  "titolo": "Ponte a Egola",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:SanMiniatoPonteaEgolaSacroCuore2.jpg",
+  "verificato": "2026-11-15"
+ },
+ "alberese": {
+  "comune": "Alberese",
+  "file": "paese-alberese-1d1vex1.jpg",
+  "titolo": "Alberese",
+  "autore": "User:Alienautic",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Alberese_panorama.JPG",
+  "verificato": "2026-11-15"
+ },
+ "penna": {
+  "comune": "Penna",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "volterra": {
+  "comune": "Volterra",
+  "file": "paese-volterra-1j31qi0.jpg",
+  "titolo": "Volterra",
+  "autore": "BobTanGo",
+  "licenza": "CC BY 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Volterra_from_above._June_2024.jpg",
+  "verificato": "2026-11-15"
+ },
+ "palaia": {
+  "comune": "Palaia",
+  "file": "paese-palaia-1vulhvm.jpg",
+  "titolo": "Palaia",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palaia%2C_rocca%2C_vista_02.JPG",
+  "verificato": "2026-11-15"
+ },
+ "livorno": {
+  "comune": "Livorno",
+  "file": "paese-livorno-fghi89.jpg",
+  "titolo": "Livorno",
+  "autore": "Anna.Massini",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Livorno_-_Vista_da_Montenero.jpg",
+  "verificato": "2026-11-15"
+ },
+ "seravezza": {
+  "comune": "Seravezza",
+  "file": "paese-seravezza-199f7sn.jpg",
+  "titolo": "Seravezza",
+  "autore": "Hans Peter Schaefer, http://www.reserv-a-rt.de",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Seravezza_220208_Kirche_am-_Fluss.jpg",
+  "verificato": "2026-11-15"
+ },
+ "terricciola": {
+  "comune": "Terricciola",
+  "file": "paese-terricciola-1w3exn7.jpg",
+  "titolo": "Terricciola",
+  "autore": "LUCHOTESTA",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Terricciola%2CToscana%2C_Via_Roma.JPG",
+  "verificato": "2026-11-15"
+ },
+ "lucignano": {
+  "comune": "Lucignano",
+  "file": "paese-lucignano-why0s3.jpg",
+  "titolo": "Lucignano",
+  "autore": "Edisonblus",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lucignano_panorama_dalla_fortezza.jpg",
+  "verificato": "2026-11-15"
+ },
+ "indicatore": {
+  "comune": "Indicatore",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "cetona": {
+  "comune": "Cetona",
+  "file": "paese-cetona-107embi.png",
+  "titolo": "Cetona",
+  "autore": "Nuada",
+  "licenza": "Public domain",
+  "licenzaUrl": "",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Cetona_(SI).png",
+  "verificato": "2026-11-15"
+ },
+ "celle sul rigo": {
+  "comune": "Celle Sul Rigo",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "battifolle": {
+  "comune": "Battifolle",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bientina": {
+  "comune": "Bientina",
+  "file": "paese-bientina-1ekp2db.jpg",
+  "titolo": "Bientina",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:BientinaPanorama2.jpg",
+  "verificato": "2026-11-15"
+ },
+ "marsiliana": {
+  "comune": "Marsiliana",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "firenze": {
+  "comune": "Firenze",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bacchereto": {
+  "comune": "Bacchereto",
+  "file": "paese-bacchereto-1dx4bww.png",
+  "titolo": "Bacchereto",
+  "autore": "Soltantoparolealvento",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Bacchereto_veduta.png",
+  "verificato": "2026-11-15"
+ },
+ "capolona": {
+  "comune": "Capolona",
+  "file": "paese-capolona-mv1ey6.jpg",
+  "titolo": "Capolona",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:CapolonaPonteCalianoArno.JPG",
+  "verificato": "2026-11-15"
+ },
+ "colle di val d elsa": {
+  "comune": "Colle di Val d'Elsa",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "chianciano terme": {
+  "comune": "Chianciano Terme",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "massarosa": {
+  "comune": "Massarosa",
+  "file": "paese-massarosa-9q6xao.jpg",
+  "titolo": "Massarosa",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Comune_di_massarosa.JPG",
+  "verificato": "2026-11-15"
+ },
+ "spicchio sovigliana": {
+  "comune": "Spicchio-Sovigliana",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "altopascio": {
+  "comune": "Altopascio",
+  "file": "paese-altopascio-1ivsb22.jpg",
+  "titolo": "Altopascio",
+  "autore": "Serendip at it.wikipedia",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Altopascio_panorama_e_porta.JPG",
+  "verificato": "2026-11-15"
+ },
+ "barberino tavarnelle": {
+  "comune": "Barberino Tavarnelle",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "bibbiena": {
+  "comune": "Bibbiena",
+  "file": "paese-bibbiena-16g39xu.jpg",
+  "titolo": "Bibbiena",
+  "autore": "Mongolo1984",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Veduta_panoramica_di_Bibbiena_(Ar)_02.jpg",
+  "verificato": "2026-11-15"
+ },
+ "londa": {
+  "comune": "Londa",
+  "file": "paese-londa-nvmovk.jpg",
+  "titolo": "Londa",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:LondaPonteRincine.JPG",
+  "verificato": "2026-11-15"
+ },
+ "bassa": {
+  "comune": "Bassa",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "piazze": {
+  "comune": "Piazze",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "capannori": {
+  "comune": "Capannori",
+  "file": "paese-capannori-30p9ru.jpg",
+  "titolo": "Capannori",
+  "autore": "Lucarelli",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Santi_Quirico_e_Giulitta%2C_Capannori.jpg",
+  "verificato": "2026-11-15"
+ },
+ "sestino": {
+  "comune": "Sestino",
+  "file": "paese-sestino-1kk0h7m.jpg",
+  "titolo": "Sestino",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:SestinoTownhall.JPG",
+  "verificato": "2026-11-15"
+ },
+ "san pancrazio": {
+  "comune": "San Pancrazio",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "buti": {
+  "comune": "Buti",
+  "file": "paese-buti-1batl54.jpg",
+  "titolo": "Buti",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:ButiPanorama1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "pavana": {
+  "comune": "Pavana",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "sticciano": {
+  "comune": "Sticciano",
+  "file": "paese-sticciano-16746nm.jpg",
+  "titolo": "Sticciano",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:SticcianoPanorama2.JPG",
+  "verificato": "2026-11-15"
+ },
+ "san piero a grado": {
+  "comune": "San Piero A Grado",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "palazzuolo sul senio": {
+  "comune": "Palazzuolo Sul Senio",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "badesse": {
+  "comune": "Badesse",
+  "file": "paese-badesse-1u4fx7q.jpg",
+  "titolo": "Badesse",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:BadesseMonteriggioniPanorama1.jpg",
+  "verificato": "2026-11-15"
+ },
+ "olmo": {
+  "comune": "Olmo",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "pietraviva": {
+  "comune": "Pietraviva",
+  "file": "paese-pietraviva-1o9imx2.jpg",
+  "titolo": "Pietraviva",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:BucinePietravivaPanorama2.jpg",
+  "verificato": "2026-11-15"
+ },
+ "fabbrica": {
+  "comune": "Fabbrica",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "querceta": {
+  "comune": "Querceta",
+  "file": "paese-querceta-122zp74.jpg",
+  "titolo": "Querceta",
+  "autore": "Alexmar983",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:2019-05-17_Seravezza_frazione_Querceta_via_Seravezza.jpg",
+  "verificato": "2026-11-15"
+ },
+ "colognola": {
+  "comune": "Colognola",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "massarella": {
+  "comune": "Massarella",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "olivola": {
+  "comune": "Olivola",
+  "assente": true,
+  "verificato": "2026-11-15"
+ },
+ "anghiari": {
+  "comune": "Anghiari",
+  "file": "paese-anghiari-vfik8e.jpg",
+  "titolo": "Anghiari",
+  "autore": "Luca Aless",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Anghiari_-_Veduta_04.jpg",
+  "verificato": "2026-11-15"
+ },
+ "cascine la croce": {
+  "comune": "Cascine-la Croce",
+  "assente": true,
+  "verificato": "2026-11-15"
+ }
+}
