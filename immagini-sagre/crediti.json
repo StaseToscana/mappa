@@ -1,0 +1,49 @@
+{
+   "cacciucco" : {
+      "autore" : "Lucarelli",
+      "file" : "File:Cacciucco.jpg",
+      "licenza" : "Public domain",
+      "pagina" : "https://commons.wikimedia.org/wiki/File:Cacciucco.jpg"
+   },
+   "castagne" : {
+      "autore" : "ykaiavu",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/chestnuts-roasted-chestnuts-gate-7660528/"
+   },
+   "cinghiale" : {
+      "autore" : "Paul_Henri",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/animal-mammal-wild-boar-pig-6909689/"
+   },
+   "funghi" : {
+      "autore" : "petrabay",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/mushroom-fall-meal-edible-forest-2290834/"
+   },
+   "olio" : {
+      "autore" : "Couleur",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/olive-oil-oil-food-carafe-1596417/"
+   },
+   "polenta" : {
+      "autore" : "やましこ",
+      "file" : "File:Polenta con i funghi (49653224713).jpg",
+      "licenza" : "CC BY-SA 2.0",
+      "pagina" : "https://commons.wikimedia.org/wiki/File:Polenta_con_i_funghi_(49653224713).jpg"
+   },
+   "porchetta" : {
+      "autore" : "RitaE",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/roast-pork-pig-roast-crust-rind-4046658/"
+   },
+   "tartufo" : {
+      "autore" : "WikiImages",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/winter-truffle-tuber-brumale-truffle-203032/"
+   },
+   "vino" : {
+      "autore" : "AS_Photography",
+      "licenza" : "Pixabay Content License",
+      "pagina" : "https://pixabay.com/photos/wines-glasses-wine-glasses-stemware-1761613/"
+   }
+}
