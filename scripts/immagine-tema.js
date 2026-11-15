@@ -28,14 +28,18 @@ const ESTENSIONI = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
 
 // ordine = priorita' (il primo tema che combacia vince)
 const TEMI = [
+  ['fiori_zucca', /fior[ei] di zucca|zucca fritt|fiori fritt/],
   ['cinghiale', /cinghial/],
   ['tartufo', /tartuf/],
   ['castagne', /castagn|marron|frugiolo|necci/],
   ['funghi', /fungh|porcin/],
   ['olio', /\bolio|frantoi|oliv/],
   ['vino', /\bvin[oi]\b|cantine|vendemmi|\buva\b|degusta|enoteca/],
-  ['pesce', /pesce|fritto misto|totan|baccal|acciugh|cacciucc|gamber|calamar/],
+  ['porchetta', /porchett/],
+  ['cacciucco', /cacciucc/],
+  ['pesce', /pesce|fritto misto|totan|baccal|acciugh|gamber|calamar/],
   ['carne', /carne|brace|bistecc|chianina|salsicc|tortell|papero|cunigliol|coniglio|arrost|porchett|grigliat/],
+  ['polenta', /polent/],
   ['dolci', /schiacci|dolci|cantucc|biscott|cioccolat|castagnacc|torta|gelato/],
   ['pane', /\bpane\b|pizza|focacc|crostini|fettunta/],
 ];
@@ -72,8 +76,19 @@ function fileDelTema(cartella, tema) {
   return null;
 }
 
+// Crediti facoltativi: se nella cartella c'e' crediti.json (tema -> autore, licenza, pagina)
+// li attacca all'evento, cosi' il sito mostra "Foto: autore · licenza" con il link a Commons.
+function leggiCrediti(cartella) {
+  try {
+    const p = path.join(cartella, 'crediti.json');
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch (e) { /* i crediti sono facoltativi: se il file e' rotto si prosegue senza */ }
+  return {};
+}
+
 function processa(dati, cartella, log = console.log) {
   const st = { conTema: 0, perCategoria: 0, senzaFile: new Set(), saltati: 0 };
+  const crediti = leggiCrediti(cartella);
   for (const ev of dati.eventi || []) {
     if (ev.locandina) continue;
     let file = null, perCategoria = false;
@@ -89,6 +104,8 @@ function processa(dati, cartella, log = console.log) {
     if (!file) { st.saltati++; continue; }
     ev.locandina = `${BASE_URL}/${NOME_CARTELLA_URL}/${file}`;
     ev.immagineIllustrativa = true;
+    const cr = perCategoria ? null : crediti[tema];
+    if (cr && cr.pagina) ev.fotoCrediti = { testo: cr.autore + ' · ' + cr.licenza, url: cr.pagina };
     if (perCategoria) st.perCategoria++; else st.conTema++;
   }
   return st;
