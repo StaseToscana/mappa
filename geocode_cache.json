@@ -39,6 +39,10 @@
   43.3262785,
   10.6269946
  ],
+ "@comune:Monteverdi Marittimo": [
+  43.1773319,
+  10.7144314
+ ],
  "@comune:Montopoli in Val d'Arno": [
   43.6702986,
   10.7608316
@@ -76,6 +80,10 @@
   43.7101077,
   10.7819415
  ],
+ "@comune:Santa Luce": [
+  43.4665473,
+  10.5467537
+ ],
  "@comune:Santa Maria a Monte": [
   43.7075159,
   10.6858074
@@ -97,6 +105,7 @@
   10.3921763
  ],
  "Arsenali Repubblicani, Via Bonanno, Pisa": null,
+ "Bagni di Pisa, Piazza Shelley, San Giuliano Terme": null,
  "Biblioteca Comunale, Piazza XX Settembre, Castelfranco di Sotto": [
   43.6988121,
   10.7442637
@@ -128,6 +137,11 @@
   43.4613075,
   10.6392538
  ],
+ "Chiesa San Paolo all’Orto, Piazza San Paolo all'Orto, Pisa": [
+  43.7175773,
+  10.404534
+ ],
+ "Chiesa di Santa Maria della Spina, Lungarno Gambacorti, Pisa": null,
  "Cinema Arsenale, Via San Martino, Pisa": null,
  "Cinema Teatro Odeon, Via dei Mille, Ponsacco": null,
  "Comune di Calci, Piazza Garibaldi, Calci": null,
@@ -153,6 +167,7 @@
   10.5546526
  ],
  "Domus Mazziniana, Via D'azeglio, Pisa": null,
+ "La Gualda Vecchia, Via castagnetana, Monteverdi Marittimo": null,
  "Largo Cocco Griffi, Pisa": [
   43.7237622,
   10.3927106
@@ -178,6 +193,7 @@
  ],
  "Museo Piaggio, Via Rinaldo Piaggio, Pontedera": null,
  "Museo degli Strumenti di Fisica-Ludoteca Scientifica, Largo Padre Renzo Spadoni, Pisa": null,
+ "Museo di Storia Antica di Bientina, Piazzetta dell'Angiolo, Bientina": null,
  "Officina Culturale San Miniato, Via Augusto Conti, San Miniato": null,
  "Orto Botanico di Pisa, Via Luca Ghini, Pisa": [
   43.7198464,
@@ -228,6 +244,10 @@
   43.7117997,
   10.6200781
  ],
+ "Piazza Vittorio Emanuele II, Piazza Vittorio Emanuele II, Pisa": [
+  43.7102179,
+  10.3990109
+ ],
  "Piazza dei Cavalieri, Pisa": [
   43.7194618,
   10.4000909
@@ -259,6 +279,7 @@
   43.3646248,
   10.5995286
  ],
+ "Riserva naturale Santa Luce, Via Rosignanina, Santa Luce": null,
  "San Giuliano Terme": [
   43.7629956,
   10.4410399
@@ -271,6 +292,10 @@
   43.6797502,
   10.8500949
  ],
+ "San Piero a Grado, Via Deodato Orlandi, Pisa": [
+  43.6830236,
+  10.3473869
+ ],
  "Santa Maria a Monte": [
   43.7075159,
   10.6858074
@@ -282,6 +307,11 @@
  ],
  "Sistema Museale Ateneo, Via Bonanno Pisano, Pisa": null,
  "Stazione Leopolda, Piazza Guerrazzi, Pisa": null,
+ "Teatro Comunale di Lari, Via Dante, Casciana Terme Lari": null,
+ "Teatro Era, Via Indipendenza, Pontedera": [
+  43.6645325,
+  10.6482048
+ ],
  "Teatro Verdi, Via Palestro, Pisa": null,
  "Teatro Verdi, Via Verdi, Santa Croce sull'Arno": null,
  "Teatro Verdi, Viale Regina Margherita, Casciana Terme Lari": null,
@@ -317,6 +347,10 @@
  "Via Roma, Peccioli": [
   43.5484461,
   10.7209707
+ ],
+ "Via Vittorio Emanuele, Calcinaia": [
+  43.6836852,
+  10.6145965
  ],
  "Vicopisano": [
   43.6998317,

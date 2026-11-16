@@ -248,5 +248,50 @@
   "luogo": "Corso Matteotti",
   "assente": true,
   "verificato": "2026-11-12"
+ },
+ "via vittorio emanuele|calcinaia": {
+  "luogo": "Via Vittorio Emanuele",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "chiesa san paolo all orto piazza san paolo all orto|pisa": {
+  "luogo": "Chiesa San Paolo all’Orto, Piazza San Paolo all'Orto",
+  "file": "chiesa-san-paolo-all-orto-piazza-san-pao-hkqitb.jpg",
+  "titolo": "Chiesa di San Paolo all'Orto",
+  "autore": "Paolo Fisicaro",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pisa_san_Paolo_all'Orto.JPG",
+  "verificato": "2026-11-16"
+ },
+ "teatro era via indipendenza|pontedera": {
+  "luogo": "Teatro Era, Via Indipendenza",
+  "file": "teatro-era-via-indipendenza-1f5ahde.jpg",
+  "titolo": "Teatro Era",
+  "autore": "Barbieriluca1980",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Interno_.jpg",
+  "verificato": "2026-11-16"
+ },
+ "san piero a grado via deodato orlandi|pisa": {
+  "luogo": "San Piero a Grado, Via Deodato Orlandi",
+  "file": "san-piero-a-grado-via-deodato-orlandi-1g65yqy.jpg",
+  "titolo": "Cimitero di San Piero a Grado",
+  "autore": "sailko",
+  "licenza": "CC BY 2.5",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.5",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Cimitero_di_san_piero_a_grado_04.JPG",
+  "verificato": "2026-11-16"
+ },
+ "piazza vittorio emanuele ii piazza vittorio emanuele ii 5|pisa": {
+  "luogo": "Piazza Vittorio Emanuele II, Piazza Vittorio Emanuele II, 5",
+  "file": "piazza-vittorio-emanuele-ii-piazza-vitto-16d7niu.jpg",
+  "titolo": "Piazza Vittorio Emanuele II (Pisa)",
+  "autore": "Illustratedjc",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Piazza_Vittorio_Emanuele_II%2C_Pisa.jpg",
+  "verificato": "2026-11-16"
  }
 }
