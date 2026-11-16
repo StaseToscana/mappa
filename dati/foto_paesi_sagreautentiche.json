@@ -463,5 +463,295 @@
   "comune": "Cascine-la Croce",
   "assente": true,
   "verificato": "2026-11-15"
+ },
+ "cetica": {
+  "comune": "Cetica",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "lucca": {
+  "comune": "Lucca",
+  "file": "paese-lucca-q63iiv.jpg",
+  "titolo": "Lucca",
+  "autore": "Arne Müseler",
+  "licenza": "CC BY-SA 3.0 de",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Italy_-_Lucca_-_2.jpg",
+  "verificato": "2026-11-16"
+ },
+ "lamporecchio": {
+  "comune": "Lamporecchio",
+  "file": "paese-lamporecchio-xsqba4.jpg",
+  "titolo": "Lamporecchio",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Lamporecchio%2C_comune.JPG",
+  "verificato": "2026-11-16"
+ },
+ "aquilea": {
+  "comune": "Aquilea",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "spianate": {
+  "comune": "Spianate",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "filicaia": {
+  "comune": "Filicaia",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "cascina": {
+  "comune": "Cascina",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "rosignano marittimo": {
+  "comune": "Rosignano Marittimo",
+  "file": "paese-rosignano-marittimo-15t5ycc.jpg",
+  "titolo": "Rosignano Marittimo",
+  "autore": "sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Castello_di_rosignano_marittimo_02.JPG",
+  "verificato": "2026-11-16"
+ },
+ "la serra": {
+  "comune": "La Serra",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "strada del monte amiata": {
+  "comune": "Strada del Monte Amiata",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "contignano": {
+  "comune": "Contignano",
+  "file": "paese-contignano-28khck.jpg",
+  "titolo": "Contignano",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:ContignanoRadicofaniPanorama1.jpg",
+  "verificato": "2026-11-16"
+ },
+ "cortona": {
+  "comune": "Cortona",
+  "file": "paese-cortona-1ehdegv.jpg",
+  "titolo": "Cortona",
+  "autore": "Patrick Denker",
+  "licenza": "CC BY 2.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/2.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Cortona-vista01.jpg",
+  "verificato": "2026-11-16"
+ },
+ "corezzo": {
+  "comune": "Corezzo",
+  "file": "paese-corezzo-126cz5n.jpg",
+  "titolo": "Corezzo",
+  "autore": "Ilpinguinotransalpino",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Entrata_del_paese_di_Corezzo.jpg",
+  "verificato": "2026-11-16"
+ },
+ "roccalbegna": {
+  "comune": "Roccalbegna",
+  "file": "paese-roccalbegna-1iq7xa1.jpg",
+  "titolo": "Roccalbegna",
+  "autore": "sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Roccalbegna%2C_veduta_01.JPG",
+  "verificato": "2026-11-16"
+ },
+ "massa": {
+  "comune": "Massa",
+  "file": "paese-massa-b9rhl3.jpg",
+  "titolo": "Massa (Italia)",
+  "autore": "Sgado walter",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Massa_-_Comune_di_Massa_-_2023-09-10_12-00-37_001.jpg",
+  "verificato": "2026-11-16"
+ },
+ "orbetello": {
+  "comune": "Orbetello",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "san casciano dei bagni": {
+  "comune": "San Casciano dei Bagni",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "badia al pino": {
+  "comune": "Badia Al Pino",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "montecarlo": {
+  "comune": "Montecarlo",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "vaglia": {
+  "comune": "Vaglia",
+  "file": "paese-vaglia-1u3nv85.jpg",
+  "titolo": "Vaglia (Italia)",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Vaglia%2C_pieve_di_san_pietro%2C_ext._01.JPG",
+  "verificato": "2026-11-16"
+ },
+ "paganico": {
+  "comune": "Paganico",
+  "file": "paese-paganico-ynds9p.jpg",
+  "titolo": "Paganico",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:PaganicoCentroCasseroSenesePortaSenese.JPG",
+  "verificato": "2026-11-16"
+ },
+ "pienza": {
+  "comune": "Pienza",
+  "file": "paese-pienza-deiv6f.jpg",
+  "titolo": "Pienza",
+  "autore": "Photo2023",
+  "licenza": "CC BY 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Centro_Pienza_3.jpg",
+  "verificato": "2026-11-16"
+ },
+ "monte sopra rondine": {
+  "comune": "Monte Sopra Rondine",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "girone": {
+  "comune": "Girone",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "pitigliano": {
+  "comune": "Pitigliano",
+  "file": "paese-pitigliano-115j579.jpg",
+  "titolo": "Pitigliano",
+  "autore": "Clemens M. Brandstetter, Buers",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Pitigliano_Cmb.JPG",
+  "verificato": "2026-11-16"
+ },
+ "marcignana": {
+  "comune": "Marcignana",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "badia a pacciana": {
+  "comune": "Badia a Pacciana",
+  "file": "paese-badia-a-pacciana-1qs4wff.jpg",
+  "titolo": "Badia di Badia a Pacciana",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Badia_di_pacciana%2C_esterno_01.jpg",
+  "verificato": "2026-11-16"
+ },
+ "pieve al toppo": {
+  "comune": "Pieve al Toppo",
+  "file": "paese-pieve-al-toppo-gm7f5a.jpg",
+  "titolo": "Civitella in Val di Chiana",
+  "autore": "Sailko",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Civitella_in_val_di_chiana%2C_veduta_03.jpg",
+  "verificato": "2026-11-16"
+ },
+ "capalbio": {
+  "comune": "Capalbio",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "greve in chianti": {
+  "comune": "Greve in Chianti",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "la rotta": {
+  "comune": "La Rotta",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "montagnano": {
+  "comune": "Montagnano",
+  "assente": true,
+  "verificato": "2026-11-16"
+ },
+ "bivigliano": {
+  "comune": "Bivigliano",
+  "file": "paese-bivigliano-1ie60ij.jpg",
+  "titolo": "Bivigliano",
+  "autore": "sailko / Ganimede85",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Villa_di_bivigliano_01.jpg",
+  "verificato": "2026-11-16"
+ },
+ "scansano": {
+  "comune": "Scansano",
+  "file": "paese-scansano-1n2ddxo.jpg",
+  "titolo": "Scansano",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:ScansanoPanorama3.jpg",
+  "verificato": "2026-11-16"
+ },
+ "chiusi": {
+  "comune": "Chiusi",
+  "file": "paese-chiusi-ab6ijh.jpg",
+  "titolo": "Chiusi",
+  "autore": "LigaDue",
+  "licenza": "CC BY-SA 4.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:ChiusiPanorama5.jpg",
+  "verificato": "2026-11-16"
+ },
+ "cinigiano": {
+  "comune": "Cinigiano",
+  "file": "paese-cinigiano-ixkzzo.jpg",
+  "titolo": "Cinigiano",
+  "autore": "LigaDue",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:CinigianoPanorama.JPG",
+  "verificato": "2026-11-16"
+ },
+ "montorsaio": {
+  "comune": "Montorsaio",
+  "file": "paese-montorsaio-1xpw3va.jpg",
+  "titolo": "Montorsaio",
+  "autore": "Petitverdot : Matteo Vinattieri",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Panorama_Montorsaio_(GR).jpg",
+  "verificato": "2026-11-16"
+ },
+ "balconevisi": {
+  "comune": "Balconevisi",
+  "file": "paese-balconevisi-ew60c6.jpg",
+  "titolo": "Balconevisi",
+  "autore": "sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Balconevisi%2C_villa_di_montebicchieri_01.JPG",
+  "verificato": "2026-11-16"
  }
 }
