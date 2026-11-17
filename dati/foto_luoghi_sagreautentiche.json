@@ -733,5 +733,20 @@
   "luogo": "Cinigiano, GR",
   "assente": true,
   "verificato": "2026-11-16"
+ },
+ "montorsaio gr|montorsaio": {
+  "luogo": "Montorsaio, GR",
+  "file": "montorsaio-gr-1xpw3va.jpg",
+  "titolo": "Montorsaio",
+  "autore": "Petitverdot : Matteo Vinattieri",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Panorama_Montorsaio_(GR).jpg",
+  "verificato": "2026-11-17"
+ },
+ "balconevisi pi|balconevisi": {
+  "luogo": "Balconevisi, PI",
+  "assente": true,
+  "verificato": "2026-11-17"
  }
 }
