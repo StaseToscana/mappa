@@ -122,6 +122,7 @@
   43.7130076,
   10.3940432
  ],
+ "Casa Quarantotti, Via Tavoleria, Pisa": null,
  "Casaconcia, Via 1° Maggio 82-84, San Miniato": null,
  "Casciana Terme Lari": [
   43.5521588,
@@ -146,6 +147,10 @@
  "Cinema Teatro Odeon, Via dei Mille, Ponsacco": null,
  "Comune di Calci, Piazza Garibaldi, Calci": null,
  "Comune di Crespina Lorenzana, Piazza Cesare Battisti, Crespina Lorenzana": null,
+ "Convento di Nicosia, Nicosia, Calci": [
+  43.7152768,
+  10.5213882
+ ],
  "Corso Matteotti, Cascina": [
   43.6763179,
   10.5499966
@@ -167,6 +172,7 @@
   10.5546526
  ],
  "Domus Mazziniana, Via D'azeglio, Pisa": null,
+ "Ex Manicomio di Volterra, Borgo San Lazzaro, Volterra": null,
  "La Gualda Vecchia, Via castagnetana, Monteverdi Marittimo": null,
  "Largo Cocco Griffi, Pisa": [
   43.7237622,
@@ -175,6 +181,10 @@
  "Lari, Casciana Terme Lari": [
   43.5660167,
   10.592001
+ ],
+ "MARTI, Piazza Fantozzi, Montopoli in Val d'Arno": [
+  43.6493332,
+  10.7441267
  ],
  "Molina di Quosa, San Giuliano Terme": [
   43.7951371,
@@ -193,6 +203,10 @@
  ],
  "Museo Piaggio, Via Rinaldo Piaggio, Pontedera": null,
  "Museo degli Strumenti di Fisica-Ludoteca Scientifica, Largo Padre Renzo Spadoni, Pisa": null,
+ "Museo della Ceramica Coccapani, Via Aurelio Saffi, Calcinaia": [
+  43.6844802,
+  10.613951
+ ],
  "Museo di Storia Antica di Bientina, Piazzetta dell'Angiolo, Bientina": null,
  "Officina Culturale San Miniato, Via Augusto Conti, San Miniato": null,
  "Orto Botanico di Pisa, Via Luca Ghini, Pisa": [
@@ -331,6 +345,11 @@
   43.7000183,
   10.5847196
  ],
+ "Tempio Di Minerva Medica, Montefoscoli, Palaia": [
+  43.5848169,
+  10.7561701
+ ],
+ "Tenuta di San Rossore, Località Cascine Vecchie, Pisa": null,
  "Terme di Casciana, Piazza Garibaldi, Casciana Terme Lari": null,
  "Terre di Pisa, Pisa": [
   43.1708392,

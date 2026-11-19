@@ -298,5 +298,30 @@
   "luogo": "Teatro di Pisa, Via Palestro",
   "assente": true,
   "verificato": "2026-11-17"
+ },
+ "tempio di minerva medica montefoscoli|palaia": {
+  "luogo": "Tempio Di Minerva Medica, Montefoscoli",
+  "file": "tempio-di-minerva-medica-montefoscoli-1a6qotx.jpg",
+  "titolo": "Tempio di Minerva Medica (Montefoscoli)",
+  "autore": "Sailko",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Montefoscoli%2C_tempio_di_minerva_medica%2C_1821-23%2C_03.jpg",
+  "verificato": "2026-11-19"
+ },
+ "museo della ceramica coccapani via aurelio saffi 8|calcinaia": {
+  "luogo": "Museo della Ceramica Coccapani, Via Aurelio Saffi, 8",
+  "assente": true,
+  "verificato": "2026-11-19"
+ },
+ "marti piazza fantozzi|montopoli in val d arno": {
+  "luogo": "MARTI, Piazza Fantozzi",
+  "assente": true,
+  "verificato": "2026-11-19"
+ },
+ "convento di nicosia nicosia|calci": {
+  "luogo": "Convento di Nicosia, Nicosia",
+  "assente": true,
+  "verificato": "2026-11-19"
  }
 }
