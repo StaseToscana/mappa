@@ -4,6 +4,27 @@
   "lastmod": "2026-11-19T13:14:29+00:00",
   "letta": "2026-11-19"
  },
+ "https://www.terredipisa.it/events/%f0%9d%90%8d%f0%9d%90%a8%f0%9d%90%ad%f0%9d%90%ad%f0%9d%90%9e-%f0%9d%90%9d%f0%9d%90%a2-%f0%9d%90%a5%f0%9d%90%ae%f0%9d%90%a7%f0%9d%90%9a-%f0%9d%90%9d%f0%9d%90%a2-%f0%9d%90%ac%f0%9d%90%a8%f0%9d%90%a0/": {
+  "email": "",
+  "fine": "2026-06-13",
+  "hash": "024b8ecb2acc46238ef957d3621c232377c7cabf",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-05-27T11:37:26+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Museo Storia Naturale, Via Roma, Calci",
+  "orario": "21:00–23:45",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Una notte al Museo di Storia Naturale di Calci",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/11-lune-inverno-2/": {
   "email": "info@fondarte.peccioli.net",
   "fine": "2027-01-06",
@@ -26,6 +47,27 @@
   "sito": "http://www.fondarte.peccioli.net",
   "telefono": "0587.672158",
   "titolo": "Undici Lune d’Inverno a Peccioli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/2-birra-in-borgo-montescudaio/": {
+  "email": "info@borghipiubelliditalia.it",
+  "fine": "2026-06-20",
+  "hash": "d94b5d92d1bb0463093369167c095f98ef326c31",
+  "inizio": "2026-06-20",
+  "lastmod": "2026-06-12T04:58:34+00:00",
+  "letta": "2026-11-24",
+  "luogo": "casale marittimo, Strada Provinciale Camminata, 5, 56040 , Casale Marittimo PI",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-06-20",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Notte Romantica a Casale Marittimo",
   "v": 4,
   "verifica": false
  },
@@ -68,6 +110,27 @@
   "sito": "https://vivicapannoli.it/",
   "telefono": "",
   "titolo": "56033 Aperishow Festival a Capannoli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/69254/": {
+  "email": "",
+  "fine": "2026-07-11",
+  "hash": "17233b09c63f6187319bed3fffd77a027bc18c04",
+  "inizio": "2026-07-07",
+  "lastmod": "2026-07-07T07:34:51+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Peccioli, centro storico, Peccioli",
+  "orario": "19:00–23:30",
+  "periodi": [
+   [
+    "2026-07-07",
+    "2026-07-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Jazz Peccioli – The New Orleans Experience",
   "v": 4,
   "verifica": false
  },
@@ -243,6 +306,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/amico-museo-orto-botanico/": {
+  "email": "",
+  "fine": "2026-05-29",
+  "hash": "13396a4ac6ae140902afb5438dde6285e19dc890",
+  "inizio": "2026-05-29",
+  "lastmod": "2026-05-23T07:29:42+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Orto e Museo Botanico, Via Ghini, Pisa",
+  "orario": "21:00–22:00",
+  "periodi": [
+   [
+    "2026-05-29",
+    "2026-05-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Amico Museo: Visite all’Orto Botanico di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/anima-mundi-festival-musica-sacra-pisa/": {
   "email": "",
   "fine": "2026-10-02",
@@ -345,6 +429,27 @@
   "sito": "",
   "telefono": "393 6779665",
   "titolo": "Antiqua | San Giuliano Terme",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/aperti-sotto-le-stelle-pisa/": {
+  "email": "",
+  "fine": "2026-06-13",
+  "hash": "dd9f8f49248d134741198f3399ef2fdb73ad443b",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-06-07T03:41:07+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza dei Cavalieri, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Aperti sotto le stelle | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -490,10 +595,73 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/aperture-visite-guidate-badia-di-san-savino-cascina/": {
+  "email": "",
+  "fine": "2026-07-11",
+  "hash": "a8af7fd03c4401aa90107c59ad93385771adf31a",
+  "inizio": "2026-07-11",
+  "lastmod": "2026-07-10T09:07:33+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Montione Badia, Via Tosco Romagnola, Montione Badia",
+  "orario": "19:30–23:00",
+  "periodi": [
+   [
+    "2026-07-11",
+    "2026-07-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Cena in bianco alla Badia di San Savino | Montione",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/appuntamento-in-giardino/": {
+  "email": "",
+  "fine": "2026-06-07",
+  "hash": "b27cb600dae668b7524cd9986e5aae8fe642f2dc",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-05-27T15:49:12+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "16:00–18:00",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "https://www.apgi.it/appuntamento-in-giardino/",
+  "telefono": "",
+  "titolo": "Appuntamento in Giardino |  Terre di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/archi-lab-visita-guidata-allarchivio-storico-di-vicopisano/": {
   "ko": true,
   "lastmod": "2026-11-19T12:25:59+00:00",
   "letta": "2026-11-19"
+ },
+ "https://www.terredipisa.it/events/archivissima-san-miniato/": {
+  "email": "",
+  "fine": "2026-06-07",
+  "hash": "c803badfbde33a6b65dfacb1b5ffa33999918b33",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-05T09:38:34+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "18:00–23:00",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Archivissima, la festa e la notte degli archivi |",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/art-natura-teatro-fra-naturale-e-artificiale/": {
   "email": "",
@@ -566,6 +734,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/artinsolite-ciclo-di-mostre-arte-lajatico/": {
+  "email": "info@teatrodelsilenzio.it",
+  "fine": "2026-07-14",
+  "hash": "333b3e524b2544c8510b7fbdd31837cec6b7d660",
+  "inizio": "2026-07-14",
+  "lastmod": "2026-07-11T15:19:51+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Lajatico, Piazza Vittorio Veneto, Lajatico",
+  "orario": "21:15–22:30",
+  "periodi": [
+   [
+    "2026-07-14",
+    "2026-07-14"
+   ]
+  ],
+  "sito": "https://www.teatrodelsilenzio.it/artinsolite-il-progetto/",
+  "telefono": "",
+  "titolo": "“Artinsolite” arte contemporanea | Lajatico",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/aspettando-il-natale/": {
   "email": "IAT@COMUNE.MONTOPOLI.PI.IT",
   "fine": "2026-11-29",
@@ -584,6 +773,27 @@
   "sito": "",
   "telefono": "0571.1604785",
   "titolo": "Aspettando il Natale | Marti",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/aspettando-la-battaglia-cascina-ad-1364-cascina/": {
+  "email": "",
+  "fine": "2025-07-06",
+  "hash": "49bf9358b0da36dc1d6e5b824cb980b4e972f588",
+  "inizio": "2025-07-04",
+  "lastmod": "2026-06-18T15:24:18+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Cascina, Corso Matteotti, Cascina",
+  "orario": "",
+  "periodi": [
+   [
+    "2025-07-04",
+    "2025-07-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 719291",
+  "titolo": "Cascina AD 1364: Aspettando la Battaglia – ANNULLATA NEL 2026",
   "v": 4,
   "verifica": false
  },
@@ -675,6 +885,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/autunno-nelle-cerbaie-passeggiate-storico-naturalistiche/": {
+  "email": "info@prolocosantacroce.com",
+  "fine": "2026-06-06",
+  "hash": "a0de7fe5b122babb545d4c9d98c35a3b819cd98e",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-06-03T10:30:14+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Colline delle Cerbaie, Poggio Adorno, Castelfranco di Sotto",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "333.4909169",
+  "titolo": "Cammina con noi in Valdarno",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/bacco-tabacco-venere-palaia/": {
   "email": "turismo@comune.palaia.pi.it",
   "fine": "2026-09-06",
@@ -738,6 +969,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/bagni-di-vino-san-giuliano-terme/": {
+  "email": "",
+  "fine": "2026-06-20",
+  "hash": "57b3f0e397a8d045a32a0556d0a8e6737fea5f1e",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-05T07:13:19+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Giuliano Terme, centro, piazze e luoghi limitrofi, San Giuliano Terme",
+  "orario": "19:00–23:45",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.819111",
+  "titolo": "Bagni di Vino a San Giuliano Terme",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/bandiere-arancioni-terre-di-pisa/": {
   "email": "",
   "fine": "2026-10-04",
@@ -772,6 +1024,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "“Banksi e la street art” agli Arsenali Repubblicani di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/beeriver-primavera-pisa/": {
+  "email": "info@leopolda.it",
+  "fine": "2026-06-13",
+  "hash": "a39cdff4a9fa42d496410046d38c586dd82b1f3b",
+  "inizio": "2026-06-12",
+  "lastmod": "2026-06-10T10:47:13+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Calci, Piazza Garibaldi, Calci",
+  "orario": "19:00–23:59",
+  "periodi": [
+   [
+    "2026-06-12",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.21531",
+  "titolo": "Beeriver on tour | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -877,6 +1150,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Bright Night – La Notte Europea dei Ricercatori in Toscana",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/buon-natale-capanne/": {
+  "email": "",
+  "fine": "2026-12-06",
+  "hash": "a6e0508f8fd9dcce3fd639ca1da5eabb6faa213e",
+  "inizio": "2026-12-06",
+  "lastmod": "2026-11-24T11:12:45+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Capanne, Piazza Vittorio Veneto, Capanne",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2026-12-06",
+    "2026-12-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Buon Natale Capanne",
   "v": 4,
   "verifica": false
  },
@@ -1069,6 +1363,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/cantina-jazz-le-mille-e-una-note-pisa/": {
+  "email": "",
+  "fine": "2026-07-08",
+  "hash": "b981be253d561684fb0693fd14c5da60722ead99",
+  "inizio": "2026-07-08",
+  "lastmod": "2026-06-11T07:07:46+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Cinema Arsenale, Via San Martino, angolo Via Scaramucci, Pisa",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-07-08",
+    "2026-07-08"
+   ]
+  ],
+  "sito": "",
+  "telefono": "320 8787288",
+  "titolo": "Cantina Jazz – Mercoledì di Emozioni",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/cantina-jazz/": {
   "email": "",
   "fine": "2026-10-10",
@@ -1150,6 +1465,27 @@
   "sito": "",
   "telefono": "0587.65651",
   "titolo": "In Cantina a Terricciola",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cantine-aperte-toscana/": {
+  "email": "segreteria@mtvtoscana.com",
+  "fine": "2026-05-31",
+  "hash": "610c233bcdefff147353217c37fefaa7f7a375e7",
+  "inizio": "2026-05-30",
+  "lastmod": "2026-05-25T10:36:25+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Terre di Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-30",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "349 7160023",
+  "titolo": "Cantine aperte nelle Terre di Pisa",
   "v": 4,
   "verifica": false
  },
@@ -1411,6 +1747,69 @@
   "lastmod": "2026-11-19T12:25:59+00:00",
   "letta": "2026-11-19"
  },
+ "https://www.terredipisa.it/events/cena-in-bianco-peccioli/": {
+  "email": "",
+  "fine": "2025-07-26",
+  "hash": "d7b640829760641597351fe1696a7b1256d85bbd",
+  "inizio": "2025-07-26",
+  "lastmod": "2026-07-10T11:23:14+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Peccioli, Via Roma, Peccioli",
+  "orario": "19:00–23:30",
+  "periodi": [
+   [
+    "2025-07-26",
+    "2025-07-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Cena in bianco | Peccioli – ANNULLATA NEL 2026",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cena-in-bianco-pisa/": {
+  "email": "cenainbiancopisa@gmail.com",
+  "fine": "2026-07-04",
+  "hash": "754d1270e850662776eeed63e9f4243ea93b3b0b",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-20T09:01:07+00:00",
+  "letta": "2026-11-24",
+  "luogo": "PIazza delle Baleari, Marina di Pisa",
+  "orario": "20:30–23:30",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Cena in bianco | Marina di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cena-in-borgo-e-cena-in-bianco-marti/": {
+  "email": "prolocom@gmail.com",
+  "fine": "2026-06-28",
+  "hash": "9902cb83bbd65ffcbf7376f80b835b400ad74b3f",
+  "inizio": "2026-06-27",
+  "lastmod": "2026-06-07T11:17:59+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza Fantozzi, Marti",
+  "orario": "19:00–23:30",
+  "periodi": [
+   [
+    "2026-06-27",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "http://www.montopoli.eu/",
+  "telefono": "3889554187",
+  "titolo": "Cena in borgo e cena in bianco | Marti",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/cena-itinerante-buti/": {
   "email": "info@paliodibuti.eu",
   "fine": "2027-01-23",
@@ -1429,6 +1828,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Aspettando il Palio: cena nelle Contrade di Buti",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/cena-nel-borgo-sotto-torri-e-stelle-vicopisano/": {
+  "email": "",
+  "fine": "2026-06-20",
+  "hash": "d74c8cc33b23915de446959582ccaf4b4aea2144",
+  "inizio": "2026-06-20",
+  "lastmod": "2026-06-03T18:45:00+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Vicopisano, centro, piazze e luoghi limitrofi, Vicopisano",
+  "orario": "18:30–23:45",
+  "periodi": [
+   [
+    "2026-06-20",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Cena nel borgo sotto torri e stelle | Vicopisano",
   "v": 4,
   "verifica": false
  },
@@ -1517,6 +1937,27 @@
   "sito": "",
   "telefono": "324 0018050",
   "titolo": "Novembre alla Certosa Monumentale di Calci",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/chase-the-sun/": {
+  "email": "turbolento@thinkbike.it",
+  "fine": "2026-06-20",
+  "hash": "24a7a8acb879a1bf98659809a6bc913202558b6f",
+  "inizio": "2026-06-20",
+  "lastmod": "2026-05-29T07:57:20+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Tirrenia, Piazza Belvedere, Tirrenia",
+  "orario": "05:30–17:30",
+  "periodi": [
+   [
+    "2026-06-20",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Chase the Sun Italia Bike Ride",
   "v": 4,
   "verifica": false
  },
@@ -1662,6 +2103,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/comicopoli-montopoli-in-val-darno/": {
+  "email": "ufficiostampa@comicopoli.it",
+  "fine": "2026-06-27",
+  "hash": "f75444f492eb230a500b2cc5763d71ae0c494005",
+  "inizio": "2026-06-26",
+  "lastmod": "2026-06-06T12:26:35+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Montopoli, Piazza Pertici, Montopoli in Valdarno",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-06-26",
+    "2026-06-27"
+   ]
+  ],
+  "sito": "https://comicopoli.it/",
+  "telefono": "",
+  "titolo": "Comicopoli, Festa della Comicità | Montopoli in Val d’Arno",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/concerti-della-normale/": {
   "email": "concerti@sns.it",
   "fine": "2027-06-06",
@@ -1741,6 +2203,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/concerto-di-natale-a-peccioli/": {
+  "email": "info@fondarte.peccioli.net",
+  "fine": "2026-11-30",
+  "hash": "5b9e54752774b0342b42d740013665107a07bc00",
+  "inizio": "2026-11-30",
+  "lastmod": "2026-11-24T07:39:29+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Galleria dei Giganti, Via cavour, 3, Peccioli",
+  "orario": "21:00–22:30",
+  "periodi": [
+   [
+    "2026-11-30",
+    "2026-11-30"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 672158",
+  "titolo": "Concerti alla Galleria dei Giganti di Peccioli",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/concerto-di-natale-pisa-2/": {
   "email": "",
   "fine": "2026-12-18",
@@ -1759,6 +2242,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Concerto di Natale in Cattedrale | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/concerto-ponsacco/": {
+  "email": "info@confcommerciopisa.it",
+  "fine": "2026-06-06",
+  "hash": "208465a09599798f8868d014609d930c45665fbc",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-06-06T12:28:26+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Ponsacco, Piazza D'Appiano, Ponsacco",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 25196",
+  "titolo": "Festa del Commercio | Ponsacco",
   "v": 4,
   "verifica": false
  },
@@ -2475,6 +2979,27 @@
   "v": 4,
   "verifica": true
  },
+ "https://www.terredipisa.it/events/estate-a-ponsacco/": {
+  "email": "",
+  "fine": "2026-07-16",
+  "hash": "a2454ab9f6d92cfc9f2031f6133ae35d1e693ca4",
+  "inizio": "2026-07-16",
+  "lastmod": "2026-07-10T08:37:00+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Ponsacco, Piazza D'Appiano, Ponsacco",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-16",
+    "2026-07-16"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Estate a Ponsacco",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/estate-a-pontedera/": {
   "email": "info@visitvaldera.eu",
   "fine": "2026-09-30",
@@ -2701,6 +3226,43 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/estate-casciana-terme/": {
+  "email": "",
+  "fine": "2026-06-27",
+  "hash": "6530ed8763c2bc1f4d436bddbcc3eb979d1e24e9",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-06-18T06:28:54+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza Garibaldi, Casciana Terme",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ],
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ],
+   [
+    "2026-06-20",
+    "2026-06-20"
+   ],
+   [
+    "2026-06-27",
+    "2026-06-27"
+   ],
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.646258",
+  "titolo": "Giugno e luglio a Casciana Terme e Lari",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/estate-castelfranchese/": {
   "email": "",
   "fine": "2026-09-27",
@@ -2805,6 +3367,27 @@
   "v": 4,
   "verifica": true
  },
+ "https://www.terredipisa.it/events/estate-in-musica-a-palazzo-blu-pisa/": {
+  "email": "",
+  "fine": "2026-09-12",
+  "hash": "977dbee887fdca0a99bcceb3cf71c23b52b2171b",
+  "inizio": "2026-09-12",
+  "lastmod": "2026-07-10T07:41:04+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Palazzo Blu, Lungarno Gambacorti, 9, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-09-12",
+    "2026-09-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Estate in Musica a Palazzo Blu | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/estate-montecatini-val-di-cecina/": {
   "email": "prolocomontecatinivc@gmail.com",
   "fine": "2025-08-08",
@@ -2823,6 +3406,27 @@
   "sito": "",
   "telefono": "3485228825",
   "titolo": "Borgo Incantando, festival degli artisti di strada | Montecatini Val di Cecina – ANNULLATO NEL 2026",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/estate-off-stazione-leopolda-pisa/": {
+  "email": "",
+  "fine": "2026-06-28",
+  "hash": "30184d8b7f3957fb523f444c2990ef91caae7e2b",
+  "inizio": "2026-06-28",
+  "lastmod": "2026-06-07T11:25:20+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Giardino Scotto, Lungarno Galilei, Pisa",
+  "orario": "20:30–23:30",
+  "periodi": [
+   [
+    "2026-06-28",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Arpa d’Estate al Giardino Scotto di Pisa",
   "v": 4,
   "verifica": false
  },
@@ -3031,6 +3635,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/eventi-rocca-ripafratta/": {
+  "email": "info@ripafratta.it",
+  "fine": "2026-07-04",
+  "hash": "eeb88079c0a5606b42050f38895a38424ae31b2c",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-30T15:33:59+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Rocca di Ripafratta, Via della Rocca, Ripafratta",
+  "orario": "18:00–22:00",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Aperiveglie sul Monte Pisano a Ripafratta",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/eventi-teatro-marchionneschi-guardistallo/": {
   "email": "teatromarchionneschi@hotmail.com",
   "fine": "2026-11-15",
@@ -3078,6 +3703,27 @@
   "lastmod": "2026-09-04T07:28:01+00:00",
   "letta": "2026-11-22"
  },
+ "https://www.terredipisa.it/events/festa-allegria-morrona-terricciola/": {
+  "email": "",
+  "fine": "2026-05-31",
+  "hash": "f106307fe53a844bb2d21e1691c2ae2e4218ba89",
+  "inizio": "2026-05-29",
+  "lastmod": "2026-05-25T10:57:10+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Morrona, Piazza Alessandro da Morrona, Morrona",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-29",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa dell’allegria a Morrona | Terricciola",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-becchi-vicopisano/": {
   "email": "grupporosellini@yahoo.it",
   "fine": "2026-11-11",
@@ -3096,6 +3742,27 @@
   "sito": "",
   "telefono": "050551285",
   "titolo": "Festa dei becchi | Vicopisano",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festa-bruschetta-lajatico/": {
+  "email": "info@lajaticotoscana.it",
+  "fine": "2026-06-21",
+  "hash": "a9e7165403c2d5734ea887860c383afe4888d06d",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-11T06:54:30+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Lajatico, Piazza Vittorio Veneto, Lajatico",
+  "orario": "19:30–23:30",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-21"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.643121",
+  "titolo": "Festa della bruschetta | Lajatico",
   "v": 4,
   "verifica": false
  },
@@ -3162,6 +3829,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festa-chiesanuovese-santo-stefano-a-macerata-cascina/": {
+  "email": "comitato.chiesanova@gmail.com",
+  "fine": "2026-06-07",
+  "hash": "3076ec3e2284a9d9edb21347a8964abbe8833b7a",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-01T12:11:52+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Santo Stefano a Macerata, Chiesanuova, Santo Stefano a Macerata",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa Chiesanuovese e sagra dell’anguilla | S. Stefano a Macerata",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-contadina-villa-campanile/": {
   "email": "info@prolocovillacampanile.it",
   "fine": "2026-08-02",
@@ -3183,6 +3871,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festa-dei-commercianti-bientina/": {
+  "email": "ilovebientina@gmail.com",
+  "fine": "2026-06-19",
+  "hash": "b4714a1c7aa1365cc15f8b74f752e4452297f306",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-10T10:16:21+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Bientina, Piazza Martiri della Libertà, Bientina",
+  "orario": "18:00–23:30",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-19"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa dei Commercianti  | Bientina",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-dei-primi-vicopisano/": {
   "email": "ortaccio@gmail.com",
   "fine": "2026-08-29",
@@ -3201,6 +3910,27 @@
   "sito": "",
   "telefono": "050.799165",
   "titolo": "Festa dei primi | Vicopisano",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festa-dei-ramai-montecatini-val-di-cecina/": {
+  "email": "prolocomontecatinivc@gmail.com",
+  "fine": "2026-07-05",
+  "hash": "b68b3fc16e24eeead7f6d53767ac20f8596061c2",
+  "inizio": "2026-07-05",
+  "lastmod": "2026-07-03T13:01:20+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Miniera di Camporciano, Via delle Miniere, Montecatini Val di Cecina",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-05",
+    "2026-07-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa dei Ramai | Montecatini Val di Cecina",
   "v": 4,
   "verifica": false
  },
@@ -3309,6 +4039,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festa-del-solstizio-medievale-montecatini-val-di-cecina/": {
+  "email": "",
+  "fine": "2026-06-21",
+  "hash": "4e6295ad22e8d4c7d33102cfaa4e8715a532e1f3",
+  "inizio": "2026-06-20",
+  "lastmod": "2026-06-18T12:44:08+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Montecatini Val di Cecina, Piazza della Repubblica, Montecatini Val di Cecina",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-20",
+    "2026-06-21"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa del Solstizio Medievale | Montecatini Val di Cecina",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festa-del-teatro-san-miniato/": {
   "email": "",
   "fine": "2026-07-30",
@@ -3348,6 +4099,27 @@
   "sito": "http://www.consorziovinomontescudaiodoc.it/",
   "telefono": "0586 651631",
   "titolo": "Festa del Vino Montescudaio DOC",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festa-della-birra-artigianale-vicopisano/": {
+  "email": "",
+  "fine": "2026-07-05",
+  "hash": "e6d708278cfd688cd2d5b9aff5a0a7369bb4fa81",
+  "inizio": "2026-07-03",
+  "lastmod": "2026-06-19T06:24:37+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Vicopisano, centro, piazze e luoghi limitrofi, Vicopisano",
+  "orario": "18:00–23:30",
+  "periodi": [
+   [
+    "2026-07-03",
+    "2026-07-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 799175",
+  "titolo": "Festa della birra artigianale | Vicopisano",
   "v": 4,
   "verifica": false
  },
@@ -3411,6 +4183,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Festa della Madonna di San Romano | Montopoli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festa-della-patrona-santa-ubaldesca-calcinaia/": {
+  "email": "parrocchiasgbcalcinaia@gmail.com",
+  "fine": "2026-05-28",
+  "hash": "2ac8d174d3fbd5b4394ceb8771ca48412fb3f6f1",
+  "inizio": "2026-05-28",
+  "lastmod": "2026-05-25T06:39:59+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Calcinaia, Via Vittorio Emanuele, Calcinaia",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-28",
+    "2026-05-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 489031",
+  "titolo": "Solenne Processione e Festa del Dono per la patrona Santa Ubaldesca | Calcinaia",
   "v": 4,
   "verifica": false
  },
@@ -3993,6 +4786,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/festival-filo-di-identita/": {
+  "email": "",
+  "fine": "2026-07-12",
+  "hash": "9e7404836ae3888eabde0da0a715cd126d9a7f6b",
+  "inizio": "2026-07-06",
+  "lastmod": "2026-06-19T07:17:22+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-06",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festival “Filo di identità”",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/festival-internazionale-del-teatro-di-figura-san-miniato/": {
+  "email": "teatrodistrada@terzostudio.it",
+  "fine": "2026-06-21",
+  "hash": "96daa26dc7cdee931fdcc1845f37810d484ccb4e",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-09T09:31:02+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-21"
+   ]
+  ],
+  "sito": "http://www.terzostudio.it/festival/la-luna-e-azzurra/",
+  "telefono": "0571.487058",
+  "titolo": "Festival del Teatro di Figura “La Luna è Azzurra” | San Miniato",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/festival-internazionale-del-teatro-romano-volterra/": {
   "email": "info@teatroromanovolterra.it",
   "fine": "2026-08-08",
@@ -4118,6 +4953,27 @@
   "titolo": "Festival “Statale 439” – Buti",
   "v": 4,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/festival-toscano-musica-antica/": {
+  "email": "info@ftma.it",
+  "fine": "2026-07-10",
+  "hash": "4bd94eaa589d31c290651bed0e22bbfcd53ffa17",
+  "inizio": "2026-07-05",
+  "lastmod": "2026-07-05T09:03:40+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Chiostro della Sapienza, Via Curtatone e Montanara, Pisa",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-07-05",
+    "2026-07-10"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050.941144",
+  "titolo": "Festival Toscano di Musica Antica | Pisa, Calci e Vicopisano",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/festival-tra-terra-e-stelle/": {
   "email": "semivolanti@gmail.com",
@@ -4497,6 +5353,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/fuochi-di-san-giovanni-san-miniato/": {
+  "email": "comitatomanifestazioni.s.miniato@gmail.com",
+  "fine": "2026-06-23",
+  "hash": "e314d95308083e53cd1355a4d4df87b6265730b7",
+  "inizio": "2026-06-23",
+  "lastmod": "2026-06-22T09:11:36+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "20:00–23:30",
+  "periodi": [
+   [
+    "2026-06-23",
+    "2026-06-23"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Fuochi di San Giovanni | San Miniato",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/ganza-gravel-bici-forcoli-palaia/": {
   "email": "",
   "fine": "2026-09-20",
@@ -4578,6 +5455,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Gioco del Mulino | Calci",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/gioco-del-ponte-pisa/": {
+  "email": "",
+  "fine": "2026-06-27",
+  "hash": "25f78349706e810d76ac0878c7b3d84d0046827c",
+  "inizio": "2026-06-27",
+  "lastmod": "2026-06-22T09:31:20+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "16:00–23:00",
+  "periodi": [
+   [
+    "2026-06-27",
+    "2026-06-27"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Gioco del Ponte | Giugno Pisano",
   "v": 4,
   "verifica": false
  },
@@ -4728,6 +5626,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/giornata-delle-miniere-toscana/": {
+  "email": "",
+  "fine": "2026-05-31",
+  "hash": "dc403e5ec1d5386475dc52c948cb8258871cdf8c",
+  "inizio": "2026-05-30",
+  "lastmod": "2026-05-29T07:36:45+00:00",
+  "letta": "2026-11-24",
+  "luogo": "salina locatelli, via delle moie vecchie, saline di volterra",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-30",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "https://www.isprambiente.gov.it/it/events/xv-giornata-nazionale-delle-miniere-edizione-2023",
+  "telefono": "",
+  "titolo": "Giornata Nazionale delle Miniere | Saline di Volterra",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/giornata-europea-del-restauro/": {
   "email": "",
   "fine": "2026-10-19",
@@ -4812,6 +5731,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/giornata-oasi-wwf-tirrenia-calambrone-pisa/": {
+  "email": "",
+  "fine": "2026-06-02",
+  "hash": "f10eaeed24c0b41cb874a2b738dc2629c4ef2c4f",
+  "inizio": "2026-06-02",
+  "lastmod": "2026-07-07T10:32:11+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Oasi WWF Bosco Cornacchiaia, Vione dei Porcari, Calambrone",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-02",
+    "2026-06-02"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "La Primavera delle Oasi WWF",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/giornata-trekking-urbano-a-pisa/": {
   "email": "",
   "fine": "2026-11-01",
@@ -4893,6 +5833,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Giornate Europee del Patrimonio",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/giorni-di-tuono-pettinato-pisa/": {
+  "email": "",
+  "fine": "2026-06-14",
+  "hash": "80974adea820b0b580cf75c11f48cc029f4ebf1c",
+  "inizio": "2026-06-11",
+  "lastmod": "2026-05-25T07:01:03+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, 9, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-11",
+    "2026-06-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050 2216060",
+  "titolo": "Festival “Giorni di Tuono” Pettinato | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -5332,6 +6293,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/i-venerdi-in-rocca-santa-maria-a-monte/": {
+  "email": "musei@comune.santamariaamonte.pi.it",
+  "fine": "2026-07-10",
+  "hash": "62950bef7a30e49612f676e5a75929f4a3bd0b93",
+  "inizio": "2026-07-10",
+  "lastmod": "2026-07-05T09:35:30+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-07-10",
+    "2026-07-10"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3333495168",
+  "titolo": "Venerdì in Rocca a Santa Maria a Monte",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/il-cinema-della-normale-pisa/": {
   "email": "",
   "fine": "2026-09-15",
@@ -5350,6 +6332,31 @@
   "sito": "",
   "telefono": "",
   "titolo": "Il Cinema della Normale | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/il-giugno-pisano/": {
+  "email": "",
+  "fine": "2026-06-30",
+  "hash": "5ba430366e652672d3b0ed9556533f046b88d77a",
+  "inizio": "2026-06-11",
+  "lastmod": "2026-06-12T09:19:42+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-04",
+    "2026-06-05"
+   ],
+   [
+    "2026-06-11",
+    "2026-06-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Il Giugno Pisano",
   "v": 4,
   "verifica": false
  },
@@ -5608,6 +6615,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/la-gloriosa-pisa/": {
+  "email": "",
+  "fine": "2026-06-25",
+  "hash": "d17b0eb7f197a77b91d8b23f3b943d1980cab18d",
+  "inizio": "2026-06-25",
+  "lastmod": "2026-06-19T11:59:59+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-25",
+    "2026-06-25"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3386761609",
+  "titolo": "La Gloriosa, visite guidate nei giovedì di giugno | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/la-lunga-notte-delle-chiese/": {
+  "email": "info@lunganottedellechiese.com",
+  "fine": "2026-06-05",
+  "hash": "e9782ec587b972d079aa702dcd31fc227d6ca5d0",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-05-27T15:30:13+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "La lunga notte delle Chiese",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/la-miniera-al-chiar-di-luna/": {
   "email": "",
   "fine": "2026-08-28",
@@ -5671,6 +6720,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/la-notte-blu-butique-musique-buti/": {
+  "email": "",
+  "fine": "2026-06-06",
+  "hash": "83f032c6a9c28b4d4fd1e67670fad2e648e86496",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-04T07:41:19+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Buti, Piazza Garibaldi, Buti",
+  "orario": "17:00–23:45",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Butique Musique | Buti",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/la-nunziatina-pisa/": {
   "email": "info@lanunziatina.com",
   "fine": "2026-11-21",
@@ -5712,6 +6782,27 @@
   "titolo": "Estate a Santa Croce sull’Arno e Staffoli",
   "v": 4,
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/lajatico-e-libri-teatro-e-tradizione/": {
+  "email": "",
+  "fine": "2026-06-10",
+  "hash": "6f9765b30eebf481e2246aa67b9547443f511720",
+  "inizio": "2026-06-10",
+  "lastmod": "2026-06-07T03:23:07+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Lajatico, Piazza Vittorio Veneto, Lajatico",
+  "orario": "18:15–23:15",
+  "periodi": [
+   [
+    "2026-06-10",
+    "2026-06-10"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Lajatico è … da vivere",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/lajatico-in-musica/": {
   "email": "prolocolajatico@gmail.com",
@@ -5935,6 +7026,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/ludus-balistris-volterra/": {
+  "email": "info@balestrierivolterra.it",
+  "fine": "2026-08-22",
+  "hash": "9e9c642c8c66c2c113a819107aa6a0d179bbcc2a",
+  "inizio": "2026-08-22",
+  "lastmod": "2026-06-24T08:10:23+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza dei Priori, Volterra",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-08-22",
+    "2026-08-22"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "“Ludus balistris Città di Volterra” – Palio dei Balestrieri",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/luglio-a-casciana-terme-e-lari/": {
   "email": "",
   "fine": "2026-08-30",
@@ -5977,6 +7089,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/marcia-colline-forcoli-palaia/": {
+  "email": "",
+  "fine": "2026-05-31",
+  "hash": "4cfcb4c01e15321685006e0c60031a9aeb78f688",
+  "inizio": "2026-05-31",
+  "lastmod": "2026-05-25T10:42:04+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Forcoli, Piazza Sant'Antonio, Forcoli",
+  "orario": "07:30–12:00",
+  "periodi": [
+   [
+    "2026-05-31",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Marcia delle Colline di Forcoli | Palaia",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/marconi-music-nights-a-coltano-pisa/": {
   "email": "",
   "fine": "2026-07-31",
@@ -5995,6 +7128,48 @@
   "sito": "",
   "telefono": "",
   "titolo": "Marconi Music Nights – Il Venerdì a Coltano Marconi",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/marenia-nonsolomare-3-mdp-music-dance-parade/": {
+  "email": "",
+  "fine": "2026-07-10",
+  "hash": "f6c9539e2e9b91a08da8c143b5e27484eaa510b1",
+  "inizio": "2026-07-10",
+  "lastmod": "2026-06-07T03:17:56+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Marina di Pisa, Piazza Sardegna, Marina di Pisa",
+  "orario": "19:00–23:45",
+  "periodi": [
+   [
+    "2026-07-10",
+    "2026-07-10"
+   ]
+  ],
+  "sito": "",
+  "telefono": "337 1390514",
+  "titolo": "Marina Dance Parade | Marina di Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/marenia-nonsolomare-8-notte-blu-a-tirrenia/": {
+  "email": "tirrenia@turismo.pisa.it",
+  "fine": "2026-07-17",
+  "hash": "81a79f739c32e0a8a3688206ed4f7e0610316027",
+  "inizio": "2026-07-17",
+  "lastmod": "2026-07-08T06:28:11+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Tirrenia, Piazza Belvedere, Tirrenia",
+  "orario": "17:00–23:45",
+  "periodi": [
+   [
+    "2026-07-17",
+    "2026-07-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "337 1390514",
+  "titolo": "Notte blu a Tirrenia",
   "v": 4,
   "verifica": false
  },
@@ -6380,6 +7555,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/merenda-nelloliveta-calci-e-vicopisano/": {
+  "email": "info@cittadellolio.it",
+  "fine": "2026-06-28",
+  "hash": "6bb0edee6d052e59705e9bc53045c738cec6c81e",
+  "inizio": "2026-06-14",
+  "lastmod": "2026-06-01T12:22:53+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Comune di Calci, Piazza Garibaldi, 9 , Calci",
+  "orario": "16:00–20:00",
+  "periodi": [
+   [
+    "2026-06-14",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Merenda nell’oliveta | Calci e Vicopisano",
+  "v": 4,
+  "verifica": true
+ },
+ "https://www.terredipisa.it/events/metarock-pisa/": {
+  "email": "",
+  "fine": "2026-07-11",
+  "hash": "feb695cd23393216fae362de3cc87c6f5ac40c76",
+  "inizio": "2026-07-11",
+  "lastmod": "2026-07-13T11:43:51+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Giardino della Nunziatina, Via La Nunziatina, Pisa",
+  "orario": "19:00–21:00",
+  "periodi": [
+   [
+    "2026-07-11",
+    "2026-07-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Colpi di Grazia al Giardino di Via La Nunziatina | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mezza-maratona-di-san-miniato/": {
   "email": "",
   "fine": "2026-12-08",
@@ -6398,6 +7615,22 @@
   "sito": "",
   "telefono": "",
   "titolo": "Mezza Maratona di San Miniato",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/momenti-musicali-alla-scoperta-della-musica-classica/": {
+  "email": "",
+  "fine": "2027-05-04",
+  "hash": "5138a0352db18104fe9beb524ee04743f7622f9e",
+  "inizio": "2026-11-28",
+  "lastmod": "2026-11-24T07:18:24+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Palazzo Blu, Lungarno Gambacorti, 9, Pisa",
+  "orario": "10:00–11:00",
+  "periodi": [],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Momenti musicali: alla scoperta della musica classica",
   "v": 4,
   "verifica": false
  },
@@ -6464,6 +7697,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mosaico-pisa-tour-itinerante-di-walking-cinema/": {
+  "email": "",
+  "fine": "2026-06-21",
+  "hash": "05122f0fb23c3462e86950e1955ea29fd8f0a443",
+  "inizio": "2026-06-21",
+  "lastmod": "2026-06-19T10:36:48+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-21",
+    "2026-06-21"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Non solo Pisa: vecchi filmati amatoriali al Parco delle Concette",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-a-pisa-collezionismo-e-spiritualismo-nel-900-per-lviii-centenario-di-san-francesco/": {
   "email": "francesca.cagianelli@gmail.com",
   "fine": "2026-12-05",
@@ -6485,6 +7739,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-al-palp-pontedera-chi-vespa-ottanta-artisti-contemporanei-per-gli-80-anni-della-vespa/": {
+  "email": "",
+  "fine": "2026-06-14",
+  "hash": "84d6260bd49b507212a0755aaf41aca68f1d4b67",
+  "inizio": "2026-06-11",
+  "lastmod": "2026-06-10T07:33:03+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro Pontedera, Corso Matteotti, Pontedera",
+  "orario": "10:00–18:00",
+  "periodi": [
+   [
+    "2026-06-11",
+    "2026-06-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra al PALP Pontedera: “Chi Vespa… Ottanta artisti contemporanei per gli 80 anni della Vespa”",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-autunnale-edward-hopper-a-palazzo-blu-pisa/": {
   "email": "info@palazzoblu.it",
   "fine": "2027-03-07",
@@ -6498,6 +7773,48 @@
   "sito": "",
   "telefono": "050 916950",
   "titolo": "Mostra autunnale “Edward Hopper” a Palazzo Blu | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-buon-compleanno-vespa-al-museo-piaggio-di-pontedera/": {
+  "email": "museo@museopiaggio.it",
+  "fine": "2026-06-30",
+  "hash": "c91111aed6c5837a11419bd764681b189a96e41e",
+  "inizio": "2026-06-11",
+  "lastmod": "2026-06-10T07:28:42+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "orario": "09:30–17:00",
+  "periodi": [
+   [
+    "2026-06-11",
+    "2026-06-30"
+   ]
+  ],
+  "sito": "",
+  "telefono": "058727171",
+  "titolo": "Mostra “Buon Compleanno Vespa” al Museo Piaggio di Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/mostra-confronti-al-museo-di-palazzo-reale-pisa/": {
+  "email": "mn-pi.museopalazzoreale@cultura.gov.it",
+  "fine": "2026-06-20",
+  "hash": "789bbd232275738935daa773198af7ea912004f2",
+  "inizio": "2026-06-11",
+  "lastmod": "2026-06-10T07:28:22+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Museo Nazionale di Palazzo Reale, Lungarno Pacinotti, 46, Pisa",
+  "orario": "09:00–19:00",
+  "periodi": [
+   [
+    "2026-06-11",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "050926573 – 334",
+  "titolo": "Mostra “Confronti” al Museo di Palazzo Reale | Pisa",
   "v": 4,
   "verifica": false
  },
@@ -6990,6 +8307,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/mostra-sfumature-di-azzurro-al-museo-della-grafica-di-pisa/": {
+  "email": "",
+  "fine": "2026-06-05",
+  "hash": "56ca0eaa33c45a70d1e7bc468fb59631f1b04c62",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-05T09:37:33+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Palazzo Lanfranchi – Museo della Grafica, Lungarno Galilei, 9, Pisa",
+  "orario": "09:00–18:00",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Mostra “Sfumature di azzurro” al Museo della Grafica di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/mostra-su-lord-byron-a-palazzo-toscanelli-pisa/": {
   "email": "",
   "fine": "2026-10-18",
@@ -7158,6 +8496,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/motoraduno-palaiese-palaia/": {
+  "email": "motoradunopalaia2020@gmail.com",
+  "fine": "2026-06-02",
+  "hash": "2bd48f5011843bb051f073546d4a99fae84aaf84",
+  "inizio": "2026-06-02",
+  "lastmod": "2026-05-27T14:31:40+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Palaia, centro storico, Palaia",
+  "orario": "09:00–13:00",
+  "periodi": [
+   [
+    "2026-06-02",
+    "2026-06-02"
+   ]
+  ],
+  "sito": "",
+  "telefono": "338 9806232",
+  "titolo": "Motoraduno Palaiese – Palaia Run",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/musei-nazionali-di-pisa/": {
   "email": "info@visitamusei.pisa.it",
   "fine": "2026-07-23",
@@ -7283,6 +8642,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/musica-sotto-la-torre-in-camposanto/": {
+  "email": "",
+  "fine": "2026-07-04",
+  "hash": "2fee235044df11584e59c95105087549c1a3fdc3",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-07-07T11:40:33+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza dei Miracoli, Pisa",
+  "orario": "21:30–23:00",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Musica sotto la Torre nel Chiostro del Museo dell’Opera | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/musicastrada-festival/": {
   "email": "",
   "fine": "2026-08-02",
@@ -7345,6 +8725,27 @@
   "titolo": "Natale a Capannoli",
   "v": 4,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-a-cenaia-crespina-lorenzana/": {
+  "email": "odeporicaets@gmail.com",
+  "fine": "2026-12-20",
+  "hash": "4a16a97eec00fd230f212bd49cf9b3396da1e474",
+  "inizio": "2026-12-06",
+  "lastmod": "2026-11-24T09:41:09+00:00",
+  "letta": "2026-11-24",
+  "luogo": "VEcchio San Michele, Via Silvestro Lega, 1, Crespina",
+  "orario": "10:30–18:00",
+  "periodi": [
+   [
+    "2026-12-06",
+    "2026-12-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Crespina e Lorenzana",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/natale-a-montopoli-in-valdarno/": {
   "email": "IAT@COMUNE.MONTOPOLI.PI.IT",
@@ -7421,6 +8822,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/natale-a-ponsacco/": {
+  "email": "",
+  "fine": "2026-12-06",
+  "hash": "bb60404e58951ddedf3a7e863b0e04fc2dc80376",
+  "inizio": "2026-12-06",
+  "lastmod": "2026-11-24T08:00:03+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza della Repubblica, Ponsacco",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-12-06",
+    "2026-12-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Ponsacco",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/natale-a-santa-croce-sullarno/": {
   "email": "info@prolocosantacroce.it",
   "fine": "2026-12-08",
@@ -7443,6 +8865,27 @@
   "sito": "",
   "telefono": "0571 31101",
   "titolo": "Amaretto & Magic: Natale a Santa Croce sull’Arno",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/natale-a-vecchiano/": {
+  "email": "infoprolocovecchiano@gmail.com",
+  "fine": "2026-11-29",
+  "hash": "75c6f5f3b79fc46d59a91147380de2e173aa85e0",
+  "inizio": "2026-11-29",
+  "lastmod": "2026-11-24T09:40:15+00:00",
+  "letta": "2026-11-24",
+  "luogo": "",
+  "orario": "10:00–19:00",
+  "periodi": [
+   [
+    "2026-11-29",
+    "2026-11-29"
+   ]
+  ],
+  "sito": "",
+  "telefono": "335.5484396",
+  "titolo": "Natale a Vecchiano",
   "v": 4,
   "verifica": false
  },
@@ -7672,6 +9115,69 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/notte-granata-a-pontedera/": {
+  "email": "info@visitvaldera.eu",
+  "fine": "2026-06-13",
+  "hash": "4914d069c37c9105be74fcbea2ab999dbacc2284",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-06-06T12:31:37+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro Pontedera, Corso Matteotti, Pontedera",
+  "orario": "19:00–23:30",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Notte Bianca a Pontedera",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/notte-nera-peccioli/": {
+  "email": "turismo@comune.peccioli.pi.it",
+  "fine": "2026-06-27",
+  "hash": "a2f8b2d7ca043875c5da2da7afc9cf622e81393a",
+  "inizio": "2026-06-27",
+  "lastmod": "2026-06-22T09:12:13+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Peccioli, Via Roma, Peccioli",
+  "orario": "19:00–23:30",
+  "periodi": [
+   [
+    "2026-06-27",
+    "2026-06-27"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.936423",
+  "titolo": "Notte nera | Peccioli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/notte-piacere-casciana-terme/": {
+  "email": "info@visitcascianatermelari.it",
+  "fine": "2026-07-18",
+  "hash": "02a04dfb0ea1659009ee599a1bb9b11229180caf",
+  "inizio": "2026-07-18",
+  "lastmod": "2026-07-11T15:05:06+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza Garibaldi, Casciana Terme",
+  "orario": "18:00–23:45",
+  "periodi": [
+   [
+    "2026-07-18",
+    "2026-07-18"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.646258",
+  "titolo": "Una Notte di Piacere | Casciana Terme",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/notte-rosa-a-cascina/": {
   "email": "",
   "fine": "2026-09-12",
@@ -7753,6 +9259,27 @@
   "sito": "",
   "telefono": "0587.738111",
   "titolo": "Notte vintage | Ponsacco",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/notti-archeologia-sistema-ateneo-pisa/": {
+  "email": "gruppoarcheologicodelbientina@gmail.com",
+  "fine": "2026-06-14",
+  "hash": "79345064db0d655b6720e6f1136feaa3ff49ce04",
+  "inizio": "2026-06-12",
+  "lastmod": "2026-06-11T15:55:37+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-12",
+    "2026-06-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Giornate Europee dell’Archeologia",
   "v": 4,
   "verifica": false
  },
@@ -7903,6 +9430,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/palaia-borgo-della-birra/": {
+  "email": "turismo@comune.palaia.pisa.it",
+  "fine": "2026-06-13",
+  "hash": "48c67cd3efdae162d9a47436d4d7ed2f903cc280",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-06-08T18:32:43+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza del Mercato, Palaia",
+  "orario": "17:00–23:00",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 621437",
+  "titolo": "Palaia, Borgo della Birra",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/palaia_nottiestate/": {
   "email": "",
   "fine": "2026-09-20",
@@ -7921,6 +9469,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Estate a Palaia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/palio-dei-barchini-con-le-ruote-castelfranco-di-sotto/": {
+  "email": "",
+  "fine": "2026-05-31",
+  "hash": "1d5868f7a3d2f9a1722555670bd5fa6064be0438",
+  "inizio": "2026-05-28",
+  "lastmod": "2026-05-25T06:37:51+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Castelfranco di Sotto, Corso Remo Bertoncini, Castelfranco di Sotto",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-05-28",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Palio dei barchini con le ruote | Castelfranco di Sotto",
   "v": 4,
   "verifica": false
  },
@@ -7966,6 +9535,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/palio-del-cero-volterra/": {
+  "email": "info@volterratur.it",
+  "fine": "2026-06-02",
+  "hash": "5253ca9e9645049baa51ced3bda32b11bae28a25",
+  "inizio": "2026-06-02",
+  "lastmod": "2026-05-27T10:53:45+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza dei Priori, Volterra",
+  "orario": "17:00–20:00",
+  "periodi": [
+   [
+    "2026-06-02",
+    "2026-06-02"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588.86099",
+  "titolo": "Palio del Cero | Volterra",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/palio-del-cuoio-e-corsa-delle-botti-san-miniato/": {
+  "email": "paliodelcuoio@tiscali.it",
+  "fine": "2026-06-28",
+  "hash": "6c5cbe092e9db5095f7bbbde7939c2b668ee390c",
+  "inizio": "2026-06-21",
+  "lastmod": "2026-06-05T10:15:16+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Ponte a Egola, Piazza Guido Rossa, Ponte a Egola",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-21",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571.42745",
+  "titolo": "Palio del cuoio e Corsa dei caratelli | Ponte a Egola",
+  "v": 4,
+  "verifica": true
+ },
  "https://www.terredipisa.it/events/palio-delle-contrade-buti/": {
   "email": "info@visitvaldera.eu",
   "fine": "2027-01-24",
@@ -8005,6 +9616,48 @@
   "sito": "",
   "telefono": "338 5847087",
   "titolo": "Palio di San Rocco Pellegrino",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/palio-di-san-valentino-bientina/": {
+  "email": "",
+  "fine": "2026-07-19",
+  "hash": "0fd12d8e33ac7faebcb1877727e33d874a27d1b9",
+  "inizio": "2026-07-19",
+  "lastmod": "2026-05-29T11:13:13+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Bientina, Piazza Martiri della Libertà, Bientina",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-19",
+    "2026-07-19"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.758411",
+  "titolo": "Palio di San Valentino | Bientina",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/palio-rionale-di-vecchiano/": {
+  "email": "",
+  "fine": "2026-07-04",
+  "hash": "3c07fe1311bb5e14132dd857625ca6820d0ce0a9",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-30T15:28:00+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Vecchiano, centro, piazze e luoghi limitrofi, Vecchiano",
+  "orario": "20:30–23:30",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Palio dei Rioni di Vecchiano",
   "v": 4,
   "verifica": false
  },
@@ -8202,6 +9855,27 @@
   "lastmod": "2026-11-19T09:52:01+00:00",
   "letta": "2026-11-19"
  },
+ "https://www.terredipisa.it/events/pinocchio-in-strada-san-miniato-basso/": {
+  "email": "",
+  "fine": "2026-06-25",
+  "hash": "8857b8b560125ab3339b5ed8e80a11acccc3cdff",
+  "inizio": "2026-06-25",
+  "lastmod": "2026-06-19T11:57:19+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Via Tosco Romagnola, San Miniato Basso",
+  "orario": "19:00–23:45",
+  "periodi": [
+   [
+    "2026-06-25",
+    "2026-06-25"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pinocchio in Strada | San Miniato Basso",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/pisa-art-week/": {
   "email": "",
   "fine": "2027-06-06",
@@ -8248,6 +9922,27 @@
   "ko": true,
   "lastmod": "2026-09-15T11:53:25+00:00",
   "letta": "2026-11-22"
+ },
+ "https://www.terredipisa.it/events/pisa-chinese-film-festival/": {
+  "email": "",
+  "fine": "2026-06-25",
+  "hash": "146459a4463ddfc9b4154d44bf1020fecc0ea9d3",
+  "inizio": "2026-06-22",
+  "lastmod": "2026-06-05T10:01:40+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Parco delle Concette, Via di Concette, Pisa",
+  "orario": "19:30–23:30",
+  "periodi": [
+   [
+    "2026-06-22",
+    "2026-06-25"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pisa Chinese Film Festival",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/pisa-di-gusto-pacchetto-bike-e-natura/": {
   "email": "",
@@ -8312,6 +10007,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/pisa-e-il-mediterraneo/": {
+  "email": "",
+  "fine": "2026-06-06",
+  "hash": "17808956c0cf5b0611aeb284b046c471a79b9f38",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-05-27T13:24:34+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Parco delle Concette, Via di Concette, Pisa",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pisa e il Mediterraneo: un viaggio nel tempo al Parco delle Concette",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/pisa-fest-food-festival/": {
   "email": "",
   "fine": "2026-09-27",
@@ -8330,6 +10046,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Festa degli Scalzi – Mostra Mercato | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/pisa-folk-festival/": {
+  "email": "info@pisafolk.org",
+  "fine": "2026-07-04",
+  "hash": "9d02a75b4c2c507d6cde316a07666a976b533adc",
+  "inizio": "2026-07-03",
+  "lastmod": "2026-07-03T13:00:27+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Giardino Scotto, Lungarno Galilei, Pisa",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-07-03",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pisa Folk Festival",
   "v": 4,
   "verifica": false
  },
@@ -8480,6 +10217,48 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/pisa-wine-week/": {
+  "email": "",
+  "fine": "2026-06-07",
+  "hash": "95456a1a05c3b8ce45ea739129ab6b39a511a725",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-05T09:37:05+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Camera di Commercio di Pisa, Piazza Vittorio Emanuele II, 5, Pisa",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Pisa Wine Week",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/pisani-schietti/": {
+  "email": "",
+  "fine": "2026-05-31",
+  "hash": "31dd9b8931a599cae3c0302a3a73ac57851683ab",
+  "inizio": "2026-05-31",
+  "lastmod": "2026-05-25T10:44:03+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Arsenali Repubblicani, Via Bonanno, Pisa",
+  "orario": "11:00–20:00",
+  "periodi": [
+   [
+    "2026-05-31",
+    "2026-05-31"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "I Pisani più schietti | Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/piscina-casciana-terme/": {
   "email": "info@termedicasciana.it",
   "fine": "2026-11-29",
@@ -8521,6 +10300,27 @@
   "titolo": "I mercoledì di Pomarance in Piazza",
   "v": 4,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/ponsacco-cult/": {
+  "email": "semivolanti@gmail.com",
+  "fine": "2026-06-26",
+  "hash": "dad1d5a57504d8c7572b83504a29332aff0e3186",
+  "inizio": "2026-06-17",
+  "lastmod": "2026-06-07T03:47:08+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Ponsacco, Piazza D'Appiano, Ponsacco",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-06-17",
+    "2026-06-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3203839434",
+  "titolo": "L’officina di via dell’Arco | Ponsacco",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/ponsacco-rende-omaggio-ad-antonio-possenti/": {
   "email": "info@comune.ponsacco.pi.it",
@@ -8624,6 +10424,27 @@
   "sito": "",
   "telefono": "329 4457074",
   "titolo": "Pontedera Music Festival – Summer Edition",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/pontedera-music-festival/": {
+  "email": "",
+  "fine": "2026-06-05",
+  "hash": "6c3c55114b24ebaf324658019c13efc7602896c8",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-05-26T09:46:34+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Museo Piaggio, Via Rinaldo Piaggio, Pontedera",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 212124",
+  "titolo": "Pontedera Music Festival",
   "v": 4,
   "verifica": false
  },
@@ -9016,6 +10837,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/randonnee-mtb-della-valdera/": {
+  "email": "info@randonneemtbdellavaldera.it",
+  "fine": "2026-06-07",
+  "hash": "86962f70782c515a17eb8b9134031efe6da08045",
+  "inizio": "2026-06-07",
+  "lastmod": "2026-06-03T12:47:47+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro Pontedera, Corso Matteotti, Pontedera",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-07",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "http://www.randonneemtbdellavaldera.it",
+  "telefono": "",
+  "titolo": "Randonnée MTB della Valdera",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/rassegna-di-cucina-povera-castellina-marittima/": {
   "email": "prolococastellinamarittima@gmail.com",
   "fine": "2026-08-02",
@@ -9034,6 +10876,90 @@
   "sito": "",
   "telefono": "388.8459119",
   "titolo": "Festa della cucina povera | Castellina Marittima",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/rassegna-teatro-popolare-mauro-monni-palaia/": {
+  "email": "",
+  "fine": "2026-07-05",
+  "hash": "ec4d9e3565ca38ff1cf6124e953391f189697a93",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-07-03T13:00:53+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Colleoli, Via Panoramica, 20, Colleoli",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-05"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Rassegna Teatro Popolare “Mauro Monni”| Colleoli, Palaia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/regata-antiche-repubbliche-marinare-pisa/": {
+  "email": "",
+  "fine": "2026-06-02",
+  "hash": "b2e342a61f445c3d9f23f4c737cd218fbd518643",
+  "inizio": "2026-06-02",
+  "lastmod": "2026-05-27T14:29:16+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "16:00–20:00",
+  "periodi": [
+   [
+    "2026-06-02",
+    "2026-06-02"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Regata delle Antiche Repubbliche Marinare 2026 | Pisa",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/regata-di-san-ranieri-pisa/": {
+  "email": "",
+  "fine": "2026-06-17",
+  "hash": "5bc47c5a33e8d5a1a892a5b6d7affec4104993a0",
+  "inizio": "2026-06-17",
+  "lastmod": "2026-05-27T15:05:43+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, centro, piazze e luoghi limitrofi, Pisa",
+  "orario": "18:00–20:00",
+  "periodi": [
+   [
+    "2026-06-17",
+    "2026-06-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Regata di San Ranieri | Giugno Pisano",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/regata-pisa-pavia/": {
+  "email": "",
+  "fine": "2026-06-06",
+  "hash": "dea28bdef4c0b3df9359e46faa43550dee362ac2",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-06-05T07:32:02+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pisa, Ponte di Mezzo, Pisa",
+  "orario": "17:00–19:00",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Regata storica Pisa Pavia",
   "v": 4,
   "verifica": false
  },
@@ -9457,6 +11383,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/sagra-della-fragola-san-giuliano-terme/": {
+  "email": "",
+  "fine": "2026-05-24",
+  "hash": "e980a4cace34efc42ea1fd4f46025da996174538",
+  "inizio": "2026-05-23",
+  "lastmod": "2026-05-23T13:51:49+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza Federico Borromeo, Sant'Andrea in Pescaiola",
+  "orario": "19:30–23:30",
+  "periodi": [
+   [
+    "2026-05-23",
+    "2026-05-24"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra della Fragola | Sant’Andrea Pescaiola",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-della-lepre-e-del-cinghiale-terricciola/": {
   "email": "erafest2018@gmail.com",
   "fine": "2026-10-11",
@@ -9528,6 +11475,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/sagra-della-pizza-orentano/": {
+  "email": "carnevaleorentano@gmail.com",
+  "fine": "2026-06-28",
+  "hash": "ac4285d24c2b36bfa6462eeef483ead11fe35978",
+  "inizio": "2026-06-12",
+  "lastmod": "2026-06-08T07:15:46+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Orentano, Orentano",
+  "orario": "19:30–23:30",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra della pizza e della birra | Orentano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-della-polenta-guardistallo/": {
   "email": "",
   "fine": "2026-10-11",
@@ -9549,6 +11517,31 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/sagra-della-trippa-cerretti/": {
+  "email": "",
+  "fine": "2026-06-28",
+  "hash": "d3e20720fc57e2d173c259d6b7a432e227b93968",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-09T13:34:53+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Cerretti, Via Cerretti, Santa Maria a Monte",
+  "orario": "20:00–23:45",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-21"
+   ],
+   [
+    "2026-06-25",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra della trippa | Cerretti",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-della-zuppa-del-lago-perduto/": {
   "email": "",
   "fine": "2026-11-21",
@@ -9567,6 +11560,48 @@
   "sito": "",
   "telefono": "371.6164551",
   "titolo": "Sagra della zuppa del lago perduto",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagra-della-zuppa-di-cavolo-e-del-coniglio-fritto-fabbrica-di-peccioli/": {
+  "email": "",
+  "fine": "2026-07-12",
+  "hash": "be76c834dc3ecd73b20f47d3471705192b2da27d",
+  "inizio": "2026-07-11",
+  "lastmod": "2026-07-01T16:09:12+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Via Vittorio Veneto, 44, Fabbrica di Peccioli",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-07-11",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587.697213",
+  "titolo": "Sagra della zuppa di cavolo e del coniglio fritto | Fabbrica di Peccioli",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagra-delle-ciliegie-lari/": {
+  "email": "",
+  "fine": "2026-06-07",
+  "hash": "0cba63ede4d0e0f0af920021068923f16d99e744",
+  "inizio": "2026-06-05",
+  "lastmod": "2026-06-03T08:41:31+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Lari, centro, piazze e luoghi limitrofi, Lari",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-05",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra della ciliegia di Lari",
   "v": 4,
   "verifica": false
  },
@@ -9654,6 +11689,31 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/sagra-polenta-agnano/": {
+  "email": "sagratortello@prolocoagnanopisano.com",
+  "fine": "2026-06-28",
+  "hash": "25e1249479a22e592e6264656f3266470386a509",
+  "inizio": "2026-06-18",
+  "lastmod": "2026-06-05T07:22:33+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Santo Stefano a Macerata, Chiesanuova, Santo Stefano a Macerata",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-06-18",
+    "2026-06-21"
+   ],
+   [
+    "2026-06-25",
+    "2026-06-28"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Sagra del tortello, stinco e birra artigianale ad Agnano",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/sagra-tartufo-balconevisi/": {
   "email": "info@usbalconevisi.it",
   "fine": "2026-10-18",
@@ -9693,6 +11753,31 @@
   "sito": "",
   "telefono": "339 5929312",
   "titolo": "Palio del papero | Balconevisi",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/sagradelpinolo/": {
+  "email": "sagradelpinolo@gmail.com",
+  "fine": "2026-07-12",
+  "hash": "e0609ed7337aaade30c6db52dcd1580eb2a826d9",
+  "inizio": "2026-07-03",
+  "lastmod": "2026-06-19T07:02:28+00:00",
+  "letta": "2026-11-24",
+  "luogo": "San Piero a Grado, Via Deodato Orlandi, Pisa",
+  "orario": "19:00–23:45",
+  "periodi": [
+   [
+    "2026-07-03",
+    "2026-07-05"
+   ],
+   [
+    "2026-07-10",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "https://www.sagradelpinolo.it",
+  "telefono": "",
+  "titolo": "Sagra del pinolo | San Piero a Grado",
   "v": 4,
   "verifica": false
  },
@@ -9798,6 +11883,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Festival del Tibet | Pomaia",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/santallago-adventure-fest-2026/": {
+  "email": "info@montipisanipromotion.com",
+  "fine": "2026-07-12",
+  "hash": "5217944c2da67db16cd284585766c2aa946f3de3",
+  "inizio": "2026-07-11",
+  "lastmod": "2026-07-06T06:43:10+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Tenuta Santallago, Calci",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-11",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Santallago Adventure Fest 2026",
   "v": 4,
   "verifica": false
  },
@@ -10092,6 +12198,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "Settimana della Geodiversità a Pisa e Calci",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/settimana-musica-pontedera/": {
+  "email": "",
+  "fine": "2026-06-20",
+  "hash": "e2eae8feefd44ce3e35808939537de0e6b7d04d3",
+  "inizio": "2026-06-19",
+  "lastmod": "2026-06-19T06:21:54+00:00",
+  "letta": "2026-11-24",
+  "luogo": "",
+  "orario": "18:00–22:30",
+  "periodi": [
+   [
+    "2026-06-19",
+    "2026-06-20"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Festa della Musica | Pontedera",
   "v": 4,
   "verifica": false
  },
@@ -10544,6 +12671,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/tartufo-nero-san-miniato/": {
+  "email": "ufficio.turismo@sanminiatopromozione.it",
+  "fine": "2026-06-14",
+  "hash": "41f1fa40f8409f8a24adfc3618f353b3af60846e",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-05-29T09:09:42+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "17:30–23:30",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-14"
+   ]
+  ],
+  "sito": "https://sanminiatopromozione.it/evento/prima-mostra-mercato-tartufo-nero-di-san-miniato/",
+  "telefono": "0571.42745",
+  "titolo": "Nero d’estate: vini e tartufo nero delle colline di San Miniato",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/teatro-al-museo-di-storia-naturale-di-calci/": {
   "email": "",
   "fine": "2026-11-06",
@@ -10583,6 +12731,56 @@
   "sito": "",
   "telefono": "050.819111",
   "titolo": "Bagni di Stelle a San Giuliano Terme",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/teatro-bambini-baule-sogni-santa-maria-a-monte/": {
+  "email": "info@giallomare.it",
+  "fine": "2026-06-06",
+  "hash": "d32b1a73a11dc20f2d427fb07cc4fdad85ff71e1",
+  "inizio": "2026-06-06",
+  "lastmod": "2026-05-25T06:51:03+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "16:30–17:30",
+  "periodi": [
+   [
+    "2026-06-06",
+    "2026-06-06"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0571-81629",
+  "titolo": "“Il baule dei sogni” rassegna teatrale per bambini",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/teatro-comico-san-miniato/": {
+  "email": "comunicazione@teatrinodeifondi.it",
+  "fine": "2026-06-26",
+  "hash": "e89711050ffbb7d587171fca3f2067829b85d6df",
+  "inizio": "2026-06-12",
+  "lastmod": "2026-06-07T12:13:45+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico San Miniato, centro, piazze e luoghi limitrofi, San Miniato",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-06-12",
+    "2026-06-12"
+   ],
+   [
+    "2026-06-17",
+    "2026-06-17"
+   ],
+   [
+    "2026-06-26",
+    "2026-06-26"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Teatro comico itinerante | San Miniato",
   "v": 4,
   "verifica": false
  },
@@ -10822,6 +13020,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/toscana-arcobaleno-destate/": {
+  "email": "",
+  "fine": "2026-06-07",
+  "hash": "389bd3b65fe3e6fa212bdc8b131c92ce0dd6cb91",
+  "inizio": "2026-06-07",
+  "lastmod": "2026-06-10T06:49:52+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Ponte di mezzo, Lungarno Mediceo, Pisa",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-06-07",
+    "2026-06-07"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Cena sul Ponte di Mezzo a Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/tour-experience-volterra/": {
   "email": "info@volterratur.it",
   "fine": "2026-10-31",
@@ -10969,6 +13188,69 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/treno-storico-del-sale-saline-volterra/": {
+  "email": "booking@visionedelmondo.com",
+  "fine": "2026-11-01",
+  "hash": "f926772b1e13943865367db1107abb06e05b5971",
+  "inizio": "2026-11-01",
+  "lastmod": "2026-06-25T07:52:51+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Saline di Volterra, Via di Saline, Saline di Volterra",
+  "orario": "09:30–18:00",
+  "periodi": [
+   [
+    "2026-11-01",
+    "2026-11-01"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0577.48003",
+  "titolo": "Il treno del sale: treno a vapore alla scoperta della Salina di Volterra",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/trittico-del-serra-buti/": {
+  "email": "tritticodelserra@gmail.com",
+  "fine": "2026-06-14",
+  "hash": "d0d1bf68d204e79a63a13933815b9affa262d6fd",
+  "inizio": "2026-06-14",
+  "lastmod": "2026-05-25T20:57:21+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Buti, Piazza Garibaldi, Buti",
+  "orario": "07:30–14:30",
+  "periodi": [
+   [
+    "2026-06-14",
+    "2026-06-14"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Trittico del Serra – percorso in bici | Buti e Calci",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/trofeo-vela-cetilar-e-15-1-run-marina-di-pisa/": {
+  "email": "info@pisahalfmarathon.com",
+  "fine": "2026-05-24",
+  "hash": "fb791a9aa984dcafcce7727915d2c83cbd58b9b8",
+  "inizio": "2026-05-23",
+  "lastmod": "2026-05-25T07:29:19+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Porto di Pisa, Via della Foce, Marina di Pisa",
+  "orario": "15:00–18:15",
+  "periodi": [
+   [
+    "2026-05-23",
+    "2026-05-24"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Corsa 15.1 Run | Marina di Pisa",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/tutti-al-centro-santa-croce-sullarno/": {
   "email": "info@prolocosantacroce.it",
   "fine": "2026-09-11",
@@ -11008,6 +13290,27 @@
   "sito": "",
   "telefono": "",
   "titolo": "“Tutti all’Opera” Giornata internazionale dei diritti delle persone con disabilità",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/una-notte-a-santo-pietro-belvedere/": {
+  "email": "",
+  "fine": "2026-07-04",
+  "hash": "473dc38b2be938ce1cdaaeaf42ade33ee6224e25",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-23T10:06:43+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Santo Pietro Belvedere, Piazza Belvedere, Santo Pietro Belvedere",
+  "orario": "21:30–23:30",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Una Notte a Santo Pietro Belvedere",
   "v": 4,
   "verifica": false
  },
@@ -11200,6 +13503,27 @@
   "v": 4,
   "verifica": true
  },
+ "https://www.terredipisa.it/events/vin-vinile-vino-vintage-e-vinile-a-volterra/": {
+  "email": "",
+  "fine": "2026-06-27",
+  "hash": "020abc95d4e44d869864b36fc2fc2a7e12dfc2a1",
+  "inizio": "2026-06-26",
+  "lastmod": "2026-06-23T13:29:57+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Piazza dei Priori, Volterra",
+  "orario": "11:00–23:45",
+  "periodi": [
+   [
+    "2026-06-26",
+    "2026-06-27"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Vin Vinile: Vino, Vintage e Vinile a Volterra",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/vino-swing-a-santa-maria-a-monte/": {
   "email": "",
   "fine": "2026-09-26",
@@ -11262,6 +13586,27 @@
   "titolo": "Vinopoli a Montopoli in Valdarno",
   "v": 4,
   "verifica": false
+ },
+ "https://www.terredipisa.it/events/visita-campi-lavanda-pieve-santa-luce/": {
+  "email": "",
+  "fine": "2026-07-12",
+  "hash": "fc884d211429936a24556954ca4bbc96b3bc55c6",
+  "inizio": "2026-07-05",
+  "lastmod": "2026-07-05T09:12:54+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Pieve di Santa Luce, Pieve di Santa Luce",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-05",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "I Giorni della Lavanda | Colli Pisani",
+  "v": 4,
+  "verifica": true
  },
  "https://www.terredipisa.it/events/visita-grotta-monticello-asciano/": {
   "email": "info@prolocoagnanopisano.com",
@@ -11759,6 +14104,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/visite-guidate-museo-della-civilta-contadina-palaia/": {
+  "email": "museoccm@gmail.com",
+  "fine": "2026-07-05",
+  "hash": "42dfa100dcce3c3aad564befebb0e9f1f75bf56c",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-05T10:42:09+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Montefoscoli, Montefoscoli",
+  "orario": "18:30–23:30",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-05"
+   ]
+  ],
+  "sito": "http://www.museociviltacontadinamontefoscoli.it",
+  "telefono": "320 0291217",
+  "titolo": "Festa della civiltà contadina | Montefoscoli",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/visite-guidate-museo-san-matteo-pisa/": {
   "email": "",
   "fine": "2026-12-06",
@@ -11800,6 +14166,27 @@
   "titolo": "Viaggio nel mondo del sale: la Salina Locatelli | Saline di Volterra",
   "v": 4,
   "verifica": true
+ },
+ "https://www.terredipisa.it/events/visite-guidate-villa-camugliano/": {
+  "email": "",
+  "fine": "2026-07-01",
+  "hash": "a99b3fac81860175dac853054eef19e9dab3dccc",
+  "inizio": "2026-07-01",
+  "lastmod": "2026-06-30T15:48:18+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Tenuta di Camugliano, Via di Camugliano, Ponsacco",
+  "orario": "10:30–19:00",
+  "periodi": [
+   [
+    "2026-07-01",
+    "2026-07-01"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0587 738111",
+  "titolo": "Musica nella Tenuta di Camugliano | Ponsacco",
+  "v": 4,
+  "verifica": false
  },
  "https://www.terredipisa.it/events/visite-guidate-wwf-bosco-di-cornacchiaia-tenuta-tombolo-pisa/": {
   "email": "pisa@wwf.it",
@@ -11952,28 +14339,40 @@
   "v": 4,
   "verifica": false
  },
- "https://www.terredipisa.it/events/viste-guidate-orto-museo-botanico-pisa/": {
-  "email": "info.ortomuseobot@sma.unipi.it",
-  "fine": "2026-12-19",
-  "hash": "6f39e04732d8c51b1d3ea29d42747535991d34c5",
-  "inizio": "2026-11-21",
-  "lastmod": "2026-10-19T12:17:56+00:00",
-  "letta": "2026-11-21",
-  "luogo": "Orto Botanico di Pisa, Via Luca Ghini, 5, Pisa",
-  "orario": "15:00–17:00",
+ "https://www.terredipisa.it/events/viste-guidate-casa-bicocchi-pomarance/": {
+  "email": "ufficioturistico@comune.pomarance.pi.it",
+  "fine": "2025-09-30",
+  "hash": "42a7cb5f302a3768f9ada3e41abfd7b74668565a",
+  "inizio": "2025-07-01",
+  "lastmod": "2026-06-07T12:05:28+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Pomarance, centro, piazze e luoghi limitrofi, Pomarance",
+  "orario": "16:00–19:00",
+  "periodi": [],
+  "sito": "http://www.museivaldicecina.it/it/guerrieri_artigiani_pomarance.php",
+  "telefono": "0588 62089",
+  "titolo": "Visite alla mostra permanente dei Principi Guerrieri a Casa Bicocchi | Pomarance – CHIUSA",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/viste-tenuta-tombolo-pisa/": {
+  "email": "passeggiata.ciraa@gmail.com",
+  "fine": "2026-06-04",
+  "hash": "d030f4de9aab98fac893bf674601c03a90e15707",
+  "inizio": "2026-06-04",
+  "lastmod": "2026-06-09T09:25:01+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro Enrico Avanzi, Via Eleonora Duse, San Piero a Grado",
+  "orario": "08:30–17:30",
   "periodi": [
    [
-    "2026-11-21",
-    "2026-11-21"
-   ],
-   [
-    "2026-12-19",
-    "2026-12-19"
+    "2026-06-04",
+    "2026-06-04"
    ]
   ],
-  "sito": "http://www.ortomuseobot.sma.unipi.it/",
-  "telefono": "050 2211310",
-  "titolo": "Sabato Botanico all’Orto e Museo Botanico | Pisa",
+  "sito": "https://avanzi.unipi.it/percorso-didattico%20una-passeggiata-negli-agro-ecosistemi/",
+  "telefono": "338.4965482",
+  "titolo": "Open Day al Centro Avanzi, ex Tenuta di Tombolo",
   "v": 4,
   "verifica": false
  },
@@ -12103,6 +14502,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/volterra-guitar-project/": {
+  "email": "info@volterratur.it",
+  "fine": "2026-07-17",
+  "hash": "27762ca008995fe211bd113576d8926fd3c02d0a",
+  "inizio": "2026-07-16",
+  "lastmod": "2026-07-08T09:47:38+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "21:00–23:00",
+  "periodi": [
+   [
+    "2026-07-16",
+    "2026-07-17"
+   ]
+  ],
+  "sito": "",
+  "telefono": "0588.86099",
+  "titolo": "Volterra Guitar Project",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/volterra-gusto-il-tartufo-bianco-volterra/": {
   "email": "infovolterragusto@gmail.com",
   "fine": "2026-11-01",
@@ -12145,6 +14565,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/volterra-motor-vintage/": {
+  "email": "info@volterramotorvintage.it",
+  "fine": "2026-07-04",
+  "hash": "8e92b9ef9d8b252d2db36b568a4db83ba799d5c6",
+  "inizio": "2026-07-04",
+  "lastmod": "2026-06-05T10:21:28+00:00",
+  "letta": "2026-11-24",
+  "luogo": "centro storico Volterra, centro storico, Volterra",
+  "orario": "19:00–23:00",
+  "periodi": [
+   [
+    "2026-07-04",
+    "2026-07-04"
+   ]
+  ],
+  "sito": "",
+  "telefono": "347 8169429",
+  "titolo": "Volterra Motor Vintage",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/volterra-teatro-volterra/": {
   "email": "info@compagniadellafortezza.org",
   "fine": "2026-07-26",
@@ -12166,6 +14607,27 @@
   "v": 4,
   "verifica": false
  },
+ "https://www.terredipisa.it/events/walking-cinema-da-calci-a-caprona-sui-passi-della-liberazione/": {
+  "email": "",
+  "fine": "2026-07-12",
+  "hash": "3a33de8799d40048c85aacea8689e024fd03c834",
+  "inizio": "2026-07-12",
+  "lastmod": "2026-07-08T09:42:19+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Caprona, Via delle Cave, Caprona",
+  "orario": "20:00–22:00",
+  "periodi": [
+   [
+    "2026-07-12",
+    "2026-07-12"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Walking Cinema: da Calci a Caprona sui passi della Liberazione",
+  "v": 4,
+  "verifica": false
+ },
  "https://www.terredipisa.it/events/walking-cinema-speciale-alluvione-arno-1966-storie-e-memorie-lungo-il-fiume/": {
   "email": "",
   "fine": "2026-11-06",
@@ -12184,6 +14646,69 @@
   "sito": "",
   "telefono": "",
   "titolo": "Walking Cinema: speciale alluvione Arno 1966 – Storie e memorie lungo il fiume",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/wine-fashion-nelle-terre-pisa/": {
+  "email": "",
+  "fine": "2026-12-08",
+  "hash": "9d240872bb8621bc529cca8e70f69668a47900be",
+  "inizio": "2026-12-08",
+  "lastmod": "2026-11-24T09:35:45+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Terricciola, centro, piazze e luoghi limitrofi, Terricciola",
+  "orario": "15:00–19:30",
+  "periodi": [
+   [
+    "2026-12-08",
+    "2026-12-08"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Natale a Terricciola",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/wine-santa-maria-a-monte/": {
+  "email": "info@autoctoniinmostra.it",
+  "fine": "2026-07-11",
+  "hash": "bc4e856053719c95e6793c61ac4240b0c05e3a1a",
+  "inizio": "2026-07-11",
+  "lastmod": "2026-06-06T06:23:50+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Centro storico Santa Maria a Monte, centro, piazze e luoghi limitrofi, Santa Maria a Monte",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-07-11",
+    "2026-07-11"
+   ]
+  ],
+  "sito": "",
+  "telefono": "3518872691",
+  "titolo": "SMAM Wine Festival – Autoctoni in Mostra | Santa Maria a Monte",
+  "v": 4,
+  "verifica": false
+ },
+ "https://www.terredipisa.it/events/world-wellness-casciana-terme/": {
+  "email": "",
+  "fine": "2026-06-13",
+  "hash": "91fd216b055dcd731b33642eae0b331d376eed49",
+  "inizio": "2026-06-13",
+  "lastmod": "2026-06-03T20:37:00+00:00",
+  "letta": "2026-11-24",
+  "luogo": "Bagni di Pisa, Piazza Shelley, San Giuliano Terme",
+  "orario": "",
+  "periodi": [
+   [
+    "2026-06-13",
+    "2026-06-13"
+   ]
+  ],
+  "sito": "",
+  "telefono": "",
+  "titolo": "Global Wellness Day e World Wellness Weekend | Casciana Terme e San Giuliano Terme",
   "v": 4,
   "verifica": false
  }

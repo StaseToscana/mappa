@@ -92,6 +92,10 @@
   43.524738,
   10.680114
  ],
+ "@comune:Vecchiano": [
+  43.783342,
+  10.384403
+ ],
  "@comune:Vicopisano": [
   43.6998317,
   10.5846946
@@ -173,6 +177,7 @@
  ],
  "Domus Mazziniana, Via D'azeglio, Pisa": null,
  "Ex Manicomio di Volterra, Borgo San Lazzaro, Volterra": null,
+ "Galleria dei Giganti, Via cavour, Peccioli": null,
  "La Gualda Vecchia, Via castagnetana, Monteverdi Marittimo": null,
  "Largo Cocco Griffi, Pisa": [
   43.7237622,
@@ -275,6 +280,10 @@
   10.8595601
  ],
  "Piazza del Castello, Chianni": null,
+ "Piazza della Repubblica, Ponsacco": [
+  43.6204015,
+  10.6307023
+ ],
  "Pieve di Calci, Piazza della Chiesa, Calci": null,
  "Pisa": [
   43.4714722,
