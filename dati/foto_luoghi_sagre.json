@@ -328,5 +328,15 @@
   "luogo": "Piazza della Repubblica",
   "assente": true,
   "verificato": "2026-11-24"
+ },
+ "piazza san matteo|montopoli in val d arno": {
+  "luogo": "Piazza San Matteo",
+  "file": "piazza-san-matteo-15xayic.jpg",
+  "titolo": "Torre di San Matteo",
+  "autore": "sailko",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Montopoli_v.a.%2C_torre_di_san_matteo_01.JPG",
+  "verificato": "2026-11-25"
  }
 }
