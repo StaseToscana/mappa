@@ -753,5 +753,20 @@
   "luogo": "Vivo D'orcia, SI",
   "assente": true,
   "verificato": "2026-11-19"
+ },
+ "bargecchia lu|bargecchia": {
+  "luogo": "Bargecchia, LU",
+  "assente": true,
+  "verificato": "2026-11-26"
+ },
+ "caprese michelangelo ar|caprese michelangelo": {
+  "luogo": "Caprese Michelangelo, AR",
+  "file": "caprese-michelangelo-ar-xe6963.jpg",
+  "titolo": "Caprese Michelangelo",
+  "autore": "Vincenzo Desiderio",
+  "licenza": "CC BY 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Palazzo_Clusini.jpg",
+  "verificato": "2026-11-26"
  }
 }

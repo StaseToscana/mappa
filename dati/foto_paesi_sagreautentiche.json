@@ -758,5 +758,15 @@
   "comune": "Vivo D'orcia",
   "assente": true,
   "verificato": "2026-11-19"
+ },
+ "bargecchia": {
+  "comune": "Bargecchia",
+  "file": "paese-bargecchia-wdl2mx.jpg",
+  "titolo": "Bargecchia",
+  "autore": "Simone.lippi",
+  "licenza": "CC BY-SA 3.0",
+  "licenzaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "paginaUrl": "https://commons.wikimedia.org/wiki/File:Campanile_Chiesa_di_San_Martino_(Bargecchia).jpg",
+  "verificato": "2026-11-26"
  }
 }
